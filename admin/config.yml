@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: parshantsaharan/extramilesenergy.in
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Name", name: "title", widget: "string" }
+      - { label: "Model / Code", name: "model", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Details", name: "details", widget: "list", field: { label: "Point", name: "point", widget: "string" } }
+      - { label: "WhatsApp Message", name: "whatsapp", widget: "string" }
