@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extra Miles Energy | Lithium Battery Manufacturer</title>
+  <meta name="description" content="Extra Miles Energy - Lithium Battery Pack Manufacturing for Electric Scooters, E-Rickshaws, Solar & Custom Battery Packs. Skyline Stores Hisar." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a31;
+      --muted:#9fb2d6;
+      --text:#eaf2ff;
+      --accent:#35d0ff;
+      --accent2:#7c5cff;
+      --good:#45ff90;
+      --border:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(124,92,255,.28), transparent 60%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(53,208,255,.24), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.65);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .wrap{
+      max-width:1100px;margin:auto;padding:10px 16px;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      font-weight:800; letter-spacing:.3px;
+    }
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      display:grid;place-items:center;font-weight:900;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .pill{
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+      font-size:14px;color:var(--muted);
+    }
+    .btn{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:10px 14px;border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      transition:.2s;
+      font-weight:650;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22);}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#07101f;
+    }
+    .btn.whatsapp{
+      border:none;
+      background: linear-gradient(135deg,#25D366,#0ea75a);
+      color:#06120b;
+    }
+
+    header.hero{
+      max-width:1100px;margin:0 auto;padding:52px 16px 28px;
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:24px;
+      align-items:center;
+    }
+    @media(max-width:900px){
+      header.hero{grid-template-columns:1fr}
+    }
+    .hero h1{margin:0;font-size:44px;line-height:1.05}
+    .hero p{color:var(--muted);font-size:16px;line-height:1.6;margin:14px 0 22px}
+    .hero .cta{display:flex; gap:12px; flex-wrap:wrap}
+
+    .card{
+      background: rgba(16,26,49,.72);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.38);
+    }
+    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .kpi{
+      border-radius:16px;
+      border:1px solid var(--border);
+      padding:14px;
+      background: rgba(255,255,255,.03);
+    }
+    .kpi b{display:block;font-size:18px}
+    .kpi span{color:var(--muted);font-size:13px}
+
+    section{
+      max-width:1100px;margin:0 auto;padding:18px 16px;
+    }
+    .section-title{
+      display:flex; align-items:end; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      margin:10px 0 12px;
+    }
+    .section-title h2{margin:0;font-size:22px}
+    .section-title p{margin:0;color:var(--muted);font-size:14px}
+
+    .grid{
+      display:grid; grid-template-columns: repeat(4,1fr); gap:12px;
+    }
+    @media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+    .product{
+      border-radius:20px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      padding:16px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; font-weight:700;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      color: var(--muted);
+      width:max-content;
+      background: rgba(0,0,0,.18);
+    }
+    .product h3{margin:0;font-size:18px}
+    .product ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6}
+    .product .actions{margin-top:auto;display:flex; gap:10px; flex-wrap:wrap}
+    .mini{font-size:13px;color:var(--muted)}
+
+    .two{
+      display:grid;grid-template-columns: 1fr 1fr; gap:12px;
+    }
+    @media(max-width:900px){.two{grid-template-columns:1fr}}
+
+    footer{
+      margin-top:22px;
+      border-top:1px solid var(--border);
+      padding:22px 16px;
+      color:var(--muted);
+    }
+    footer .wrap{max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .note{
+      font-size:12px; line-height:1.5;
+      opacity:.9;
+    }
+
+    /* floating WhatsApp */
+    .floatWA{
+      position:fixed; right:16px; bottom:16px; z-index:50;
+      display:flex; flex-direction:column; gap:10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo">EM</div>
+        <div>
+          <div style="font-size:15px;">Extra Miles Energy</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600;">Lithium Battery Pack Manufacturing</div>
+        </div>
+      </div>
+
+      <div class="pill">
+        <a class="btn" href="tel:8222999950">📞 Call: 8222999950</a>
+        <a class="btn whatsapp" href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20to%20buy%20a%20Lithium%20Battery%20Pack.%20Please%20share%20details." target="_blank">💬 WhatsApp Order</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div>
+      <div class="badge">✅ Manufacturer | EV + Solar Battery Packs</div>
+      <h1>Power your ride with<br/>Smart Lithium Batteries</h1>
+      <p>
+        We manufacture high-performance Lithium Battery Packs for Electric Scooters, E-Rickshaws, Solar & custom requirements.
+        Reliable BMS protection, clean wiring, strong casing and tested performance.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#products">⚡ View Products</a>
+        <a class="btn" href="#custom">🛠️ Custom Battery Order</a>
+        <a class="btn" href="#contact">📍 Contact</a>
+      </div>
+
+      <div style="margin-top:18px;" class="mini">📦 Dispatch available • 🔧 Custom packs available • ✅ Quality tested</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 12px;">Why Customers Choose Us</h3>
+      <div class="kpis">
+        <div class="kpi"><b style="color:var(--good);">3 Year Warranty*</b><span>Warranty depends on model & terms</span></div>
+        <div class="kpi"><b>Smart BMS</b><span>Over-charge/discharge protection</span></div>
+        <div class="kpi"><b>Custom Packs</b><span>As per vehicle & space</span></div>
+        <div class="kpi"><b>Strong Build</b><span>Industrial finishing & insulation</span></div>
+      </div>
+      <div style="margin-top:12px;" class="note">
+        *Warranty terms and conditions apply. Please confirm model & usage before order.
+      </div>
+    </div>
+  </header>
+
+  <section id="products">
+    <div class="section-title">
+      <div>
+        <h2>Products</h2>
+        <p>Choose category and order directly on WhatsApp</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="product">
+        <div class="badge">⚡ EV Battery</div>
+        <h3>Electric Scooter Battery Pack</h3>
+        <ul>
+          <li>60V / 72V Models</li>
+          <li>High power discharge</li>
+          <li>Water-resistant packing</li>
+          <li>With Smart BMS</li>
+        </ul>
+        <div class="actions">
+          <a class="btn whatsapp" target="_blank"
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20Electric%20Scooter%20Lithium%20Battery.%20Please%20share%20price%20and%20specs.">WhatsApp Order</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="badge">🛺 EV Battery</div>
+        <h3>E-Rickshaw Battery Pack</h3>
+        <ul>
+          <li>High capacity packs</li>
+          <li>Long range performance</li>
+          <li>Heavy-duty wiring</li>
+          <li>Fast charging support</li>
+        </ul>
+        <div class="actions">
+          <a class="btn whatsapp" target="_blank"
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20E-Rickshaw%20Lithium%20Battery%20Pack.%20Please%20share%20options%20with%20price.">WhatsApp Order</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="badge">☀️ Solar</div>
+        <h3>Solar / Inverter Lithium Battery</h3>
+        <ul>
+          <li>LiFePO4 options available</li>
+          <li>Safe & long life cycle</li>
+          <li>High backup performance</li>
+          <li>Low maintenance</li>
+        </ul>
+        <div class="actions">
+          <a class="btn whatsapp" target="_blank"
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20Solar%2FInverter%20Lithium%20Battery.%20Please%20share%20capacity%20options%20and%20price.">WhatsApp Order</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="badge">🛠️ Custom</div>
+        <h3>Custom Battery Pack</h3>
+        <ul>
+          <li>As per space/box size</li>
+          <li>Voltage & Ah customizable</li>
+          <li>Controller/motor based build</li>
+          <li>Best for special vehicles</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="#custom">Open Custom Form</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="custom">
+    <div class="section-title">
+      <div>
+        <h2>Custom Battery Order</h2>
+        <p>Send details on WhatsApp (auto message)</p>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <h3 style="margin-top:0;">Send requirement on WhatsApp</h3>
+        <p class="mini">Click below → WhatsApp open hoga aur message already typed hoga ✅</p>
+        <a class="btn whatsapp" target="_blank"
+          href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20a%20CUSTOM%20Lithium%20Battery%20Pack.%0A%0A1)%20Vehicle%3A%20%0A2)%20Voltage%3A%20%0A3)%20Capacity%20(Ah)%3A%20%0A4)%20Motor%2FController%20Watt%3A%20%0A5)%20Battery%20Box%20Size%3A%20%0A6)%20Delivery%20City%3A%20%0A%0APlease%20share%20best%20option%20with%20price%20and%20delivery%20time.">
+          💬 Send Custom Order Details
+        </a>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;">We build with quality process</h3>
+        <ul class="mini" style="line-height:1.8;">
+          <li>✅ Cell testing before assembly</li>
+          <li>✅ Proper Nickel welding / soldering</li>
+          <li>✅ Insulation & vibration protection</li>
+          <li>✅ BMS wiring verified</li>
+          <li>✅ Final charging & discharge testing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title">
+      <div>
+        <h2>Contact</h2>
+        <p>Skyline Stores (Hisar) • Orders on WhatsApp</p>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <h3 style="margin-top:0;">Extra Miles Energy</h3>
+        <p class="mini" style="margin:0 0 10px;">
+          <b>Address:</b> Skyline Stores, Shop No-8 Opp The Aryan School, Kaimri Road Hisar-125001<br/>
+          <b>Call:</b> <a href="tel:8222999950">8222999950</a><br/>
+          <b>WhatsApp:</b> <a target="_blank" href="https://wa.me/917876555055">+91-7876555055</a><br/>
+          <b>GST:</b> 06AUIPP2101K2ZR
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="tel:8222999950">📞 Call Now</a>
+          <a class="btn whatsapp" target="_blank" href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20need%20Lithium%20Battery%20Pack.%20Please%20guide%20me.">💬 WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;">Bank Details (For Payments)</h3>
+        <p class="mini" style="margin:0;">
+          <b>Bank Name:</b> State Bank of India<br/>
+          <b>A/c No:</b> 41252664720<br/>
+          <b>Branch:</b> Patel Nagar, Hissar-125001<br/>
+          <b>IFSC:</b> SBIN0009280
+        </p>
+        <p class="note" style="margin-top:10px;">
+          Note: Please confirm product, voltage, capacity, and delivery before making payment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="note">© <span id="y"></span> Extra Miles Energy • Lithium Battery Pack Manufacturing</div>
+      <div class="note">Skyline Stores, Hisar</div>
+    </div>
+  </footer>
+
+  <div class="floatWA">
+    <a class="btn whatsapp" target="_blank"
+       href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20to%20order%20a%20Lithium%20Battery%20Pack.%20Please%20share%20details.">
+      💬 WhatsApp
+    </a>
+  </div>
+
+  <script>
+    document.getElementById('y').innerText = new Date().getFullYear();
+  </script>
+</body>
+</html>
