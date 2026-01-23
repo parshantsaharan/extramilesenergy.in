@@ -1,10 +1,6 @@
 backend:
-  name: github
-  repo: parshantsaharan/extramilesenergy.in
+  name: git-gateway
   branch: main
-
-site_url: https://extramilesenergy.in
-display_url: https://extramilesenergy.in
 
 publish_mode: editorial_workflow
 
@@ -21,10 +17,8 @@ collections:
       - { label: "Product Name", name: "title", widget: "string" }
       - { label: "Model / Code", name: "model", widget: "string", required: false }
       - { label: "Image", name: "image", widget: "image" }
-
       - label: "Details"
         name: "details"
         widget: "list"
         field: { label: "Point", name: "point", widget: "string" }
-
       - { label: "WhatsApp Message", name: "whatsapp", widget: "string", required: false }
