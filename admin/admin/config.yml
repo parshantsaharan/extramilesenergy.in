@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: parshantsaharan/extramilesenergy.in
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Voltage", name: "voltage", widget: "string"}
+      - {label: "Capacity (Ah)", name: "capacity", widget: "string"}
+      - {label: "Configuration", name: "config", widget: "string"}
+      - {label: "Type", name: "type", widget: "select", options: ["EV Scooter", "E-Rickshaw", "Solar/Inverter", "Custom"]}
+      - {label: "Warranty", name: "warranty", widget: "string", default: "3 Year Warranty*"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "WhatsApp Text", name: "wa_text", widget: "text"}
+      - {label: "Features", name: "features", widget: "list"}
