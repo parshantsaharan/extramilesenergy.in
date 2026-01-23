@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: parshantsaharan/extramilesenergy.in
   branch: main
 
 site_url: https://extramilesenergy.in
