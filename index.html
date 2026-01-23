@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extra Miles Energy | Lithium Battery Manufacturer</title>
+
   <meta name="description" content="Extra Miles Energy - Lithium Battery Pack Manufacturing for Electric Scooters, E-Rickshaws, Solar & Custom Battery Packs. Skyline Stores Hisar." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
 
   <style>
     :root{
@@ -18,6 +22,7 @@
       --border:rgba(255,255,255,.12);
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -27,10 +32,13 @@
       color:var(--text);
     }
     a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Top bar */
     .topbar{
       position:sticky; top:0; z-index:20;
       backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.65);
+      background: rgba(11,18,32,.72);
       border-bottom:1px solid var(--border);
     }
     .topbar .wrap{
@@ -41,11 +49,14 @@
     .brand{
       display:flex; gap:10px; align-items:center;
       font-weight:800; letter-spacing:.3px;
+      min-width:240px;
     }
-    .logo{
-      width:38px;height:38px;border-radius:12px;
-      background: linear-gradient(135deg,var(--accent),var(--accent2));
-      display:grid;place-items:center;font-weight:900;
+    .logo-img{
+      width:110px; height:auto;
+      border-radius:12px;
+      padding:6px 10px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
       box-shadow:0 10px 30px rgba(0,0,0,.35);
     }
     .pill{
@@ -59,6 +70,7 @@
       background: rgba(255,255,255,.04);
       transition:.2s;
       font-weight:650;
+      white-space:nowrap;
     }
     .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22);}
     .btn.primary{
@@ -72,18 +84,22 @@
       color:#06120b;
     }
 
+    /* Hero */
     header.hero{
-      max-width:1100px;margin:0 auto;padding:52px 16px 28px;
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:24px;
+      max-width:1100px;margin:0 auto;padding:52px 16px 18px;
+      display:grid; grid-template-columns: 1.15fr .85fr; gap:24px;
       align-items:center;
     }
     @media(max-width:900px){
       header.hero{grid-template-columns:1fr}
+      .logo-img{width:92px}
     }
     .hero h1{margin:0;font-size:44px;line-height:1.05}
     .hero p{color:var(--muted);font-size:16px;line-height:1.6;margin:14px 0 22px}
     .hero .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .mini{font-size:13px;color:var(--muted)}
 
+    /* Cards */
     .card{
       background: rgba(16,26,49,.72);
       border:1px solid var(--border);
@@ -112,6 +128,7 @@
     .section-title h2{margin:0;font-size:22px}
     .section-title p{margin:0;color:var(--muted);font-size:14px}
 
+    /* Product grid */
     .grid{
       display:grid; grid-template-columns: repeat(4,1fr); gap:12px;
     }
@@ -124,6 +141,7 @@
       background: rgba(255,255,255,.03);
       padding:16px;
       display:flex; flex-direction:column; gap:10px;
+      overflow:hidden;
     }
     .badge{
       display:inline-flex; align-items:center; gap:8px;
@@ -137,8 +155,15 @@
     .product h3{margin:0;font-size:18px}
     .product ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6}
     .product .actions{margin-top:auto;display:flex; gap:10px; flex-wrap:wrap}
-    .mini{font-size:13px;color:var(--muted)}
 
+    .product-img{
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.15);
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
     .two{
       display:grid;grid-template-columns: 1fr 1fr; gap:12px;
     }
@@ -165,10 +190,11 @@
 </head>
 <body>
 
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="wrap">
       <div class="brand">
-        <div class="logo">EM</div>
+        <img class="logo-img" src="logo.png" alt="Extra Miles Energy Logo" />
         <div>
           <div style="font-size:15px;">Extra Miles Energy</div>
           <div style="font-size:12px;color:var(--muted);font-weight:600;">Lithium Battery Pack Manufacturing</div>
@@ -176,12 +202,14 @@
       </div>
 
       <div class="pill">
-        <a class="btn" href="tel:8222999950">📞 Call: 8222999950</a>
-        <a class="btn whatsapp" href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20to%20buy%20a%20Lithium%20Battery%20Pack.%20Please%20share%20details." target="_blank">💬 WhatsApp Order</a>
+        <a class="btn" href="tel:9991144903">📞 Call: 9991144903</a>
+        <a class="btn whatsapp" href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20to%20buy%20a%20Lithium%20Battery%20Pack.%20Please%20share%20details."
+           target="_blank">💬 WhatsApp Order</a>
       </div>
     </div>
   </div>
 
+  <!-- HERO -->
   <header class="hero">
     <div>
       <div class="badge">✅ Manufacturer | EV + Solar Battery Packs</div>
@@ -190,6 +218,7 @@
         We manufacture high-performance Lithium Battery Packs for Electric Scooters, E-Rickshaws, Solar & custom requirements.
         Reliable BMS protection, clean wiring, strong casing and tested performance.
       </p>
+
       <div class="cta">
         <a class="btn primary" href="#products">⚡ View Products</a>
         <a class="btn" href="#custom">🛠️ Custom Battery Order</a>
@@ -213,76 +242,103 @@
     </div>
   </header>
 
+  <!-- PRODUCTS -->
   <section id="products">
     <div class="section-title">
       <div>
         <h2>Products</h2>
-        <p>Choose category and order directly on WhatsApp</p>
+        <p>Choose pack and order directly on WhatsApp</p>
       </div>
     </div>
 
     <div class="grid">
+
+      <!-- 60V30Ah -->
       <div class="product">
+        <img class="product-img" src="60v30ah.png" alt="60V 30Ah Lithium Battery" />
         <div class="badge">⚡ EV Battery</div>
-        <h3>Electric Scooter Battery Pack</h3>
+        <h3>60V 30Ah (19S2P)</h3>
         <ul>
-          <li>60V / 72V Models</li>
-          <li>High power discharge</li>
-          <li>Water-resistant packing</li>
-          <li>With Smart BMS</li>
+          <li>LiFePO4</li>
+          <li>3 Year Warranty*</li>
+          <li>JK Smart BMS</li>
+          <li>Suitable for EV Scooters</li>
         </ul>
         <div class="actions">
           <a class="btn whatsapp" target="_blank"
-            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20Electric%20Scooter%20Lithium%20Battery.%20Please%20share%20price%20and%20specs.">WhatsApp Order</a>
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%2060V%2030Ah%20Lithium%20Battery%20(19S2P).%20Please%20share%20price%20and%20availability.">💬 WhatsApp Order</a>
         </div>
       </div>
 
+      <!-- 72V30Ah -->
       <div class="product">
-        <div class="badge">🛺 EV Battery</div>
-        <h3>E-Rickshaw Battery Pack</h3>
+        <img class="product-img" src="72v30ah.png" alt="72V 30Ah Lithium Battery" />
+        <div class="badge">⚡ EV Battery</div>
+        <h3>72V 30Ah (23S2P)</h3>
         <ul>
-          <li>High capacity packs</li>
+          <li>LiFePO4</li>
+          <li>3 Year Warranty*</li>
+          <li>JK Smart BMS</li>
+          <li>High performance for Scooters</li>
+        </ul>
+        <div class="actions">
+          <a class="btn whatsapp" target="_blank"
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%2072V%2030Ah%20Lithium%20Battery%20(23S2P).%20Please%20share%20price%20and%20details.">💬 WhatsApp Order</a>
+        </div>
+      </div>
+
+      <!-- 72V45Ah -->
+      <div class="product">
+        <img class="product-img" src="72v45ah.jpg" alt="72V 45Ah Lithium Battery" />
+        <div class="badge">🛺 EV Battery</div>
+        <h3>72V 45Ah (23S3P)</h3>
+        <ul>
+          <li>LiFePO4</li>
           <li>Long range performance</li>
           <li>Heavy-duty wiring</li>
-          <li>Fast charging support</li>
+          <li>Best for High Load EV</li>
         </ul>
         <div class="actions">
           <a class="btn whatsapp" target="_blank"
-            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20E-Rickshaw%20Lithium%20Battery%20Pack.%20Please%20share%20options%20with%20price.">WhatsApp Order</a>
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%2072V%2045Ah%20Lithium%20Battery%20(23S3P).%20Please%20share%20price%20and%20availability.">💬 WhatsApp Order</a>
         </div>
       </div>
 
+      <!-- 76V45Ah -->
       <div class="product">
-        <div class="badge">☀️ Solar</div>
-        <h3>Solar / Inverter Lithium Battery</h3>
+        <img class="product-img" src="76v45ah.png" alt="76V 45Ah Lithium Battery" />
+        <div class="badge">🛺 EV Battery</div>
+        <h3>76V 45Ah (24S3P)</h3>
         <ul>
-          <li>LiFePO4 options available</li>
-          <li>Safe & long life cycle</li>
-          <li>High backup performance</li>
-          <li>Low maintenance</li>
+          <li>LiFePO4</li>
+          <li>High power output</li>
+          <li>Strong casing</li>
+          <li>Premium EV performance</li>
         </ul>
         <div class="actions">
           <a class="btn whatsapp" target="_blank"
-            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%20Solar%2FInverter%20Lithium%20Battery.%20Please%20share%20capacity%20options%20and%20price.">WhatsApp Order</a>
+            href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20want%2076V%2045Ah%20Lithium%20Battery%20(24S3P).%20Please%20share%20price%20and%20details.">💬 WhatsApp Order</a>
         </div>
       </div>
 
-      <div class="product">
-        <div class="badge">🛠️ Custom</div>
-        <h3>Custom Battery Pack</h3>
-        <ul>
-          <li>As per space/box size</li>
-          <li>Voltage & Ah customizable</li>
-          <li>Controller/motor based build</li>
-          <li>Best for special vehicles</li>
-        </ul>
-        <div class="actions">
-          <a class="btn" href="#custom">Open Custom Form</a>
-        </div>
-      </div>
     </div>
   </section>
 
+  <!-- REAL PACK PHOTO -->
+  <section id="gallery">
+    <div class="section-title">
+      <div>
+        <h2>Battery Pack Photo</h2>
+        <p>Actual pack photo / sample</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="battery-pack.png" alt="Extra Miles Energy battery pack" style="border-radius:18px;border:1px solid rgba(255,255,255,.10);width:100%;max-height:520px;object-fit:cover;" />
+    </div>
+  </section>
+
+  <!-- CUSTOM -->
   <section id="custom">
     <div class="section-title">
       <div>
@@ -314,6 +370,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="section-title">
       <div>
@@ -327,12 +384,12 @@
         <h3 style="margin-top:0;">Extra Miles Energy</h3>
         <p class="mini" style="margin:0 0 10px;">
           <b>Address:</b> Skyline Stores, Shop No-8 Opp The Aryan School, Kaimri Road Hisar-125001<br/>
-          <b>Call:</b> <a href="tel:8222999950">8222999950</a><br/>
+          <b>Call:</b> <a href="tel:9991144903">9991144903</a><br/>
           <b>WhatsApp:</b> <a target="_blank" href="https://wa.me/917876555055">+91-7876555055</a><br/>
           <b>GST:</b> 06AUIPP2101K2ZR
         </p>
         <div class="actions">
-          <a class="btn primary" href="tel:8222999950">📞 Call Now</a>
+          <a class="btn primary" href="tel:9991144903">📞 Call Now</a>
           <a class="btn whatsapp" target="_blank" href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy%2C%20I%20need%20Lithium%20Battery%20Pack.%20Please%20guide%20me.">💬 WhatsApp</a>
         </div>
       </div>
