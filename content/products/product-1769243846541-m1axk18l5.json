@@ -1,0 +1,19 @@
+{
+  "id": "product-1769243846541-m1axk18l5",
+  "name": "slkdfflksdff",
+  "voltage": "sdfasddffasdasdas",
+  "category": "EV Battery",
+  "price": "adsasdg",
+  "model": "dsvasd",
+  "configuration": "asdsvasd",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "15000",
+  "features": [
+    "ssagasgcd"
+  ],
+  "status": "active",
+  "image": "../uploads/32140.jpg",
+  "createdAt": "2026-01-24T08:37:26.541Z",
+  "updatedAt": "2026-01-24T08:37:26.541Z"
+}
