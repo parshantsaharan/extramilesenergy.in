@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "id": "product-1769256625783-85922x8jk",
+    "name": "Royal",
+    "voltage": "Loki",
+    "category": "EV Battery",
+    "price": "2000000",
+    "model": "2018",
+    "configuration": "4",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "2000",
+    "bms": "Jejerkr",
+    "features": [
+      "J3j4j4",
+      "Jejeje",
+      "Hehjee"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769256619980.jpg",
+    "displayOrder": 0
+  }
+]
