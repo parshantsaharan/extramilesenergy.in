@@ -534,6 +534,55 @@
             font-size: 1.2rem;
         }
         
+        /* ===== LOADING STATES ===== */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--accent);
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .empty-state-description {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
         /* ===== FEATURES SECTION ===== */
         .features-grid {
             display: grid;
@@ -973,22 +1022,6 @@
             border-left: 5px solid var(--accent);
         }
         
-        /* ===== LOADING SPINNER ===== */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid var(--accent);
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         /* ===== RESPONSIVE DESIGN - MOBILE FIXES ===== */
         @media (max-width: 1200px) {
             .hero-title {
@@ -1330,122 +1363,10 @@
                 <p class="section-subtitle">High-performance lithium battery packs for various applications</p>
             </div>
             
-            <div id="productsContainer" class="products-grid">
-                <!-- Product 1 -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="60v30ah.png" alt="60V 30Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-                    </div>
-                    <div class="product-badge">EV Battery</div>
-                    <h3 class="product-title">60V 30Ah (19S2P)</h3>
-                    <div class="product-specs">60V 30Ah Lithium Battery</div>
-                    
-                    <div class="product-range">
-                        <i class="fas fa-road"></i> Range: 60-80 km
-                    </div>
-                    
-                    <ul class="product-features">
-                        <li>LiFePO4 Cells</li>
-                        <li>3 Year Warranty</li>
-                        <li>JK Smart BMS</li>
-                        <li>Suitable for Electric Scooters</li>
-                        <li>Lightweight Design</li>
-                    </ul>
-                    
-                    <div class="product-price">Price on WhatsApp</div>
-                    
-                    <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2060V%2030Ah%20Lithium%20Battery%20(19S2P).%20Please%20share%20price%20and%20availability." 
-                       target="_blank" class="btn btn-whatsapp" style="width: 100%;">
-                        <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                    </a>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="72v30ah.png" alt="72V 30Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-                    </div>
-                    <div class="product-badge">EV Battery</div>
-                    <h3 class="product-title">72V 30Ah (23S2P)</h3>
-                    <div class="product-specs">72V 30Ah Lithium Battery</div>
-                    
-                    <div class="product-range">
-                        <i class="fas fa-road"></i> Range: 70-90 km
-                    </div>
-                    
-                    <ul class="product-features">
-                        <li>LiFePO4 Cells</li>
-                        <li>3 Year Warranty</li>
-                        <li>Smart BMS Protection</li>
-                        <li>High Performance for Scooters</li>
-                        <li>Fast Charging</li>
-                    </ul>
-                    
-                    <div class="product-price">Price on WhatsApp</div>
-                    
-                    <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2030Ah%20Lithium%20Battery%20(23S2P).%20Please%20share%20price%20and%20availability." 
-                       target="_blank" class="btn btn-whatsapp" style="width: 100%;">
-                        <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                    </a>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="72v45ah.jpg" alt="72V 45Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-                    </div>
-                    <div class="product-badge">EV Battery</div>
-                    <h3 class="product-title">72V 45Ah (23S3P)</h3>
-                    <div class="product-specs">72V 45Ah Lithium Battery</div>
-                    
-                    <div class="product-range">
-                        <i class="fas fa-road"></i> Range: 100-130 km
-                    </div>
-                    
-                    <ul class="product-features">
-                        <li>LiFePO4 Cells</li>
-                        <li>Long Range Performance</li>
-                        <li>Heavy-Duty Wiring</li>
-                        <li>Best for High Load EV</li>
-                        <li>Extended Battery Life</li>
-                    </ul>
-                    
-                    <div class="product-price">Price on WhatsApp</div>
-                    
-                    <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2045Ah%20Lithium%20Battery%20(23S3P).%20Please%20share%20price%20and%20availability." 
-                       target="_blank" class="btn btn-whatsapp" style="width: 100%;">
-                        <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                    </a>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="76v45ah.png" alt="76V 45Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-                    </div>
-                    <div class="product-badge">EV Battery</div>
-                    <h3 class="product-title">76V 45Ah (24S3P)</h3>
-                    <div class="product-specs">76V 45Ah Lithium Battery</div>
-                    
-                    <div class="product-range">
-                        <i class="fas fa-road"></i> Range: 110-140 km
-                    </div>
-                    
-                    <ul class="product-features">
-                        <li>LiFePO4 Cells</li>
-                        <li>High Power Output</li>
-                        <li>Strong Casing</li>
-                        <li>Premium EV Performance</li>
-                        <li>Temperature Protection</li>
-                    </ul>
-                    
-                    <div class="product-price">Price on WhatsApp</div>
-                    
-                    <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2076V%2045Ah%20Lithium%20Battery%20(24S3P).%20Please%20share%20price%20and%20availability." 
-                       target="_blank" class="btn btn-whatsapp" style="width: 100%;">
-                        <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                    </a>
-                </div>
+            <!-- Dynamic Products Container -->
+            <div id="productsContainer" class="loading">
+                <div class="spinner"></div>
+                <div>Loading products...</div>
             </div>
             
             <div style="text-align: center; margin-top: 60px;">
@@ -1853,6 +1774,136 @@
             }
         });
         
+        // ===== PRODUCTS LOADING FROM GITHUB =====
+        async function loadProducts() {
+            const container = document.getElementById('productsContainer');
+            
+            try {
+                // GitHub repository se products load karein
+                const response = await fetch('https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/content/products/all-products.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const products = await response.json();
+                
+                if (products.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <h3 class="empty-state-title">No Products Available</h3>
+                            <p class="empty-state-description">
+                                Products will be added soon. Please check back later or contact us directly.
+                            </p>
+                            <a href="#contact" class="btn btn-primary" style="margin-top: 20px;">
+                                <i class="fas fa-phone-alt"></i> Contact for Products
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Display products
+                let productsHTML = '<div class="products-grid">';
+                
+                products.forEach(product => {
+                    // Only show active products
+                    if (product.status !== 'active') return;
+                    
+                    // Format price
+                    const priceDisplay = product.price 
+                        ? `<div class="product-price">${product.price}</div>` 
+                        : '<div class="product-price">Price on WhatsApp</div>';
+                    
+                    // Format range
+                    const rangeDisplay = product.range 
+                        ? `<div class="product-range"><i class="fas fa-road"></i> Range: ${product.range}</div>` 
+                        : '';
+                    
+                    // Format features list
+                    const featuresList = product.features && product.features.length > 0 
+                        ? product.features.map(feature => `<li>${feature}</li>`).join('') 
+                        : '<li>LiFePO4 Cells</li><li>3 Year Warranty</li><li>Smart BMS Protection</li>';
+                    
+                    // Generate WhatsApp message
+                    const whatsappMessage = encodeURIComponent(
+                        `Hi Extra Miles Energy, I want ${product.name} (${product.voltage || ''}). Please share price and availability.`
+                    );
+                    
+                    productsHTML += `
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="${product.image || 'placeholder.png'}" 
+                                     alt="${product.name}" 
+                                     class="product-image" 
+                                     onerror="this.src='placeholder.png'"
+                                     onclick="openModal(this.src)">
+                            </div>
+                            <div class="product-badge">${product.category || 'EV Battery'}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-specs">${product.voltage || ''}</div>
+                            
+                            ${rangeDisplay}
+                            
+                            <ul class="product-features">
+                                ${featuresList}
+                            </ul>
+                            
+                            ${priceDisplay}
+                            
+                            <a href="https://wa.me/917876555055?text=${whatsappMessage}" 
+                               target="_blank" 
+                               class="btn btn-whatsapp" 
+                               style="width: 100%;">
+                                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                            </a>
+                        </div>
+                    `;
+                });
+                
+                productsHTML += '</div>';
+                container.innerHTML = productsHTML;
+                
+                // Add hover effects to new product cards
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    });
+                    
+                    card.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateY(-10px)';
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading products:', error);
+                
+                // Fallback to default products if GitHub fails
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="empty-state-title">Unable to Load Products</h3>
+                        <p class="empty-state-description">
+                            Please check your internet connection or contact us directly for product information.
+                        </p>
+                        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
+                            <a href="tel:9991144903" class="btn btn-primary">
+                                <i class="fas fa-phone-alt"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/917876555055" target="_blank" class="btn btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
         // ===== FAQ TOGGLE =====
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
@@ -1962,17 +2013,10 @@
             }, 3000);
         }
         
-        // ===== LOAD PRODUCTS FROM GITHUB (Future Enhancement) =====
-        async function loadProductsFromGitHub() {
-            // This function can be used to dynamically load products from GitHub
-            // Currently using static products
-            console.log('Products loaded statically');
-        }
-        
         // ===== INITIALIZATION =====
         window.onload = function() {
-            // Load products (future enhancement)
-            loadProductsFromGitHub();
+            // Load products from GitHub
+            loadProducts();
             
             // Check for notification in URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -1997,38 +2041,18 @@
         // ===== WHATSAPP CLICK TRACKING =====
         document.querySelectorAll('.btn-whatsapp, .whatsapp-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                // You can add analytics tracking here
                 console.log('WhatsApp button clicked');
             });
         });
         
-        // ===== LAZY LOAD IMAGES =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('img');
-            
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src || img.src;
-                        observer.unobserve(img);
-                    }
-                });
-            });
-            
-            images.forEach(img => imageObserver.observe(img));
-        });
-        
-        // ===== PRODUCT HOVER EFFECT ENHANCEMENT =====
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-10px)';
-            });
-        });
+        // ===== PRODUCTS AUTO-REFRESH (Optional) =====
+        // Har 5 minute mein products refresh karein
+        setInterval(() => {
+            const currentScroll = window.scrollY;
+            if (currentScroll < 100) { // Only refresh if user is near top
+                loadProducts();
+            }
+        }, 300000); // 5 minutes
     </script>
 </body>
 </html>
