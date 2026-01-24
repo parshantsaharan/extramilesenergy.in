@@ -5,105 +5,186 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Extra Miles Energy | Premium Lithium Battery Manufacturer</title>
 
+<meta name="description" content="Extra Miles Energy - Lithium Battery Manufacturer in Hisar">
+<meta name="author" content="Extra Miles Energy">
+
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* ===== BASIC RESET ===== */
+:root{
+--primary:#0b1220;
+--secondary:#142044;
+--accent:#35d0ff;
+--text:#fff;
+--muted:#a0b3d9;
+--border:rgba(255,255,255,.15);
+--radius:16px;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 body{
 font-family:Inter,sans-serif;
-background:#0b1220;
-color:#fff;
-line-height:1.6
+background:var(--primary);
+color:var(--text);
+line-height:1.6;
+overflow-x:hidden;
 }
+
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 
-/* ===== HEADER ===== */
 header{
 position:fixed;top:0;left:0;width:100%;
 background:#0b1220f0;
-border-bottom:1px solid rgba(255,255,255,.1);
-z-index:1000
+border-bottom:1px solid var(--border);
+z-index:1000;
 }
+
 .header-container{
-max-width:1200px;margin:auto;
-display:flex;justify-content:space-between;
-align-items:center;padding:15px
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
 }
+
 .logo-img{width:150px}
 
-/* ===== NAV ===== */
 .nav-links{
-display:flex;gap:25px
+display:flex;
+gap:25px;
 }
-.nav-links a{font-weight:600}
-.mobile-menu-btn{display:none;font-size:22px;background:none;border:none;color:#fff}
 
-/* ===== MOBILE NAV ===== */
+.nav-links a{font-weight:600}
+
+.mobile-menu-btn{
+display:none;
+font-size:22px;
+background:none;
+border:none;
+color:#fff;
+cursor:pointer;
+}
+
 @media(max-width:768px){
 .nav-links{
-position:fixed;top:80px;left:0;
+position:fixed;
+top:80px;
+left:0;
 width:100%;
+background:var(--primary);
 flex-direction:column;
-background:#0b1220;
 padding:20px;
 transform:translateY(-120%);
-transition:.3s
+transition:.3s;
 }
 .nav-links.active{transform:translateY(0)}
 .mobile-menu-btn{display:block}
 }
 
-/* ===== HERO ===== */
-.hero{padding:140px 20px 80px;text-align:center}
-.hero h1{font-size:2.8rem}
-.hero span{color:#35d0ff}
+.hero{
+padding:140px 20px 80px;
+text-align:center;
+}
 
-/* ===== PRODUCTS ===== */
-.section{padding:80px 20px}
+.hero h1{
+font-size:3rem;
+line-height:1.2;
+}
+
+.hero span{color:var(--accent)}
+
+.section{
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
+}
+
 .products-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px
+gap:25px;
 }
+
 .product-card{
-background:#142044cc;
-border:1px solid rgba(255,255,255,.1);
-border-radius:16px;
+background:var(--secondary);
+border:1px solid var(--border);
+border-radius:var(--radius);
 padding:20px;
 display:flex;
-flex-direction:column
+flex-direction:column;
+height:100%;
 }
-.product-image{height:200px;object-fit:contain;cursor:pointer}
-.product-title{margin:15px 0;font-size:1.2rem}
-.product-features li{margin-left:20px}
 
-/* ===== BUTTON ===== */
+.product-image{
+height:200px;
+object-fit:contain;
+cursor:pointer;
+margin-bottom:15px;
+}
+
+.product-title{
+font-size:1.2rem;
+margin-bottom:10px;
+}
+
+.product-features li{
+margin-left:20px;
+color:var(--muted);
+}
+
 .btn-whatsapp{
 margin-top:auto;
 background:#25D366;
 padding:12px;
 border-radius:8px;
 text-align:center;
-font-weight:600
+font-weight:600;
+color:#fff;
 }
 
-/* ===== FOOTER ===== */
-footer{text-align:center;padding:40px;color:#aaa}
+footer{
+text-align:center;
+padding:40px;
+color:var(--muted);
+border-top:1px solid var(--border);
+}
 
-/* ===== MODAL ===== */
 .modal{
-display:none;position:fixed;top:0;left:0;
+display:none;
+position:fixed;
+top:0;left:0;
 width:100%;height:100%;
 background:rgba(0,0,0,.85);
-align-items:center;justify-content:center;
-z-index:2000
+align-items:center;
+justify-content:center;
+z-index:2000;
 }
+
 .modal.active{display:flex}
-.modal img{max-width:90%;max-height:90%}
+
+.modal img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+}
+
+.spinner{
+border:3px solid rgba(255,255,255,.2);
+border-top:3px solid var(--accent);
+width:40px;height:40px;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:auto;
+}
+
+@keyframes spin{
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}
 </style>
 </head>
 
@@ -127,7 +208,7 @@ z-index:2000
 </header>
 
 <section class="hero" id="home">
-<h1>Power Your Journey with <span>Extra Miles Energy</span></h1>
+<h1>Power Your Electric Journey with <span>Extra Miles Energy</span></h1>
 <p>Premium Lithium Battery Packs for EV & Solar</p>
 </section>
 
@@ -137,24 +218,24 @@ z-index:2000
 </section>
 
 <section class="section" id="contact">
-<h2 style="text-align:center">Contact</h2>
-<p style="text-align:center">📞 7876555055 | Hisar</p>
+<h2 style="text-align:center">Contact Us</h2>
+<p style="text-align:center">
+📍 Hisar, Haryana<br>
+📞 +91-7876555055
+</p>
 </section>
 
 <footer>
 © <span id="year"></span> Extra Miles Energy
 </footer>
 
-<!-- IMAGE MODAL -->
 <div class="modal" id="imgModal" onclick="closeModal()">
 <img id="modalImg">
 </div>
 
 <script>
-/* ===== YEAR ===== */
 document.getElementById("year").textContent=new Date().getFullYear();
 
-/* ===== MOBILE MENU ===== */
 const menuBtn=document.getElementById("menuBtn");
 const navLinks=document.getElementById("navLinks");
 
@@ -165,7 +246,6 @@ menuBtn.innerHTML=navLinks.classList.contains("active")
 :'<i class="fas fa-bars"></i>';
 };
 
-/* ===== MODAL ===== */
 function openModal(src){
 document.getElementById("modalImg").src=src;
 document.getElementById("imgModal").classList.add("active");
@@ -174,46 +254,55 @@ function closeModal(){
 document.getElementById("imgModal").classList.remove("active");
 }
 
-/* ===== LOAD PRODUCTS (FIXED) ===== */
 async function loadProducts(){
 const box=document.getElementById("productsContainer");
-box.innerHTML="Loading...";
+box.innerHTML='<div class="spinner"></div>';
 
 try{
 const indexRes=await fetch(
-"https://raw.githubusercontent.com/parshantsahara/extramilesenergy.in/main/content/products/index.json"
+"https://raw.githubusercontent.com/parshantsahara/extramilesenergy.in/main/content/products/index.json",
+{cache:"no-store"}
 );
+
 const files=await indexRes.json();
 box.innerHTML="";
 
 for(const file of files){
 const res=await fetch(
-"https://raw.githubusercontent.com/parshantsahara/extramilesenergy.in/main/content/products/"+file
+"https://raw.githubusercontent.com/parshantsahara/extramilesenergy.in/main/content/products/"+file,
+{cache:"no-store"}
 );
 const p=await res.json();
 
 const card=document.createElement("div");
 card.className="product-card";
 card.innerHTML=`
-<img src="${p.image}" class="product-image" onclick="openModal(this.src)">
+<img src="${p.image || 'placeholder.png'}"
+class="product-image"
+onclick="openModal(this.src)">
+
 <h3 class="product-title">${p.name}</h3>
+
 <ul class="product-features">
 ${(p.features||[]).map(f=>`<li>${f}</li>`).join("")}
 </ul>
-<a target="_blank"
-href="https://wa.me/917876555055?text=${encodeURIComponent("Hi, I want "+p.name)}"
-class="btn-whatsapp">
+
+<a class="btn-whatsapp" target="_blank"
+href="https://wa.me/917876555055?text=${encodeURIComponent('Hi, I want '+p.name)}">
 Order on WhatsApp
-</a>`;
+</a>
+`;
 box.appendChild(card);
 }
+
 }catch(e){
 box.innerHTML="Products not available";
+console.error(e);
 }
 }
 
 loadProducts();
-setInterval(loadProducts,120000);
+setInterval(loadProducts,180000);
 </script>
 
 </body>
