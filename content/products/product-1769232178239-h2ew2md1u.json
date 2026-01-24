@@ -1,0 +1,16 @@
+{
+  "id": "product-1769232178239-h2ew2md1u",
+  "name": "SOLAR BATTRIES",
+  "voltage": "51.2V 105AH",
+  "category": "Solar Battery",
+  "price": "55000-61000",
+  "range": null,
+  "status": "active",
+  "features": [
+    "LIFEPO4"
+  ],
+  "description": "5 YEAR WARRENTY",
+  "image": "../uploads/CELL.jpg",
+  "createdAt": "2026-01-24T05:22:58.239Z",
+  "updatedAt": "2026-01-24T05:22:58.239Z"
+}
