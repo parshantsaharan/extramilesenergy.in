@@ -192,7 +192,7 @@
             text-align: center;
             position: relative;
             background: linear-gradient(rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.9)),
-                        url('hero-bg.jpg') center/cover no-repeat;
+                        url('https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/hero-bg.jpg') center/cover no-repeat;
         }
         
         .hero h1 {
@@ -323,6 +323,11 @@
             margin-bottom: 20px;
             padding: 15px;
             border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: var(--transition);
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
         }
         
         .product-title {
@@ -638,6 +643,60 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Product Modal */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .product-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid var(--gold);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            background: #ff2b5e;
+            transform: rotate(90deg);
+        }
+        
         /* Responsive */
         @media (max-width: 992px) {
             .nav-links {
@@ -719,7 +778,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="logo.png" alt="Extra Miles Energy" class="logo-img">
+                    <img src="https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/logo.png" alt="Extra Miles Energy" class="logo-img" onerror="this.src='https://via.placeholder.com/60x60/FFD700/0b1220?text=EM'">
                     <div class="logo-text">
                         <h1>Extra Miles Energy</h1>
                         <div class="tagline">Premium LiFePO₄ Battery Solutions</div>
@@ -927,15 +986,32 @@
         </div>
     </footer>
 
+    <!-- Product Details Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
+        // Configuration
+        const GITHUB_USERNAME = 'parshantsaharan';
+        const GITHUB_REPO = 'extramilesenergy.in';
+        const GITHUB_BRANCH = 'main';
+        const PRODUCTS_PATH = 'content/products';
+        const UPLOADS_PATH = 'uploads';
+        
         // Load products from GitHub
         async function loadProducts() {
             const container = document.getElementById('productsContainer');
             
             try {
                 // Try to load from master products list
-                const response = await fetch('https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/content/products/all-products.json');
+                const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${PRODUCTS_PATH}/all-products.json`);
                 
                 if (!response.ok) {
                     throw new Error('Failed to load products');
@@ -977,7 +1053,35 @@
                 }
                 
                 activeProducts.forEach(product => {
-                    const imageUrl = product.image || 'placeholder.png';
+                    // Fix image URL - check multiple possible locations
+                    let imageUrl = '';
+                    
+                    if (product.image) {
+                        // If image already has full URL
+                        if (product.image.startsWith('http')) {
+                            imageUrl = product.image;
+                        }
+                        // If image has relative path
+                        else if (product.image.startsWith('../')) {
+                            // Remove ../ prefix
+                            const cleanPath = product.image.replace('../', '');
+                            imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${cleanPath}`;
+                        }
+                        // If image is just filename
+                        else {
+                            // Try multiple possible locations
+                            const possiblePaths = [
+                                `${UPLOADS_PATH}/${product.image}`,
+                                `images/${product.image}`,
+                                `uploads/${product.image}`,
+                                product.image
+                            ];
+                            
+                            // Use first image that exists (we'll handle error with onerror)
+                            imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${possiblePaths[0]}`;
+                        }
+                    }
+                    
                     const whatsappMessage = `Hello, I'm interested in ${product.name} (${product.voltage || ''}). Please provide more details.`;
                     const whatsappUrl = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappMessage)}`;
                     
@@ -987,10 +1091,12 @@
                     html += `
                         <div class="product-card">
                             <div class="product-badge">${product.status === 'active' ? 'IN STOCK' : 'PRE-ORDER'}</div>
-                            <img src="${imageUrl}" 
+                            <img src="${imageUrl || 'https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/placeholder.png'}" 
                                  alt="${product.name}" 
                                  class="product-image"
-                                 onerror="this.src='placeholder.png'">
+                                 onerror="handleImageError(this, '${product.name}')"
+                                 onclick="showProductDetails('${product.id}')"
+                                 style="cursor: pointer;">
                             <h3 class="product-title">${product.name}</h3>
                             <div class="product-specs">${product.voltage || ''}</div>
                             <div class="product-model">${model}</div>
@@ -1059,10 +1165,146 @@
             }
         }
         
+        // Handle image loading errors
+        function handleImageError(img, productName) {
+            console.log(`Image failed to load for ${productName}: ${img.src}`);
+            
+            // Try alternative image paths
+            const productNameEncoded = encodeURIComponent(productName);
+            const alternativePaths = [
+                `https://via.placeholder.com/300x200/FFD700/0b1220?text=${productNameEncoded}`,
+                `https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/placeholder.png`,
+                `https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles`
+            ];
+            
+            // Try next alternative path
+            const currentSrc = img.src;
+            for (let i = 0; i < alternativePaths.length; i++) {
+                if (currentSrc !== alternativePaths[i]) {
+                    img.src = alternativePaths[i];
+                    break;
+                }
+            }
+        }
+        
         // Show product details modal
-        function showProductDetails(productId) {
-            // In future, implement a modal with detailed specs
-            window.location.href = `https://wa.me/917876555055?text=I need detailed specifications for product ID: ${productId}`;
+        async function showProductDetails(productId) {
+            try {
+                // Load individual product details
+                const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${PRODUCTS_PATH}/${productId}.json`);
+                
+                if (!response.ok) {
+                    throw new Error('Product not found');
+                }
+                
+                const product = await response.json();
+                
+                // Fix image URL for modal
+                let imageUrl = '';
+                if (product.image) {
+                    if (product.image.startsWith('http')) {
+                        imageUrl = product.image;
+                    } else if (product.image.startsWith('../')) {
+                        const cleanPath = product.image.replace('../', '');
+                        imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${cleanPath}`;
+                    } else {
+                        imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/uploads/${product.image}`;
+                    }
+                }
+                
+                const whatsappMessage = `Hello, I'm interested in ${product.name} (${product.voltage || ''}). Please provide detailed specifications and pricing.`;
+                const whatsappUrl = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                const modalContent = document.getElementById('modalContent');
+                modalContent.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                        <div>
+                            <img src="${imageUrl || 'https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/placeholder.png'}" 
+                                 alt="${product.name}" 
+                                 style="width: 100%; border-radius: var(--radius-sm); border: 2px solid var(--gold);"
+                                 onerror="this.src='https://via.placeholder.com/400x300/FFD700/0b1220?text=Product+Image'">
+                        </div>
+                        <div>
+                            <h2 style="color: var(--gold); margin-bottom: 15px;">${product.name}</h2>
+                            <div style="color: var(--accent); font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">${product.voltage || ''}</div>
+                            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                <span class="product-category">${product.category || 'LiFePO₄ Battery'}</span>
+                                <span style="background: rgba(69, 255, 144, 0.1); color: var(--success); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(69, 255, 144, 0.3);">
+                                    ${product.status === 'active' ? 'In Stock' : 'Pre-order'}
+                                </span>
+                            </div>
+                            
+                            ${product.price ? `<div style="font-size: 1.8rem; color: var(--gold); font-weight: 700; margin-bottom: 20px;">${product.price}</div>` : ''}
+                            
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: var(--gold-light); margin-bottom: 10px;">Specifications</h4>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                    ${product.model ? `
+                                    <div style="padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                        <div style="color: var(--gold-light); font-size: 0.8rem;">Model</div>
+                                        <div style="color: var(--text); font-weight: 600;">${product.model}</div>
+                                    </div>` : ''}
+                                    
+                                    ${product.configuration ? `
+                                    <div style="padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                        <div style="color: var(--gold-light); font-size: 0.8rem;">Configuration</div>
+                                        <div style="color: var(--text); font-weight: 600;">${product.configuration}</div>
+                                    </div>` : ''}
+                                    
+                                    ${product.chemistry ? `
+                                    <div style="padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                        <div style="color: var(--gold-light); font-size: 0.8rem;">Chemistry</div>
+                                        <div style="color: var(--text); font-weight: 600;">${product.chemistry}</div>
+                                    </div>` : ''}
+                                    
+                                    ${product.capacity ? `
+                                    <div style="padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                        <div style="color: var(--gold-light); font-size: 0.8rem;">Capacity</div>
+                                        <div style="color: var(--text); font-weight: 600;">${product.capacity}</div>
+                                    </div>` : ''}
+                                    
+                                    ${product.warranty ? `
+                                    <div style="padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                        <div style="color: var(--gold-light); font-size: 0.8rem;">Warranty</div>
+                                        <div style="color: var(--text); font-weight: 600;">${product.warranty}</div>
+                                    </div>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h4 style="color: var(--gold-light); margin-bottom: 15px;">Features</h4>
+                        <ul class="product-features" style="columns: 2; column-gap: 30px;">
+                            ${(product.features || []).map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <a href="${whatsappUrl}" class="btn-whatsapp" target="_blank" style="flex: 2; font-size: 1.1rem;">
+                            <i class="fab fa-whatsapp"></i> Contact on WhatsApp for Quote
+                        </a>
+                        <button class="btn-details" onclick="closeProductModal()" style="flex: 1;">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                `;
+                
+                // Show modal
+                document.getElementById('productModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+            } catch (error) {
+                console.error('Error loading product details:', error);
+                // Fallback: redirect to WhatsApp
+                window.location.href = `https://wa.me/917876555055?text=I need information about product ID: ${productId}`;
+            }
+        }
+        
+        // Close product modal
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
         
         // Initialize on load
@@ -1079,7 +1321,7 @@
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop - 120,
+                            top: targetElement.offsetTop - 100,
                             behavior: 'smooth'
                         });
                     }
@@ -1100,6 +1342,20 @@
                     }
                     stat.textContent = Math.floor(current) + (stat.textContent.includes('+') ? '+' : '');
                 }, 30);
+            });
+            
+            // Close modal on outside click
+            document.getElementById('productModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeProductModal();
+                }
+            });
+            
+            // Close modal on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeProductModal();
+                }
             });
         });
         
