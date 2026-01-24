@@ -191,8 +191,17 @@
             padding: 180px 0 100px;
             text-align: center;
             position: relative;
-            background: linear-gradient(rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.9)),
-                        url('https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/hero-bg.jpg') center/cover no-repeat;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.9));
+            z-index: -1;
         }
         
         .hero h1 {
@@ -778,10 +787,10 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/logo.png" alt="Extra Miles Energy" class="logo-img" onerror="this.src='https://via.placeholder.com/60x60/FFD700/0b1220?text=EM'">
+                    <img src="logo.png" alt="Extra Miles Energy" class="logo-img" onerror="this.src='https://via.placeholder.com/60x60/FFD700/0b1220?text=EM'">
                     <div class="logo-text">
-                        <h1>Extra Miles Energy</h1>
-                        <div class="tagline">Premium LiFePO₄ Battery Solutions</div>
+                        <h1 id="companyBrand">Extra Miles Energy</h1>
+                        <div class="tagline" id="companyTagline">Premium LiFePO₄ Battery Solutions</div>
                     </div>
                 </div>
                 
@@ -792,15 +801,15 @@
                     <a href="/admin" target="_blank">Admin</a>
                 </div>
                 
-                <a href="https://wa.me/917876555055" class="cta-button" target="_blank">
+                <a href="#" class="cta-button" id="whatsappLink" target="_blank">
                     <i class="fab fa-whatsapp"></i> Get Quote
                 </a>
             </div>
             
             <div class="company-info">
-                <span><i class="fas fa-map-marker-alt"></i> Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</span>
-                <span><i class="fas fa-envelope"></i> extramilesenergy@gmail.com</span>
-                <span><i class="fas fa-phone"></i> +91 78765 55055</span>
+                <span><i class="fas fa-map-marker-alt"></i> <span id="companyAddress">Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</span></span>
+                <span><i class="fas fa-envelope"></i> <span id="companyEmail">extramilesenergy@gmail.com</span></span>
+                <span><i class="fas fa-phone"></i> <span id="companyPhone">+91 78765 55055</span></span>
             </div>
         </div>
     </header>
@@ -808,8 +817,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Power Up Your Journey!</h1>
-            <p>High-performance LiFePO₄ lithium batteries for electric vehicles, solar systems, and custom applications. Built with advanced technology for maximum safety and longevity.</p>
+            <h1 id="heroTitle">Power Up Your Journey!</h1>
+            <p id="heroDescription">High-performance LiFePO₄ lithium batteries for electric vehicles, solar systems, and custom applications. Built with advanced technology for maximum safety and longevity.</p>
             <a href="#products" class="cta-button">
                 <i class="fas fa-bolt"></i> View Our Products
             </a>
@@ -851,8 +860,8 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Why Choose Extra Miles Energy?</h2>
-                    <p style="color: var(--gold-light); margin-bottom: 30px;">
+                    <h2 id="aboutTitle">Why Choose Extra Miles Energy?</h2>
+                    <p style="color: var(--gold-light); margin-bottom: 30px;" id="aboutDescription">
                         We specialize in manufacturing high-quality LiFePO₄ (Lithium Iron Phosphate) batteries that offer superior safety, longer lifespan, and better performance compared to traditional lithium batteries.
                     </p>
                     
@@ -902,19 +911,19 @@
                 <div class="company-details">
                     <h3 style="color: var(--gold); margin-bottom: 15px;">Company Details</h3>
                     <div class="detail-item">
-                        <strong style="color: var(--gold);">Manufacturer:</strong> Skyline Stores
+                        <strong style="color: var(--gold);">Manufacturer:</strong> <span id="manufacturerName">Skyline Stores</span>
                     </div>
                     <div class="detail-item">
-                        <strong style="color: var(--gold);">GST No:</strong> 07HYXPS2318L1ZY
+                        <strong style="color: var(--gold);">GST No:</strong> <span id="companyGST">07HYXPS2318L1ZY</span>
                     </div>
                     <div class="detail-item">
-                        <strong style="color: var(--gold);">Address:</strong> Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001
+                        <strong style="color: var(--gold);">Address:</strong> <span id="companyFullAddress">Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</span>
                     </div>
                     <div class="detail-item">
-                        <strong style="color: var(--gold);">Email:</strong> extramilesenergy@gmail.com
+                        <strong style="color: var(--gold);">Email:</strong> <span id="companyEmailDetail">extramilesenergy@gmail.com</span>
                     </div>
                     <div class="detail-item">
-                        <strong style="color: var(--gold);">Phone:</strong> +91 78765 55055
+                        <strong style="color: var(--gold);">Phone:</strong> <span id="companyPhoneDetail">+91 78765 55055</span>
                     </div>
                     <div class="detail-item">
                         <strong style="color: var(--gold);">Products:</strong> LiFePO₄ Batteries for EV, Solar & Custom Applications
@@ -929,12 +938,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Extra Miles Energy</h3>
-                    <p>Leading manufacturer of premium LiFePO₄ lithium batteries for electric vehicles, solar systems, and custom applications. Power up your journey with safety and reliability.</p>
+                    <h3 id="footerBrand">Extra Miles Energy</h3>
+                    <p id="footerDescription">Leading manufacturer of premium LiFePO₄ lithium batteries for electric vehicles, solar systems, and custom applications. Power up your journey with safety and reliability.</p>
                     <div class="social-links">
-                        <a href="https://wa.me/917876555055" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="mailto:extramilesenergy@gmail.com"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+917876555055"><i class="fas fa-phone"></i></a>
+                        <a href="#" id="footerWhatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" id="footerEmail"><i class="fas fa-envelope"></i></a>
+                        <a href="#" id="footerPhone"><i class="fas fa-phone"></i></a>
                         <a href="/admin" target="_blank"><i class="fas fa-cog"></i></a>
                     </div>
                 </div>
@@ -944,19 +953,19 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+91 78765 55055</span>
+                            <span id="footerPhoneNumber">+91 78765 55055</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>extramilesenergy@gmail.com</span>
+                            <span id="footerEmailAddress">extramilesenergy@gmail.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</span>
+                            <span id="footerAddress">Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-file-invoice"></i>
-                            <span>GST: 07HYXPS2318L1ZY</span>
+                            <span id="footerGST">GST: 07HYXPS2318L1ZY</span>
                         </div>
                     </div>
                 </div>
@@ -981,7 +990,7 @@
             </div>
             
             <div class="copyright">
-                &copy; 2024 Extra Miles Energy. All rights reserved. | Premium LiFePO₄ Battery Solutions
+                &copy; 2024 <span id="copyrightBrand">Extra Miles Energy</span>. All rights reserved. | <span id="copyrightTagline">Premium LiFePO₄ Battery Solutions</span>
             </div>
         </div>
     </footer>
@@ -1003,14 +1012,95 @@
         const GITHUB_REPO = 'extramilesenergy.in';
         const GITHUB_BRANCH = 'main';
         const PRODUCTS_PATH = 'content/products';
+        const COMPANY_PATH = 'content/company.json';
         const UPLOADS_PATH = 'uploads';
+        
+        // Default company details (will be overridden by loaded data)
+        let companyData = {
+            brand: 'Extra Miles Energy',
+            tagline: 'Premium LiFePO₄ Battery Solutions',
+            address: 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001',
+            email: 'extramilesenergy@gmail.com',
+            phone1: '+91 78765 55055',
+            whatsapp: '+917876555055',
+            manufacturer: 'Skyline Stores',
+            gst: '07HYXPS2318L1ZY',
+            websiteTitle: 'Extra Miles Energy - Premium Lithium Batteries',
+            websiteDescription: 'High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with LiFePO4 technology for maximum safety and longevity.'
+        };
+        
+        // Load company details from GitHub
+        async function loadCompanyDetails() {
+            try {
+                const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${COMPANY_PATH}`);
+                
+                if (response.ok) {
+                    companyData = await response.json();
+                    updateWebsiteWithCompanyDetails();
+                }
+            } catch (error) {
+                console.log('Using default company details');
+                updateWebsiteWithCompanyDetails();
+            }
+        }
+        
+        // Update website with company details
+        function updateWebsiteWithCompanyDetails() {
+            // Update header
+            document.getElementById('companyBrand').textContent = companyData.brand || 'Extra Miles Energy';
+            document.getElementById('companyTagline').textContent = companyData.tagline || 'Premium LiFePO₄ Battery Solutions';
+            document.getElementById('companyAddress').textContent = companyData.address || 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001';
+            document.getElementById('companyEmail').textContent = companyData.email || 'extramilesenergy@gmail.com';
+            document.getElementById('companyPhone').textContent = companyData.phone1 || '+91 78765 55055';
+            
+            // Update WhatsApp link
+            const whatsappNumber = companyData.whatsapp || '917876555055';
+            const whatsappLink = `https://wa.me/${whatsappNumber}`;
+            document.getElementById('whatsappLink').href = whatsappLink;
+            
+            // Update hero section
+            document.getElementById('heroTitle').textContent = 'Power Up Your Journey!';
+            if (companyData.websiteTitle) {
+                document.title = companyData.websiteTitle;
+            }
+            if (companyData.websiteDescription) {
+                document.getElementById('heroDescription').textContent = companyData.websiteDescription;
+            }
+            
+            // Update about section
+            document.getElementById('aboutTitle').textContent = 'Why Choose ' + (companyData.brand || 'Extra Miles Energy') + '?';
+            document.getElementById('aboutDescription').textContent = companyData.websiteDescription || 'We specialize in manufacturing high-quality LiFePO₄ (Lithium Iron Phosphate) batteries that offer superior safety, longer lifespan, and better performance compared to traditional lithium batteries.';
+            
+            // Update company details section
+            document.getElementById('manufacturerName').textContent = companyData.manufacturer || 'Skyline Stores';
+            document.getElementById('companyGST').textContent = companyData.gst || '07HYXPS2318L1ZY';
+            document.getElementById('companyFullAddress').textContent = companyData.address || 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001';
+            document.getElementById('companyEmailDetail').textContent = companyData.email || 'extramilesenergy@gmail.com';
+            document.getElementById('companyPhoneDetail').textContent = companyData.phone1 || '+91 78765 55055';
+            
+            // Update footer
+            document.getElementById('footerBrand').textContent = companyData.brand || 'Extra Miles Energy';
+            document.getElementById('footerDescription').textContent = companyData.websiteDescription || 'Leading manufacturer of premium LiFePO₄ lithium batteries for electric vehicles, solar systems, and custom applications. Power up your journey with safety and reliability.';
+            
+            document.getElementById('footerWhatsapp').href = whatsappLink;
+            document.getElementById('footerEmail').href = `mailto:${companyData.email || 'extramilesenergy@gmail.com'}`;
+            document.getElementById('footerPhone').href = `tel:${companyData.phone1 || '+917876555055'}`;
+            
+            document.getElementById('footerPhoneNumber').textContent = companyData.phone1 || '+91 78765 55055';
+            document.getElementById('footerEmailAddress').textContent = companyData.email || 'extramilesenergy@gmail.com';
+            document.getElementById('footerAddress').textContent = companyData.address || 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001';
+            document.getElementById('footerGST').textContent = `GST: ${companyData.gst || '07HYXPS2318L1ZY'}`;
+            
+            // Update copyright
+            document.getElementById('copyrightBrand').textContent = companyData.brand || 'Extra Miles Energy';
+            document.getElementById('copyrightTagline').textContent = companyData.tagline || 'Premium LiFePO₄ Battery Solutions';
+        }
         
         // Load products from GitHub
         async function loadProducts() {
             const container = document.getElementById('productsContainer');
             
             try {
-                // Try to load from master products list
                 const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${PRODUCTS_PATH}/all-products.json`);
                 
                 if (!response.ok) {
@@ -1025,7 +1115,7 @@
                             <i class="fas fa-box-open" style="font-size: 3rem; color: var(--gold); margin-bottom: 20px; display: block;"></i>
                             <h3 style="margin-bottom: 15px; color: var(--gold);">No Products Available</h3>
                             <p style="color: var(--gold-light); margin-bottom: 25px;">Products will be added soon.</p>
-                            <a href="https://wa.me/917876555055" class="cta-button" target="_blank">
+                            <a href="${whatsappLink}" class="cta-button" target="_blank">
                                 <i class="fab fa-whatsapp"></i> Contact for Products
                             </a>
                         </div>
@@ -1035,8 +1125,10 @@
                 
                 let html = '<div class="products-grid">';
                 
-                // Filter active products
-                const activeProducts = products.filter(p => p.status === 'active');
+                // Filter active products and sort by display order
+                const activeProducts = products
+                    .filter(p => p.status === 'active')
+                    .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
                 
                 if (activeProducts.length === 0) {
                     container.innerHTML = `
@@ -1044,7 +1136,7 @@
                             <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--gold); margin-bottom: 20px; display: block;"></i>
                             <h3 style="margin-bottom: 15px; color: var(--gold);">Products Coming Soon</h3>
                             <p style="color: var(--gold-light); margin-bottom: 25px;">We're preparing our premium battery range.</p>
-                            <a href="https://wa.me/917876555055" class="cta-button" target="_blank">
+                            <a href="${whatsappLink}" class="cta-button" target="_blank">
                                 <i class="fab fa-whatsapp"></i> Pre-order Now
                             </a>
                         </div>
@@ -1053,48 +1145,33 @@
                 }
                 
                 activeProducts.forEach(product => {
-                    // Fix image URL - check multiple possible locations
-                    let imageUrl = '';
+                    // Get WhatsApp number from company data
+                    const whatsappNumber = companyData.whatsapp || '917876555055';
+                    const whatsappMessage = `Hello, I'm interested in ${product.name} (${product.voltage || ''}). Please provide more details.`;
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
                     
+                    // Handle image URL
+                    let imageUrl = '';
                     if (product.image) {
-                        // If image already has full URL
-                        if (product.image.startsWith('http')) {
+                        if (product.image.includes('githubusercontent.com')) {
                             imageUrl = product.image;
-                        }
-                        // If image has relative path
-                        else if (product.image.startsWith('../')) {
-                            // Remove ../ prefix
+                        } else if (product.image.startsWith('../')) {
                             const cleanPath = product.image.replace('../', '');
                             imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${cleanPath}`;
-                        }
-                        // If image is just filename
-                        else {
-                            // Try multiple possible locations
-                            const possiblePaths = [
-                                `${UPLOADS_PATH}/${product.image}`,
-                                `images/${product.image}`,
-                                `uploads/${product.image}`,
-                                product.image
-                            ];
-                            
-                            // Use first image that exists (we'll handle error with onerror)
-                            imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${possiblePaths[0]}`;
+                        } else {
+                            imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${UPLOADS_PATH}/${product.image}`;
                         }
                     }
                     
-                    const whatsappMessage = `Hello, I'm interested in ${product.name} (${product.voltage || ''}). Please provide more details.`;
-                    const whatsappUrl = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappMessage)}`;
-                    
-                    // Extract model from product name or create one
                     const model = product.model || product.name.match(/[A-Z]{2}-[A-Z]{3}\d+/)?.[0] || 'Custom Model';
                     
                     html += `
                         <div class="product-card">
                             <div class="product-badge">${product.status === 'active' ? 'IN STOCK' : 'PRE-ORDER'}</div>
-                            <img src="${imageUrl || 'https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/placeholder.png'}" 
+                            <img src="${imageUrl || 'https://via.placeholder.com/300x200/FFD700/0b1220?text=Product'}" 
                                  alt="${product.name}" 
                                  class="product-image"
-                                 onerror="handleImageError(this, '${product.name}')"
+                                 onerror="this.src='https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles'"
                                  onclick="showProductDetails('${product.id}')"
                                  style="cursor: pointer;">
                             <h3 class="product-title">${product.name}</h3>
@@ -1165,32 +1242,9 @@
             }
         }
         
-        // Handle image loading errors
-        function handleImageError(img, productName) {
-            console.log(`Image failed to load for ${productName}: ${img.src}`);
-            
-            // Try alternative image paths
-            const productNameEncoded = encodeURIComponent(productName);
-            const alternativePaths = [
-                `https://via.placeholder.com/300x200/FFD700/0b1220?text=${productNameEncoded}`,
-                `https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/placeholder.png`,
-                `https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles`
-            ];
-            
-            // Try next alternative path
-            const currentSrc = img.src;
-            for (let i = 0; i < alternativePaths.length; i++) {
-                if (currentSrc !== alternativePaths[i]) {
-                    img.src = alternativePaths[i];
-                    break;
-                }
-            }
-        }
-        
         // Show product details modal
         async function showProductDetails(productId) {
             try {
-                // Load individual product details
                 const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${PRODUCTS_PATH}/${productId}.json`);
                 
                 if (!response.ok) {
@@ -1198,28 +1252,28 @@
                 }
                 
                 const product = await response.json();
+                const whatsappNumber = companyData.whatsapp || '917876555055';
+                const whatsappMessage = `Hello, I'm interested in ${product.name} (${product.voltage || ''}). Please provide detailed specifications and pricing.`;
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
                 
-                // Fix image URL for modal
+                // Handle image URL for modal
                 let imageUrl = '';
                 if (product.image) {
-                    if (product.image.startsWith('http')) {
+                    if (product.image.includes('githubusercontent.com')) {
                         imageUrl = product.image;
                     } else if (product.image.startsWith('../')) {
                         const cleanPath = product.image.replace('../', '');
                         imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${cleanPath}`;
                     } else {
-                        imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/uploads/${product.image}`;
+                        imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${UPLOADS_PATH}/${product.image}`;
                     }
                 }
-                
-                const whatsappMessage = `Hello, I'm interested in ${product.name} (${product.voltage || ''}). Please provide detailed specifications and pricing.`;
-                const whatsappUrl = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappMessage)}`;
                 
                 const modalContent = document.getElementById('modalContent');
                 modalContent.innerHTML = `
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                         <div>
-                            <img src="${imageUrl || 'https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/placeholder.png'}" 
+                            <img src="${imageUrl || 'https://via.placeholder.com/400x300/FFD700/0b1220?text=Product+Image'}" 
                                  alt="${product.name}" 
                                  style="width: 100%; border-radius: var(--radius-sm); border: 2px solid var(--gold);"
                                  onerror="this.src='https://via.placeholder.com/400x300/FFD700/0b1220?text=Product+Image'">
@@ -1290,14 +1344,13 @@
                     </div>
                 `;
                 
-                // Show modal
                 document.getElementById('productModal').classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
             } catch (error) {
                 console.error('Error loading product details:', error);
-                // Fallback: redirect to WhatsApp
-                window.location.href = `https://wa.me/917876555055?text=I need information about product ID: ${productId}`;
+                const whatsappNumber = companyData.whatsapp || '917876555055';
+                window.location.href = `https://wa.me/${whatsappNumber}?text=I need information about product ID: ${productId}`;
             }
         }
         
@@ -1309,7 +1362,11 @@
         
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
-            loadProducts();
+            // Load company details first
+            loadCompanyDetails().then(() => {
+                // Then load products
+                loadProducts();
+            });
             
             // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1359,8 +1416,11 @@
             });
         });
         
-        // Refresh products every 30 seconds
-        setInterval(loadProducts, 30000);
+        // Refresh data every 5 minutes
+        setInterval(() => {
+            loadCompanyDetails();
+            loadProducts();
+        }, 5 * 60 * 1000);
     </script>
 </body>
 </html>
