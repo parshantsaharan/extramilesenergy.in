@@ -5,12 +5,22 @@
     "voltage": "51.2V 105AH",
     "category": "E-Rickshaw Battery",
     "price": "45000-96000",
-    "range": "110-200",
-    "status": "active",
     "features": [
       "Lifepo4 Cell battery"
     ],
-    "image": "../uploads/LOGO SKYLINE.png",
-    "description": "3 Year Warrenty"
+    "status": "active",
+    "image": "../uploads/LOGO SKYLINE.png"
+  },
+  {
+    "id": "product-1769236609514-ffwvsfit4",
+    "name": "SOLAR BATTRY CELL",
+    "voltage": "3.2V 105AH",
+    "category": "Solar Battery",
+    "price": "4800",
+    "features": [
+      "LIFEPO4"
+    ],
+    "status": "active",
+    "image": "../uploads/CELL.jpg"
   }
 ]
