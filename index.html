@@ -482,6 +482,40 @@
             border-radius: 5px;
         }
         
+        /* Product Tabs - NEW ADDED */
+        .product-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .tab-btn {
+            padding: 12px 22px;
+            border-radius: 30px;
+            border: 2px solid var(--gold);
+            background: rgba(255, 215, 0, 0.08);
+            color: var(--gold);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--gold), #FFC107);
+            color: #0b1220;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transform: translateY(-3px);
+        }
+        
         /* Products Grid */
         .products-grid {
             display: grid;
@@ -1243,6 +1277,17 @@
             .modal-content {
                 padding: 30px 20px;
             }
+            
+            /* Product Tabs Responsive */
+            .product-tabs {
+                gap: 8px;
+                margin-bottom: 30px;
+            }
+            
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1281,6 +1326,18 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
+            }
+            
+            /* Product Tabs Mobile */
+            .product-tabs {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+                flex-wrap: nowrap;
+            }
+            
+            .tab-btn {
+                flex-shrink: 0;
             }
         }
         
@@ -1486,6 +1543,31 @@
             <div class="section-title">
                 <h2>Our Premium Products</h2>
                 <p id="productsDescription">Explore our range of high-performance LiFePO₄ batteries designed for various applications</p>
+            </div>
+            
+            <!-- Product Category Tabs - NEW ADDED -->
+            <div class="product-tabs">
+                <button class="tab-btn active" onclick="filterProducts('all')">
+                    <i class="fas fa-layer-group"></i> All Products
+                </button>
+                <button class="tab-btn" onclick="filterProducts('ev')">
+                    <i class="fas fa-car-battery"></i> EV Battery
+                </button>
+                <button class="tab-btn" onclick="filterProducts('solar')">
+                    <i class="fas fa-solar-panel"></i> Solar System
+                </button>
+                <button class="tab-btn" onclick="filterProducts('home')">
+                    <i class="fas fa-home"></i> Home Backup
+                </button>
+                <button class="tab-btn" onclick="filterProducts('e-rickshaw')">
+                    <i class="fas fa-truck-pickup"></i> E-Rickshaw
+                </button>
+                <button class="tab-btn" onclick="filterProducts('custom')">
+                    <i class="fas fa-cogs"></i> Customized
+                </button>
+                <button class="tab-btn" onclick="filterProducts('accessory')">
+                    <i class="fas fa-plug"></i> Accessories
+                </button>
             </div>
             
             <div id="productsContainer" class="loading">
@@ -2056,8 +2138,11 @@
                 
                 const model = product.model || product.name.match(/[A-Z]{2}-[A-Z]{3}\d+/)?.[0] || 'Custom Model';
                 
+                // Get category for filtering
+                const category = (product.category || '').toLowerCase();
+                
                 html += `
-                    <div class="product-card" data-id="${product.id}" data-category="${product.category || ''}">
+                    <div class="product-card" data-id="${product.id}" data-category="${category}">
                         <div class="product-badge">${product.status === 'active' ? 'IN STOCK' : 'PRE-ORDER'}</div>
                         <div class="product-image-container">
                             <img src="${imageUrl}" 
@@ -2119,6 +2204,62 @@
             
             html += '</div>';
             container.innerHTML = html;
+            
+            // Set initial active tab to "All"
+            const firstTabBtn = document.querySelector('.tab-btn');
+            if (firstTabBtn) {
+                firstTabBtn.click();
+            }
+        }
+
+        // Filter products by category - NEW ADDED FUNCTION
+        function filterProducts(category) {
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            let cards = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                let cat = (card.dataset.category || '').toLowerCase();
+                
+                if (category === 'all' || cat.includes(category)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                    // Add fade-in animation
+                    card.style.animation = 'fadeIn 0.5s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Show message if no products in selected category
+            const container = document.getElementById('productsContainer');
+            if (visibleCount === 0 && container.querySelector('.products-grid')) {
+                const noProductsMessage = `
+                    <div style="text-align: center; padding: 60px 20px; grid-column: 1 / -1;">
+                        <i class="fas fa-battery-empty" style="font-size: 4rem; color: var(--gold); opacity: 0.5; margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--gold); margin-bottom: 15px;">No Products in This Category</h3>
+                        <p style="color: var(--gold-light); margin-bottom: 30px;">
+                            We don't have products in this category yet. Please check other categories or contact us for custom requirements.
+                        </p>
+                        <button class="cta-button" onclick="filterProducts('all')">
+                            <i class="fas fa-layer-group"></i> View All Products
+                        </button>
+                    </div>
+                `;
+                
+                const grid = container.querySelector('.products-grid');
+                if (grid) {
+                    grid.innerHTML = noProductsMessage;
+                }
+            }
+            
+            // Update sync status with count
+            if (visibleCount > 0) {
+                showSyncStatus(`Showing ${visibleCount} products in ${category === 'all' ? 'All Categories' : category}`, 'info');
+            }
         }
 
         // Show product details modal
@@ -2296,6 +2437,7 @@
         window.closeProductModal = closeProductModal;
         window.closeMobileMenu = closeMobileMenu;
         window.showProductDetails = showProductDetails;
+        window.filterProducts = filterProducts;
         window.forceRefresh = forceRefresh;
     </script>
 </body>
