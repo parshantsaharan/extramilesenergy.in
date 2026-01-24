@@ -1,1527 +1,1721 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Extra Miles Energy | Premium Lithium Battery Manufacturer in India</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Extra Miles Energy - Top Lithium Battery Manufacturer for Electric Scooters, E-Rickshaws, Solar Systems & Custom Battery Packs. 3-Year Warranty. Hisar, Haryana." />
-  <meta name="keywords" content="lithium battery manufacturer, EV battery pack, electric scooter battery, e-rickshaw battery, solar battery, custom battery pack, Hisar, Haryana" />
-  <meta name="author" content="Extra Miles Energy" />
-  
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Extra Miles Energy | Premium Lithium Battery Manufacturer" />
-  <meta property="og:description" content="Manufacturing high-performance Lithium Battery Packs for Electric Vehicles & Solar Systems with 3-Year Warranty." />
-  <meta property="og:image" content="https://extramilesenergy.com/logo.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://extramilesenergy.com" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Extra Miles Energy | Lithium Battery Manufacturer" />
-  <meta name="twitter:description" content="Premium Lithium Battery Packs for Electric Vehicles" />
-  
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#0b1220" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="apple-touch-icon" href="logo.png" />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    /* Reset & Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    :root {
-      --primary: #0b1220;
-      --secondary: #142044;
-      --accent: #35d0ff;
-      --accent2: #7c5cff;
-      --success: #45ff90;
-      --warning: #ffb145;
-      --text: #ffffff;
-      --text-muted: #a0b3d9;
-      --border: rgba(255, 255, 255, 0.15);
-      --card-bg: rgba(20, 32, 68, 0.8);
-      --header-bg: rgba(11, 18, 32, 0.95);
-      
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --transition: all 0.3s ease;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
-    
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--primary);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
-    
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(124, 92, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(53, 208, 255, 0.1) 0%, transparent 50%);
-      z-index: -1;
-      pointer-events: none;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-    
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    .section {
-      padding: 80px 0;
-    }
-    
-    .section-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 14px 28px;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      text-align: center;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: white;
-      box-shadow: var(--shadow-light);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(53, 208, 255, 0.3);
-    }
-    
-    .btn-whatsapp {
-      background: linear-gradient(135deg, #25D366, #0ea75a);
-      color: white;
-      box-shadow: var(--shadow-light);
-    }
-    
-    .btn-whatsapp:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-    }
-    
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 2px solid var(--border);
-    }
-    
-    .btn-outline:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
-    
-    /* Header - FIXED */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: var(--header-bg);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      transition: var(--transition);
-    }
-    
-    .header-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 0;
-    }
-    
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .logo-img {
-      width: 180px;
-      height: auto;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      padding: 5px;
-      background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .logo-text h1 {
-      font-size: 1.4rem;
-      margin: 0;
-      line-height: 1.2;
-    }
-    
-    .logo-text .tagline {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
-    
-    /* Navigation */
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-    }
-    
-    .nav-links a {
-      font-weight: 500;
-      font-size: 0.95rem;
-      position: relative;
-      padding: 5px 0;
-    }
-    
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s;
-    }
-    
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-    
-    .nav-contact {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .phone-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      font-weight: 500;
-    }
-    
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    
-    /* Hero Section - SIMPLIFIED */
-    .hero {
-      padding-top: 140px;
-      padding-bottom: 80px;
-    }
-    
-    .hero-content {
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      background: rgba(53, 208, 255, 0.1);
-      border: 1px solid rgba(53, 208, 255, 0.3);
-      color: var(--accent);
-      margin-bottom: 30px;
-      font-size: 0.95rem;
-    }
-    
-    .hero-title {
-      font-size: 3.2rem;
-      margin-bottom: 20px;
-      line-height: 1.1;
-    }
-    
-    .hero-title span {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .hero-description {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 60px;
-      flex-wrap: wrap;
-    }
-    
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 25px 20px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-    }
-    
-    .stat-number {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    
-    .stat-text {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    
-    /* Products Section */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-    }
-    
-    .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 25px;
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    
-    .product-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--accent);
-      box-shadow: var(--shadow);
-    }
-    
-    .product-image-container {
-      position: relative;
-      margin-bottom: 20px;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border);
-    }
-    
-    .product-image {
-      width: 100%;
-      height: 200px;
-      object-fit: contain;
-      padding: 15px;
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    
-    .product-image:hover {
-      transform: scale(1.05);
-    }
-    
-    .product-badge {
-      display: inline-block;
-      padding: 6px 12px;
-      background: rgba(53, 208, 255, 0.1);
-      color: var(--accent);
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-      border: 1px solid rgba(53, 208, 255, 0.3);
-    }
-    
-    .product-title {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-    }
-    
-    .product-features {
-      list-style: none;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-    
-    .product-features li {
-      padding: 8px 0;
-      position: relative;
-      padding-left: 25px;
-      color: var(--text-muted);
-    }
-    
-    .product-features li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--success);
-      font-weight: bold;
-    }
-    
-    /* Features Section */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 30px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-    }
-    
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      background: rgba(53, 208, 255, 0.1);
-      border-radius: 50%;
-      font-size: 1.5rem;
-      color: var(--accent);
-    }
-    
-    .feature-title {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-    }
-    
-    .feature-description {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    
-    /* Gallery Section */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    
-    .gallery-item {
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 250px;
-      position: relative;
-      border: 1px solid var(--border);
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-    
-    /* FAQ Section */
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .faq-item {
-      margin-bottom: 15px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-    }
-    
-    .faq-question {
-      padding: 20px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-    }
-    
-    .faq-answer {
-      padding: 0 20px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-    }
-    
-    .faq-answer.active {
-      padding: 20px;
-      max-height: 500px;
-    }
-    
-    .faq-toggle {
-      transition: transform 0.3s;
-    }
-    
-    .faq-item.active .faq-toggle {
-      transform: rotate(45deg);
-    }
-    
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-    }
-    
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-    
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-    }
-    
-    .contact-icon {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(53, 208, 255, 0.1);
-      border-radius: 50%;
-      color: var(--accent);
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    
-    .contact-details h4 {
-      margin-bottom: 5px;
-    }
-    
-    .contact-details p {
-      color: var(--text-muted);
-    }
-    
-    /* Footer */
-    footer {
-      background: rgba(11, 18, 32, 0.95);
-      border-top: 1px solid var(--border);
-      padding: 60px 0 30px;
-    }
-    
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-    
-    .footer-logo img {
-      width: 200px;
-      margin-bottom: 20px;
-    }
-    
-    .footer-about {
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      font-size: 0.95rem;
-    }
-    
-    .footer-title {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      position: relative;
-      padding-bottom: 10px;
-    }
-    
-    .footer-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background: var(--accent);
-    }
-    
-    .footer-links {
-      list-style: none;
-    }
-    
-    .footer-links li {
-      margin-bottom: 12px;
-    }
-    
-    .footer-links a {
-      color: var(--text-muted);
-      transition: var(--transition);
-    }
-    
-    .footer-links a:hover {
-      color: var(--accent);
-      padding-left: 5px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .social-link {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--secondary);
-      border-radius: 50%;
-      color: var(--text);
-      transition: var(--transition);
-    }
-    
-    .social-link:hover {
-      background: var(--accent);
-      color: var(--primary);
-      transform: translateY(-5px);
-    }
-    
-    .copyright {
-      text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    
-    /* Floating WhatsApp */
-    .float-whatsapp {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 100;
-    }
-    
-    .whatsapp-btn {
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #25D366, #0ea75a);
-      color: white;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-      transition: var(--transition);
-      animation: pulse 2s infinite;
-    }
-    
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
-    }
-    
-    @keyframes pulse {
-      0% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
-      50% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.7); }
-      100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
-    }
-    
-    /* Image Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 18, 32, 0.95);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    
-    .modal.active {
-      display: flex;
-    }
-    
-    .modal-content {
-      max-width: 90%;
-      max-height: 90%;
-      position: relative;
-    }
-    
-    .modal-img {
-      width: 100%;
-      height: auto;
-      border-radius: var(--radius);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-    }
-    
-    .modal-close {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-      .hero-title {
-        font-size: 2.8rem;
-      }
-      
-      .hero-stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: var(--header-bg);
-        backdrop-filter: blur(15px);
-        flex-direction: column;
-        padding: 20px;
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: var(--transition);
-        border-bottom: 1px solid var(--border);
-        gap: 15px;
-      }
-      
-      .nav-links.active {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      
-      .nav-contact {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      .hero {
-        padding-top: 120px;
-      }
-      
-      .hero-title {
-        font-size: 2.3rem;
-      }
-      
-      .hero-description {
-        font-size: 1.1rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .hero-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-      
-      .section {
-        padding: 60px 0;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-      }
-      
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .logo-img {
-        width: 150px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 2rem;
-      }
-      
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-      
-      .section-title {
-        font-size: 1.8rem;
-      }
-      
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .float-whatsapp {
-        bottom: 20px;
-        right: 20px;
-      }
-      
-      .whatsapp-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.3rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extra Miles Energy | Premium Lithium Battery Manufacturer</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Extra Miles Energy - Top Lithium Battery Manufacturer in Hisar for Electric Scooters, E-Rickshaws, Solar Systems. 3-Year Warranty. WhatsApp: 7876555055">
+    <meta name="keywords" content="lithium battery manufacturer hisar, ev battery, electric scooter battery, e-rickshaw battery, solar battery, hisar battery shop">
+    <meta name="author" content="Extra Miles Energy">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Extra Miles Energy | Lithium Battery Manufacturer">
+    <meta property="og:description" content="Premium Lithium Battery Packs for Electric Vehicles & Solar Systems">
+    <meta property="og:image" content="https://extramilesenergy.in/logo.png">
+    <meta property="og:url" content="https://extramilesenergy.in">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --primary: #0b1220;
+            --secondary: #142044;
+            --accent: #35d0ff;
+            --accent2: #7c5cff;
+            --success: #45ff90;
+            --warning: #ffb145;
+            --danger: #ff3570;
+            --text: #ffffff;
+            --text-muted: #a0b3d9;
+            --border: rgba(255, 255, 255, 0.15);
+            --card-bg: rgba(20, 32, 68, 0.8);
+            --header-bg: rgba(11, 18, 32, 0.95);
+            --overlay: rgba(11, 18, 32, 0.9);
+            
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(124, 92, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(53, 208, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(53, 208, 255, 0.3);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #0ea75a);
+            color: white;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            width: 160px;
+            height: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.3rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .admin-link {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 80px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            background: rgba(53, 208, 255, 0.1);
+            border: 1px solid rgba(53, 208, 255, 0.3);
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .hero-title {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .stat-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* ===== PRODUCTS SECTION ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
+        }
+        
+        .product-image-container {
+            position: relative;
+            margin-bottom: 20px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(53, 208, 255, 0.1);
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(53, 208, 255, 0.3);
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-specs {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .product-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            color: var(--text-muted);
+        }
+        
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .product-range {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .product-price {
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* ===== FEATURES SECTION ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            background: rgba(53, 208, 255, 0.1);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* ===== GALLERY SECTION ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* ===== FAQ SECTION ===== */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-toggle {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        /* ===== CONTACT SECTION ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(53, 208, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            color: var(--text-muted);
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(11, 18, 32, 0.95);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo img {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-about {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary);
+            border-radius: 50%;
+            color: var(--text);
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .admin-access {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-access a {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* ===== FLOATING WHATSAPP ===== */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+        
+        .whatsapp-btn {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #25D366, #0ea75a);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+        }
+        
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--header-bg);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                border-bottom: 1px solid var(--border);
+                gap: 15px;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-img {
+                width: 140px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .float-whatsapp {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* ===== LOADING SPINNER ===== */
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--accent);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: var(--radius-sm);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 2001;
+            max-width: 400px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+        
+        .notification.error {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .notification.info {
+            border-left: 4px solid var(--accent);
+        }
+        
+        /* ===== ADMIN BADGE ===== */
+        .admin-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(53, 208, 255, 0.2);
+            color: var(--accent);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(53, 208, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header id="header">
-    <div class="container">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="logo.png" alt="Extra Miles Energy Logo" class="logo-img">
-          <div class="logo-text">
-            <h1>Extra Miles Energy</h1>
-            <div class="tagline">Premium Lithium Battery Manufacturer</div>
-          </div>
-        </div>
-        
-        <nav>
-          <div class="nav-links" id="navLinks">
-            <a href="#home" class="active">Home</a>
-            <a href="#products">Products</a>
-            <a href="#features">Why Us</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-            <div class="nav-contact">
-              <a href="tel:9991144903" class="phone-btn">
-                <i class="fas fa-phone-alt"></i> 9991144903
-              </a>
-              <a href="https://wa.me/917876555055" target="_blank" class="btn btn-whatsapp" style="padding: 10px 16px;">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-              </a>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-container">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Extra Miles Energy Logo" class="logo-img">
+                    <div class="logo-text">
+                        <h1>Extra Miles Energy</h1>
+                        <div class="tagline">Premium Lithium Battery Manufacturer</div>
+                    </div>
+                </div>
+                
+                <nav>
+                    <div class="nav-links" id="navLinks">
+                        <a href="#home" class="active">Home</a>
+                        <a href="#products">Products</a>
+                        <a href="#features">Why Us</a>
+                        <a href="#gallery">Gallery</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contact">Contact</a>
+                        <a href="admin/" class="admin-link">
+                            <i class="fas fa-user-shield"></i> Admin
+                        </a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
             </div>
-          </div>
-          <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-          </button>
-        </nav>
-      </div>
-    </div>
-  </header>
+        </div>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fas fa-bolt"></i> Leading Lithium Battery Manufacturer
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i> Leading Lithium Battery Manufacturer in Hisar
+                </div>
+                
+                <h1 class="hero-title">Power Your Electric Journey with <span>Extra Miles</span></h1>
+                
+                <p class="hero-description">
+                    We manufacture high-performance Lithium Battery Packs for Electric Scooters, E-Rickshaws, Solar Systems & custom applications. Quality tested with 3-Year Warranty.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">
+                        <i class="fas fa-bolt"></i> View Products
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-phone-alt"></i> Contact Us
+                    </a>
+                    <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20need%20information%20about%20Lithium%20Batteries." 
+                       target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-text">Years Warranty</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-text">Batteries Sold</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-text">Support</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-text">Quality Tested</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <h1 class="hero-title">Power Your Electric Journey with <span>Extra Miles</span></h1>
-        
-        <p class="hero-description">
-          We manufacture high-performance Lithium Battery Packs for Electric Scooters, E-Rickshaws, Solar Systems & custom applications. Quality tested with 3-Year Warranty.
-        </p>
-        
-        <div class="hero-buttons">
-          <a href="#products" class="btn btn-primary">
-            <i class="fas fa-bolt"></i> View Products
-          </a>
-          <a href="#contact" class="btn btn-outline">
-            <i class="fas fa-phone-alt"></i> Contact Us
-          </a>
-          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20need%20information%20about%20Lithium%20Batteries." 
-             target="_blank" class="btn btn-whatsapp">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </a>
-        </div>
-        
-        <div class="hero-stats">
-          <div class="stat-card">
-            <div class="stat-number">3+</div>
-            <div class="stat-text">Years Warranty</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">500+</div>
-            <div class="stat-text">Batteries Sold</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">24/7</div>
-            <div class="stat-text">Support</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">100%</div>
-            <div class="stat-text">Quality Tested</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Products Section -->
-  <section class="section" id="products">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">High-performance lithium battery packs for various applications</p>
-      </div>
-      
-      <div class="products-grid">
-        <!-- Product 1 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="60v30ah.png" alt="60V 30Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-          </div>
-          <div class="product-badge">EV Battery</div>
-          <h3 class="product-title">60V 30Ah (19S2P)</h3>
-          <ul class="product-features">
-            <li>LiFePO4 Cells</li>
-            <li>3 Year Warranty</li>
-            <li>JK Smart BMS</li>
-            <li>Suitable for Electric Scooters</li>
-            <li>Range: 60-80 km</li>
-          </ul>
-          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2060V%2030Ah%20Lithium%20Battery%20(19S2P).%20Please%20share%20price%20and%20availability." 
-             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
-            <i class="fab fa-whatsapp"></i> Order Now
-          </a>
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Products</h2>
+                <p class="section-subtitle">High-performance lithium battery packs for various applications</p>
+            </div>
+            
+            <div id="productsContainer" class="products-grid">
+                <!-- Products will be loaded dynamically from GitHub -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#contact" class="btn btn-primary" style="padding: 16px 40px;">
+                    <i class="fas fa-tools"></i> Need Custom Battery? Contact Us
+                </a>
+            </div>
         </div>
-        
-        <!-- Product 2 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="72v30ah.png" alt="72V 30Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-          </div>
-          <div class="product-badge">EV Battery</div>
-          <h3 class="product-title">72V 30Ah (23S2P)</h3>
-          <ul class="product-features">
-            <li>LiFePO4 Cells</li>
-            <li>3 Year Warranty</li>
-            <li>Smart BMS Protection</li>
-            <li>High Performance for Scooters</li>
-            <li>Range: 70-90 km</li>
-          </ul>
-          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2030Ah%20Lithium%20Battery%20(23S2P).%20Please%20share%20price%20and%20availability." 
-             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
-            <i class="fab fa-whatsapp"></i> Order Now
-          </a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Extra Miles Energy</h2>
+                <p class="section-subtitle">We deliver quality and reliability in every battery pack</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">3-Year Warranty</h3>
+                    <p class="feature-description">Industry-leading warranty with comprehensive coverage for peace of mind.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Smart BMS</h3>
+                    <p class="feature-description">Advanced Battery Management System for complete protection and monitoring.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Custom Solutions</h3>
+                    <p class="feature-description">Battery packs customized to your specific vehicle requirements.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="feature-title">Pan India Delivery</h3>
+                    <p class="feature-description">Safe and secure shipping across India with reliable logistics partners.</p>
+                </div>
+            </div>
         </div>
-        
-        <!-- Product 3 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="72v45ah.jpg" alt="72V 45Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-          </div>
-          <div class="product-badge">EV Battery</div>
-          <h3 class="product-title">72V 45Ah (23S3P)</h3>
-          <ul class="product-features">
-            <li>LiFePO4 Cells</li>
-            <li>Long Range Performance</li>
-            <li>Heavy-Duty Wiring</li>
-            <li>Best for High Load EV</li>
-            <li>Range: 100-130 km</li>
-          </ul>
-          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2045Ah%20Lithium%20Battery%20(23S3P).%20Please%20share%20price%20and%20availability." 
-             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
-            <i class="fab fa-whatsapp"></i> Order Now
-          </a>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Work Gallery</h2>
+                <p class="section-subtitle">Premium battery packs manufactured with precision</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="battery-pack.png" alt="Battery Pack Assembly" onclick="openModal(this.src)">
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="60v30ah.png" alt="60V 30Ah Battery" onclick="openModal(this.src)">
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="72v45ah.jpg" alt="72V 45Ah Battery" onclick="openModal(this.src)">
+                </div>
+            </div>
         </div>
-        
-        <!-- Product 4 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="76v45ah.png" alt="76V 45Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
-          </div>
-          <div class="product-badge">EV Battery</div>
-          <h3 class="product-title">76V 45Ah (24S3P)</h3>
-          <ul class="product-features">
-            <li>LiFePO4 Cells</li>
-            <li>High Power Output</li>
-            <li>Strong Casing</li>
-            <li>Premium EV Performance</li>
-            <li>Range: 110-140 km</li>
-          </ul>
-          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2076V%2045Ah%20Lithium%20Battery%20(24S3P).%20Please%20share%20price%20and%20availability." 
-             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
-            <i class="fab fa-whatsapp"></i> Order Now
-          </a>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Get answers to common questions about our batteries</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What is the warranty period for your batteries?
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        We provide a 3-year warranty on our lithium battery packs. The warranty covers manufacturing defects and performance issues under normal usage conditions.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        How long does the battery last on a single charge?
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        Battery life depends on various factors including vehicle type, motor power, terrain, and load. Typically, our 60V 30Ah battery provides 60-80 km range for electric scooters.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Do you provide custom battery solutions?
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we specialize in custom battery packs. We can design batteries according to your specific voltage, capacity, size, and application requirements.
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 50px;">
-        <a href="#contact" class="btn btn-primary" style="padding: 16px 40px;">
-          <i class="fas fa-tools"></i> Need Custom Battery? Contact Us
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch for inquiries, orders, or support</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="feature-card" style="height: 100%; text-align: left;">
+                        <h3 style="margin-top: 0;">Extra Miles Energy</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Address</h4>
+                                <p>Skyline Stores, Shop No-8<br>Opp The Aryan School, Kaimri Road<br>Hisar-125001, Haryana</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Phone Numbers</h4>
+                                <p>+91-9991144903<br>+91-7876555055 (WhatsApp)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>extramilesenergy@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Business Hours</h4>
+                                <p>Monday - Saturday: 9:00 AM - 8:00 PM<br>Sunday: 10:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>GST Number</h4>
+                                <p>06AUIPP2101K2ZR</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="tel:9991144903" class="btn btn-primary">
+                                <i class="fas fa-phone-alt"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/917876555055" target="_blank" class="btn btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="feature-card" style="height: 100%;">
+                        <h3 style="margin-top: 0;">Bank Details</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>State Bank of India</h4>
+                                <p>Account Number: 41252664720<br>Branch: Patel Nagar, Hisar-125001<br>IFSC: SBIN0009280</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Payment Note</h4>
+                                <p>Please confirm product details, price, and delivery before making any payment.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4 style="margin-bottom: 15px;">Custom Order Form</h4>
+                            <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%20a%20CUSTOM%20Lithium%20Battery%20Pack.%0A%0A1)%20Vehicle:%20%0A2)%20Voltage:%20%0A3)%20Capacity%20(Ah):%20%0A4)%20Motor/Controller%20Watt:%20%0A5)%20Battery%20Box%20Size:%20%0A6)%20Delivery%20City:%20%0A%0APlease%20share%20best%20option%20with%20price%20and%20delivery%20time." 
+                               target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+                                <i class="fab fa-whatsapp"></i> Send Custom Requirements
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="Extra Miles Energy">
+                    </div>
+                    <p class="footer-about">
+                        Leading manufacturer of premium lithium battery packs for electric vehicles and solar applications.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:extramilesenergy@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#features">Why Choose Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products">60V 30Ah Battery</a></li>
+                        <li><a href="#products">72V 30Ah Battery</a></li>
+                        <li><a href="#products">72V 45Ah Battery</a></li>
+                        <li><a href="#products">76V 45Ah Battery</a></li>
+                        <li><a href="#contact">Custom Battery Packs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Hisar, Haryana</li>
+                        <li><i class="fas fa-phone-alt"></i> +91-9991144903</li>
+                        <li><i class="fab fa-whatsapp"></i> +91-7876555055</li>
+                        <li><i class="fas fa-envelope"></i> extramilesenergy@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> Extra Miles Energy. All rights reserved. | Lithium Battery Manufacturer | GST: 06AUIPP2101K2ZR</p>
+            </div>
+            
+            <div class="admin-access">
+                <a href="admin/">
+                    <i class="fas fa-user-shield"></i> Admin Access
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <div class="float-whatsapp">
+        <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%20to%20buy%20a%20Lithium%20Battery%20Pack.%20Please%20share%20details." 
+           target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
         </a>
-      </div>
     </div>
-  </section>
 
-  <!-- Features Section -->
-  <section class="section" id="features">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Why Choose Extra Miles Energy</h2>
-        <p class="section-subtitle">We deliver quality and reliability in every battery pack</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3 class="feature-title">3-Year Warranty</h3>
-          <p class="feature-description">Industry-leading warranty with comprehensive coverage for peace of mind.</p>
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modalImage" class="product-image" alt="Enlarged View">
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3 class="feature-title">Smart BMS</h3>
-          <p class="feature-description">Advanced Battery Management System for complete protection and monitoring.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-cogs"></i>
-          </div>
-          <h3 class="feature-title">Custom Solutions</h3>
-          <p class="feature-description">Battery packs customized to your specific vehicle requirements.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-truck"></i>
-          </div>
-          <h3 class="feature-title">Pan India Delivery</h3>
-          <p class="feature-description">Safe and secure shipping across India with reliable logistics partners.</p>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Gallery Section -->
-  <section class="section" id="gallery">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Work Gallery</h2>
-        <p class="section-subtitle">Premium battery packs manufactured with precision</p>
-      </div>
-      
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="battery-pack.png" alt="Battery Pack Assembly" onclick="openModal(this.src)">
-        </div>
-        
-        <div class="gallery-item">
-          <img src="60v30ah.png" alt="60V 30Ah Battery" onclick="openModal(this.src)">
-        </div>
-        
-        <div class="gallery-item">
-          <img src="72v45ah.jpg" alt="72V 45Ah Battery" onclick="openModal(this.src)">
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
 
-  <!-- FAQ Section -->
-  <section class="section" id="faq">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-subtitle">Get answers to common questions about our batteries</p>
-      </div>
-      
-      <div class="faq-container">
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            What is the warranty period for your batteries?
-            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-          </div>
-          <div class="faq-answer">
-            We provide a 3-year warranty on our lithium battery packs. The warranty covers manufacturing defects and performance issues under normal usage conditions.
-          </div>
-        </div>
+    <!-- Main Script -->
+    <script>
+        // ===== BASIC FUNCTIONS =====
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            How long does the battery last on a single charge?
-            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-          </div>
-          <div class="faq-answer">
-            Battery life depends on various factors including vehicle type, motor power, terrain, and load. Typically, our 60V 30Ah battery provides 60-80 km range for electric scooters.
-          </div>
-        </div>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
         
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            Do you provide custom battery solutions?
-            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-          </div>
-          <div class="faq-answer">
-            Yes, we specialize in custom battery packs. We can design batteries according to your specific voltage, capacity, size, and application requirements.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">Get in touch for inquiries, orders, or support</p>
-      </div>
-      
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="feature-card" style="height: 100%; text-align: left;">
-            <h3 style="margin-top: 0;">Extra Miles Energy</h3>
-            
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-map-marker-alt"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Address</h4>
-                <p>Skyline Stores, Shop No-8<br>Opp The Aryan School, Kaimri Road<br>Hisar-125001, Haryana</p>
-              </div>
-            </div>
-            
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-phone-alt"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Phone Numbers</h4>
-                <p>+91-9991144903<br>+91-7876555055 (WhatsApp)</p>
-              </div>
-            </div>
-            
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Email</h4>
-                <p>extramilesenergy@gmail.com</p>
-              </div>
-            </div>
-            
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-clock"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Business Hours</h4>
-                <p>Monday - Saturday: 9:00 AM - 8:00 PM<br>Sunday: 10:00 AM - 6:00 PM</p>
-              </div>
-            </div>
-            
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-file-invoice"></i>
-              </div>
-              <div class="contact-details">
-                <h4>GST Number</h4>
-                <p>06AUIPP2101K2ZR</p>
-              </div>
-            </div>
-            
-            <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
-              <a href="tel:9991144903" class="btn btn-primary">
-                <i class="fas fa-phone-alt"></i> Call Now
-              </a>
-              <a href="https://wa.me/917876555055" target="_blank" class="btn btn-whatsapp">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-              </a>
-            </div>
-          </div>
-        </div>
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
         
-        <div>
-          <div class="feature-card" style="height: 100%;">
-            <h3 style="margin-top: 0;">Bank Details</h3>
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // FAQ toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const faqAnswer = faqItem.querySelector('.faq-answer');
+            const toggleIcon = element.querySelector('.faq-toggle i');
             
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-university"></i>
-              </div>
-              <div class="contact-details">
-                <h4>State Bank of India</h4>
-                <p>Account Number: 41252664720<br>Branch: Patel Nagar, Hisar-125001<br>IFSC: SBIN0009280</p>
-              </div>
-            </div>
+            faqItem.classList.toggle('active');
             
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-info-circle"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Payment Note</h4>
-                <p>Please confirm product details, price, and delivery before making any payment.</p>
-              </div>
-            </div>
-            
-            <div style="margin-top: 30px;">
-              <h4 style="margin-bottom: 15px;">Custom Order Form</h4>
-              <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%20a%20CUSTOM%20Lithium%20Battery%20Pack.%0A%0A1)%20Vehicle:%20%0A2)%20Voltage:%20%0A3)%20Capacity%20(Ah):%20%0A4)%20Motor/Controller%20Watt:%20%0A5)%20Battery%20Box%20Size:%20%0A6)%20Delivery%20City:%20%0A%0APlease%20share%20best%20option%20with%20price%20and%20delivery%20time." 
-                 target="_blank" class="btn btn-whatsapp" style="width: 100%;">
-                <i class="fab fa-whatsapp"></i> Send Custom Requirements
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">
-            <img src="logo.png" alt="Extra Miles Energy">
-          </div>
-          <p class="footer-about">
-            Leading manufacturer of premium lithium battery packs for electric vehicles and solar applications.
-          </p>
-          <div class="social-links">
-            <a href="#" class="social-link">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social-link">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="social-link">
-              <i class="fab fa-youtube"></i>
-            </a>
-            <a href="mailto:extramilesenergy@gmail.com" class="social-link">
-              <i class="fas fa-envelope"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div>
-          <h4 class="footer-title">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#features">Why Choose Us</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="footer-title">Products</h4>
-          <ul class="footer-links">
-            <li><a href="#products">60V 30Ah Battery</a></li>
-            <li><a href="#products">72V 30Ah Battery</a></li>
-            <li><a href="#products">72V 45Ah Battery</a></li>
-            <li><a href="#products">76V 45Ah Battery</a></li>
-            <li><a href="#contact">Custom Battery Packs</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="footer-title">Contact Info</h4>
-          <ul class="footer-links">
-            <li><i class="fas fa-map-marker-alt"></i> Hisar, Haryana</li>
-            <li><i class="fas fa-phone-alt"></i> +91-9991144903</li>
-            <li><i class="fab fa-whatsapp"></i> +91-7876555055</li>
-            <li><i class="fas fa-envelope"></i> extramilesenergy@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="copyright">
-        <p>&copy; <span id="currentYear"></span> Extra Miles Energy. All rights reserved. | Lithium Battery Manufacturer | GST: 06AUIPP2101K2ZR</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Floating WhatsApp -->
-  <div class="float-whatsapp">
-    <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%20to%20buy%20a%20Lithium%20Battery%20Pack.%20Please%20share%20details." 
-       target="_blank" class="whatsapp-btn">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-  </div>
-
-  <!-- Image Modal -->
-  <div class="modal" id="imageModal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      <img id="modalImage" class="modal-img" alt="Enlarged View">
-    </div>
-  </div>
-
-  <script>
-    // Set current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-      mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-    });
-    
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-      });
-    });
-    
-    // FAQ toggle functionality
-    function toggleFAQ(element) {
-      const faqItem = element.parentElement;
-      const faqAnswer = faqItem.querySelector('.faq-answer');
-      const toggleIcon = element.querySelector('.faq-toggle i');
-      
-      faqItem.classList.toggle('active');
-      
-      if (faqItem.classList.contains('active')) {
-        faqAnswer.classList.add('active');
-        toggleIcon.className = 'fas fa-minus';
-      } else {
-        faqAnswer.classList.remove('active');
-        toggleIcon.className = 'fas fa-plus';
-      }
-    }
-    
-    // Image modal functionality
-    function openModal(src) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      modalImg.src = src;
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeModal() {
-      const modal = document.getElementById('imageModal');
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-    
-    // Close modal when clicking outside image
-    document.getElementById('imageModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
-      }
-    });
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
+            if (faqItem.classList.contains('active')) {
+                faqAnswer.classList.add('active');
+                toggleIcon.className = 'fas fa-minus';
+            } else {
+                faqAnswer.classList.remove('active');
+                toggleIcon.className = 'fas fa-plus';
+            }
         }
-      });
-    });
-    
-    // Active nav link based on scroll position
-    window.addEventListener('scroll', function() {
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-links a:not(.phone-btn):not(.btn)');
-      
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 100)) {
-          current = section.getAttribute('id');
+        
+        // Image modal
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
-      });
-    });
-    
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
-      } else {
-        header.style.boxShadow = 'none';
-      }
-    });
-  </script>
+        
+        // Close modal when clicking outside
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a:not(.admin-link)');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // ===== NOTIFICATION SYSTEM =====
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // ===== PRODUCTS LOADING FROM GITHUB =====
+        async function loadProducts() {
+            const productsContainer = document.getElementById('productsContainer');
+            
+            try {
+                // Load products from GitHub
+                const response = await fetch('https://api.github.com/repos/parshantsahara/extramilesenergy.in/contents/content/products');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load products');
+                }
+                
+                const files = await response.json();
+                
+                // Filter for JSON files
+                const jsonFiles = files.filter(file => 
+                    file.name.endsWith('.json') && file.name !== '.keep'
+                );
+                
+                if (jsonFiles.length === 0) {
+                    // Show default products if no JSON files found
+                    showDefaultProducts();
+                    return;
+                }
+                
+                // Load each product
+                productsContainer.innerHTML = '';
+                
+                for (const file of jsonFiles) {
+                    try {
+                        const productResponse = await fetch(file.download_url);
+                        const product = await productResponse.json();
+                        
+                        // Generate WhatsApp link
+                        const whatsappText = `Hi Extra Miles Energy, I want ${product.name}. Please share price and availability.`;
+                        const whatsappLink = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappText)}`;
+                        
+                        // Create product card
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.innerHTML = `
+                            <div class="product-image-container">
+                                <img src="${product.image || 'placeholder.png'}" 
+                                     alt="${product.name} - Extra Miles Energy" 
+                                     class="product-image"
+                                     onclick="openModal(this.src)">
+                                ${product.isNew ? '<div class="admin-badge">NEW</div>' : ''}
+                            </div>
+                            
+                            <div class="product-badge">${product.category || 'EV Battery'}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-specs">${product.voltage || ''}</div>
+                            
+                            ${product.range ? `
+                                <div class="product-range">
+                                    <i class="fas fa-road"></i> Range: ${product.range}
+                                </div>
+                            ` : ''}
+                            
+                            <ul class="product-features">
+                                ${(product.features || []).map(feature => `
+                                    <li>${feature}</li>
+                                `).join('')}
+                            </ul>
+                            
+                            ${product.price ? `
+                                <div class="product-price">${product.price}</div>
+                            ` : ''}
+                            
+                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+                                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                            </a>
+                        `;
+                        
+                        productsContainer.appendChild(productCard);
+                        
+                    } catch (error) {
+                        console.error('Error loading product:', error);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showDefaultProducts();
+            }
+        }
+        
+        // Show default products if GitHub fails
+        function showDefaultProducts() {
+            const productsContainer = document.getElementById('productsContainer');
+            
+            const defaultProducts = [
+                {
+                    name: "60V 30Ah (19S2P)",
+                    voltage: "60V 30Ah Lithium Battery",
+                    category: "EV Battery",
+                    features: ["LiFePO4 Cells", "3 Year Warranty", "JK Smart BMS", "Suitable for Electric Scooters"],
+                    range: "60-80 km",
+                    price: "Price on WhatsApp",
+                    image: "60v30ah.png"
+                },
+                {
+                    name: "72V 30Ah (23S2P)",
+                    voltage: "72V 30Ah Lithium Battery",
+                    category: "EV Battery",
+                    features: ["LiFePO4 Cells", "3 Year Warranty", "Smart BMS Protection", "High Performance"],
+                    range: "70-90 km",
+                    price: "Price on WhatsApp",
+                    image: "72v30ah.png"
+                },
+                {
+                    name: "72V 45Ah (23S3P)",
+                    voltage: "72V 45Ah Lithium Battery",
+                    category: "EV Battery",
+                    features: ["LiFePO4 Cells", "Long Range Performance", "Heavy-Duty Wiring", "Best for High Load EV"],
+                    range: "100-130 km",
+                    price: "Price on WhatsApp",
+                    image: "72v45ah.jpg"
+                },
+                {
+                    name: "76V 45Ah (24S3P)",
+                    voltage: "76V 45Ah Lithium Battery",
+                    category: "EV Battery",
+                    features: ["LiFePO4 Cells", "High Power Output", "Strong Casing", "Premium EV Performance"],
+                    range: "110-140 km",
+                    price: "Price on WhatsApp",
+                    image: "76v45ah.png"
+                }
+            ];
+            
+            productsContainer.innerHTML = defaultProducts.map(product => {
+                const whatsappText = `Hi Extra Miles Energy, I want ${product.name}. Please share price and availability.`;
+                const whatsappLink = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappText)}`;
+                
+                return `
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="${product.image}" 
+                                 alt="${product.name} - Extra Miles Energy" 
+                                 class="product-image"
+                                 onclick="openModal(this.src)">
+                        </div>
+                        
+                        <div class="product-badge">${product.category}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-specs">${product.voltage}</div>
+                        
+                        <div class="product-range">
+                            <i class="fas fa-road"></i> Range: ${product.range}
+                        </div>
+                        
+                        <ul class="product-features">
+                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        
+                        <div class="product-price">${product.price}</div>
+                        
+                        <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ===== INITIALIZATION =====
+        window.onload = function() {
+            // Load products
+            loadProducts();
+            
+            // Check for notification in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const notification = urlParams.get('notification');
+            const notificationType = urlParams.get('type');
+            
+            if (notification) {
+                showNotification(decodeURIComponent(notification), notificationType || 'success');
+                
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        };
+        
+        // ===== AUTO REFRESH PRODUCTS (Every 5 minutes) =====
+        setInterval(loadProducts, 5 * 60 * 1000);
+    </script>
 </body>
 </html>
