@@ -1,20 +1,5 @@
 [
   {
-    "id": "product-1769239675345-pcqupluxl",
-    "name": "CYLINDRICAL CELL 32140",
-    "voltage": "3.2V 15AH",
-    "category": "EV Battery",
-    "price": "290",
-    "features": [
-      "32140 CELL",
-      "CYCLE 4000",
-      "GRADE A"
-    ],
-    "status": "active",
-    "image": "../uploads/32140.jpg",
-    "displayOrder": 0
-  },
-  {
     "id": "product-1769243846541-m1axk18l5",
     "name": "slkdfflksdff",
     "voltage": "sdfasddffasdasdas",
