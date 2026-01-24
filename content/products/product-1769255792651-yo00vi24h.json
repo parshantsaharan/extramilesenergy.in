@@ -1,0 +1,21 @@
+{
+  "id": "product-1769255792651-yo00vi24h",
+  "name": "Nickel strip 32140",
+  "voltage": "32140",
+  "category": "EV Battery",
+  "price": "1300",
+  "model": null,
+  "configuration": null,
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": null,
+  "bms": null,
+  "features": [
+    "32140 nickel strip"
+  ],
+  "status": "active",
+  "image": "",
+  "displayOrder": 0,
+  "createdAt": "2026-01-24T11:56:32.651Z",
+  "updatedAt": "2026-01-24T11:56:32.651Z"
+}
