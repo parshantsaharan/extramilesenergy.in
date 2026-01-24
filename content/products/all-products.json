@@ -17,5 +17,26 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769244468849.jpg",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1769245907390-mjer1fr82",
+    "name": "Kaliyo",
+    "voltage": "Koi ni ",
+    "category": "EV Battery",
+    "price": "Zero",
+    "model": "Faltua",
+    "configuration": "Aawara",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "Zero",
+    "bms": "Hai hi konk",
+    "features": [
+      "Hattt",
+      "Huur",
+      "Happp"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769245900337.jpg",
+    "displayOrder": 0
   }
 ]
