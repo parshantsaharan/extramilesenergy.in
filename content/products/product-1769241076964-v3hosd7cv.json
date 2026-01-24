@@ -1,0 +1,19 @@
+{
+  "id": "product-1769241076964-v3hosd7cv",
+  "name": "EM-LFP6030",
+  "voltage": "60Volt 30Ah",
+  "category": "EV Battery",
+  "price": "Rs 23000",
+  "model": "EM-LFP6030",
+  "configuration": "19s2p",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "1820 Wh",
+  "features": [
+    "Lithium Iron Phosphate"
+  ],
+  "status": "active",
+  "image": "../uploads/product-1769241055250.jpg",
+  "createdAt": "2026-01-24T07:51:16.966Z",
+  "updatedAt": "2026-01-24T07:51:16.966Z"
+}
