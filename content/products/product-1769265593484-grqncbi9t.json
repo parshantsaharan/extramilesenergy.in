@@ -1,0 +1,21 @@
+{
+  "id": "product-1769265593484-grqncbi9t",
+  "name": "Solar battery ",
+  "voltage": "51.2 volt  105Ah",
+  "category": "Solar Battery",
+  "price": "65000/-",
+  "model": "EM-SlFP 16S",
+  "configuration": "16s1p",
+  "chemistry": "LiFePO₄",
+  "warranty": "5 Year Warranty",
+  "capacity": "5120 KW",
+  "bms": "Smart BMS",
+  "features": [
+    "Safe Lfp 4000+ life cycle "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769265588180.jpg",
+  "displayOrder": 0,
+  "createdAt": "2026-01-24T14:39:53.484Z",
+  "updatedAt": "2026-01-24T14:39:53.486Z"
+}
