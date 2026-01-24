@@ -1,20 +1,5 @@
 [
   {
-    "id": "product-1769237281501-1upomv6t7",
-    "name": "60v 30ah LiFePo4 battery",
-    "voltage": "60v 30ah",
-    "category": "EV Battery",
-    "price": "23000-25000",
-    "features": [
-      "LiFepo4 Battery Pack",
-      "3 Year warrenty",
-      "4000 life cycles"
-    ],
-    "status": "active",
-    "image": "../uploads/download.jpeg",
-    "displayOrder": 0
-  },
-  {
     "id": "product-1769239675345-pcqupluxl",
     "name": "CYLINDRICAL CELL 32140",
     "voltage": "3.2V 15AH",
