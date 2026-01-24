@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Extra Miles Energy | Leading Lithium Battery Manufacturer in India</title>
+  <title>Extra Miles Energy | Premium Lithium Battery Manufacturer in India</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Extra Miles Energy - Top Lithium Battery Manufacturer for Electric Scooters, E-Rickshaws, Solar Systems & Custom EV Battery Packs. 3-Year Warranty. Hisar, Haryana." />
+  <meta name="description" content="Extra Miles Energy - Top Lithium Battery Manufacturer for Electric Scooters, E-Rickshaws, Solar Systems & Custom Battery Packs. 3-Year Warranty. Hisar, Haryana." />
   <meta name="keywords" content="lithium battery manufacturer, EV battery pack, electric scooter battery, e-rickshaw battery, solar battery, custom battery pack, Hisar, Haryana" />
   <meta name="author" content="Extra Miles Energy" />
   
@@ -32,36 +32,37 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    :root {
-      --primary: #0b1220;
-      --secondary: #101a31;
-      --accent: #35d0ff;
-      --accent2: #7c5cff;
-      --success: #45ff90;
-      --warning: #ffb145;
-      --text: #eaf2ff;
-      --text-muted: #9fb2d6;
-      --border: rgba(255, 255, 255, 0.12);
-      --card-bg: rgba(16, 26, 49, 0.85);
-      --overlay: rgba(11, 18, 32, 0.95);
-      
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.25);
-      --radius: 24px;
-      --radius-sm: 16px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
+    /* Reset & Base Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+    
+    :root {
+      --primary: #0b1220;
+      --secondary: #142044;
+      --accent: #35d0ff;
+      --accent2: #7c5cff;
+      --success: #45ff90;
+      --warning: #ffb145;
+      --text: #ffffff;
+      --text-muted: #a0b3d9;
+      --border: rgba(255, 255, 255, 0.15);
+      --card-bg: rgba(20, 32, 68, 0.8);
+      --header-bg: rgba(11, 18, 32, 0.95);
+      
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: all 0.3s ease;
     }
     
     html {
@@ -71,19 +72,32 @@
     
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: radial-gradient(1400px 800px at 15% 10%, rgba(124, 92, 255, 0.28), transparent 70%),
-                  radial-gradient(1000px 700px at 85% 20%, rgba(53, 208, 255, 0.24), transparent 65%),
-                  var(--primary);
+      background: var(--primary);
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(124, 92, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(53, 208, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
     }
     
     h1, h2, h3, h4, h5, h6 {
-      font-family: 'Poppins', sans-serif;
       font-weight: 700;
       line-height: 1.2;
+      margin-bottom: 1rem;
     }
     
     a {
@@ -94,8 +108,8 @@
     
     img {
       max-width: 100%;
+      height: auto;
       display: block;
-      border-radius: var(--radius-sm);
     }
     
     .container {
@@ -111,12 +125,12 @@
     
     .section-header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
     }
     
     .section-title {
       font-size: 2.5rem;
-      margin-bottom: 16px;
+      margin-bottom: 15px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -130,6 +144,7 @@
       margin: 0 auto;
     }
     
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -137,54 +152,34 @@
       gap: 10px;
       padding: 14px 28px;
       border-radius: var(--radius-sm);
-      font-family: 'Poppins', sans-serif;
       font-weight: 600;
       font-size: 1rem;
       border: none;
       cursor: pointer;
       transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(-100%);
-      transition: transform 0.6s;
-      z-index: -1;
-    }
-    
-    .btn:hover::before {
-      transform: translateX(0);
+      text-align: center;
     }
     
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: var(--primary);
-      box-shadow: 0 10px 30px rgba(53, 208, 255, 0.3);
+      color: white;
+      box-shadow: var(--shadow-light);
     }
     
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(53, 208, 255, 0.4);
+      box-shadow: 0 10px 25px rgba(53, 208, 255, 0.3);
     }
     
     .btn-whatsapp {
       background: linear-gradient(135deg, #25D366, #0ea75a);
       color: white;
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+      box-shadow: var(--shadow-light);
     }
     
     .btn-whatsapp:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
     }
     
     .btn-outline {
@@ -198,67 +193,27 @@
       transform: translateY(-3px);
     }
     
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow-light);
-      transition: var(--transition);
-      height: 100%;
-      backdrop-filter: blur(10px);
-    }
-    
-    .card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(53, 208, 255, 0.3);
-      box-shadow: var(--shadow);
-    }
-    
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      background: rgba(53, 208, 255, 0.1);
-      border: 1px solid rgba(53, 208, 255, 0.3);
-      color: var(--accent);
-    }
-    
-    /* Header Styles */
+    /* Header - FIXED */
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(11, 18, 32, 0.95);
-      backdrop-filter: blur(15px);
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       transition: var(--transition);
-    }
-    
-    header.scrolled {
-      padding: 10px 0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
     
     .header-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 0;
-      transition: var(--transition);
+      padding: 15px 0;
     }
     
-    header.scrolled .header-container {
-      padding: 10px 0;
-    }
-    
-    .logo {
+    .logo-container {
       display: flex;
       align-items: center;
       gap: 15px;
@@ -267,9 +222,9 @@
     .logo-img {
       width: 180px;
       height: auto;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      padding: 5px;
       background: rgba(255, 255, 255, 0.05);
     }
     
@@ -279,23 +234,27 @@
     }
     
     .logo-text h1 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       margin: 0;
+      line-height: 1.2;
     }
     
-    .logo-text p {
-      font-size: 0.9rem;
+    .logo-text .tagline {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin: 0;
+      margin-top: 3px;
     }
     
+    /* Navigation */
     .nav-links {
       display: flex;
-      gap: 30px;
+      gap: 25px;
+      align-items: center;
     }
     
     .nav-links a {
       font-weight: 500;
+      font-size: 0.95rem;
       position: relative;
       padding: 5px 0;
     }
@@ -316,6 +275,23 @@
       width: 100%;
     }
     
+    .nav-contact {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .phone-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+    
     .mobile-menu-btn {
       display: none;
       background: none;
@@ -325,98 +301,156 @@
       cursor: pointer;
     }
     
-    /* Hero Section */
+    /* Hero Section - SIMPLIFIED */
     .hero {
-      padding-top: 160px;
-      padding-bottom: 100px;
-      position: relative;
-      overflow: hidden;
+      padding-top: 140px;
+      padding-bottom: 80px;
     }
     
     .hero-content {
-      max-width: 700px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
     
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 24px;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      background: rgba(53, 208, 255, 0.1);
+      border: 1px solid rgba(53, 208, 255, 0.3);
+      color: var(--accent);
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+    
+    .hero-title {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
       line-height: 1.1;
     }
     
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-      max-width: 600px;
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
-    .hero-btns {
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    
+    .hero-buttons {
       display: flex;
+      justify-content: center;
       gap: 20px;
+      margin-bottom: 60px;
       flex-wrap: wrap;
-      margin-bottom: 40px;
     }
     
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      max-width: 700px;
+      max-width: 900px;
+      margin: 0 auto;
     }
     
-    .stat {
-      text-align: center;
-      padding: 20px;
-      border-radius: var(--radius-sm);
-      background: rgba(16, 26, 49, 0.7);
+    .stat-card {
+      background: var(--card-bg);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px 20px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
     }
     
     .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 2.2rem;
+      font-weight: 800;
       color: var(--accent);
       margin-bottom: 8px;
     }
     
     .stat-text {
-      font-size: 0.9rem;
       color: var(--text-muted);
+      font-size: 0.95rem;
     }
     
     /* Products Section */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 30px;
+      gap: 25px;
     }
     
     .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      transition: var(--transition);
       display: flex;
       flex-direction: column;
+      height: 100%;
     }
     
-    .product-img {
-      width: 100%;
-      height: 250px;
-      object-fit: contain;
-      border-radius: var(--radius-sm);
+    .product-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    
+    .product-image-container {
+      position: relative;
       margin-bottom: 20px;
-      padding: 15px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
       background: rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border);
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      padding: 15px;
       transition: var(--transition);
       cursor: pointer;
     }
     
-    .product-img:hover {
+    .product-image:hover {
       transform: scale(1.05);
-      border-color: var(--accent);
+    }
+    
+    .product-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(53, 208, 255, 0.1);
+      color: var(--accent);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      border: 1px solid rgba(53, 208, 255, 0.3);
     }
     
     .product-title {
       font-size: 1.3rem;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
     
     .product-features {
@@ -440,43 +474,48 @@
       font-weight: bold;
     }
     
-    .product-actions {
-      display: flex;
-      gap: 15px;
-    }
-    
-    /* Why Choose Us Section */
+    /* Features Section */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      gap: 25px;
     }
     
     .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
       text-align: center;
-      padding: 40px 20px;
+      transition: var(--transition);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
     }
     
     .feature-icon {
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
       background: rgba(53, 208, 255, 0.1);
       border-radius: 50%;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: var(--accent);
     }
     
     .feature-title {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-bottom: 15px;
     }
     
     .feature-description {
       color: var(--text-muted);
+      font-size: 0.95rem;
     }
     
     /* Gallery Section */
@@ -487,11 +526,11 @@
     }
     
     .gallery-item {
-      position: relative;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius);
       overflow: hidden;
       height: 250px;
-      cursor: pointer;
+      position: relative;
+      border: 1px solid var(--border);
     }
     
     .gallery-item img {
@@ -505,69 +544,6 @@
       transform: scale(1.1);
     }
     
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(11, 18, 32, 0.9), transparent);
-      padding: 20px;
-      transform: translateY(20px);
-      opacity: 0;
-      transition: var(--transition);
-    }
-    
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    
-    /* Testimonials */
-    .testimonial-slider {
-      position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .testimonial {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 40px;
-      border: 1px solid var(--border);
-      text-align: center;
-    }
-    
-    .testimonial-text {
-      font-size: 1.1rem;
-      font-style: italic;
-      margin-bottom: 30px;
-      color: var(--text-muted);
-    }
-    
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-    
-    .author-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent);
-    }
-    
-    .author-info h4 {
-      margin-bottom: 5px;
-    }
-    
-    .author-info p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    
     /* FAQ Section */
     .faq-container {
       max-width: 800px;
@@ -576,14 +552,14 @@
     
     .faq-item {
       margin-bottom: 15px;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--border);
+      background: var(--card-bg);
     }
     
     .faq-question {
       padding: 20px;
-      background: var(--card-bg);
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -596,7 +572,6 @@
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease, padding 0.3s ease;
-      background: rgba(16, 26, 49, 0.5);
     }
     
     .faq-answer.active {
@@ -652,14 +627,6 @@
       color: var(--text-muted);
     }
     
-    .map-container {
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      height: 100%;
-      min-height: 300px;
-      border: 1px solid var(--border);
-    }
-    
     /* Footer */
     footer {
       background: rgba(11, 18, 32, 0.95);
@@ -674,18 +641,15 @@
       margin-bottom: 40px;
     }
     
-    .footer-logo {
-      margin-bottom: 20px;
-    }
-    
-    .footer-logo-img {
+    .footer-logo img {
       width: 200px;
-      height: auto;
+      margin-bottom: 20px;
     }
     
     .footer-about {
       color: var(--text-muted);
       margin-bottom: 20px;
+      font-size: 0.95rem;
     }
     
     .footer-title {
@@ -761,9 +725,6 @@
       bottom: 30px;
       right: 30px;
       z-index: 100;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
     }
     
     .whatsapp-btn {
@@ -792,7 +753,7 @@
       100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
     }
     
-    /* Modal for Image Zoom */
+    /* Image Modal */
     .modal {
       display: none;
       position: fixed;
@@ -837,7 +798,7 @@
     
     /* Responsive Design */
     @media (max-width: 1024px) {
-      .hero h1 {
+      .hero-title {
         font-size: 2.8rem;
       }
       
@@ -855,16 +816,12 @@
     }
     
     @media (max-width: 768px) {
-      .header-container {
-        padding: 15px 0;
-      }
-      
       .nav-links {
         position: fixed;
         top: 80px;
         left: 0;
         width: 100%;
-        background: var(--overlay);
+        background: var(--header-bg);
         backdrop-filter: blur(15px);
         flex-direction: column;
         padding: 20px;
@@ -872,6 +829,7 @@
         opacity: 0;
         transition: var(--transition);
         border-bottom: 1px solid var(--border);
+        gap: 15px;
       }
       
       .nav-links.active {
@@ -879,26 +837,35 @@
         opacity: 1;
       }
       
+      .nav-contact {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
       .mobile-menu-btn {
         display: block;
       }
       
       .hero {
-        padding-top: 140px;
+        padding-top: 120px;
       }
       
-      .hero h1 {
+      .hero-title {
         font-size: 2.3rem;
       }
       
-      .hero-btns {
-        flex-direction: column;
+      .hero-description {
+        font-size: 1.1rem;
       }
       
-      .hero-btns .btn {
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .hero-buttons .btn {
         width: 100%;
-        text-align: center;
-        justify-content: center;
+        max-width: 300px;
       }
       
       .section {
@@ -920,15 +887,15 @@
       .gallery-grid {
         grid-template-columns: 1fr;
       }
+      
+      .logo-img {
+        width: 150px;
+      }
     }
     
     @media (max-width: 480px) {
-      .hero h1 {
+      .hero-title {
         font-size: 2rem;
-      }
-      
-      .hero p {
-        font-size: 1rem;
       }
       
       .hero-stats {
@@ -961,11 +928,11 @@
   <header id="header">
     <div class="container">
       <div class="header-container">
-        <div class="logo">
+        <div class="logo-container">
           <img src="logo.png" alt="Extra Miles Energy Logo" class="logo-img">
           <div class="logo-text">
             <h1>Extra Miles Energy</h1>
-            <p>Lithium Battery Manufacturer</p>
+            <div class="tagline">Premium Lithium Battery Manufacturer</div>
           </div>
         </div>
         
@@ -973,11 +940,18 @@
           <div class="nav-links" id="navLinks">
             <a href="#home" class="active">Home</a>
             <a href="#products">Products</a>
-            <a href="#features">Why Choose Us</a>
+            <a href="#features">Why Us</a>
             <a href="#gallery">Gallery</a>
-            <a href="#testimonials">Reviews</a>
             <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
+            <div class="nav-contact">
+              <a href="tel:9991144903" class="phone-btn">
+                <i class="fas fa-phone-alt"></i> 9991144903
+              </a>
+              <a href="https://wa.me/917876555055" target="_blank" class="btn btn-whatsapp" style="padding: 10px 16px;">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
           </div>
           <button class="mobile-menu-btn" id="mobileMenuBtn">
             <i class="fas fa-bars"></i>
@@ -991,15 +965,17 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="badge">
-          <i class="fas fa-bolt"></i> Premium Lithium Battery Manufacturer
+        <div class="hero-badge">
+          <i class="fas fa-bolt"></i> Leading Lithium Battery Manufacturer
         </div>
         
-        <h1>Power Your Electric Journey with <span style="color:var(--accent);">Extra Miles</span></h1>
+        <h1 class="hero-title">Power Your Electric Journey with <span>Extra Miles</span></h1>
         
-        <p>We manufacture high-performance Lithium Battery Packs for Electric Scooters, E-Rickshaws, Solar Systems & custom applications. Quality tested with 3-Year Warranty.</p>
+        <p class="hero-description">
+          We manufacture high-performance Lithium Battery Packs for Electric Scooters, E-Rickshaws, Solar Systems & custom applications. Quality tested with 3-Year Warranty.
+        </p>
         
-        <div class="hero-btns">
+        <div class="hero-buttons">
           <a href="#products" class="btn btn-primary">
             <i class="fas fa-bolt"></i> View Products
           </a>
@@ -1013,19 +989,19 @@
         </div>
         
         <div class="hero-stats">
-          <div class="stat">
+          <div class="stat-card">
             <div class="stat-number">3+</div>
             <div class="stat-text">Years Warranty</div>
           </div>
-          <div class="stat">
+          <div class="stat-card">
             <div class="stat-number">500+</div>
             <div class="stat-text">Batteries Sold</div>
           </div>
-          <div class="stat">
+          <div class="stat-card">
             <div class="stat-number">24/7</div>
             <div class="stat-text">Support</div>
           </div>
-          <div class="stat">
+          <div class="stat-card">
             <div class="stat-number">100%</div>
             <div class="stat-text">Quality Tested</div>
           </div>
@@ -1044,9 +1020,11 @@
       
       <div class="products-grid">
         <!-- Product 1 -->
-        <div class="card product-card">
-          <img src="60v30ah.png" alt="60V 30Ah Lithium Battery" class="product-img" onclick="openModal(this.src)">
-          <div class="badge">EV Battery</div>
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="60v30ah.png" alt="60V 30Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
+          </div>
+          <div class="product-badge">EV Battery</div>
           <h3 class="product-title">60V 30Ah (19S2P)</h3>
           <ul class="product-features">
             <li>LiFePO4 Cells</li>
@@ -1055,18 +1033,18 @@
             <li>Suitable for Electric Scooters</li>
             <li>Range: 60-80 km</li>
           </ul>
-          <div class="product-actions">
-            <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2060V%2030Ah%20Lithium%20Battery%20(19S2P).%20Please%20share%20price%20and%20availability." 
-               target="_blank" class="btn btn-whatsapp" style="flex-grow:1;">
-              <i class="fab fa-whatsapp"></i> Order Now
-            </a>
-          </div>
+          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2060V%2030Ah%20Lithium%20Battery%20(19S2P).%20Please%20share%20price%20and%20availability." 
+             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
+            <i class="fab fa-whatsapp"></i> Order Now
+          </a>
         </div>
         
         <!-- Product 2 -->
-        <div class="card product-card">
-          <img src="72v30ah.png" alt="72V 30Ah Lithium Battery" class="product-img" onclick="openModal(this.src)">
-          <div class="badge">EV Battery</div>
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="72v30ah.png" alt="72V 30Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
+          </div>
+          <div class="product-badge">EV Battery</div>
           <h3 class="product-title">72V 30Ah (23S2P)</h3>
           <ul class="product-features">
             <li>LiFePO4 Cells</li>
@@ -1075,18 +1053,18 @@
             <li>High Performance for Scooters</li>
             <li>Range: 70-90 km</li>
           </ul>
-          <div class="product-actions">
-            <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2030Ah%20Lithium%20Battery%20(23S2P).%20Please%20share%20price%20and%20availability." 
-               target="_blank" class="btn btn-whatsapp" style="flex-grow:1;">
-              <i class="fab fa-whatsapp"></i> Order Now
-            </a>
-          </div>
+          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2030Ah%20Lithium%20Battery%20(23S2P).%20Please%20share%20price%20and%20availability." 
+             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
+            <i class="fab fa-whatsapp"></i> Order Now
+          </a>
         </div>
         
         <!-- Product 3 -->
-        <div class="card product-card">
-          <img src="72v45ah.jpg" alt="72V 45Ah Lithium Battery" class="product-img" onclick="openModal(this.src)">
-          <div class="badge">EV Battery</div>
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="72v45ah.jpg" alt="72V 45Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
+          </div>
+          <div class="product-badge">EV Battery</div>
           <h3 class="product-title">72V 45Ah (23S3P)</h3>
           <ul class="product-features">
             <li>LiFePO4 Cells</li>
@@ -1095,18 +1073,18 @@
             <li>Best for High Load EV</li>
             <li>Range: 100-130 km</li>
           </ul>
-          <div class="product-actions">
-            <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2045Ah%20Lithium%20Battery%20(23S3P).%20Please%20share%20price%20and%20availability." 
-               target="_blank" class="btn btn-whatsapp" style="flex-grow:1;">
-              <i class="fab fa-whatsapp"></i> Order Now
-            </a>
-          </div>
+          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2072V%2045Ah%20Lithium%20Battery%20(23S3P).%20Please%20share%20price%20and%20availability." 
+             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
+            <i class="fab fa-whatsapp"></i> Order Now
+          </a>
         </div>
         
         <!-- Product 4 -->
-        <div class="card product-card">
-          <img src="76v45ah.png" alt="76V 45Ah Lithium Battery" class="product-img" onclick="openModal(this.src)">
-          <div class="badge">EV Battery</div>
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="76v45ah.png" alt="76V 45Ah Lithium Battery" class="product-image" onclick="openModal(this.src)">
+          </div>
+          <div class="product-badge">EV Battery</div>
           <h3 class="product-title">76V 45Ah (24S3P)</h3>
           <ul class="product-features">
             <li>LiFePO4 Cells</li>
@@ -1115,12 +1093,10 @@
             <li>Premium EV Performance</li>
             <li>Range: 110-140 km</li>
           </ul>
-          <div class="product-actions">
-            <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2076V%2045Ah%20Lithium%20Battery%20(24S3P).%20Please%20share%20price%20and%20availability." 
-               target="_blank" class="btn btn-whatsapp" style="flex-grow:1;">
-              <i class="fab fa-whatsapp"></i> Order Now
-            </a>
-          </div>
+          <a href="https://wa.me/917876555055?text=Hi%20Extra%20Miles%20Energy,%20I%20want%2076V%2045Ah%20Lithium%20Battery%20(24S3P).%20Please%20share%20price%20and%20availability." 
+             target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: auto;">
+            <i class="fab fa-whatsapp"></i> Order Now
+          </a>
         </div>
       </div>
       
@@ -1132,8 +1108,8 @@
     </div>
   </section>
 
-  <!-- Why Choose Us Section -->
-  <section class="section" id="features" style="background: rgba(11, 18, 32, 0.5);">
+  <!-- Features Section -->
+  <section class="section" id="features">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Why Choose Extra Miles Energy</h2>
@@ -1141,7 +1117,7 @@
       </div>
       
       <div class="features-grid">
-        <div class="card feature-card">
+        <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-shield-alt"></i>
           </div>
@@ -1149,44 +1125,28 @@
           <p class="feature-description">Industry-leading warranty with comprehensive coverage for peace of mind.</p>
         </div>
         
-        <div class="card feature-card">
+        <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-bolt"></i>
           </div>
           <h3 class="feature-title">Smart BMS</h3>
-          <p class="feature-description">Advanced Battery Management System for protection against overcharge, over-discharge, and short circuit.</p>
+          <p class="feature-description">Advanced Battery Management System for complete protection and monitoring.</p>
         </div>
         
-        <div class="card feature-card">
+        <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-cogs"></i>
           </div>
           <h3 class="feature-title">Custom Solutions</h3>
-          <p class="feature-description">Battery packs customized to your specific vehicle requirements and space constraints.</p>
+          <p class="feature-description">Battery packs customized to your specific vehicle requirements.</p>
         </div>
         
-        <div class="card feature-card">
+        <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-truck"></i>
           </div>
           <h3 class="feature-title">Pan India Delivery</h3>
           <p class="feature-description">Safe and secure shipping across India with reliable logistics partners.</p>
-        </div>
-        
-        <div class="card feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-check-circle"></i>
-          </div>
-          <h3 class="feature-title">Quality Testing</h3>
-          <p class="feature-description">Each battery undergoes rigorous testing for performance, safety, and durability.</p>
-        </div>
-        
-        <div class="card feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-headset"></i>
-          </div>
-          <h3 class="feature-title">24/7 Support</h3>
-          <p class="feature-description">Dedicated customer support team available for technical assistance and queries.</p>
         </div>
       </div>
     </div>
@@ -1203,51 +1163,14 @@
       <div class="gallery-grid">
         <div class="gallery-item">
           <img src="battery-pack.png" alt="Battery Pack Assembly" onclick="openModal(this.src)">
-          <div class="gallery-overlay">
-            <h4>Battery Pack Assembly</h4>
-            <p>Professional wiring and cell arrangement</p>
-          </div>
         </div>
         
         <div class="gallery-item">
           <img src="60v30ah.png" alt="60V 30Ah Battery" onclick="openModal(this.src)">
-          <div class="gallery-overlay">
-            <h4>60V 30Ah Battery</h4>
-            <p>Compact design for electric scooters</p>
-          </div>
         </div>
         
         <div class="gallery-item">
           <img src="72v45ah.jpg" alt="72V 45Ah Battery" onclick="openModal(this.src)">
-          <div class="gallery-overlay">
-            <h4>72V 45Ah Battery</h4>
-            <p>High-capacity for long range</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="section" id="testimonials" style="background: rgba(11, 18, 32, 0.5);">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Customer Reviews</h2>
-        <p class="section-subtitle">What our customers say about our products</p>
-      </div>
-      
-      <div class="testimonial-slider">
-        <div class="testimonial">
-          <div class="testimonial-text">
-            "The 72V 45Ah battery from Extra Miles Energy has transformed my e-rickshaw business. I get 20% more rides per charge compared to my old battery. Excellent quality and service!"
-          </div>
-          <div class="testimonial-author">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="author-avatar">
-            <div class="author-info">
-              <h4>Rajesh Kumar</h4>
-              <p>E-Rickshaw Owner, Delhi</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -1268,7 +1191,7 @@
             <span class="faq-toggle"><i class="fas fa-plus"></i></span>
           </div>
           <div class="faq-answer">
-            We provide a 3-year warranty on our lithium battery packs. The warranty covers manufacturing defects and performance issues under normal usage conditions. Please refer to our warranty terms for detailed information.
+            We provide a 3-year warranty on our lithium battery packs. The warranty covers manufacturing defects and performance issues under normal usage conditions.
           </div>
         </div>
         
@@ -1278,7 +1201,7 @@
             <span class="faq-toggle"><i class="fas fa-plus"></i></span>
           </div>
           <div class="faq-answer">
-            Battery life depends on various factors including vehicle type, motor power, terrain, and load. Typically, our 60V 30Ah battery provides 60-80 km range for electric scooters, while 72V 45Ah battery can provide 100-130 km range for e-rickshaws.
+            Battery life depends on various factors including vehicle type, motor power, terrain, and load. Typically, our 60V 30Ah battery provides 60-80 km range for electric scooters.
           </div>
         </div>
         
@@ -1288,27 +1211,7 @@
             <span class="faq-toggle"><i class="fas fa-plus"></i></span>
           </div>
           <div class="faq-answer">
-            Yes, we specialize in custom battery packs. We can design batteries according to your specific voltage, capacity, size, and application requirements. Contact us with your specifications for a customized solution.
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            How can I place an order?
-            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-          </div>
-          <div class="faq-answer">
-            You can place an order directly through WhatsApp by clicking the "Order Now" button on any product, or by calling us at +91-9991144903. We'll guide you through the order process, payment, and delivery details.
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            Do you provide installation support?
-            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-          </div>
-          <div class="faq-answer">
-            While we provide detailed installation instructions with each battery, for complex installations we can connect you with our authorized service partners in your city. We also offer remote guidance via video call if needed.
+            Yes, we specialize in custom battery packs. We can design batteries according to your specific voltage, capacity, size, and application requirements.
           </div>
         </div>
       </div>
@@ -1325,8 +1228,8 @@
       
       <div class="contact-grid">
         <div class="contact-info">
-          <div class="card">
-            <h3 style="margin-bottom: 20px;">Extra Miles Energy</h3>
+          <div class="feature-card" style="height: 100%; text-align: left;">
+            <h3 style="margin-top: 0;">Extra Miles Energy</h3>
             
             <div class="contact-item">
               <div class="contact-icon">
@@ -1353,6 +1256,16 @@
                 <i class="fas fa-envelope"></i>
               </div>
               <div class="contact-details">
+                <h4>Email</h4>
+                <p>extramilesenergy@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="contact-details">
                 <h4>Business Hours</h4>
                 <p>Monday - Saturday: 9:00 AM - 8:00 PM<br>Sunday: 10:00 AM - 6:00 PM</p>
               </div>
@@ -1368,8 +1281,8 @@
               </div>
             </div>
             
-            <div style="margin-top: 20px;">
-              <a href="tel:9991144903" class="btn btn-primary" style="margin-right: 10px;">
+            <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
+              <a href="tel:9991144903" class="btn btn-primary">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
               <a href="https://wa.me/917876555055" target="_blank" class="btn btn-whatsapp">
@@ -1380,8 +1293,9 @@
         </div>
         
         <div>
-          <div class="card">
-            <h3 style="margin-bottom: 20px;">Bank Details</h3>
+          <div class="feature-card" style="height: 100%;">
+            <h3 style="margin-top: 0;">Bank Details</h3>
+            
             <div class="contact-item">
               <div class="contact-icon">
                 <i class="fas fa-university"></i>
@@ -1398,7 +1312,7 @@
               </div>
               <div class="contact-details">
                 <h4>Payment Note</h4>
-                <p>Please confirm product details, price, and delivery before making any payment. Share payment receipt on WhatsApp for order confirmation.</p>
+                <p>Please confirm product details, price, and delivery before making any payment.</p>
               </div>
             </div>
             
@@ -1421,10 +1335,10 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo">
-            <img src="logo.png" alt="Extra Miles Energy" class="footer-logo-img">
+            <img src="logo.png" alt="Extra Miles Energy">
           </div>
           <p class="footer-about">
-            Leading manufacturer of premium lithium battery packs for electric vehicles and solar applications. Quality, reliability, and customer satisfaction are our top priorities.
+            Leading manufacturer of premium lithium battery packs for electric vehicles and solar applications.
           </p>
           <div class="social-links">
             <a href="#" class="social-link">
@@ -1436,8 +1350,8 @@
             <a href="#" class="social-link">
               <i class="fab fa-youtube"></i>
             </a>
-            <a href="https://wa.me/917876555055" target="_blank" class="social-link">
-              <i class="fab fa-whatsapp"></i>
+            <a href="mailto:extramilesenergy@gmail.com" class="social-link">
+              <i class="fas fa-envelope"></i>
             </a>
           </div>
         </div>
@@ -1467,17 +1381,16 @@
         <div>
           <h4 class="footer-title">Contact Info</h4>
           <ul class="footer-links">
-            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Hisar, Haryana</li>
-            <li><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +91-9991144903</li>
-            <li><i class="fab fa-whatsapp" style="margin-right: 10px;"></i> +91-7876555055</li>
-            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@extramilesenergy.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> Hisar, Haryana</li>
+            <li><i class="fas fa-phone-alt"></i> +91-9991144903</li>
+            <li><i class="fab fa-whatsapp"></i> +91-7876555055</li>
+            <li><i class="fas fa-envelope"></i> extramilesenergy@gmail.com</li>
           </ul>
         </div>
       </div>
       
       <div class="copyright">
         <p>&copy; <span id="currentYear"></span> Extra Miles Energy. All rights reserved. | Lithium Battery Manufacturer | GST: 06AUIPP2101K2ZR</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Design & Developed with ❤️ for Electric Mobility</p>
       </div>
     </div>
   </footer>
@@ -1501,16 +1414,6 @@
   <script>
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
     
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1591,7 +1494,7 @@
     // Active nav link based on scroll position
     window.addEventListener('scroll', function() {
       const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-links a');
+      const navLinks = document.querySelectorAll('.nav-links a:not(.phone-btn):not(.btn)');
       
       let current = '';
       sections.forEach(section => {
@@ -1610,23 +1513,14 @@
       });
     });
     
-    // Add animation to elements when they come into view
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-    
-    // Observe elements for animation
-    document.querySelectorAll('.card, .feature-card, .product-card').forEach(el => {
-      observer.observe(el);
+    // Add scroll effect to header
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+      } else {
+        header.style.boxShadow = 'none';
+      }
     });
   </script>
 </body>
