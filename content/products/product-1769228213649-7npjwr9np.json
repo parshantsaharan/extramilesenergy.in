@@ -1,0 +1,14 @@
+{
+  "id": "product-1769228213649-7npjwr9np",
+  "name": "E Rikshaw Lithium Battery",
+  "voltage": "51.2V 105AH",
+  "category": "E-Rickshaw Battery",
+  "price": "45000-96000",
+  "range": "110-200",
+  "status": "active",
+  "features": [
+    "Lifepo4 Cell battery"
+  ],
+  "image": "../uploads/LOGO SKYLINE.png",
+  "description": "3 Year Warrenty"
+}
