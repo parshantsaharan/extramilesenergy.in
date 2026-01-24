@@ -9,7 +9,8 @@
       "LIFEPO4"
     ],
     "status": "active",
-    "image": "../uploads/CELL.jpg"
+    "image": "../uploads/CELL.jpg",
+    "displayOrder": 0
   },
   {
     "id": "product-1769237281501-1upomv6t7",
@@ -23,7 +24,8 @@
       "4000 life cycles"
     ],
     "status": "active",
-    "image": "../uploads/download.jpeg"
+    "image": "../uploads/download.jpeg",
+    "displayOrder": 0
   },
   {
     "id": "product-1769239675345-pcqupluxl",
@@ -37,23 +39,26 @@
       "GRADE A"
     ],
     "status": "active",
-    "image": "../uploads/32140.jpg"
+    "image": "../uploads/32140.jpg",
+    "displayOrder": 0
   },
   {
-    "id": "product-1769243846541-m1axk18l5",
-    "name": "slkdfflksdff",
-    "voltage": "sdfasddffasdasdas",
+    "id": "product-1769244002972-pe9t0qy3g",
+    "name": "EM-LFP6030",
+    "voltage": "60v 30Ah",
     "category": "EV Battery",
-    "price": "adsasdg",
-    "model": "dsvasd",
-    "configuration": "asdsvasd",
+    "price": "Rs. 25000",
+    "model": "EM-LFP6030",
+    "configuration": "19s2p",
     "chemistry": "LiFePO₄",
     "warranty": "3 Year Warranty",
-    "capacity": "15000",
+    "capacity": "1820Wh",
+    "bms": "JK smart 60 Amp",
     "features": [
-      "ssagasgcd"
+      "Waterproof IP 65 "
     ],
     "status": "active",
-    "image": "../uploads/32140.jpg"
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769243990554.jpg",
+    "displayOrder": 1
   }
 ]
