@@ -1,0 +1,14 @@
+{
+  "id": "product-1769236609514-ffwvsfit4",
+  "name": "SOLAR BATTRY CELL",
+  "voltage": "3.2V 105AH",
+  "category": "Solar Battery",
+  "price": "4800",
+  "features": [
+    "LIFEPO4"
+  ],
+  "status": "active",
+  "image": "../uploads/CELL.jpg",
+  "createdAt": "2026-01-24T06:36:49.514Z",
+  "updatedAt": "2026-01-24T06:36:49.514Z"
+}
