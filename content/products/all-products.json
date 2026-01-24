@@ -1,17 +1,5 @@
 [
   {
-    "id": "product-1769228213649-7npjwr9np",
-    "name": "E Rikshaw Lithium Battery",
-    "voltage": "51.2V 105AH",
-    "category": "E-Rickshaw Battery",
-    "price": "45000-96000",
-    "features": [
-      "Lifepo4 Cell battery"
-    ],
-    "status": "active",
-    "image": "../uploads/LOGO SKYLINE.png"
-  },
-  {
     "id": "product-1769236609514-ffwvsfit4",
     "name": "SOLAR BATTRY CELL",
     "voltage": "3.2V 105AH",
