@@ -43,22 +43,21 @@
     "displayOrder": 0
   },
   {
-    "id": "product-1769244002972-pe9t0qy3g",
-    "name": "EM-LFP6030",
-    "voltage": "60v 30Ah",
+    "id": "product-1769243846541-m1axk18l5",
+    "name": "slkdfflksdff",
+    "voltage": "sdfasddffasdasdas",
     "category": "EV Battery",
-    "price": "Rs. 25000",
-    "model": "EM-LFP6030",
-    "configuration": "19s2p",
+    "price": "adsasdg",
+    "model": "dsvasd",
+    "configuration": "asdsvasd",
     "chemistry": "LiFePO₄",
     "warranty": "3 Year Warranty",
-    "capacity": "1820Wh",
-    "bms": "JK smart 60 Amp",
+    "capacity": "15000",
     "features": [
-      "Waterproof IP 65 "
+      "ssagasgcd"
     ],
     "status": "active",
-    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769243990554.jpg",
-    "displayOrder": 1
+    "image": "../uploads/32140.jpg",
+    "displayOrder": 0
   }
 ]
