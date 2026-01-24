@@ -1225,7 +1225,7 @@
         let products = [];
         let editingProductId = null;
         let cameraStream = null;
-        let currentCamera = 'environment'; // 'user' for front, 'environment' for back
+        let currentCamera = 'environment';
         let companyDetails = {
             name: 'Skyline Stores',
             brand: 'Extra Miles Energy',
@@ -1280,7 +1280,6 @@
                 loadRecentActivity();
                 showMessage('loginMessage', 'Login successful! Redirecting...', 'success');
                 
-                // Add to activity log
                 addActivity('Admin login successful');
             } else {
                 showMessage('loginMessage', 'Incorrect password!', 'error');
@@ -1320,7 +1319,6 @@
                 updateDashboardStats();
             }
             
-            // Update form title for edit mode
             if (tabId === 'addProduct') {
                 document.getElementById('formTitle').textContent = editingProductId ? 'Edit Product' : 'Add New Product';
             }
@@ -1343,8 +1341,7 @@
             const activities = JSON.parse(localStorage.getItem('admin_activities') || '[]');
             activities.unshift({
                 action: action,
-                timestamp: new Date().toLocaleString('en-IN'),
-                ip: '127.0.0.1'
+                timestamp: new Date().toLocaleString('en-IN')
             });
             
             if (activities.length > 20) {
@@ -1530,11 +1527,21 @@
             let html = '<div class="products-grid">';
             
             displayProducts.forEach(product => {
-                // Fix image URL for display
+                // ✅ FIX: Handle image URLs properly
                 let imageUrl = product.image || '';
-                if (imageUrl && !imageUrl.startsWith('http')) {
-                    // Convert relative path to GitHub URL
-                    imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${imageUrl.split('/').pop()}`;
+                
+                // If image is already a GitHub URL, use it as is
+                if (imageUrl && imageUrl.includes('githubusercontent.com')) {
+                    // Already a GitHub URL, use it
+                } 
+                // If image is a local path, convert to GitHub URL
+                else if (imageUrl && imageUrl.startsWith('../')) {
+                    const cleanPath = imageUrl.replace('../', '');
+                    imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${cleanPath}`;
+                }
+                // If image is just filename
+                else if (imageUrl && !imageUrl.startsWith('http')) {
+                    imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${imageUrl}`;
                 }
                 
                 html += `
@@ -1632,7 +1639,7 @@
             document.getElementById('storageInfo').textContent = `${percent}% used`;
         }
         
-        // ✅ FIXED: Save product with proper image URL
+        // ✅ FIXED: Save product with PROPER image handling
         async function saveProduct() {
             const name = document.getElementById('productName').value;
             const voltage = document.getElementById('productVoltage').value;
@@ -1677,7 +1684,7 @@
                 bms: bms || null,
                 features,
                 status,
-                image: imageUrl, // Will be updated after upload
+                image: imageUrl, // Will be updated if new image is uploaded
                 displayOrder: parseInt(order) || 0,
                 createdAt: editingProductId ? products.find(p => p.id === productId)?.createdAt : new Date().toISOString(),
                 updatedAt: new Date().toISOString()
@@ -1686,14 +1693,14 @@
             try {
                 showMessage('addProductMessage', 'Saving product...', 'success');
                 
-                // Upload image to GitHub first if exists
+                // Step 1: Upload image to GitHub if exists
                 if (imageFile && githubConfig.token) {
                     const uploadedImageUrl = await uploadImageToGitHub(imageFile);
                     product.image = uploadedImageUrl; // Set GitHub URL
                     addActivity(`Uploaded image: ${imageFile.name}`);
                 }
                 
-                // Update local array
+                // Step 2: Update local array
                 const index = products.findIndex(p => p.id === productId);
                 if (index > -1) {
                     products[index] = product;
@@ -1703,12 +1710,15 @@
                     addActivity(`Added new product: ${product.name}`);
                 }
                 
-                // Save to localStorage
+                // Step 3: Save to localStorage
                 localStorage.setItem('local_products', JSON.stringify(products));
                 
-                // Save to GitHub if configured
+                // Step 4: Save to GitHub if configured
                 if (githubConfig.token) {
+                    // First save individual product
                     await saveToGitHub(product);
+                    // Then update master list
+                    await updateMasterProductsList();
                     localStorage.setItem('last_sync_time', new Date().toISOString());
                 }
                 
@@ -1810,7 +1820,10 @@
                 reader.readAsDataURL(imageFile);
             });
             
-            const fileName = imageFile.name.replace(/\s+/g, '-').toLowerCase();
+            // Create safe filename
+            const originalName = imageFile.name;
+            const safeName = originalName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9.-]/g, '');
+            const fileName = safeName || `image-${Date.now()}.jpg`;
             const filePath = `${githubConfig.uploadsPath}/${fileName}`;
             
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -1836,8 +1849,17 @@
             return `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${filePath}`;
         }
         
-        // ✅ FIXED: Save product to GitHub with correct image URL
+        // ✅ FIXED: Save individual product to GitHub
         async function saveToGitHub(product) {
+            // Make sure image URL is properly set
+            if (product.image && !product.image.includes('githubusercontent.com')) {
+                // If image is a local filename, convert to GitHub URL
+                if (product.image && !product.image.startsWith('http')) {
+                    const fileName = product.image.split('/').pop();
+                    product.image = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${fileName}`;
+                }
+            }
+            
             const content = JSON.stringify(product, null, 2);
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/${product.id}.json`;
@@ -1881,14 +1903,12 @@
                 throw new Error(`Failed to save product: ${error.message}`);
             }
             
-            // Update master products list
-            await updateMasterProductsList();
-            
             return true;
         }
         
-        // Update master products list
+        // ✅ FIXED: Update master products list WITHOUT losing image URLs
         async function updateMasterProductsList() {
+            // Create clean product list for website
             const websiteProducts = products.map(p => ({
                 id: p.id,
                 name: p.name,
@@ -1903,7 +1923,7 @@
                 bms: p.bms,
                 features: p.features,
                 status: p.status,
-                image: p.image, // Already has GitHub URL
+                image: p.image, // Keep the full GitHub URL
                 displayOrder: p.displayOrder || 0
             }));
             
@@ -1987,7 +2007,6 @@
                 }
             } catch (error) {
                 console.error('Error deleting from GitHub:', error);
-                // Continue even if GitHub delete fails
             }
         }
         
@@ -2028,7 +2047,6 @@
             
             localStorage.setItem('company_details', JSON.stringify(companyDetails));
             
-            // Save to GitHub if configured
             if (githubConfig.token) {
                 saveCompanyDetailsToGitHub();
             }
@@ -2128,7 +2146,7 @@
                 
                 if (response.ok) {
                     const user = await response.json();
-                    alert(`Connected successfully!\nGitHub user: ${user.login}\nName: ${user.name || 'Not set'}`);
+                    alert(`Connected successfully!\nGitHub user: ${user.login}`);
                     addActivity('GitHub connection test successful');
                 } else {
                     alert('Connection failed. Please check your token.');
@@ -2155,6 +2173,9 @@
                 for (const product of products) {
                     await saveToGitHub(product);
                 }
+                
+                // Update master list
+                await updateMasterProductsList();
                 
                 localStorage.setItem('last_sync_time', new Date().toISOString());
                 updateDashboardStats();
@@ -2386,8 +2407,6 @@
         
         // Check for auto backup every hour
         setInterval(checkAutoBackup, 60 * 60 * 1000);
-        
-        // Initial check
         setTimeout(checkAutoBackup, 5000);
     </script>
 </body>
