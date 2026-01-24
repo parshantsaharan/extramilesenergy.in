@@ -1,0 +1,16 @@
+{
+  "id": "product-1769232903232-xnrc9z9ai",
+  "name": "SOLAR",
+  "voltage": "SDFA",
+  "category": "Solar Battery",
+  "price": "45146135",
+  "range": null,
+  "status": "active",
+  "features": [
+    "LIFEP"
+  ],
+  "description": "3 YEAR",
+  "image": "../uploads/CELL.jpg",
+  "createdAt": "2026-01-24T05:35:03.232Z",
+  "updatedAt": "2026-01-24T05:35:03.232Z"
+}
