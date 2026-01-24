@@ -1085,7 +1085,7 @@
                        autocomplete="current-password"
                        onkeypress="if(event.key === 'Enter') login()">
                 <div style="margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">
-                    Default password: Sky12345
+                    <i class="fas fa-info-circle"></i> Contact administrator for password
                 </div>
             </div>
             
@@ -1582,20 +1582,59 @@
                         </div>
                         
                         <div class="form-container">
-                            <h3 style="margin-top: 0; margin-bottom: 25px;">Website Settings</h3>
+                            <h3 style="margin-top: 0; margin-bottom: 25px;">Admin Settings</h3>
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="adminPassword" class="form-label">
-                                        <i class="fas fa-lock"></i> Admin Password *
+                                    <label for="currentPassword" class="form-label">
+                                        <i class="fas fa-lock"></i> Current Password *
                                     </label>
                                     <input type="password" 
-                                           id="adminPassword" 
+                                           id="currentPassword" 
                                            class="form-input" 
-                                           value="Sky12345"
+                                           placeholder="Enter current password"
                                            required>
                                 </div>
                                 
+                                <div class="form-group">
+                                    <label for="newPassword" class="form-label">
+                                        <i class="fas fa-key"></i> New Password *
+                                    </label>
+                                    <input type="password" 
+                                           id="newPassword" 
+                                           class="form-input" 
+                                           placeholder="Enter new password"
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="confirmPassword" class="form-label">
+                                        <i class="fas fa-check-circle"></i> Confirm New Password *
+                                    </label>
+                                    <input type="password" 
+                                           id="confirmPassword" 
+                                           class="form-input" 
+                                           placeholder="Confirm new password"
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 30px;">
+                                <button class="btn btn-primary" onclick="changeAdminPassword()">
+                                    <i class="fas fa-save"></i> Change Password
+                                </button>
+                                <button class="btn btn-outline" onclick="resetPasswordForm()" style="margin-left: 15px;">
+                                    <i class="fas fa-times"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-container">
+                            <h3 style="margin-top: 0; margin-bottom: 25px;">Website Settings</h3>
+                            
+                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="whatsappNumber" class="form-label">
                                         <i class="fab fa-whatsapp"></i> WhatsApp Number *
@@ -1605,6 +1644,16 @@
                                            class="form-input" 
                                            value="917876555055"
                                            required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="companyEmail" class="form-label">
+                                        <i class="fas fa-envelope"></i> Company Email
+                                    </label>
+                                    <input type="email" 
+                                           id="companyEmail" 
+                                           class="form-input" 
+                                           placeholder="contact@extramilesenergy.com">
                                 </div>
                             </div>
                             
@@ -1666,7 +1715,7 @@
     <!-- Main JavaScript -->
     <script>
         // ===== CONFIGURATION =====
-        const ADMIN_PASSWORD = 'Sky12345'; // Default password
+        const DEFAULT_ADMIN_PASSWORD = 'Sky12345'; // Initial password
         
         // ===== STATE MANAGEMENT =====
         let currentUser = null;
@@ -1680,7 +1729,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Check if already logged in
             const token = localStorage.getItem('admin_token');
-            if (token === ADMIN_PASSWORD) {
+            const savedPassword = localStorage.getItem('admin_password') || DEFAULT_ADMIN_PASSWORD;
+            
+            if (token === savedPassword) {
                 showAdminDashboard();
             } else {
                 showLoginPage();
@@ -1703,10 +1754,10 @@
                 return;
             }
             
-            // Check password (you can change this to your preferred password)
-            const validPasswords = [ADMIN_PASSWORD, 'Sky12345', 'admin123'];
+            // Get current password (saved or default)
+            const currentPassword = localStorage.getItem('admin_password') || DEFAULT_ADMIN_PASSWORD;
             
-            if (validPasswords.includes(password)) {
+            if (password === currentPassword) {
                 // Save token
                 localStorage.setItem('admin_token', password);
                 showAdminDashboard();
@@ -1733,6 +1784,59 @@
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
             loadDashboard();
+        }
+        
+        // ===== PASSWORD CHANGE FUNCTION =====
+        function changeAdminPassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Get current saved password
+            const savedPassword = localStorage.getItem('admin_password') || DEFAULT_ADMIN_PASSWORD;
+            
+            // Validation
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification('Please fill all password fields', 'error');
+                return;
+            }
+            
+            if (currentPassword !== savedPassword) {
+                showNotification('Current password is incorrect', 'error');
+                document.getElementById('currentPassword').focus();
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showNotification('New password must be at least 6 characters', 'error');
+                document.getElementById('newPassword').focus();
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match', 'error');
+                document.getElementById('confirmPassword').focus();
+                return;
+            }
+            
+            // Save new password
+            localStorage.setItem('admin_password', newPassword);
+            
+            // Also update token if user is logged in
+            if (localStorage.getItem('admin_token') === savedPassword) {
+                localStorage.setItem('admin_token', newPassword);
+            }
+            
+            // Clear form
+            resetPasswordForm();
+            
+            showNotification('Password changed successfully!', 'success');
+        }
+        
+        function resetPasswordForm() {
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
         }
         
         // ===== DASHBOARD FUNCTIONS =====
@@ -2084,6 +2188,9 @@
                     }
                     await saveProductToGitHub(product);
                     
+                    // Also update master products list file
+                    await updateMasterProductsList();
+                    
                     showMessage(messageDiv, 'Product saved successfully and synced with GitHub!', 'success');
                     showNotification('Product saved and synced with GitHub!', 'success');
                 } else {
@@ -2107,6 +2214,45 @@
                 console.error('Error saving product:', error);
                 showMessage(messageDiv, 'Error saving product: ' + error.message, 'error');
                 showNotification('Error saving product: ' + error.message, 'error');
+            }
+        }
+        
+        async function updateMasterProductsList() {
+            try {
+                // Create a simplified version of products for the website
+                const websiteProducts = products.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    voltage: p.voltage,
+                    category: p.category,
+                    price: p.price,
+                    range: p.range,
+                    status: p.status,
+                    features: p.features,
+                    image: p.image,
+                    description: p.description
+                }));
+                
+                const masterFile = `${githubConfig.productsPath}/all-products.json`;
+                const content = JSON.stringify(websiteProducts, null, 2);
+                
+                await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${masterFile}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: `Update master products list`,
+                        content: btoa(unescape(encodeURIComponent(content))),
+                        branch: githubConfig.branch
+                    })
+                });
+                
+                console.log('Master products list updated on GitHub');
+                
+            } catch (error) {
+                console.error('Error updating master products list:', error);
             }
         }
         
@@ -2228,10 +2374,12 @@
                     progressPercent.textContent = Math.round(progress) + '%';
                 }
                 
-                // Step 3: Update main website (90%)
+                // Step 3: Update master products list (90%)
                 progressFill.style.width = '90%';
                 progressPercent.textContent = '90%';
-                addSyncLog('Updating website...', 'info');
+                addSyncLog('Updating master products list...', 'info');
+                
+                await updateMasterProductsList();
                 
                 // Step 4: Complete (100%)
                 progressFill.style.width = '100%';
@@ -2269,15 +2417,29 @@
         }
         
         async function saveProductToGitHub(product) {
-            // This is a simplified implementation
-            // In production, you would use the GitHub API
-            
             const fileName = `${product.id}.json`;
             const filePath = `${githubConfig.productsPath}/${fileName}`;
             const content = JSON.stringify(product, null, 2);
             
             try {
-                // Create JSON file
+                // First try to get existing file to get SHA
+                let sha = null;
+                try {
+                    const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                        headers: {
+                            'Authorization': `token ${githubConfig.token}`
+                        }
+                    });
+                    
+                    if (getResponse.ok) {
+                        const fileData = await getResponse.json();
+                        sha = fileData.sha;
+                    }
+                } catch (e) {
+                    // File doesn't exist, that's fine
+                }
+                
+                // Create or update the file
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                     method: 'PUT',
                     headers: {
@@ -2287,7 +2449,8 @@
                     body: JSON.stringify({
                         message: `Add/Update product: ${product.name}`,
                         content: btoa(unescape(encodeURIComponent(content))),
-                        branch: githubConfig.branch
+                        branch: githubConfig.branch,
+                        sha: sha
                     })
                 });
                 
@@ -2356,7 +2519,27 @@
                 showNotification('Pulling products from GitHub...', 'info');
                 addSyncLog('Pulling products from GitHub...', 'info');
                 
-                // Fetch products from GitHub
+                // Try to pull from master list first
+                try {
+                    const masterListResponse = await fetch(`https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.productsPath}/all-products.json`);
+                    if (masterListResponse.ok) {
+                        products = await masterListResponse.json();
+                        localStorage.setItem('extra_miles_products', JSON.stringify(products));
+                        
+                        addSyncLog(`Successfully pulled ${products.length} products from master list`, 'success');
+                        showNotification(`Successfully loaded ${products.length} products from GitHub`, 'success');
+                        
+                        // Update UI
+                        loadProductsList();
+                        updateStats();
+                        return;
+                    }
+                } catch (e) {
+                    // Master list not found, try individual files
+                    console.log('Master list not found, trying individual files...');
+                }
+                
+                // Fallback: Fetch individual product files
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${githubConfig.productsPath}`, {
                     headers: {
                         'Authorization': `token ${githubConfig.token}`
@@ -2368,7 +2551,7 @@
                 }
                 
                 const files = await response.json();
-                const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+                const jsonFiles = files.filter(file => file.name.endsWith('.json') && file.name !== 'all-products.json');
                 
                 // Clear existing products
                 products = [];
@@ -2400,31 +2583,16 @@
         async function pullProductsFromGitHub() {
             // Similar to pullFromGitHub but without UI updates
             try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${githubConfig.productsPath}`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`
-                    }
-                });
-                
-                if (response.ok) {
-                    const files = await response.json();
-                    const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-                    
-                    const githubProducts = [];
-                    for (const file of jsonFiles) {
-                        const productResponse = await fetch(file.download_url);
-                        const product = await productResponse.json();
-                        githubProducts.push(product);
-                    }
-                    
-                    // Merge with local products (GitHub overrides local)
+                // Try master list first
+                const masterListResponse = await fetch(`https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.productsPath}/all-products.json`);
+                if (masterListResponse.ok) {
+                    const githubProducts = await masterListResponse.json();
                     products = [...githubProducts];
                     localStorage.setItem('extra_miles_products', JSON.stringify(products));
-                    
                     return true;
                 }
             } catch (error) {
-                console.error('Error pulling products from GitHub:', error);
+                console.error('Error pulling master list from GitHub:', error);
             }
             return false;
         }
@@ -2549,13 +2717,16 @@
             document.getElementById('githubBranch').value = githubConfig.branch || 'main';
             document.getElementById('productsPath').value = githubConfig.productsPath || 'content/products';
             
-            // Load admin password
-            const savedPassword = localStorage.getItem('admin_password') || ADMIN_PASSWORD;
-            document.getElementById('adminPassword').value = savedPassword;
-            
             // Load WhatsApp number
             const whatsappNumber = localStorage.getItem('whatsapp_number') || '917876555055';
             document.getElementById('whatsappNumber').value = whatsappNumber;
+            
+            // Load company email
+            const companyEmail = localStorage.getItem('company_email') || '';
+            document.getElementById('companyEmail').value = companyEmail;
+            
+            // Clear password fields
+            resetPasswordForm();
         }
         
         function saveSettings() {
@@ -2575,16 +2746,16 @@
         }
         
         function saveWebsiteSettings() {
-            // Save admin password
-            const newPassword = document.getElementById('adminPassword').value.trim();
-            if (newPassword) {
-                localStorage.setItem('admin_password', newPassword);
-            }
-            
             // Save WhatsApp number
             const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
             if (whatsappNumber) {
                 localStorage.setItem('whatsapp_number', whatsappNumber);
+            }
+            
+            // Save company email
+            const companyEmail = document.getElementById('companyEmail').value.trim();
+            if (companyEmail) {
+                localStorage.setItem('company_email', companyEmail);
             }
             
             showNotification('Website settings saved successfully!', 'success');
@@ -2726,6 +2897,7 @@
             localStorage.removeItem('github_config');
             localStorage.removeItem('admin_password');
             localStorage.removeItem('whatsapp_number');
+            localStorage.removeItem('company_email');
             initGitHubConfig();
             loadSettingsForm();
             showNotification('Settings reset to default', 'success');
@@ -2781,7 +2953,8 @@
         
         // Initialize on load
         console.log('Admin Panel loaded successfully');
-        console.log('Default password: Sky12345');
+        console.log('Initial password: Sky12345');
+        console.log('You can change password in Settings tab');
         console.log('Configure GitHub token in Settings tab for automatic sync');
     </script>
 </body>
