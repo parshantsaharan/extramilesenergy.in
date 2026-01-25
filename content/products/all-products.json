@@ -45,5 +45,28 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/7230.png",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1769346355976-l4fd9lnog",
+    "name": "Lithium Phosphate Battry pack for Electric scooty",
+    "voltage": "72V 30Ah",
+    "category": "EV Battery",
+    "price": "29500",
+    "model": "EM-LFP7330",
+    "configuration": "23s2p",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "2280Wh",
+    "bms": "JK Smart BMS 60A with Active Balancer",
+    "features": [
+      "LiFePo4 Cells",
+      "3 Year Warrenty",
+      "Smart BMS",
+      "Waterproof",
+      "Active Cell Balancer"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-01-25-at-5.55.58-pm.jpeg",
+    "displayOrder": 0
   }
 ]
