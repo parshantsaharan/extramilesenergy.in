@@ -1,24 +1,5 @@
 [
   {
-    "id": "product-1769259224077-uks3bj64h",
-    "name": "Jevin",
-    "voltage": "Shehs",
-    "category": "EV Battery",
-    "price": "7383",
-    "model": "Dcc",
-    "configuration": "Cc",
-    "chemistry": "LiFePO₄",
-    "warranty": "3 Year Warranty",
-    "capacity": "6",
-    "bms": null,
-    "features": [
-      "Ehsbbdbbd"
-    ],
-    "status": "active",
-    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/image.jpg",
-    "displayOrder": 0
-  },
-  {
     "id": "product-1769320241187-v321hdza1",
     "name": "Iffici",
     "voltage": "Ydhxuxdu",
