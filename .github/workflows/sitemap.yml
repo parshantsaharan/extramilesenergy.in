@@ -2,27 +2,30 @@ name: Auto Sitemap
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+
+permissions:
+  contents: write
 
 jobs:
   sitemap:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Generate Sitemap
-      run: node generate-sitemap.js
+      - name: Generate Sitemap
+        run: node generate-sitemap.js
 
-    - name: Commit Sitemap
-      run: |
-        git config --global user.name "bot"
-        git config --global user.email "bot@github.com"
-        git add sitemap.xml
-        git commit -m "Auto update sitemap"
-        git push
+      - name: Commit Sitemap
+        run: |
+          git config --global user.name "github-bot"
+          git config --global user.email "bot@github.com"
+          git add sitemap.xml
+          git diff --cached --quiet || git commit -m "Auto update sitemap"
+          git push
