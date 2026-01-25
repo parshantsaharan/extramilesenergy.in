@@ -1,0 +1,25 @@
+{
+  "id": "product-1769340182983-98zlp4dmp",
+  "name": "E Scooter Lithium Phosphate Battery ",
+  "voltage": "60V 30Ah",
+  "category": "EV Battery",
+  "price": "25000",
+  "model": "EM-LFP6030",
+  "configuration": "19s2p",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "1820Wh",
+  "bms": "JK Smart BMS 60A with Active Balance ",
+  "features": [
+    "LiFePo4 Cell",
+    "Smart BMS",
+    "Cell Active Balance ",
+    "Waterproof ",
+    "3 year warranty "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133027.png",
+  "displayOrder": 0,
+  "createdAt": "2026-01-25T11:23:02.983Z",
+  "updatedAt": "2026-01-25T11:23:02.987Z"
+}
