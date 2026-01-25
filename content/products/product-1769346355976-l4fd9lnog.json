@@ -3,7 +3,7 @@
   "name": "Lithium Phosphate Battry pack for Electric scooty",
   "voltage": "72V 30Ah",
   "category": "EV Battery",
-  "price": "29500",
+  "price": "Rs. 29500/-",
   "model": "EM-LFP7330",
   "configuration": "23s2p",
   "chemistry": "LiFePO₄",
@@ -21,5 +21,5 @@
   "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-01-25-at-5.55.58-pm.jpeg",
   "displayOrder": 0,
   "createdAt": "2026-01-25T13:05:55.976Z",
-  "updatedAt": "2026-01-25T13:05:55.976Z"
+  "updatedAt": "2026-01-25T13:31:36.184Z"
 }
