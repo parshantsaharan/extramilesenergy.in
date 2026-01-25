@@ -68,5 +68,29 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-01-25-at-5.55.58-pm.jpeg",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1769347456062-r4kh718s3",
+    "name": "Lithium Phosphate Battery Pack for High Speed Scooter",
+    "voltage": "76V45Ah",
+    "category": "EV Battery",
+    "price": "Rs.  40000/-",
+    "model": "EM-LFP7645",
+    "configuration": "24s3p",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "3456Wh",
+    "bms": "JK Smart BMS 80A with active Balancer",
+    "features": [
+      "LiFePo4 Cells",
+      "3 Years Warrenty",
+      "Smart BMS",
+      "Waterproof",
+      "Active Cell Balancer",
+      "3200+ Life Cycles"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-01-25-at-6.49.52-pm.jpeg",
+    "displayOrder": 0
   }
 ]
