@@ -1,0 +1,21 @@
+{
+  "id": "product-1769347839672-9mmp9bzoo",
+  "name": "JSK New Energy A+ EV Grade LiFePo4 Cell",
+  "voltage": "3.2V 15Ah",
+  "category": "EV Battery",
+  "price": "Rs.  285/-",
+  "model": "JSK IFR32140*15AH",
+  "configuration": null,
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "48Wh",
+  "bms": null,
+  "features": [
+    "A+ EV Grade Cell"
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-01-25-at-6.57.47-pm.jpeg",
+  "displayOrder": 0,
+  "createdAt": "2026-01-25T13:30:39.672Z",
+  "updatedAt": "2026-01-25T13:30:39.672Z"
+}
