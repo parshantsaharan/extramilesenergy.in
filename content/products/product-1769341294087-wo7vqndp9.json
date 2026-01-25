@@ -1,0 +1,26 @@
+{
+  "id": "product-1769341294087-wo7vqndp9",
+  "name": "Lithium Phosphate Battey pack for big electric scooters",
+  "voltage": "72V 45Ah",
+  "category": "EV Battery",
+  "price": "Rs. 38500/-",
+  "model": "EM-LFP7345",
+  "configuration": "23s3p",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "3312Wh ( 3.3Kw )",
+  "bms": "JK Smart BMS 80A with Active Balance",
+  "features": [
+    "LiFePo4 Cells",
+    "3Year Warrenty",
+    "Smart BMS",
+    "Waterproof",
+    "Active Cell Balance",
+    "3200+ Cycle Life"
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/7230.png",
+  "displayOrder": 0,
+  "createdAt": "2026-01-25T11:41:34.087Z",
+  "updatedAt": "2026-01-25T11:42:48.627Z"
+}
