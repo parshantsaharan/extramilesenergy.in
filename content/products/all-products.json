@@ -1,26 +1,5 @@
 [
   {
-    "id": "product-1769257748004-b0jfd4kyr",
-    "name": "rtjtt",
-    "voltage": "yrtyr",
-    "category": "EV Battery",
-    "price": "ryerty",
-    "model": "rtyerty",
-    "configuration": "rtyerty",
-    "chemistry": "LiFePO₄",
-    "warranty": "3 Year Warranty",
-    "capacity": "tryrty",
-    "bms": null,
-    "features": [
-      "rtyer",
-      "rtyr",
-      "ety"
-    ],
-    "status": "active",
-    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769257743669.jpg",
-    "displayOrder": 0
-  },
-  {
     "id": "product-1769259224077-uks3bj64h",
     "name": "Jevin",
     "voltage": "Shehs",
