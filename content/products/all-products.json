@@ -61,22 +61,41 @@
     "displayOrder": 0
   },
   {
-    "id": "product-1769320146117-pi8engjb6",
-    "name": "Xuudu",
-    "voltage": "Xududu",
-    "category": "Solar Battery",
-    "price": "Jcxjfudu",
-    "model": "Iff8f7f",
-    "configuration": "Cuuducu",
+    "id": "product-1769319901831-ngxtlhgeb",
+    "name": "Jejjd",
+    "voltage": "Jejeje",
+    "category": "EV Battery",
+    "price": "Bdhdjd",
+    "model": "Hdhdjd",
+    "configuration": "ejeudjd",
     "chemistry": "LiFePO₄",
-    "warranty": "10 Year Warranty",
-    "capacity": "Ufufud",
-    "bms": "Yfufu",
+    "warranty": "3 Year Warranty",
+    "capacity": "Hdhdjdj",
+    "bms": "Jejdjd",
     "features": [
-      "Udufuf"
+      "Heuejje"
     ],
-    "status": "draft",
-    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769320135046.jpg",
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769319897581.jpg",
+    "displayOrder": 0
+  },
+  {
+    "id": "product-1769320241187-v321hdza1",
+    "name": "Iffici",
+    "voltage": "Ydhxuxdu",
+    "category": "E-Rickshaw Battery",
+    "price": "Jccjccj",
+    "model": "Cuucfuc",
+    "configuration": "Ufcuufu",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "7rd77r7",
+    "bms": "Yu fuuff",
+    "features": [
+      "7f7f7r"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1769320236355.jpg",
     "displayOrder": 0
   }
 ]
