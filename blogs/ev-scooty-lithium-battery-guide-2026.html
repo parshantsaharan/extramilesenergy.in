@@ -249,6 +249,44 @@
             font-size: 0.9rem;
         }
         
+        /* WhatsApp Float Button -->
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .whatsapp-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-icon {
+            font-size: 1.5rem;
+        }
+        
         /* Social Share -->
         .social-share {
             display: flex;
@@ -334,6 +372,55 @@
         .cta-btn.secondary {
             background: transparent;
             border: 2px solid white;
+        }
+        
+        /* WhatsApp Inquiry Section -->
+        .whatsapp-inquiry {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .whatsapp-inquiry h3 {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .whatsapp-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-option:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(10px);
+        }
+        
+        .whatsapp-option-icon {
+            font-size: 2rem;
+        }
+        
+        .whatsapp-option-text {
+            text-align: left;
+        }
+        
+        .whatsapp-option-text strong {
+            display: block;
+            margin-bottom: 5px;
         }
         
         .contact-info {
@@ -429,6 +516,16 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-button {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -447,11 +544,25 @@
             .content {
                 padding: 20px;
             }
+            
+            .whatsapp-float {
+                bottom: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/919991144903?text=Hi%20ExtraMiles%20Energy,%20I%20need%20information%20about%20EV%20battery" 
+           class="whatsapp-button" target="_blank">
+            <span class="whatsapp-icon">💬</span>
+            <span>WhatsApp Inquiry</span>
+        </a>
+    </div>
+    
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -504,6 +615,36 @@
                    class="share-btn twitter" target="_blank">
                     <span>🐦</span> Twitter
                 </a>
+            </div>
+            
+            <!-- WhatsApp Inquiry Section -->
+            <div class="whatsapp-inquiry">
+                <h3><span class="whatsapp-icon">💬</span> WhatsApp पर Inquiry करें</h3>
+                <p>हमारे Battery Experts से सीधे WhatsApp पर बात करें और Instant Solution पाएँ:</p>
+                
+                <div class="whatsapp-option" onclick="window.open('https://wa.me/919991144903?text=Hi%20ExtraMiles%20Energy,%20I%20want%20to%20know%20more%20about%20EV%20batteries', '_blank')">
+                    <div class="whatsapp-option-icon">🔋</div>
+                    <div class="whatsapp-option-text">
+                        <strong>Product Information</strong>
+                        <span>EV Battery की सभी Details और Specifications जानें</span>
+                    </div>
+                </div>
+                
+                <div class="whatsapp-option" onclick="window.open('https://wa.me/919991144903?text=Hi,%20I%20need%20price%20quote%20for%20EV%20battery', '_blank')">
+                    <div class="whatsapp-option-icon">💰</div>
+                    <div class="whatsapp-option-text">
+                        <strong>Price Quote</strong>
+                        <span>अपनी Requirement के हिसाब से Best Price पाएँ</span>
+                    </div>
+                </div>
+                
+                <div class="whatsapp-option" onclick="window.open('https://wa.me/919991144903?text=Hi,%20I%20have%20technical%20query%20about%20EV%20battery', '_blank')">
+                    <div class="whatsapp-option-icon">🔧</div>
+                    <div class="whatsapp-option-text">
+                        <strong>Technical Support</strong>
+                        <span>Installation और Maintenance के लिए Expert Advice</span>
+                    </div>
+                </div>
             </div>
             
             <!-- Section 1 -->
@@ -628,10 +769,10 @@
                 <p>हमारे Battery Experts से FREE Consultation लें और सही Battery Select करें!</p>
                 
                 <div class="cta-buttons">
-                    <a href="tel:8222999950" class="cta-btn">
-                        📞 अभी कॉल करें: 8222999950
+                    <a href="tel:9991144903" class="cta-btn">
+                        📞 अभी कॉल करें: 9991144903
                     </a>
-                    <a href="https://wa.me/918222999950?text=Hi, I need help choosing EV battery for my scooty" 
+                    <a href="https://wa.me/919991144903?text=Hi,%20I%20need%20help%20choosing%20EV%20battery%20for%20my%20scooty" 
                        class="cta-btn secondary" target="_blank">
                         💬 WhatsApp पर बात करें
                     </a>
@@ -656,8 +797,8 @@
                     <div class="contact-item">
                         <div class="contact-icon">📞</div>
                         <div>
-                            <strong>Phone</strong><br>
-                            <a href="tel:8222999950" style="color: var(--primary-color); text-decoration: none;">8222999950</a>
+                            <strong>Phone / WhatsApp</strong><br>
+                            <a href="tel:9991144903" style="color: var(--primary-color); text-decoration: none;">9991144903</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -714,14 +855,14 @@
                 <a href="https://extramilesenergy.in/warranty">Warranty</a>
             </div>
             <p>© 2026 ExtraMiles Energy | All Rights Reserved | Made with ❤️ in India</p>
-            <p style="font-size: 0.9rem; margin-top: 10px; color: #bdc3c7;">This content is protected by copyright and may not be reproduced without permission.</p>
+            <p style="font-size: 0.9rem; margin-top: 10px; color: #bdc3c7;">Contact: 9991144903 | WhatsApp: <a href="https://wa.me/919991144903" style="color: #25D366;">Click Here</a></p>
         </footer>
     </div>
 
     <!-- Small JavaScript for Social Share Count -->
     <script>
         // Simple animation for share buttons
-        document.querySelectorAll('.share-btn').forEach(btn => {
+        document.querySelectorAll('.share-btn, .whatsapp-option').forEach(btn => {
             btn.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-3px)';
             });
@@ -737,6 +878,13 @@
                 document.querySelector('.author-badge:nth-child(3) span:last-child').textContent = "✓ पूरा पढ़ लिया";
             }
         });
+        
+        // WhatsApp direct click function
+        function openWhatsApp(message) {
+            const phone = '919991144903';
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
