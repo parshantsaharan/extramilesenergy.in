@@ -111,5 +111,25 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-01-25-at-6.57.47-pm.jpeg",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1769566251663-uol08mz6h",
+    "name": "E Rikshaw Battery ",
+    "voltage": "51.2V 105Ah",
+    "category": "EV Battery",
+    "price": "Rs. 65000/-",
+    "model": "EM-LFP(R) 51.2-105",
+    "configuration": null,
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "5376Wh",
+    "bms": "Smart BMS",
+    "features": [
+      "With GPS for safety of your vehicle ",
+      "1 year GPS subscription Included "
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000134493.png",
+    "displayOrder": 0
   }
 ]
