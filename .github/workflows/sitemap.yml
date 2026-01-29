@@ -12,17 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout Repository
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # Generate Sitemap
       - name: Generate Sitemap
         run: |
           echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
           echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
 
-          for file in $(find . -name "*.html" ! -path "./node_modules/*"); do
+          for file in $(find . -name "*.html" ! -path "./node_modules/*" ! -path "./.github/*"); do
 
             clean_path=$(echo "$file" | sed 's|^\./||')
 
@@ -30,7 +32,7 @@ jobs:
 
               last_commit=$(git log -1 --format="%cI" -- "$file")
 
-              url="https://extramilesenergy.in/${clean_path}"
+              url="https://extramilesenergy.in/$clean_path"
 
               echo "  <url>" >> sitemap.xml
               echo "    <loc>$url</loc>" >> sitemap.xml
@@ -42,15 +44,15 @@ jobs:
 
           done
 
-          echo '</urlset>' >> sitemap.xml
+          echo "</urlset>" >> sitemap.xml
 
+      # Commit Sitemap
       - name: Commit Sitemap
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
           git add sitemap.xml
-
           git commit -m "Auto update sitemap" || echo "No changes"
 
           git push
