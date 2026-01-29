@@ -3,7 +3,7 @@
   "name": "E Scooter Lithium Phosphate Battery ",
   "voltage": "60V 30Ah",
   "category": "EV Battery",
-  "price": "Rs. 25000/-",
+  "price": "Rs. 25500/-",
   "model": "EM-LFP6030",
   "configuration": "19s2p",
   "chemistry": "LiFePO₄",
@@ -19,5 +19,6 @@
   ],
   "status": "active",
   "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133027.png",
-  "displayOrder": 0
+  "displayOrder": 0,
+  "updatedAt": "2026-01-29T13:01:38.456Z"
 }
