@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
     <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YJFK0Q3EKW"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-YJFK0Q3EKW');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJFK0Q3EKW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YJFK0Q3EKW');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Extra Miles Energy - Premium LiFePO₄ Lithium Batteries</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
     <style>
         :root {
             --primary: #0b1220;
@@ -30,8 +33,6 @@ gtag('config', 'G-YJFK0Q3EKW');
             --text-muted: #a0b3d9;
             --border: rgba(255, 255, 255, 0.15);
             --card-bg: rgba(20, 32, 68, 0.95);
-            --shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            --shadow-light: 0 8px 25px rgba(0, 0, 0, 0.3);
             --radius: 16px;
             --radius-sm: 10px;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,22 +54,6 @@ gtag('config', 'G-YJFK0Q3EKW');
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 25%),
-                radial-gradient(circle at 90% 80%, rgba(53, 208, 255, 0.05) 0%, transparent 25%),
-                radial-gradient(circle at 50% 50%, rgba(124, 92, 255, 0.03) 0%, transparent 50%);
-            z-index: -1;
-            pointer-events: none;
         }
         
         .container {
@@ -78,78 +63,20 @@ gtag('config', 'G-YJFK0Q3EKW');
             padding: 0 20px;
         }
         
-        /* Animated Background Elements */
-        .bg-elements {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        .bg-element {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .bg-element:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        
-        .bg-element:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: 20%;
-            right: 10%;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            animation-delay: -5s;
-        }
-        
-        .bg-element:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            left: 15%;
-            background: radial-gradient(circle, var(--accent2) 0%, transparent 70%);
-            animation-delay: -10s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(180deg, rgba(11, 18, 32, 0.98) 0%, rgba(11, 18, 32, 0.9) 100%);
+        /* Compact Header */
+        .compact-header {
+            background: rgba(11, 18, 32, 0.98);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-bottom: 2px solid var(--gold);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 15px 0;
+            padding: 12px 0;
             transition: var(--transition);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
         }
         
-        header.scrolled {
-            padding: 10px 0;
-            background: rgba(11, 18, 32, 0.98);
-            border-bottom: 3px solid var(--gold);
-        }
-        
-        .header-content {
+        .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -158,1447 +85,931 @@ gtag('config', 'G-YJFK0Q3EKW');
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            transition: var(--transition);
-        }
-        
-        .logo:hover {
-            transform: translateX(-5px);
+            gap: 12px;
+            text-decoration: none;
         }
         
         .logo-img {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             border-radius: var(--radius-sm);
-            border: 3px solid var(--gold);
-            padding: 8px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            transition: var(--transition);
-        }
-        
-        .logo:hover .logo-img {
-            transform: rotate(15deg);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            border: 2px solid var(--gold);
+            padding: 5px;
+            background: rgba(255, 215, 0, 0.1);
         }
         
         .logo-text h1 {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--gold) 0%, #FFE55C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-            letter-spacing: -0.5px;
+            margin-bottom: 2px;
         }
         
         .logo-text .tagline {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--gold-light);
             font-weight: 500;
-            opacity: 0.9;
         }
         
-        /* Company Info Banner */
-        .company-info-banner {
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 12px 0;
-            margin-top: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .company-info-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .info-items {
+        /* Compact Navigation */
+        .nav-compact {
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            flex-wrap: wrap;
             gap: 20px;
         }
         
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--gold-light);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        .info-item:hover {
-            color: var(--gold);
-            transform: translateY(-2px);
-        }
-        
-        .info-item i {
-            color: var(--gold);
-            font-size: 1rem;
-        }
-        
-        /* Navigation */
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .nav-links a {
+        .nav-compact a {
             color: var(--text);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: var(--transition);
-            position: relative;
-            padding: 8px 0;
             opacity: 0.9;
+            position: relative;
         }
         
-        .nav-links a:hover {
+        .nav-compact a:hover {
             color: var(--gold);
             opacity: 1;
         }
         
-        .nav-links a::after {
+        .nav-compact a.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), #FFC107);
-            transition: var(--transition);
-            border-radius: 2px;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* CTA Button */
-        .cta-button {
-            background: linear-gradient(135deg, var(--gold) 0%, #FFC107 100%);
-            color: var(--primary) !important;
-            padding: 14px 32px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-light);
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.5px;
-        }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .cta-button:hover::before {
-            left: 100%;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
-            background: linear-gradient(135deg, #FFE55C 0%, var(--gold) 100%);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 200px 0 120px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            z-index: -1;
-            animation: pulse 10s infinite ease-in-out;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.4; }
-        }
-        
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            background: linear-gradient(135deg, var(--gold) 0%, #FFE55C 50%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
-            line-height: 1.1;
-            letter-spacing: -1px;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--gold-light);
-            max-width: 700px;
-            margin: 0 auto 50px;
-            opacity: 0.9;
-            line-height: 1.8;
-        }
-        
-        /* Hero Stats */
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-top: 80px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, rgba(20, 32, 68, 0.8), rgba(11, 18, 32, 0.9));
-            border-radius: var(--radius);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
+            bottom: -6px;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold), #FFC107);
+            height: 2px;
+            background: var(--gold);
+            border-radius: 1px;
         }
         
-        .stat-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
-        }
-        
-        .stat-item .icon {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        
-        .stat-item .number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--gold);
-            margin-bottom: 10px;
-            font-family: 'Poppins', sans-serif;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-        
-        .stat-item .label {
-            color: var(--gold-light);
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Section Styling */
-        .section {
-            padding: 100px 0;
-            position: relative;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--gold) 0%, #FFE55C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            letter-spacing: -1px;
-        }
-        
-        .section-title p {
-            font-size: 1.2rem;
-            color: var(--gold-light);
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold), #FFC107);
-            border-radius: 5px;
-        }
-        
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 35px;
-            margin-bottom: 100px;
-        }
-        
-        .product-card {
-            background: linear-gradient(135deg, rgba(20, 32, 68, 0.95), rgba(11, 18, 32, 0.95));
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: var(--radius);
-            padding: 30px;
-            transition: var(--transition);
-            position: relative;
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-        }
-        
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold), #FFC107);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s ease;
-        }
-        
-        .product-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .product-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--gold);
-            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.25);
-        }
-        
-        .product-badge {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            padding: 8px 18px;
+        .cta-small {
             background: linear-gradient(135deg, var(--gold) 0%, #FFC107 100%);
             color: var(--primary);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            z-index: 2;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-        
-        .product-image-container {
-            position: relative;
-            margin-bottom: 25px;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            height: 220px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: var(--transition);
-            padding: 15px;
-        }
-        
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-        
-        .product-title {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-            color: var(--text);
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .product-specs {
-            color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 18px;
-            font-weight: 800;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .product-model {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            font-family: monospace;
-            background: rgba(53, 208, 255, 0.1);
-            padding: 6px 14px;
-            border-radius: 20px;
-            display: inline-block;
-            border: 1px solid rgba(53, 208, 255, 0.3);
-        }
-        
-        .product-category {
-            display: inline-block;
-            padding: 8px 18px;
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--gold);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .product-price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--gold);
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-        
-        .product-features {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-        
-        .product-features li {
-            padding: 10px 0;
-            padding-left: 30px;
-            position: relative;
-            color: var(--text-muted);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .product-features li::before {
-            content: '⚡';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-weight: bold;
-        }
-        
-        .product-spec-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-        
-        .spec-item {
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .spec-label {
-            color: var(--gold-light);
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .spec-value {
-            color: var(--text);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        .product-actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            padding: 16px 25px;
+            padding: 10px 20px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             font-weight: 700;
-            flex: 1;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        }
-        
-        .btn-whatsapp:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-            background: linear-gradient(135deg, #00E676 0%, #25D366 100%);
-        }
-        
-        .btn-details {
-            background: transparent;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            padding: 14px 25px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 700;
-            flex: 1;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .btn-details:hover {
-            background: rgba(255, 215, 0, 0.15);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.25);
-        }
-        
-        /* About Section */
-        .about-section {
-            padding: 120px 0;
-            background: linear-gradient(180deg, rgba(20, 32, 68, 0.7) 0%, rgba(11, 18, 32, 0.9) 100%);
-            margin: 100px 0;
-            border-top: 3px solid rgba(255, 215, 0, 0.3);
-            border-bottom: 3px solid rgba(255, 215, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(53, 208, 255, 0.05) 0%, transparent 50%);
-            z-index: -1;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .about-text h2 {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            color: var(--gold);
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--gold-light);
-            margin-bottom: 35px;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-        
-        .about-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            transition: var(--transition);
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-            background: rgba(255, 215, 0, 0.05);
-        }
-        
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-size: 1.5rem;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            flex-shrink: 0;
-        }
-        
-        .feature-item h4 {
-            color: var(--gold);
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        
-        .feature-item p {
-            color: var(--gold-light);
-            font-size: 0.95rem;
-            margin: 0;
-            opacity: 0.9;
-        }
-        
-        /* Company Details Section */
-        .company-details-card {
-            background: linear-gradient(135deg, rgba(20, 32, 68, 0.95), rgba(11, 18, 32, 0.95));
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: var(--radius);
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .company-details-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold), #FFC107);
-        }
-        
-        .company-details-card h3 {
-            color: var(--gold);
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-        
-        .detail-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        
-        .detail-item {
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .detail-label {
-            color: var(--gold-light);
             font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
-        .detail-label i {
-            color: var(--gold);
+        .cta-small:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
         
-        .detail-value {
-            color: var(--text);
+        /* Hero Section */
+        .hero-compact {
+            padding: 140px 0 60px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(11, 18, 32, 0.9), rgba(20, 32, 68, 0.9));
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .hero-compact h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--gold) 0%, #FFE55C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero-compact p {
             font-size: 1.1rem;
-            font-weight: 600;
-            word-break: break-word;
-        }
-        
-        /* Footer */
-        footer {
-            background: linear-gradient(180deg, rgba(11, 18, 32, 1) 0%, rgba(7, 12, 22, 1) 100%);
-            border-top: 3px solid var(--gold);
-            padding: 80px 0 30px;
-            margin-top: 100px;
-            position: relative;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(53, 208, 255, 0.05) 0%, transparent 40%);
-            z-index: -1;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            color: var(--gold);
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), #FFC107);
-            border-radius: 3px;
-        }
-        
-        .footer-section p {
             color: var(--gold-light);
-            margin-bottom: 25px;
-            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 30px;
             opacity: 0.9;
         }
         
-        .footer-links {
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .quick-stat {
+            text-align: center;
+            padding: 20px;
+            min-width: 150px;
+        }
+        
+        .quick-stat .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .quick-stat .label {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Content Tabs */
+        .content-tabs {
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: transparent;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            color: var(--text);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .tab-btn:hover {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+        
+        .tab-btn.active {
+            background: var(--gold);
+            color: var(--primary);
+            border-color: var(--gold);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Products Grid Compact */
+        .products-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card-compact {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: var(--transition);
+            position: relative;
+            height: 100%;
             display: flex;
             flex-direction: column;
+        }
+        
+        .product-card-compact:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
+        }
+        
+        .product-image-compact {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .product-badge-compact {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            background: var(--gold);
+            color: var(--primary);
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .product-title-compact {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .product-specs-compact {
+            color: var(--gold);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .product-features-compact {
+            list-style: none;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .product-features-compact li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .product-features-compact li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .product-actions-compact {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .btn-whatsapp-compact {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .btn-whatsapp-compact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-details-compact {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        
+        .btn-details-compact:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        /* Blogs Section */
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 25px;
+            transition: var(--transition);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .blog-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(53, 208, 255, 0.1);
+            color: var(--accent);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .blog-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .blog-excerpt {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gold-light);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+        
+        /* Live Updates */
+        .live-updates {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin: 40px 0;
+        }
+        
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .update-header h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .update-refresh {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 15px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .update-refresh:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .updates-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .update-item {
+            display: flex;
+            align-items: center;
             gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--gold);
+        }
+        
+        .update-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        .update-content {
+            flex-grow: 1;
+        }
+        
+        .update-title {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .update-meta {
+            color: var(--gold-light);
+            font-size: 0.8rem;
+        }
+        
+        /* Search and Filter */
+        .search-filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+        
+        .filter-select {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 0.95rem;
+            min-width: 150px;
+        }
+        
+        /* About Section Compact */
+        .about-compact {
+            padding: 60px 0;
+            background: rgba(20, 32, 68, 0.3);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .about-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .about-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--gold);
+            font-size: 1.5rem;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .about-card h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .about-card p {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer Compact */
+        .footer-compact {
+            background: linear-gradient(180deg, rgba(11, 18, 32, 1) 0%, rgba(7, 12, 22, 1) 100%);
+            border-top: 2px solid var(--gold);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
         
         .footer-links a {
             color: var(--gold-light);
             text-decoration: none;
-            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .footer-links a:hover {
             color: var(--gold);
-            transform: translateX(10px);
-        }
-        
-        .footer-links a i {
-            color: var(--gold);
-            width: 20px;
-            text-align: center;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 1.2rem;
-        }
-        
-        .social-links a:hover {
-            background: var(--gold);
-            color: var(--primary);
-            transform: translateY(-5px) rotate(15deg);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+            transform: translateX(5px);
         }
         
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
             color: var(--gold-light);
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
-        
-        .contact-item:hover {
-            background: rgba(255, 215, 0, 0.05);
-            border-color: var(--gold);
-            transform: translateX(10px);
+            font-size: 0.9rem;
         }
         
         .contact-item i {
             color: var(--gold);
-            font-size: 1.3rem;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 20px;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 40px;
+            padding-top: 20px;
             border-top: 1px solid rgba(255, 215, 0, 0.2);
             color: var(--gold-light);
-            font-size: 0.95rem;
-            opacity: 0.8;
+            font-size: 0.85rem;
         }
         
-        .copyright a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        
-        .copyright a:hover {
-            color: var(--gold-light);
-            text-decoration: underline;
-        }
-        
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 100px 20px;
-            color: var(--gold-light);
-        }
-        
-        .spinner {
-            border: 5px solid rgba(255, 215, 0, 0.1);
-            border-radius: 50%;
-            border-top: 5px solid var(--gold);
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 30px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Product Modal */
-        .product-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .product-modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            background: linear-gradient(135deg, rgba(20, 32, 68, 0.98), rgba(11, 18, 32, 0.98));
-            border-radius: var(--radius);
-            padding: 40px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 3px solid var(--gold);
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            background: var(--danger);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            transition: var(--transition);
-            z-index: 2;
-        }
-        
-        .modal-close:hover {
-            background: #ff2b5e;
-            transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 5px 20px rgba(255, 53, 112, 0.4);
-        }
-        
-        /* Sync Status */
-        .sync-status {
+        /* Admin Sync Badge */
+        .sync-badge {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: var(--primary);
-            border: 2px solid var(--gold);
+            border: 1px solid var(--gold);
             border-radius: var(--radius);
-            padding: 15px 25px;
+            padding: 12px 20px;
+            font-size: 0.8rem;
             color: var(--gold-light);
-            font-size: 0.9rem;
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            display: none;
+            display: flex;
             align-items: center;
             gap: 10px;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: var(--transition);
         }
         
-        .sync-status.show {
-            display: flex;
-            animation: slideUp 0.3s ease;
+        .sync-badge:hover {
+            background: rgba(255, 215, 0, 0.1);
         }
         
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .sync-badge.syncing {
+            border-color: var(--accent);
+            color: var(--accent);
         }
         
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .container {
-                max-width: 100%;
-                padding: 0 30px;
-            }
-            
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            }
+        .sync-badge.success {
+            border-color: var(--success);
+            color: var(--success);
         }
         
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-            
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .nav-links {
+        .sync-badge.error {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        
+        /* Loading */
+        .loading-compact {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gold-light);
+        }
+        
+        .spinner-compact {
+            border: 3px solid rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--gold);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--gold-light);
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-compact {
                 display: none;
             }
             
             .mobile-menu-btn {
-                display: block !important;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero {
-                padding: 160px 0 80px;
+                display: block;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section {
-                padding: 80px 0;
-            }
-            
-            .section-title h2 {
-                font-size: 2.5rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .product-card {
-                padding: 25px;
-            }
-            
-            .product-actions {
-                flex-direction: column;
-            }
-            
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                padding: 30px 20px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero h1 {
+            .hero-compact h1 {
                 font-size: 2rem;
             }
             
-            .hero-stats {
-                grid-template-columns: 1fr;
+            .products-compact {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
-            .stat-item {
-                padding: 25px 15px;
-            }
-            
-            .logo-img {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.4rem;
-            }
-            
-            .info-items {
-                flex-direction: column;
+            .quick-stats {
                 gap: 15px;
-                text-align: center;
             }
             
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 0.95rem;
+            .quick-stat {
+                min-width: 120px;
+                padding: 15px;
             }
             
-            .footer-content {
+            .tab-buttons {
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .search-filter-bar {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-compact {
+                padding: 120px 0 40px;
+            }
+            
+            .products-compact {
                 grid-template-columns: 1fr;
-                gap: 40px;
             }
-        }
-        
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--gold);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 10px;
-            transition: var(--transition);
-        }
-        
-        .mobile-menu-btn:hover {
-            transform: rotate(90deg);
-        }
-        
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 18, 32, 0.98);
-            z-index: 2000;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(20px);
-        }
-        
-        .mobile-menu.active {
-            left: 0;
-        }
-        
-        .mobile-menu-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--gold);
-            font-size: 2rem;
-            cursor: pointer;
-        }
-        
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .mobile-nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .mobile-nav-links a:hover {
-            color: var(--gold);
-            transform: translateX(10px);
+            
+            .product-actions-compact {
+                flex-direction: column;
+            }
+            
+            .sync-badge {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background Elements -->
-    <div class="bg-elements">
-        <div class="bg-element"></div>
-        <div class="bg-element"></div>
-        <div class="bg-element"></div>
-    </div>
-
-    <!-- Header -->
-    <header id="mainHeader">
+    <!-- Compact Header -->
+    <header class="compact-header">
         <div class="container">
-            <div class="header-content">
-                <a href="#home" class="logo" style="text-decoration: none;">
-                    <img src="logo.png" alt="Extra Miles Energy" class="logo-img" onerror="this.src='https://via.placeholder.com/60x60/FFD700/0b1220?text=EM'">
+            <div class="header-inner">
+                <a href="#home" class="logo">
+                    <img src="logo.png" alt="Extra Miles Energy" class="logo-img" 
+                         onerror="this.src='https://via.placeholder.com/45x45/142044/FFD700?text=EM'">
                     <div class="logo-text">
                         <h1 id="companyBrand">Extra Miles Energy</h1>
-                        <div class="tagline" id="companyTagline">Premium LiFePO₄ Battery Solutions</div>
+                        <div class="tagline" id="companyTagline">Premium LiFePO₄ Solutions</div>
                     </div>
                 </a>
                 
-                <!-- Desktop Navigation -->
-                <div class="nav-links">
-                    <a href="#home">Home</a>
+                <nav class="nav-compact">
+                    <a href="#home" class="active">Home</a>
                     <a href="#products">Products</a>
+                    <a href="#blogs">Blogs</a>
                     <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                    <a href="/admin" target="_blank" style="color: var(--gold); font-weight: 700;">
-                        <i class="fas fa-cog"></i> Admin
+                    <a href="/admin" target="_blank" style="color: var(--gold);">
+                        <i class="fas fa-cog"></i>
                     </a>
-                    <a href="#" class="cta-button" id="whatsappHeaderLink" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Get Quote
+                    <a href="#" class="cta-small" id="whatsappLink">
+                        <i class="fab fa-whatsapp"></i> Quote
                     </a>
-                </div>
+                </nav>
                 
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <button class="mobile-menu-btn" style="display: none; background: none; border: none; color: var(--gold); font-size: 1.3rem;">
                     <i class="fas fa-bars"></i>
                 </button>
-            </div>
-            
-            <!-- Company Info Banner -->
-            <div class="company-info-banner">
-                <div class="info-items">
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span id="companyAddress">Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <span id="companyEmail">extramilesenergy@gmail.com</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <span id="companyPhone">+91 78765 55055</span>
-                    </div>
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-menu-close" id="mobileMenuClose">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="mobile-nav-links">
-            <a href="#home" onclick="closeMobileMenu()">Home</a>
-            <a href="#products" onclick="closeMobileMenu()">Products</a>
-            <a href="#about" onclick="closeMobileMenu()">About</a>
-            <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-            <a href="/admin" target="_blank" onclick="closeMobileMenu()">Admin Panel</a>
-            <a href="#" class="cta-button" id="whatsappMobileLink" target="_blank" onclick="closeMobileMenu()">
-                <i class="fab fa-whatsapp"></i> WhatsApp Quote
-            </a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero-compact" id="home">
         <div class="container">
-            <div class="hero-content">
-                <h1 id="heroTitle">Power Your Journey with Premium LiFePO₄ Batteries</h1>
-                <p id="heroDescription">High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with advanced technology for maximum safety and longevity.</p>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
-                    <a href="#products" class="cta-button">
-                        <i class="fas fa-bolt"></i> View Products
-                    </a>
-                    <a href="#" class="cta-button" id="heroWhatsappLink" target="_blank" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
-                    </a>
-                </div>
-                
-                <!-- Hero Stats -->
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="icon">
-                            <i class="fas fa-battery-full"></i>
-                        </div>
-                        <div class="number">4000+</div>
-                        <div class="label">Full Cycles</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="number">3 Years</div>
-                        <div class="label">Warranty</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="number">24/7</div>
-                        <div class="label">Support</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="number">100%</div>
-                        <div class="label">Safety</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section class="section" id="products">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Premium Products</h2>
-                <p id="productsDescription">Explore our range of high-performance LiFePO₄ batteries designed for various applications</p>
+            <h1 id="heroTitle">Premium LiFePO₄ Batteries</h1>
+            <p id="heroDescription">High-performance lithium batteries for EV, Solar & Custom Applications</p>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; margin: 30px 0;">
+                <a href="#products" class="cta-small">
+                    <i class="fas fa-bolt"></i> Browse Products
+                </a>
+                <a href="#" class="cta-small" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);" id="heroWhatsapp">
+                    <i class="fab fa-whatsapp"></i> Quick Inquiry
+                </a>
             </div>
             
-            <div id="productsContainer" class="loading">
-                <div class="spinner"></div>
-                <div>Loading products...</div>
+            <div class="quick-stats">
+                <div class="quick-stat">
+                    <div class="number" id="productCount">0</div>
+                    <div class="label">Products</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="number" id="blogCount">0</div>
+                    <div class="label">Blogs</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="number">3+</div>
+                    <div class="label">Years Warranty</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="number">24/7</div>
+                    <div class="label">Support</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section" id="about">
+    <!-- Content Tabs -->
+    <section class="content-tabs" id="content">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 id="aboutTitle">Why Choose Extra Miles Energy?</h2>
-                    <p id="aboutDescription">
-                        We specialize in manufacturing high-quality LiFePO₄ (Lithium Iron Phosphate) batteries that offer superior safety, longer lifespan, and better performance compared to traditional lithium batteries.
-                    </p>
-                    
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="products">Products</button>
+                <button class="tab-btn" data-tab="blogs">Latest Blogs</button>
+                <button class="tab-btn" data-tab="updates">Live Updates</button>
+                <button class="tab-btn" data-tab="about">About Us</button>
+            </div>
+            
+            <!-- Search and Filter -->
+            <div class="search-filter-bar">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search products and blogs...">
+                <select class="filter-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="EV Battery">EV Battery</option>
+                    <option value="Solar Battery">Solar Battery</option>
+                    <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
+                    <option value="Custom Battery">Custom Battery</option>
+                </select>
+                <select class="filter-select" id="sortBy">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="name">Name A-Z</option>
+                    <option value="price">Price</option>
+                </select>
+            </div>
+            
+            <!-- Products Tab -->
+            <div class="tab-content active" id="productsTab">
+                <div id="productsContainer" class="loading-compact">
+                    <div class="spinner-compact"></div>
+                    <div>Loading products...</div>
+                </div>
+            </div>
+            
+            <!-- Blogs Tab -->
+            <div class="tab-content" id="blogsTab">
+                <div id="blogsContainer" class="loading-compact">
+                    <div class="spinner-compact"></div>
+                    <div>Discovering latest blogs...</div>
+                </div>
+            </div>
+            
+            <!-- Live Updates Tab -->
+            <div class="tab-content" id="updatesTab">
+                <div class="live-updates">
+                    <div class="update-header">
+                        <h3>Live Updates</h3>
+                        <button class="update-refresh" onclick="loadLiveUpdates(true)">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    <div id="updatesContainer" class="updates-list">
+                        <div class="update-item">
+                            <div class="update-icon">
+                                <i class="fas fa-bolt"></i>
                             </div>
-                            <div>
-                                <h4>Super Safe</h4>
-                                <p>LiFePO₄ chemistry with smart BMS protection</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-battery-full"></i>
-                            </div>
-                            <div>
-                                <h4>Long Life</h4>
-                                <p>4000+ cycles at 100% depth of discharge</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <div>
-                                <h4>Custom Solutions</h4>
-                                <p>Custom battery packs as per requirements</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div>
-                                <h4>3 Year Warranty</h4>
-                                <p>Comprehensive warranty on all products</p>
+                            <div class="update-content">
+                                <div class="update-title">Loading updates...</div>
+                                <div class="update-meta">Just now</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="company-details-card">
-                    <h3>Company Details</h3>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <div class="detail-label">
-                                <i class="fas fa-industry"></i> Manufacturer
+                <!-- Recent Changes -->
+                <div style="margin-top: 30px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.2rem;">Recent Changes</h3>
+                    <div id="recentChanges" style="color: var(--gold-light); font-size: 0.9rem;">
+                        Checking for recent updates...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Tab -->
+            <div class="tab-content" id="aboutTab">
+                <div class="about-compact">
+                    <div class="container">
+                        <div class="about-grid">
+                            <div class="about-card">
+                                <div class="about-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3>Super Safe</h3>
+                                <p>LiFePO₄ chemistry with smart BMS protection system</p>
                             </div>
-                            <div class="detail-value" id="manufacturerName">Skyline Stores</div>
+                            <div class="about-card">
+                                <div class="about-icon">
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                                <h3>Long Life</h3>
+                                <p>4000+ cycles at 100% depth of discharge</p>
+                            </div>
+                            <div class="about-card">
+                                <div class="about-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3>Custom Solutions</h3>
+                                <p>Custom battery packs as per specific requirements</p>
+                            </div>
+                            <div class="about-card">
+                                <div class="about-icon">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <h3>3 Year Warranty</h3>
+                                <p>Comprehensive warranty on all our products</p>
+                            </div>
                         </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-label">
-                                <i class="fas fa-file-invoice"></i> GST Number
-                            </div>
-                            <div class="detail-value" id="companyGST">07HYXPS2318L1ZY</div>
+                    </div>
+                </div>
+                
+                <!-- Company Info -->
+                <div style="margin-top: 40px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.3rem;">Company Information</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div style="padding: 20px; background: var(--card-bg); border-radius: var(--radius); border: 1px solid rgba(255, 215, 0, 0.2);">
+                            <div style="color: var(--gold-light); margin-bottom: 8px; font-size: 0.9rem;">Manufacturer</div>
+                            <div style="color: var(--text); font-weight: 600;" id="manufacturerName">Skyline Stores</div>
                         </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-label">
-                                <i class="fas fa-map-marker-alt"></i> Address
-                            </div>
-                            <div class="detail-value" id="companyFullAddress">Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</div>
+                        <div style="padding: 20px; background: var(--card-bg); border-radius: var(--radius); border: 1px solid rgba(255, 215, 0, 0.2);">
+                            <div style="color: var(--gold-light); margin-bottom: 8px; font-size: 0.9rem;">GST Number</div>
+                            <div style="color: var(--text); font-weight: 600;" id="companyGST">07HYXPS2318L1ZY</div>
                         </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-label">
-                                <i class="fas fa-envelope"></i> Email
-                            </div>
-                            <div class="detail-value" id="companyEmailDetail">extramilesenergy@gmail.com</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-label">
-                                <i class="fas fa-phone"></i> Phone
-                            </div>
-                            <div class="detail-value" id="companyPhoneDetail">+91 78765 55055</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-label">
-                                <i class="fas fa-bolt"></i> Specialization
-                            </div>
-                            <div class="detail-value">LiFePO₄ Batteries</div>
+                        <div style="padding: 20px; background: var(--card-bg); border-radius: var(--radius); border: 1px solid rgba(255, 215, 0, 0.2);">
+                            <div style="color: var(--gold-light); margin-bottom: 8px; font-size: 0.9rem;">Contact</div>
+                            <div style="color: var(--text); font-weight: 600;" id="companyPhone">+91 78765 55055</div>
                         </div>
                     </div>
                 </div>
@@ -1607,86 +1018,65 @@ gtag('config', 'G-YJFK0Q3EKW');
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer class="footer-compact" id="contact">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-section">
-                    <h3 id="footerBrand">Extra Miles Energy</h3>
-                    <p id="footerDescription">Leading manufacturer of premium LiFePO₄ lithium batteries for electric vehicles, solar systems, and custom applications. Power up your journey with safety and reliability.</p>
-                    <div class="social-links">
-                        <a href="#" id="footerWhatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" id="footerEmail" target="_blank"><i class="fas fa-envelope"></i></a>
-                        <a href="#" id="footerPhone" target="_blank"><i class="fas fa-phone"></i></a>
-                        <a href="/admin" target="_blank"><i class="fas fa-cog"></i></a>
-                    </div>
+                    <h4 id="footerBrand">Extra Miles Energy</h4>
+                    <p style="color: var(--gold-light); font-size: 0.9rem; line-height: 1.5;">
+                        Premium LiFePO₄ battery manufacturer for EV, solar, and custom applications.
+                    </p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
+                    <h4>Quick Links</h4>
                     <div class="footer-links">
-                        <a href="#home"><i class="fas fa-home"></i> Home</a>
-                        <a href="#products"><i class="fas fa-box"></i> Products</a>
-                        <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
-                        <a href="#contact"><i class="fas fa-address-book"></i> Contact</a>
-                        <a href="/admin" target="_blank"><i class="fas fa-cog"></i> Admin Panel</a>
+                        <a href="#home">Home</a>
+                        <a href="#products">Products</a>
+                        <a href="#blogs">Blogs</a>
+                        <a href="#about">About</a>
+                        <a href="/admin" target="_blank">Admin Panel</a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contact Info</h3>
+                    <h4>Contact</h4>
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--gold); margin-bottom: 5px;">Call Us</div>
-                                <div id="footerPhoneNumber">+91 78765 55055</div>
-                            </div>
+                            <span id="footerPhone">+91 78765 55055</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--gold); margin-bottom: 5px;">Email Us</div>
-                                <div id="footerEmailAddress">extramilesenergy@gmail.com</div>
-                            </div>
+                            <span id="footerEmail">extramilesenergy@gmail.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--gold); margin-bottom: 5px;">Visit Us</div>
-                                <div id="footerAddress">Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001</div>
-                            </div>
+                            <span id="footerAddress">Hisar, Haryana</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; <span id="currentYear"></span> <span id="copyrightBrand">Extra Miles Energy</span>. All rights reserved. | 
-                <span id="copyrightTagline">Premium LiFePO₄ Battery Solutions</span> | 
-                <span id="footerGST">GST: 07HYXPS2318L1ZY</span>
+                © <span id="currentYear"></span> <span id="copyrightBrand">Extra Miles Energy</span>. All rights reserved.
+                <div style="margin-top: 10px; font-size: 0.8rem; color: var(--gold-light); opacity: 0.7;">
+                    Auto-updating from admin panel • Last sync: <span id="lastSyncTime">Just now</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Product Details Modal -->
-    <div id="productModal" class="product-modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeProductModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="modalContent"></div>
-        </div>
+    <!-- Sync Status Badge -->
+    <div class="sync-badge" id="syncBadge" onclick="forceRefresh()">
+        <i class="fas fa-sync-alt"></i>
+        <span id="syncStatusText">Auto-sync enabled</span>
     </div>
 
-    <!-- Sync Status Notification -->
-    <div class="sync-status" id="syncStatus">
-        <i class="fas fa-sync-alt fa-spin"></i>
-        <span id="syncStatusText">Syncing with admin panel...</span>
-    </div>
-
-    <!-- JavaScript -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Configuration - ये admin panel के settings से automatically sync होगा
+        // Configuration - Matches Admin Panel
         const CONFIG = {
             github: {
                 username: 'parshantsaharan',
@@ -1694,431 +1084,383 @@ gtag('config', 'G-YJFK0Q3EKW');
                 branch: 'main',
                 productsPath: 'content/products',
                 companyPath: 'content/company.json',
-                uploadsPath: 'uploads'
-            },
-            company: {
-                brand: 'Extra Miles Energy',
-                tagline: 'Premium LiFePO₄ Battery Solutions',
-                address: 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001',
-                email: 'extramilesenergy@gmail.com',
-                phone1: '+91 78765 55055',
-                whatsapp: '+917876555055',
-                manufacturer: 'Skyline Stores',
-                gst: '07HYXPS2318L1ZY',
-                websiteTitle: 'Extra Miles Energy - Premium Lithium Batteries',
-                websiteDescription: 'High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with LiFePO4 technology for maximum safety and longevity.'
+                sitemapPath: 'sitemap.xml'
             }
         };
 
-        // Global variables
+        // Global State
         let products = [];
-        let lastSyncTime = null;
+        let blogs = [];
+        let updates = [];
+        let lastSync = null;
         let autoRefreshInterval = null;
 
-        // DOM Content Loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeWebsite();
+        // Initialize Website
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Setup event listeners
             setupEventListeners();
-            setupAutoRefresh();
+            
+            // Load initial data
+            await initializeData();
+            
+            // Start auto-refresh
+            startAutoRefresh();
         });
 
-        // Initialize Website
-        async function initializeWebsite() {
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.dataset.tab;
+                    switchTab(tabId);
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', debounce(handleSearch, 300));
+            }
+
+            // Filter functionality
+            document.getElementById('categoryFilter').addEventListener('change', handleFilter);
+            document.getElementById('sortBy').addEventListener('change', handleSort);
+
+            // Mobile menu (if needed)
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+        }
+
+        // Initialize Data
+        async function initializeData() {
             try {
-                // Set current year in copyright
-                document.getElementById('currentYear').textContent = new Date().getFullYear();
+                showSyncStatus('Loading data...', 'syncing');
                 
-                // Load company details and products
+                // Load company details
                 await loadCompanyDetails();
+                
+                // Load products
                 await loadProducts();
                 
-                // Update last sync time
-                updateSyncTime();
+                // Load blogs from sitemap
+                await loadBlogsFromSitemap();
                 
-                // Show welcome message
-                showSyncStatus('Website loaded successfully!', 'success');
+                // Load live updates
+                await loadLiveUpdates();
+                
+                showSyncStatus('Data loaded successfully', 'success');
                 
             } catch (error) {
                 console.error('Initialization error:', error);
-                showSyncStatus('Error loading data. Please refresh.', 'error');
+                showSyncStatus('Error loading data', 'error');
             }
         }
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // Mobile menu
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-            
-            if (mobileMenuClose) {
-                mobileMenuClose.addEventListener('click', closeMobileMenu);
-            }
-            
-            // Header scroll effect
-            window.addEventListener('scroll', () => {
-                const header = document.getElementById('mainHeader');
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href === '#') return;
-                    
-                    if (href.startsWith('#') && href.length > 1) {
-                        e.preventDefault();
-                        const targetId = href.substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 100,
-                                behavior: 'smooth'
-                            });
-                            
-                            // Close mobile menu if open
-                            closeMobileMenu();
-                        }
-                    }
-                });
-            });
-            
-            // Close modal on outside click
-            document.getElementById('productModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeProductModal();
-                }
-            });
-            
-            // Close modal on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeProductModal();
-                    closeMobileMenu();
-                }
-            });
-        }
-
-        // Close mobile menu
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Setup auto refresh
-        function setupAutoRefresh() {
-            // Refresh data every 5 minutes
-            autoRefreshInterval = setInterval(async () => {
-                await loadCompanyDetails();
-                await loadProducts();
-                updateSyncTime();
-                showSyncStatus('Data refreshed automatically', 'info');
-            }, 5 * 60 * 1000);
-            
-            // Also refresh when window gains focus
-            window.addEventListener('focus', async () => {
-                await loadCompanyDetails();
-                await loadProducts();
-                updateSyncTime();
-            });
-        }
-
-        // Update last sync time
-        function updateSyncTime() {
-            lastSyncTime = new Date();
-            // You can display this somewhere if needed
-        }
-
-        // Show sync status
-        function showSyncStatus(message, type = 'info') {
-            const syncStatus = document.getElementById('syncStatus');
-            const syncStatusText = document.getElementById('syncStatusText');
-            
-            syncStatusText.textContent = message;
-            
-            // Set color based on type
-            const colors = {
-                info: '#35d0ff',
-                success: '#45ff90',
-                error: '#ff3570',
-                warning: '#ffb145'
-            };
-            
-            syncStatus.style.borderColor = colors[type] || colors.info;
-            syncStatus.style.color = colors[type] || colors.info;
-            
-            syncStatus.classList.add('show');
-            
-            // Auto hide after 3 seconds
-            setTimeout(() => {
-                syncStatus.classList.remove('show');
-            }, 3000);
-        }
-
-        // Load company details from GitHub
+        // Load Company Details
         async function loadCompanyDetails() {
             try {
-                const companyUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.companyPath}`;
-                const response = await fetch(companyUrl, { cache: 'no-store' });
+                const url = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.companyPath}`;
+                const response = await fetch(url, { cache: 'no-store' });
                 
                 if (response.ok) {
                     const data = await response.json();
-                    CONFIG.company = { ...CONFIG.company, ...data };
-                    updateWebsiteWithCompanyDetails();
-                    return true;
+                    updateCompanyDetails(data);
                 }
             } catch (error) {
-                console.log('Using default company details:', error.message);
+                console.log('Using default company details');
             }
-            
-            // Fallback to default
-            updateWebsiteWithCompanyDetails();
-            return false;
         }
 
-        // Update website with company details
-        function updateWebsiteWithCompanyDetails() {
-            const c = CONFIG.company;
+        // Update Company Details
+        function updateCompanyDetails(data) {
+            // Update WhatsApp links
+            const whatsappNumber = data.whatsapp || data.phone1?.replace(/[+\s]/g, '');
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Extra%20Miles%20Energy,%20I%20would%20like%20to%20inquire%20about%20your%20products.`;
+            
+            // Update all WhatsApp links
+            document.querySelectorAll('[id*="whatsapp"], [href*="whatsapp"]').forEach(link => {
+                if (link.id !== 'whatsappLink' && !link.id.includes('whatsapp')) return;
+                link.href = whatsappUrl;
+            });
+            
+            // Update company info
+            document.getElementById('companyBrand').textContent = data.brand || 'Extra Miles Energy';
+            document.getElementById('companyTagline').textContent = data.tagline || 'Premium LiFePO₄ Solutions';
+            document.getElementById('manufacturerName').textContent = data.manufacturer || data.brand || 'Skyline Stores';
+            document.getElementById('companyGST').textContent = data.gst || '07HYXPS2318L1ZY';
+            document.getElementById('companyPhone').textContent = data.phone1 || '+91 78765 55055';
+            document.getElementById('footerPhone').textContent = data.phone1 || '+91 78765 55055';
+            document.getElementById('footerEmail').textContent = data.email || 'extramilesenergy@gmail.com';
+            document.getElementById('footerAddress').textContent = data.address ? data.address.split(',').slice(-2).join(',') : 'Hisar, Haryana';
+            document.getElementById('copyrightBrand').textContent = data.brand || 'Extra Miles Energy';
             
             // Update page title
-            document.title = c.websiteTitle || 'Extra Miles Energy - Premium Lithium Batteries';
-            document.getElementById('pageTitle').textContent = c.websiteTitle || 'Extra Miles Energy - Premium Lithium Batteries';
-            
-            // Update header
-            document.getElementById('companyBrand').textContent = c.brand;
-            document.getElementById('companyTagline').textContent = c.tagline;
-            document.getElementById('companyAddress').textContent = c.address;
-            document.getElementById('companyEmail').textContent = c.email;
-            document.getElementById('companyPhone').textContent = c.phone1;
-            
-            // Update WhatsApp links
-            const whatsappNumber = c.whatsapp || c.phone1.replace(/[+\s]/g, '');
-            const whatsappMessage = `Hello ${c.brand}, I would like to inquire about your battery products.`;
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            document.getElementById('whatsappHeaderLink').href = whatsappUrl;
-            document.getElementById('whatsappMobileLink').href = whatsappUrl;
-            document.getElementById('heroWhatsappLink').href = whatsappUrl;
-            document.getElementById('footerWhatsapp').href = whatsappUrl;
-            
-            // Update hero section
-            document.getElementById('heroTitle').textContent = 'Power Your Journey with Premium LiFePO₄ Batteries';
-            document.getElementById('heroDescription').textContent = c.websiteDescription;
-            
-            // Update about section
-            document.getElementById('aboutTitle').textContent = `Why Choose ${c.brand}?`;
-            document.getElementById('aboutDescription').textContent = c.websiteDescription;
-            document.getElementById('productsDescription').textContent = 'Explore our range of high-performance LiFePO₄ batteries designed for various applications';
-            
-            // Update company details
-            document.getElementById('manufacturerName').textContent = c.manufacturer || c.brand;
-            document.getElementById('companyGST').textContent = c.gst;
-            document.getElementById('companyFullAddress').textContent = c.address;
-            document.getElementById('companyEmailDetail').textContent = c.email;
-            document.getElementById('companyPhoneDetail').textContent = c.phone1;
-            
-            // Update footer
-            document.getElementById('footerBrand').textContent = c.brand;
-            document.getElementById('footerDescription').textContent = c.websiteDescription;
-            document.getElementById('footerPhoneNumber').textContent = c.phone1;
-            document.getElementById('footerEmailAddress').textContent = c.email;
-            document.getElementById('footerAddress').textContent = c.address;
-            document.getElementById('footerGST').textContent = `GST: ${c.gst}`;
-            document.getElementById('copyrightBrand').textContent = c.brand;
-            document.getElementById('copyrightTagline').textContent = c.tagline;
-            
-            // Update contact links
-            document.getElementById('footerEmail').href = `mailto:${c.email}`;
-            document.getElementById('footerPhone').href = `tel:${c.phone1.replace(/\s/g, '')}`;
+            document.title = data.websiteTitle || 'Extra Miles Energy - Premium LiFePO₄ Batteries';
         }
 
-        // Load products from GitHub
+        // Load Products
         async function loadProducts() {
             const container = document.getElementById('productsContainer');
             
             try {
-                const productsUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.productsPath}/all-products.json`;
-                const response = await fetch(productsUrl, { cache: 'no-store' });
+                const url = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.productsPath}/all-products.json`;
+                const response = await fetch(url, { cache: 'no-store' });
                 
-                if (!response.ok) {
-                    throw new Error('Failed to load products');
-                }
+                if (!response.ok) throw new Error('Failed to load products');
                 
                 const allProducts = await response.json();
-                
-                // Filter active products and sort by display order
-                products = allProducts
-                    .filter(p => p.status === 'active')
+                products = allProducts.filter(p => p.status === 'active')
                     .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
                 
+                // Update product count
+                document.getElementById('productCount').textContent = products.length;
+                
                 if (products.length === 0) {
-                    showNoProductsMessage(container);
-                    return;
+                    showNoProducts(container);
+                } else {
+                    displayProducts(products);
                 }
                 
-                displayProducts(container);
-                showSyncStatus(`${products.length} products loaded`, 'success');
+                return true;
                 
             } catch (error) {
                 console.error('Error loading products:', error);
-                showErrorLoadingProducts(container, error.message);
-                showSyncStatus('Error loading products', 'error');
+                showErrorLoading(container, 'products');
+                return false;
             }
         }
 
-        // Display "no products" message
-        function showNoProductsMessage(container) {
-            const whatsappUrl = document.getElementById('whatsappHeaderLink').href;
+        // Load Blogs from Sitemap
+        async function loadBlogsFromSitemap() {
+            const container = document.getElementById('blogsContainer');
             
-            container.innerHTML = `
-                <div style="text-align: center; padding: 80px 20px;">
-                    <div style="margin-bottom: 30px;">
-                        <i class="fas fa-box-open" style="font-size: 4rem; color: var(--gold); opacity: 0.5;"></i>
-                    </div>
-                    <h3 style="color: var(--gold); margin-bottom: 15px; font-size: 1.8rem;">Products Coming Soon</h3>
-                    <p style="color: var(--gold-light); margin-bottom: 30px; max-width: 500px; margin: 0 auto 30px; line-height: 1.6;">
-                        We are currently updating our product catalog. New premium LiFePO₄ batteries will be available soon.
-                    </p>
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                        <a href="${whatsappUrl}" class="cta-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Contact for Details
-                        </a>
-                        <button class="btn-details" onclick="loadProducts()" style="padding: 14px 32px;">
-                            <i class="fas fa-redo"></i> Refresh
-                        </button>
-                    </div>
-                </div>
-            `;
+            try {
+                const sitemapUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.sitemapPath}`;
+                const response = await fetch(sitemapUrl, { cache: 'no-store' });
+                
+                if (!response.ok) {
+                    // Try to discover blogs from common paths
+                    await discoverBlogs();
+                    return;
+                }
+                
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const urls = xml.querySelectorAll('url');
+                
+                blogs = [];
+                urls.forEach(url => {
+                    const loc = url.querySelector('loc')?.textContent;
+                    const lastmod = url.querySelector('lastmod')?.textContent;
+                    
+                    if (loc && (loc.includes('/blogs/') || loc.includes('/blog/'))) {
+                        const title = loc.split('/').pop().replace('.html', '').replace(/-/g, ' ');
+                        blogs.push({
+                            url: loc,
+                            title: title.charAt(0).toUpperCase() + title.slice(1),
+                            lastModified: lastmod,
+                            category: 'Blog'
+                        });
+                    }
+                });
+                
+                // Update blog count
+                document.getElementById('blogCount').textContent = blogs.length;
+                
+                if (blogs.length > 0) {
+                    displayBlogs(blogs.slice(0, 6)); // Show latest 6 blogs
+                } else {
+                    await discoverBlogs();
+                }
+                
+            } catch (error) {
+                console.error('Error loading sitemap:', error);
+                await discoverBlogs();
+            }
         }
 
-        // Display error loading products
-        function showErrorLoadingProducts(container, errorMessage) {
-            container.innerHTML = `
-                <div style="text-align: center; padding: 80px 20px;">
-                    <div style="margin-bottom: 30px;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: var(--warning);"></i>
-                    </div>
-                    <h3 style="color: var(--warning); margin-bottom: 15px; font-size: 1.8rem;">Connection Error</h3>
-                    <p style="color: var(--gold-light); margin-bottom: 25px; max-width: 500px; margin: 0 auto 30px; line-height: 1.6;">
-                        Unable to load products. Please check your internet connection and try again.
-                    </p>
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                        <button class="cta-button" onclick="loadProducts()">
-                            <i class="fas fa-redo"></i> Try Again
-                        </button>
-                        <a href="/admin" class="btn-details" target="_blank" style="padding: 14px 32px;">
-                            <i class="fas fa-cog"></i> Admin Panel
-                        </a>
-                    </div>
-                    <div style="margin-top: 30px; padding: 15px; background: rgba(255, 177, 69, 0.1); border-radius: var(--radius-sm); border: 1px solid rgba(255, 177, 69, 0.3); max-width: 500px; margin: 30px auto 0;">
-                        <div style="color: var(--warning); font-size: 0.9rem; text-align: left;">
-                            <strong>Debug Info:</strong><br>
-                            URL: ${CONFIG.github.username}/${CONFIG.github.repo}<br>
-                            Error: ${errorMessage}
+        // Discover Blogs from Common Paths
+        async function discoverBlogs() {
+            const commonBlogPaths = [
+                '/blogs/',
+                '/blog/',
+                '/articles/',
+                '72v-45ah-lithium-battery-electric-scooter.html'
+            ];
+            
+            blogs = [];
+            
+            for (const path of commonBlogPaths) {
+                try {
+                    const testUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${path}`;
+                    
+                    // Try to access the path
+                    const response = await fetch(testUrl);
+                    
+                    if (response.status === 200) {
+                        // If it's an HTML file
+                        if (path.endsWith('.html')) {
+                            const title = path.split('/').pop().replace('.html', '').replace(/-/g, ' ');
+                            blogs.push({
+                                url: path.startsWith('/') ? path : `/${path}`,
+                                title: title.charAt(0).toUpperCase() + title.slice(1),
+                                lastModified: new Date().toISOString().split('T')[0],
+                                category: 'Technical Guide'
+                            });
+                        }
+                    }
+                } catch (error) {
+                    continue;
+                }
+            }
+            
+            // Update blog count
+            document.getElementById('blogCount').textContent = blogs.length;
+            
+            if (blogs.length > 0) {
+                displayBlogs(blogs);
+            } else {
+                showNoBlogs();
+            }
+        }
+
+        // Load Live Updates
+        async function loadLiveUpdates(force = false) {
+            const container = document.getElementById('updatesContainer');
+            
+            try {
+                // Get products to check for updates
+                const productsUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.productsPath}/all-products.json`;
+                const response = await fetch(productsUrl, { cache: force ? 'no-cache' : 'default' });
+                
+                if (response.ok) {
+                    const allProducts = await response.json();
+                    const activeProducts = allProducts.filter(p => p.status === 'active');
+                    
+                    // Generate updates
+                    updates = [];
+                    
+                    // Add new products (last 7 days)
+                    const weekAgo = new Date();
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    
+                    activeProducts.forEach(product => {
+                        const updatedAt = new Date(product.updatedAt || product.createdAt);
+                        if (updatedAt > weekAgo) {
+                            updates.push({
+                                type: 'product',
+                                title: `New: ${product.name}`,
+                                description: product.voltage || '',
+                                date: updatedAt.toLocaleDateString(),
+                                icon: 'fas fa-bolt'
+                            });
+                        }
+                    });
+                    
+                    // Add blog updates
+                    if (blogs.length > 0) {
+                        blogs.slice(0, 3).forEach(blog => {
+                            updates.push({
+                                type: 'blog',
+                                title: `Blog: ${blog.title}`,
+                                description: 'New article published',
+                                date: blog.lastModified || 'Recently',
+                                icon: 'fas fa-file-alt'
+                            });
+                        });
+                    }
+                    
+                    // Sort by date (newest first)
+                    updates.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    
+                    // Display updates
+                    displayUpdates(updates.slice(0, 5));
+                    
+                    // Update sync time
+                    updateSyncTime();
+                    
+                    if (force) {
+                        showSyncStatus('Updates refreshed', 'success');
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error loading updates:', error);
+                container.innerHTML = `
+                    <div class="update-item">
+                        <div class="update-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="update-content">
+                            <div class="update-title">Unable to load updates</div>
+                            <div class="update-meta">Check connection</div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
         }
 
-        // Display products in grid
-        function displayProducts(container) {
-            const c = CONFIG.company;
-            const whatsappNumber = c.whatsapp || c.phone1.replace(/[+\s]/g, '');
+        // Display Products
+        function displayProducts(productsToShow) {
+            const container = document.getElementById('productsContainer');
+            const c = CONFIG;
             
-            let html = '<div class="products-grid">';
+            if (!productsToShow || productsToShow.length === 0) {
+                showNoProducts(container);
+                return;
+            }
             
-            products.forEach(product => {
-                // Build WhatsApp URL for this product
-                const whatsappMessage = `Hello ${c.brand}, I'm interested in your product:\n\nProduct: ${product.name}\nModel: ${product.model || 'N/A'}\nSpecs: ${product.voltage || ''}\n\nPlease send me detailed specifications and pricing.`;
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-                
-                // Handle image URL
+            let html = '<div class="products-compact">';
+            
+            productsToShow.forEach(product => {
+                // Get image URL
                 let imageUrl = '';
                 if (product.image) {
                     if (product.image.includes('githubusercontent.com')) {
                         imageUrl = product.image;
                     } else if (product.image.startsWith('../')) {
                         const cleanPath = product.image.replace('../', '');
-                        imageUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${cleanPath}`;
+                        imageUrl = `https://raw.githubusercontent.com/${c.github.username}/${c.github.repo}/${c.github.branch}/${cleanPath}`;
                     } else {
-                        imageUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.uploadsPath}/${product.image}`;
+                        imageUrl = `https://raw.githubusercontent.com/${c.github.username}/${c.github.repo}/${c.github.branch}/uploads/${product.image}`;
                     }
                 } else {
-                    imageUrl = `https://via.placeholder.com/400x300/142044/FFD700?text=${encodeURIComponent(product.name.substring(0, 20))}`;
+                    imageUrl = `https://via.placeholder.com/300x200/142044/FFD700?text=${encodeURIComponent(product.name.substring(0, 15))}`;
                 }
                 
-                const model = product.model || product.name.match(/[A-Z]{2}-[A-Z]{3}\d+/)?.[0] || 'Custom Model';
+                // WhatsApp URL
+                const whatsappMessage = `Hello, I'm interested in: ${product.name} (${product.voltage || ''}). Please send details.`;
+                const whatsappUrl = `https://wa.me/917876555055?text=${encodeURIComponent(whatsappMessage)}`;
                 
                 html += `
-                    <div class="product-card" data-id="${product.id}" data-category="${product.category || ''}">
-                        <div class="product-badge">${product.status === 'active' ? 'IN STOCK' : 'PRE-ORDER'}</div>
-                        <div class="product-image-container">
-                            <img src="${imageUrl}" 
-                                 alt="${product.name}" 
-                                 class="product-image"
-                                 onerror="this.src='https://via.placeholder.com/400x300/142044/FFD700?text=Extra+Miles'"
-                                 onclick="showProductDetails('${product.id}')"
-                                 style="cursor: pointer;">
-                        </div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-specs">${product.voltage || ''}</div>
-                        <div class="product-model">${model}</div>
-                        <div class="product-category">${product.category || 'LiFePO₄ Battery'}</div>
+                    <div class="product-card-compact" data-category="${product.category || ''}">
+                        <div class="product-badge-compact">${product.category || 'BATTERY'}</div>
+                        <img src="${imageUrl}" alt="${product.name}" class="product-image-compact"
+                             onerror="this.src='https://via.placeholder.com/300x200/142044/FFD700?text=Product'">
                         
-                        ${product.price ? `<div class="product-price">${product.price}</div>` : ''}
+                        <h3 class="product-title-compact">${product.name}</h3>
+                        <div class="product-specs-compact">${product.voltage || ''}</div>
                         
-                        <div class="product-spec-grid">
-                            ${product.capacity ? `
-                            <div class="spec-item">
-                                <div class="spec-label">Capacity</div>
-                                <div class="spec-value">${product.capacity}</div>
-                            </div>` : ''}
-                            
-                            ${product.chemistry ? `
-                            <div class="spec-item">
-                                <div class="spec-label">Chemistry</div>
-                                <div class="spec-value">${product.chemistry}</div>
-                            </div>` : ''}
-                            
-                            ${product.configuration ? `
-                            <div class="spec-item">
-                                <div class="spec-label">Configuration</div>
-                                <div class="spec-value">${product.configuration}</div>
-                            </div>` : ''}
-                            
-                            ${product.warranty ? `
-                            <div class="spec-item">
-                                <div class="spec-label">Warranty</div>
-                                <div class="spec-value">${product.warranty}</div>
-                            </div>` : ''}
-                        </div>
+                        ${product.price ? `<div style="color: var(--gold); font-weight: 700; margin: 10px 0; font-size: 1.1rem;">${product.price}</div>` : ''}
                         
-                        <ul class="product-features">
-                            ${(product.features || []).slice(0, 4).map(feature => `<li>${feature}</li>`).join('')}
-                            ${(product.features || []).length > 4 ? '<li style="color: var(--gold); font-weight: 600;">+ More features</li>' : ''}
+                        <ul class="product-features-compact">
+                            ${(product.features || []).slice(0, 3).map(f => `<li>${f}</li>`).join('')}
+                            ${(product.features || []).length > 3 ? '<li>+ More features</li>' : ''}
                         </ul>
                         
-                        <div class="product-actions">
-                            <a href="${whatsappUrl}" class="btn-whatsapp" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Get Quote
+                        <div class="product-actions-compact">
+                            <a href="${whatsappUrl}" class="btn-whatsapp-compact" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Quote
                             </a>
-                            <button class="btn-details" onclick="showProductDetails('${product.id}')">
-                                <i class="fas fa-info-circle"></i> Details
+                            <button class="btn-details-compact" onclick="showProductDetails('${product.id}')">
+                                <i class="fas fa-info"></i> Details
                             </button>
                         </div>
                     </div>
@@ -2129,194 +1471,363 @@ gtag('config', 'G-YJFK0Q3EKW');
             container.innerHTML = html;
         }
 
-        // Show product details modal
-        async function showProductDetails(productId) {
-            try {
-                const product = products.find(p => p.id === productId);
-                if (!product) {
-                    throw new Error('Product not found');
-                }
-                
-                const productUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.productsPath}/${productId}.json`;
-                const response = await fetch(productUrl, { cache: 'no-store' });
-                
-                if (!response.ok) {
-                    // Fallback to product from local array
-                    showProductModal(product);
-                    return;
-                }
-                
-                const detailedProduct = await response.json();
-                showProductModal(detailedProduct);
-                
-            } catch (error) {
-                console.error('Error loading product details:', error);
-                const product = products.find(p => p.id === productId);
-                if (product) {
-                    showProductModal(product);
-                } else {
-                    showSyncStatus('Product details not available', 'error');
-                }
+        // Display Blogs
+        function displayBlogs(blogsToShow) {
+            const container = document.getElementById('blogsContainer');
+            
+            if (!blogsToShow || blogsToShow.length === 0) {
+                showNoBlogs();
+                return;
             }
+            
+            let html = '<div class="blogs-grid">';
+            
+            blogsToShow.forEach(blog => {
+                const fullUrl = blog.url.startsWith('http') ? blog.url : 
+                    `https://${CONFIG.github.username}.github.io/${CONFIG.github.repo}${blog.url.startsWith('/') ? blog.url : '/' + blog.url}`;
+                
+                html += `
+                    <a href="${fullUrl}" class="blog-card" target="_blank">
+                        <span class="blog-category">${blog.category || 'Blog'}</span>
+                        <h3 class="blog-title">${blog.title}</h3>
+                        <p class="blog-excerpt">Learn about ${blog.title.toLowerCase()} and its applications...</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> ${blog.lastModified || 'Recent'}</span>
+                            <span><i class="far fa-clock"></i> Read more →</span>
+                        </div>
+                    </a>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
         }
 
-        // Show product modal with details
-        function showProductModal(product) {
-            const c = CONFIG.company;
-            const whatsappNumber = c.whatsapp || c.phone1.replace(/[+\s]/g, '');
-            const whatsappMessage = `Hello ${c.brand}, I'm interested in your product:\n\nProduct: ${product.name}\nModel: ${product.model || 'N/A'}\nSpecs: ${product.voltage || ''}\nPrice: ${product.price || 'Quote based'}\n\nPlease send me detailed specifications and pricing.`;
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+        // Display Updates
+        function displayUpdates(updatesToShow) {
+            const container = document.getElementById('updatesContainer');
             
-            // Handle image URL
-            let imageUrl = '';
-            if (product.image) {
-                if (product.image.includes('githubusercontent.com')) {
-                    imageUrl = product.image;
-                } else if (product.image.startsWith('../')) {
-                    const cleanPath = product.image.replace('../', '');
-                    imageUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${cleanPath}`;
-                } else {
-                    imageUrl = `https://raw.githubusercontent.com/${CONFIG.github.username}/${CONFIG.github.repo}/${CONFIG.github.branch}/${CONFIG.github.uploadsPath}/${product.image}`;
-                }
-            } else {
-                imageUrl = `https://via.placeholder.com/500x400/142044/FFD700?text=${encodeURIComponent(product.name)}`;
+            if (!updatesToShow || updatesToShow.length === 0) {
+                container.innerHTML = `
+                    <div class="update-item">
+                        <div class="update-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="update-content">
+                            <div class="update-title">No recent updates</div>
+                            <div class="update-meta">Check back later</div>
+                        </div>
+                    </div>
+                `;
+                return;
             }
             
-            const modalContent = document.getElementById('modalContent');
-            modalContent.innerHTML = `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
-                    <div>
-                        <div style="border-radius: var(--radius); overflow: hidden; border: 3px solid var(--gold); margin-bottom: 20px;">
-                            <img src="${imageUrl}" 
-                                 alt="${product.name}" 
-                                 style="width: 100%; display: block;"
-                                 onerror="this.src='https://via.placeholder.com/500x400/142044/FFD700?text=Product+Image'">
+            let html = '';
+            
+            updatesToShow.forEach(update => {
+                html += `
+                    <div class="update-item">
+                        <div class="update-icon">
+                            <i class="${update.icon}"></i>
                         </div>
-                        ${product.image ? `
-                        <div style="text-align: center; color: var(--gold-light); font-size: 0.9rem;">
-                            <i class="fas fa-info-circle"></i> Click image to view full size
-                        </div>` : ''}
-                    </div>
-                    <div>
-                        <h2 style="color: var(--gold); margin-bottom: 15px; font-size: 2.2rem;">${product.name}</h2>
-                        <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 20px; font-weight: 700;">${product.voltage || ''}</div>
-                        
-                        <div style="display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;">
-                            <span class="product-category">${product.category || 'LiFePO₄ Battery'}</span>
-                            <span style="background: linear-gradient(135deg, var(--gold) 0%, #FFC107 100%); color: var(--primary); padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; font-weight: 700;">
-                                ${product.status === 'active' ? 'In Stock' : 'Pre-order'}
-                            </span>
-                        </div>
-                        
-                        ${product.price ? `
-                        <div style="margin-bottom: 30px;">
-                            <div style="color: var(--gold-light); font-size: 1rem; margin-bottom: 8px;">Price Range</div>
-                            <div style="font-size: 2.2rem; color: var(--gold); font-weight: 800; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">${product.price}</div>
-                        </div>` : ''}
-                        
-                        <div style="margin-bottom: 30px;">
-                            <h4 style="color: var(--gold-light); margin-bottom: 15px; font-size: 1.2rem;">Specifications</h4>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                                ${product.model ? `
-                                <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div style="color: var(--gold-light); font-size: 0.9rem; margin-bottom: 5px;">Model Number</div>
-                                    <div style="color: var(--text); font-weight: 700; font-size: 1.1rem;">${product.model}</div>
-                                </div>` : ''}
-                                
-                                ${product.configuration ? `
-                                <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div style="color: var(--gold-light); font-size: 0.9rem; margin-bottom: 5px;">Configuration</div>
-                                    <div style="color: var(--text); font-weight: 700; font-size: 1.1rem;">${product.configuration}</div>
-                                </div>` : ''}
-                                
-                                ${product.chemistry ? `
-                                <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div style="color: var(--gold-light); font-size: 0.9rem; margin-bottom: 5px;">Chemistry</div>
-                                    <div style="color: var(--text); font-weight: 700; font-size: 1.1rem;">${product.chemistry}</div>
-                                </div>` : ''}
-                                
-                                ${product.capacity ? `
-                                <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div style="color: var(--gold-light); font-size: 0.9rem; margin-bottom: 5px;">Capacity</div>
-                                    <div style="color: var(--text); font-weight: 700; font-size: 1.1rem;">${product.capacity}</div>
-                                </div>` : ''}
-                                
-                                ${product.bms ? `
-                                <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div style="color: var(--gold-light); font-size: 0.9rem; margin-bottom: 5px;">BMS Type</div>
-                                    <div style="color: var(--text); font-weight: 700; font-size: 1.1rem;">${product.bms}</div>
-                                </div>` : ''}
-                                
-                                ${product.warranty ? `
-                                <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div style="color: var(--gold-light); font-size: 0.9rem; margin-bottom: 5px;">Warranty</div>
-                                    <div style="color: var(--text); font-weight: 700; font-size: 1.1rem;">${product.warranty}</div>
-                                </div>` : ''}
-                            </div>
+                        <div class="update-content">
+                            <div class="update-title">${update.title}</div>
+                            <div class="update-meta">${update.description} • ${update.date}</div>
                         </div>
                     </div>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h4 style="color: var(--gold-light); margin-bottom: 20px; font-size: 1.3rem;">Product Features</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-                        ${(product.features || []).map(feature => `
-                        <div style="padding: 15px; background: rgba(255, 215, 0, 0.05); border-radius: var(--radius-sm); border-left: 4px solid var(--gold);">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-check" style="color: var(--gold);"></i>
-                                <span style="color: var(--text); font-weight: 500;">${feature}</span>
-                            </div>
-                        </div>
-                        `).join('')}
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 20px; margin-top: 40px;">
-                    <a href="${whatsappUrl}" class="btn-whatsapp" target="_blank" style="flex: 2; font-size: 1.2rem; padding: 20px;">
-                        <i class="fab fa-whatsapp"></i> Get Quote on WhatsApp
-                    </a>
-                    <button class="btn-details" onclick="closeProductModal()" style="flex: 1; padding: 20px; font-size: 1.1rem;">
-                        <i class="fas fa-times"></i> Close
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Show No Products
+        function showNoProducts(container) {
+            container.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-box-open"></i>
+                    <h3 style="color: var(--gold); margin: 15px 0;">No Products Available</h3>
+                    <p style="color: var(--gold-light); margin-bottom: 20px;">Products will be available soon.</p>
+                    <button class="cta-small" onclick="loadProducts()">
+                        <i class="fas fa-redo"></i> Refresh
                     </button>
                 </div>
             `;
+        }
+
+        // Show No Blogs
+        function showNoBlogs() {
+            const container = document.getElementById('blogsContainer');
+            container.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-newspaper"></i>
+                    <h3 style="color: var(--gold); margin: 15px 0;">No Blogs Yet</h3>
+                    <p style="color: var(--gold-light; margin-bottom: 20px;">Blogs will appear here automatically when published.</p>
+                    <div style="font-size: 0.9rem; color: var(--accent); margin-top: 15px;">
+                        <i class="fas fa-info-circle"></i> Blogs auto-detected from sitemap.xml
+                    </div>
+                </div>
+            `;
+        }
+
+        // Show Error Loading
+        function showErrorLoading(container, type) {
+            container.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3 style="color: var(--warning); margin: 15px 0;">Error Loading ${type}</h3>
+                    <p style="color: var(--gold-light); margin-bottom: 20px;">Please check your connection.</p>
+                    <button class="cta-small" onclick="load${type.charAt(0).toUpperCase() + type.slice(1)}()">
+                        <i class="fas fa-redo"></i> Retry
+                    </button>
+                </div>
+            `;
+        }
+
+        // Show Product Details
+        async function showProductDetails(productId) {
+            try {
+                const product = products.find(p => p.id === productId);
+                if (!product) return;
+                
+                // Create modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.9); z-index: 2000; display: flex;
+                    align-items: center; justify-content: center; padding: 20px;
+                    backdrop-filter: blur(10px);
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background: var(--card-bg); border-radius: var(--radius);
+                         padding: 30px; max-width: 500px; width: 100%; border: 2px solid var(--gold);
+                         position: relative;">
+                        <button onclick="this.parentElement.parentElement.remove()" 
+                                style="position: absolute; top: 15px; right: 15px;
+                                background: var(--danger); color: white; border: none;
+                                width: 35px; height: 35px; border-radius: 50%; cursor: pointer;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        
+                        <h2 style="color: var(--gold); margin-bottom: 20px;">${product.name}</h2>
+                        <div style="color: var(--accent); font-weight: 700; margin-bottom: 15px;">${product.voltage || ''}</div>
+                        
+                        ${product.price ? `<div style="color: var(--gold); font-size: 1.5rem; font-weight: 800; margin: 20px 0;">${product.price}</div>` : ''}
+                        
+                        <div style="margin: 20px 0;">
+                            <h4 style="color: var(--gold-light); margin-bottom: 10px;">Features:</h4>
+                            <ul style="color: var(--text-muted); padding-left: 20px;">
+                                ${(product.features || []).map(f => `<li style="margin-bottom: 8px;">${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; margin-top: 30px;">
+                            <a href="https://wa.me/917876555055?text=I'm interested in ${encodeURIComponent(product.name)}" 
+                               class="btn-whatsapp-compact" target="_blank" style="flex: 1; text-align: center;">
+                                <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
+                            </a>
+                            <button onclick="this.parentElement.parentElement.parentElement.remove()" 
+                                    class="btn-details-compact" style="flex: 1;">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+            } catch (error) {
+                console.error('Error showing product details:', error);
+            }
+        }
+
+        // Switch Tab
+        function switchTab(tabId) {
+            // Update active tab button
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('active');
+                }
+            });
             
-            document.getElementById('productModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // Show active tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+                if (content.id === `${tabId}Tab`) {
+                    content.classList.add('active');
+                }
+            });
+            
+            // Load data if needed
+            if (tabId === 'blogs' && blogs.length === 0) {
+                loadBlogsFromSitemap();
+            }
+            
+            if (tabId === 'updates') {
+                loadLiveUpdates();
+            }
         }
 
-        // Close product modal
-        function closeProductModal() {
-            document.getElementById('productModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+        // Handle Search
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+            
+            if (activeTab === 'products') {
+                const filtered = products.filter(p => 
+                    p.name.toLowerCase().includes(query) ||
+                    (p.voltage && p.voltage.toLowerCase().includes(query)) ||
+                    (p.category && p.category.toLowerCase().includes(query))
+                );
+                displayProducts(filtered);
+            } else if (activeTab === 'blogs') {
+                const filtered = blogs.filter(b => 
+                    b.title.toLowerCase().includes(query)
+                );
+                displayBlogs(filtered);
+            }
         }
 
-        // Force refresh data
+        // Handle Filter
+        function handleFilter() {
+            const category = document.getElementById('categoryFilter').value;
+            const sortBy = document.getElementById('sortBy').value;
+            
+            let filtered = [...products];
+            
+            if (category) {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            
+            // Sort
+            switch (sortBy) {
+                case 'newest':
+                    filtered.sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt));
+                    break;
+                case 'oldest':
+                    filtered.sort((a, b) => new Date(a.updatedAt || a.createdAt) - new Date(b.updatedAt || b.createdAt));
+                    break;
+                case 'name':
+                    filtered.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'price':
+                    filtered.sort((a, b) => {
+                        const priceA = extractPrice(a.price) || 0;
+                        const priceB = extractPrice(b.price) || 0;
+                        return priceA - priceB;
+                    });
+                    break;
+            }
+            
+            displayProducts(filtered);
+        }
+
+        // Handle Sort
+        function handleSort() {
+            handleFilter();
+        }
+
+        // Extract price from string
+        function extractPrice(priceStr) {
+            if (!priceStr) return null;
+            const match = priceStr.match(/[\d,]+/);
+            return match ? parseInt(match[0].replace(/,/g, '')) : null;
+        }
+
+        // Update Sync Time
+        function updateSyncTime() {
+            lastSync = new Date();
+            document.getElementById('lastSyncTime').textContent = formatTimeAgo(lastSync);
+        }
+
+        // Format time ago
+        function formatTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours}h ago`;
+            
+            const days = Math.floor(hours / 24);
+            if (days === 1) return 'Yesterday';
+            if (days < 7) return `${days}d ago`;
+            
+            return date.toLocaleDateString();
+        }
+
+        // Show Sync Status
+        function showSyncStatus(message, type = 'syncing') {
+            const badge = document.getElementById('syncBadge');
+            const text = document.getElementById('syncStatusText');
+            
+            badge.className = `sync-badge ${type}`;
+            text.textContent = message;
+            
+            badge.style.display = 'flex';
+            
+            if (type !== 'syncing') {
+                setTimeout(() => {
+                    badge.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Start Auto Refresh
+        function startAutoRefresh() {
+            // Refresh every 5 minutes
+            autoRefreshInterval = setInterval(async () => {
+                await loadProducts();
+                await loadBlogsFromSitemap();
+                await loadLiveUpdates();
+                showSyncStatus('Auto-refreshed', 'success');
+            }, 5 * 60 * 1000);
+            
+            // Also refresh when page becomes visible
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    loadLiveUpdates(true);
+                }
+            });
+        }
+
+        // Force Refresh
         async function forceRefresh() {
-            showSyncStatus('Refreshing data...', 'info');
-            await loadCompanyDetails();
-            await loadProducts();
-            updateSyncTime();
-            showSyncStatus('Data refreshed successfully!', 'success');
+            showSyncStatus('Manual refresh...', 'syncing');
+            await initializeData();
+            showSyncStatus('Refreshed successfully', 'success');
         }
 
-        // Expose functions to global scope
-        window.closeProductModal = closeProductModal;
-        window.closeMobileMenu = closeMobileMenu;
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav-compact');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Expose functions globally
         window.showProductDetails = showProductDetails;
         window.forceRefresh = forceRefresh;
+        window.loadProducts = loadProducts;
+        window.loadBlogsFromSitemap = loadBlogsFromSitemap;
+        window.loadLiveUpdates = loadLiveUpdates;
     </script>
-    <section style="padding:30px;background:#f1f1f1;">
-<h2>Our Lithium Battery Products</h2>
-
-<ul>
-<li><a href="/products/60v-30ah-lifepo4.html">60V 30Ah Lithium Battery for Scooter</a></li>
-<li><a href="/products/72v-30ah-lifepo4.html">72V 30Ah Lithium Battery for EV</a></li>
-<li><a href="/products/76v-45ah-lifepo4.html">76V 45Ah High Capacity Battery</a></li>
-</ul>
-</section>
-    <a href="/blogs/72v-45ah-lithium-battery-electric-scooter.html">
-72V 45Ah Lithium Battery Guide
-</a>
 </body>
 </html>
