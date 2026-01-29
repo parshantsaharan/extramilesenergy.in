@@ -1,60 +1,56 @@
-name: Auto Sitemap Generator
+name: Auto Generate Sitemap
 
 on:
   push:
     branches:
       - main
-      - master
-      - gh-pages
-      - "**"
-  workflow_dispatch:
-
-permissions:
-  contents: write
+    paths:
+      - "**/*.html"
 
 jobs:
   sitemap:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      # Setup Node
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v4
         with:
-          node-version: 18
+          fetch-depth: 0
 
-      # Install dependencies (if any)
-      - name: Install Dependencies
-        run: |
-          if [ -f package.json ]; then
-            npm install
-          fi
-
-      # Generate Sitemap
       - name: Generate Sitemap
         run: |
-          if [ -f generate-sitemap.js ]; then
-            node generate-sitemap.js
-          else
-            echo "generate-sitemap.js not found"
-            exit 1
-          fi
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
 
-      # Commit & Push
+          for file in $(find . -name "*.html" ! -path "./node_modules/*"); do
+
+            clean_path=$(echo "$file" | sed 's|^\./||')
+
+            if [[ "$clean_path" != "index.html" ]]; then
+
+              last_commit=$(git log -1 --format="%cI" -- "$file")
+
+              url="https://extramilesenergy.in/${clean_path}"
+
+              echo "  <url>" >> sitemap.xml
+              echo "    <loc>$url</loc>" >> sitemap.xml
+              echo "    <lastmod>$last_commit</lastmod>" >> sitemap.xml
+              echo "    <priority>0.8</priority>" >> sitemap.xml
+              echo "  </url>" >> sitemap.xml
+
+            fi
+
+          done
+
+          echo '</urlset>' >> sitemap.xml
+
       - name: Commit Sitemap
         run: |
-          git config --global user.name "github-bot"
-          git config --global user.email "bot@github.com"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
           git add sitemap.xml
 
-          if git diff --cached --quiet; then
-            echo "No sitemap changes"
-          else
-            git commit -m "Auto update sitemap"
-            git push
-          fi
+          git commit -m "Auto update sitemap" || echo "No changes"
+
+          git push
