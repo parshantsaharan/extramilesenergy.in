@@ -3,7 +3,7 @@
   "name": "Lithium Phosphate Battey pack for big electric scooters",
   "voltage": "72V 45Ah",
   "category": "EV Battery",
-  "price": "Rs. 38500/-",
+  "price": "Rs. 39000/-",
   "model": "EM-LFP7345",
   "configuration": "23s3p",
   "chemistry": "LiFePO₄",
@@ -20,5 +20,6 @@
   ],
   "status": "active",
   "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/7230.png",
-  "displayOrder": 0
+  "displayOrder": 0,
+  "updatedAt": "2026-01-29T12:31:34.467Z"
 }
