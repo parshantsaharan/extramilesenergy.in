@@ -1,77 +1,121 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
-const baseUrl = "https://extramilesenergy.in";
+/* ================= CONFIG ================= */
 
-// Folders to scan
-const folders = ["products", "blogs"];
+const BASE_URL = "https://extramilesenergy.in";
+const OUTPUT_FILE = "sitemap.xml";
 
-// Files/folders to ignore
-const ignore = ["node_modules", ".git", ".github", "admin"];
+/* Folders jahan blogs & products hain */
+const CONTENT_FOLDERS = [
+  "blogs",
+  "products"
+];
 
-let urls = [];
+/* ========================================== */
 
-/**
- * Scan directory recursively
- */
-function scanDir(dir, webPath = "") {
-  if (!fs.existsSync(dir)) return;
+// Get last git commit date of file
+function getGitLastModified(filePath) {
+  try {
+    const cmd = `git log -1 --format=%cI -- "${filePath}"`;
+    return execSync(cmd).toString().trim();
+  } catch (err) {
+    return new Date().toISOString();
+  }
+}
+
+// Scan folder recursively
+function scanFolder(dir) {
+  let result = [];
+
+  if (!fs.existsSync(dir)) return result;
 
   const files = fs.readdirSync(dir);
 
   files.forEach(file => {
-    if (ignore.includes(file)) return;
-
     const fullPath = path.join(dir, file);
-    const stat = fs.statSync(fullPath);
 
-    if (stat.isDirectory()) {
-      scanDir(fullPath, `${webPath}/${file}`);
+    if (fs.statSync(fullPath).isDirectory()) {
+      result = result.concat(scanFolder(fullPath));
     }
 
-    else if (file.endsWith(".html")) {
-      let cleanName = file.replace("index.html", "");
-      const url = `${baseUrl}${webPath}/${cleanName}`
-        .replace(/\/+/g, "/")
-        .replace("https:/", "https://");
-
-      urls.push(url);
+    if (file.endsWith(".html")) {
+      result.push(fullPath);
     }
   });
+
+  return result;
 }
 
-/* Homepage */
-urls.push(`${baseUrl}/`);
+// Build URL list
+function collectUrls() {
 
-/* Scan main folders */
-folders.forEach(folder => {
-  scanDir(path.join(__dirname, folder), `/${folder}`);
-});
+  let urls = [];
 
-/* Scan root for pages (about.html etc) */
-scanDir(__dirname, "");
+  /* Homepage */
+  urls.push({
+    loc: `${BASE_URL}/`,
+    lastmod: new Date().toISOString(),
+    priority: "1.0"
+  });
 
-/* Remove duplicates */
-urls = [...new Set(urls)];
+  /* Scan blogs & products */
+  CONTENT_FOLDERS.forEach(folder => {
 
-/* Generate XML */
-let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    const pages = scanFolder(folder);
 
-urls.forEach(url => {
-  const priority = url === `${baseUrl}/` ? "1.0" : "0.8";
+    pages.forEach(file => {
 
-  xml += `
-  <url>
-    <loc>${url}</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-    <priority>${priority}</priority>
-  </url>`;
-});
+      const cleanPath = file.replace(/\\/g, "/");
 
-xml += `\n</urlset>`;
+      urls.push({
+        loc: `${BASE_URL}/${cleanPath}`,
+        lastmod: getGitLastModified(file),
+        priority: "0.8"
+      });
 
-/* Save */
-fs.writeFileSync("sitemap.xml", xml);
+    });
 
-console.log("✅ Sitemap Auto Updated:", urls.length, "URLs");
+  });
+
+  return urls;
+}
+
+// Generate XML
+function generateSitemap(urls) {
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  urls.forEach(u => {
+
+    xml += `  <url>\n`;
+    xml += `    <loc>${u.loc}</loc>\n`;
+    xml += `    <lastmod>${u.lastmod}</lastmod>\n`;
+    xml += `    <priority>${u.priority}</priority>\n`;
+    xml += `  </url>\n`;
+
+  });
+
+  xml += `</urlset>`;
+
+  return xml;
+}
+
+// Main Run
+function main() {
+
+  console.log("🚀 Generating sitemap...");
+
+  const urls = collectUrls();
+
+  const sitemap = generateSitemap(urls);
+
+  fs.writeFileSync(OUTPUT_FILE, sitemap);
+
+  console.log(`✅ Sitemap created: ${OUTPUT_FILE}`);
+  console.log(`📄 Total URLs: ${urls.length}`);
+}
+
+main();
