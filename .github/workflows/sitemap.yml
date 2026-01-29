@@ -1,8 +1,13 @@
-name: Auto Sitemap
+name: Auto Sitemap Generator
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+      - master
+      - gh-pages
+      - "**"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,20 +17,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      # Checkout repo
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Setup Node
+      # Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Generate Sitemap
-        run: node generate-sitemap.js
+      # Install dependencies (if any)
+      - name: Install Dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
 
+      # Generate Sitemap
+      - name: Generate Sitemap
+        run: |
+          if [ -f generate-sitemap.js ]; then
+            node generate-sitemap.js
+          else
+            echo "generate-sitemap.js not found"
+            exit 1
+          fi
+
+      # Commit & Push
       - name: Commit Sitemap
         run: |
           git config --global user.name "github-bot"
           git config --global user.email "bot@github.com"
+
           git add sitemap.xml
-          git diff --cached --quiet || git commit -m "Auto update sitemap"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No sitemap changes"
+          else
+            git commit -m "Auto update sitemap"
+            git push
+          fi
