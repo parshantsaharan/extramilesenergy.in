@@ -11,33 +11,49 @@ jobs:
 
     steps:
 
-      # Checkout Repo
-      - name: Checkout repository
+      # Checkout Repository
+      - name: Checkout Repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Setup Node
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      # Install Dependencies (if package.json exists)
-      - name: Install dependencies
-        run: |
-          if [ -f package.json ]; then
-            npm install
-          fi
-
       # Generate Sitemap
-      - name: Generate sitemap
+      - name: Generate sitemap.xml
         run: |
-          node generate-sitemap.js
 
-      # Commit & Push
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+
+          # Homepage
+          echo "  <url>" >> sitemap.xml
+          echo "    <loc>https://extramilesenergy.in/</loc>" >> sitemap.xml
+          echo "    <priority>1.0</priority>" >> sitemap.xml
+          echo "  </url>" >> sitemap.xml
+
+
+          # Blogs & Products
+          for file in $(find blogs products -type f -name "*.html"); do
+
+            lastmod=$(git log -1 --format="%cI" -- "$file")
+
+            url="https://extramilesenergy.in/$file"
+
+            echo "  <url>" >> sitemap.xml
+            echo "    <loc>$url</loc>" >> sitemap.xml
+            echo "    <lastmod>$lastmod</lastmod>" >> sitemap.xml
+            echo "    <priority>0.8</priority>" >> sitemap.xml
+            echo "  </url>" >> sitemap.xml
+
+          done
+
+
+          echo "</urlset>" >> sitemap.xml
+
+
+      # Commit & Push Sitemap
       - name: Commit sitemap
         run: |
+
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
