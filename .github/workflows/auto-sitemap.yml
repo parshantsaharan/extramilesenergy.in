@@ -1,4 +1,4 @@
-name: Auto Sitemap Generator
+name: Auto Generate Sitemap
 
 on:
   push:
@@ -11,16 +11,13 @@ jobs:
 
     steps:
 
-      # Checkout repo
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # IMPORTANT: full git history
 
-
-      # Create sitemap
-      - name: Generate sitemap
+      - name: Generate sitemap.xml
         run: |
-
-          DATE=$(date -u +"%Y-%m-%d")
 
           echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
           echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
@@ -29,23 +26,21 @@ jobs:
           # Homepage
           echo "  <url>" >> sitemap.xml
           echo "    <loc>https://extramilesenergy.in/</loc>" >> sitemap.xml
-          echo "    <lastmod>$DATE</lastmod>" >> sitemap.xml
+          echo "    <lastmod>$(date -u +%Y-%m-%d)</lastmod>" >> sitemap.xml
           echo "    <priority>1.0</priority>" >> sitemap.xml
           echo "  </url>" >> sitemap.xml
 
 
-          # All HTML files
-          find . -name "*.html" \
-          ! -path "./.github/*" \
-          ! -path "./node_modules/*" \
-          | while read file
-          do
+          # Blogs + Products
+          for file in $(find blogs products -type f -name "*.html"); do
 
-            clean=$(echo "$file" | sed 's|^\./||')
+            lastmod=$(git log -1 --format="%cs" -- "$file")
+
+            url="https://extramilesenergy.in/$file"
 
             echo "  <url>" >> sitemap.xml
-            echo "    <loc>https://extramilesenergy.in/$clean</loc>" >> sitemap.xml
-            echo "    <lastmod>$DATE</lastmod>" >> sitemap.xml
+            echo "    <loc>$url</loc>" >> sitemap.xml
+            echo "    <lastmod>$lastmod</lastmod>" >> sitemap.xml
             echo "    <priority>0.8</priority>" >> sitemap.xml
             echo "  </url>" >> sitemap.xml
 
@@ -55,7 +50,6 @@ jobs:
           echo "</urlset>" >> sitemap.xml
 
 
-      # Commit sitemap
       - name: Commit sitemap
         run: |
 
@@ -64,4 +58,5 @@ jobs:
 
           git add sitemap.xml
           git commit -m "Auto update sitemap" || echo "No changes"
+
           git push
