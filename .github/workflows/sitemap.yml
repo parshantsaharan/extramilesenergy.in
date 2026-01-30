@@ -24,7 +24,10 @@ jobs:
           echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
           echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
 
-          for file in $(find . -name "*.html" ! -path "./node_modules/*" ! -path "./.github/*"); do
+          find . -name "*.html" \
+          ! -path "./node_modules/*" \
+          ! -path "./.github/*" \
+          | sort | while read file; do
 
             clean_path=$(echo "$file" | sed 's|^\./||')
 
@@ -46,13 +49,16 @@ jobs:
 
           echo "</urlset>" >> sitemap.xml
 
-      # Commit Sitemap
+      # Commit Sitemap (Prevent Loop)
       - name: Commit Sitemap
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add sitemap.xml
-          git commit -m "Auto update sitemap" || echo "No changes"
-
-          git push
+          if git diff --quiet; then
+            echo "No sitemap changes"
+          else
+            git add sitemap.xml
+            git commit -m "Auto update sitemap"
+            git push
+          fi
