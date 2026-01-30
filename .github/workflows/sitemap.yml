@@ -12,39 +12,76 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout Repository
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      # Generate Sitemap
-      - name: Generate Sitemap
-        run: |
-          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
-          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+    # 1️⃣ Checkout full repo
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-          for file in $(find . -name "*.html" ! -path "./node_modules/*" ! -path "./.github/*"); do
 
-            clean_path=$(echo "$file" | sed 's|^\./||')
+    # 2️⃣ Generate Sitemap
+    - name: Generate Sitemap
+      run: |
+
+        echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+        echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+
+
+        # Homepage
+        echo "  <url>" >> sitemap.xml
+        echo "    <loc>https://extramilesenergy.in/</loc>" >> sitemap.xml
+        echo "    <lastmod>$(date -Iseconds)</lastmod>" >> sitemap.xml
+        echo "    <priority>1.0</priority>" >> sitemap.xml
+        echo "  </url>" >> sitemap.xml
+
+
+        # All HTML files
+        find . -name "*.html" \
+        ! -path "./.github/*" \
+        ! -path "./node_modules/*" \
+        ! -name "404.html" | while read file; do
+
+
+          clean_path=${file#./}
+
+          if [ "$clean_path" != "index.html" ]; then
 
             last_commit=$(git log -1 --format="%cI" -- "$file")
 
             url="https://extramilesenergy.in/$clean_path"
 
+            # Blog priority high
+            if [[ "$clean_path" == blogs/* ]]; then
+              priority="0.9"
+            else
+              priority="0.8"
+            fi
+
+
             echo "  <url>" >> sitemap.xml
             echo "    <loc>$url</loc>" >> sitemap.xml
             echo "    <lastmod>$last_commit</lastmod>" >> sitemap.xml
-            echo "    <priority>0.8</priority>" >> sitemap.xml
+            echo "    <priority>$priority</priority>" >> sitemap.xml
             echo "  </url>" >> sitemap.xml
 
-          done
+          fi
 
-          echo "</urlset>" >> sitemap.xml
+        done
 
-      # Upload Sitemap (NO PUSH = NO ERROR)
-      - name: Upload Sitemap
-        uses: actions/upload-artifact@v4
-        with:
-          name: sitemap
-          path: sitemap.xml
+
+        echo "</urlset>" >> sitemap.xml
+
+
+    # 3️⃣ Commit sitemap
+    - name: Commit Sitemap
+      run: |
+
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+
+        git add sitemap.xml
+
+        git commit -m "Auto update sitemap" || echo "No changes"
+
+        git push
