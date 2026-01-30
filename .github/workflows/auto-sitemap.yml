@@ -1,0 +1,67 @@
+name: Auto Sitemap Generator
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      # Create sitemap
+      - name: Generate sitemap
+        run: |
+
+          DATE=$(date -u +"%Y-%m-%d")
+
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+
+
+          # Homepage
+          echo "  <url>" >> sitemap.xml
+          echo "    <loc>https://extramilesenergy.in/</loc>" >> sitemap.xml
+          echo "    <lastmod>$DATE</lastmod>" >> sitemap.xml
+          echo "    <priority>1.0</priority>" >> sitemap.xml
+          echo "  </url>" >> sitemap.xml
+
+
+          # All HTML files
+          find . -name "*.html" \
+          ! -path "./.github/*" \
+          ! -path "./node_modules/*" \
+          | while read file
+          do
+
+            clean=$(echo "$file" | sed 's|^\./||')
+
+            echo "  <url>" >> sitemap.xml
+            echo "    <loc>https://extramilesenergy.in/$clean</loc>" >> sitemap.xml
+            echo "    <lastmod>$DATE</lastmod>" >> sitemap.xml
+            echo "    <priority>0.8</priority>" >> sitemap.xml
+            echo "  </url>" >> sitemap.xml
+
+          done
+
+
+          echo "</urlset>" >> sitemap.xml
+
+
+      # Commit sitemap
+      - name: Commit sitemap
+        run: |
+
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add sitemap.xml
+          git commit -m "Auto update sitemap" || echo "No changes"
+          git push
