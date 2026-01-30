@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "**/*.html"
-
-permissions:
-  contents: write
 
 jobs:
   sitemap:
@@ -16,21 +11,27 @@ jobs:
 
     steps:
 
-      # Checkout repo
-      - name: Checkout
+      # Checkout Repo
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: true
 
       # Setup Node
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: "18"
+
+      # Install Dependencies (if package.json exists)
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
 
       # Generate Sitemap
-      - name: Generate Sitemap
+      - name: Generate sitemap
         run: |
           node generate-sitemap.js
 
@@ -41,10 +42,6 @@ jobs:
           git config user.email "actions@github.com"
 
           git add sitemap.xml
+          git commit -m "Auto update sitemap" || echo "No changes"
 
-          if git diff --cached --quiet; then
-            echo "No sitemap changes"
-          else
-            git commit -m "Auto update sitemap"
-            git push
-          fi
+          git push
