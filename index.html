@@ -1840,18 +1840,23 @@
                     await discoverBlogs();
                 }
                 
+                // ✅ IMPORTANT: Sort blogs by latest date first - ChatGPT ने यही बताया था
+                blogs.sort((a, b) => {
+                    return new Date(b.lastModified) - new Date(a.lastModified);
+                });
+                
+                // Update blog count
+                document.getElementById('blogCount').textContent = blogs.length;
+                
+                if (blogs.length > 0) {
+                    displayBlogs(blogs.slice(0, 6)); // Show latest 6
+                } else {
+                    showNoBlogs();
+                }
+                
             } catch (error) {
                 // Use backup discovery
                 await discoverBlogs();
-            }
-            
-            // Update blog count
-            document.getElementById('blogCount').textContent = blogs.length;
-            
-            if (blogs.length > 0) {
-                displayBlogs(blogs.slice(0, 6));
-            } else {
-                showNoBlogs();
             }
         }
 
