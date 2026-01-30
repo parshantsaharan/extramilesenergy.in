@@ -11,36 +11,38 @@ jobs:
 
     steps:
 
-      # Checkout Repository
-      - name: Checkout Repo
+      # Checkout Repo
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+
 
       # Generate Sitemap
       - name: Generate sitemap.xml
         run: |
 
+          TODAY=$(date -I)
+
           echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
           echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+
 
           # Homepage
           echo "  <url>" >> sitemap.xml
           echo "    <loc>https://extramilesenergy.in/</loc>" >> sitemap.xml
+          echo "    <lastmod>$TODAY</lastmod>" >> sitemap.xml
           echo "    <priority>1.0</priority>" >> sitemap.xml
           echo "  </url>" >> sitemap.xml
 
 
           # Blogs & Products
-          for file in $(find blogs products -type f -name "*.html"); do
-
-            lastmod=$(git log -1 --format="%cI" -- "$file")
+          find blogs products -type f -name "*.html" | while read file
+          do
 
             url="https://extramilesenergy.in/$file"
 
             echo "  <url>" >> sitemap.xml
             echo "    <loc>$url</loc>" >> sitemap.xml
-            echo "    <lastmod>$lastmod</lastmod>" >> sitemap.xml
+            echo "    <lastmod>$TODAY</lastmod>" >> sitemap.xml
             echo "    <priority>0.8</priority>" >> sitemap.xml
             echo "  </url>" >> sitemap.xml
 
@@ -50,7 +52,7 @@ jobs:
           echo "</urlset>" >> sitemap.xml
 
 
-      # Commit & Push Sitemap
+      # Commit Sitemap
       - name: Commit sitemap
         run: |
 
