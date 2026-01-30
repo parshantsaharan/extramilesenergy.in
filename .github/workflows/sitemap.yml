@@ -7,81 +7,44 @@ on:
     paths:
       - "**/*.html"
 
+permissions:
+  contents: write
+
 jobs:
   sitemap:
     runs-on: ubuntu-latest
 
     steps:
 
-    # 1️⃣ Checkout full repo
-    - name: Checkout Repo
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
+      # Setup Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-    # 2️⃣ Generate Sitemap
-    - name: Generate Sitemap
-      run: |
+      # Generate Sitemap
+      - name: Generate Sitemap
+        run: |
+          node generate-sitemap.js
 
-        echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
-        echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+      # Commit & Push
+      - name: Commit sitemap
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
+          git add sitemap.xml
 
-        # Homepage
-        echo "  <url>" >> sitemap.xml
-        echo "    <loc>https://extramilesenergy.in/</loc>" >> sitemap.xml
-        echo "    <lastmod>$(date -Iseconds)</lastmod>" >> sitemap.xml
-        echo "    <priority>1.0</priority>" >> sitemap.xml
-        echo "  </url>" >> sitemap.xml
-
-
-        # All HTML files
-        find . -name "*.html" \
-        ! -path "./.github/*" \
-        ! -path "./node_modules/*" \
-        ! -name "404.html" | while read file; do
-
-
-          clean_path=${file#./}
-
-          if [ "$clean_path" != "index.html" ]; then
-
-            last_commit=$(git log -1 --format="%cI" -- "$file")
-
-            url="https://extramilesenergy.in/$clean_path"
-
-            # Blog priority high
-            if [[ "$clean_path" == blogs/* ]]; then
-              priority="0.9"
-            else
-              priority="0.8"
-            fi
-
-
-            echo "  <url>" >> sitemap.xml
-            echo "    <loc>$url</loc>" >> sitemap.xml
-            echo "    <lastmod>$last_commit</lastmod>" >> sitemap.xml
-            echo "    <priority>$priority</priority>" >> sitemap.xml
-            echo "  </url>" >> sitemap.xml
-
+          if git diff --cached --quiet; then
+            echo "No sitemap changes"
+          else
+            git commit -m "Auto update sitemap"
+            git push
           fi
-
-        done
-
-
-        echo "</urlset>" >> sitemap.xml
-
-
-    # 3️⃣ Commit sitemap
-    - name: Commit Sitemap
-      run: |
-
-        git config user.name "github-actions"
-        git config user.email "actions@github.com"
-
-        git add sitemap.xml
-
-        git commit -m "Auto update sitemap" || echo "No changes"
-
-        git push
