@@ -1,0 +1,21 @@
+{
+  "id": "product-1770128194086-mxt13ntpg",
+  "name": "10.7 Kw Smart Energy Storage Battery Pack ",
+  "voltage": "51.2V 210Ah",
+  "category": "EV Battery",
+  "price": "Rs. 125000/-",
+  "model": "EM-LFP51210",
+  "configuration": "16S14P",
+  "chemistry": "LiFePO₄",
+  "warranty": "5 Year Warranty",
+  "capacity": "10752Wh",
+  "bms": "JK ESS Smart BMS 150Amp",
+  "features": [
+    "Lifepo4 battery "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000138423.png",
+  "displayOrder": 0,
+  "createdAt": "2026-02-03T14:16:34.087Z",
+  "updatedAt": "2026-02-03T14:16:34.087Z"
+}
