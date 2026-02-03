@@ -1,6 +1,6 @@
 {
   "id": "product-1770128194086-mxt13ntpg",
-  "name": "10.7 Kw Smart Energy Storage Battery Pack ",
+  "name": "10.7 Kw Smart Energy Storage Battery Pack  for home and industrial Use ",
   "voltage": "51.2V 210Ah",
   "category": "EV Battery",
   "price": "Rs. 125000/-",
@@ -11,11 +11,14 @@
   "capacity": "10752Wh",
   "bms": "JK ESS Smart BMS 150Amp",
   "features": [
-    "Lifepo4 battery "
+    "Lifepo4 battery ",
+    "Smart Active Balance function ",
+    "5 year warrenty ",
+    "Bluetooth Connectivity "
   ],
   "status": "active",
   "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000138423.png",
   "displayOrder": 0,
   "createdAt": "2026-02-03T14:16:34.087Z",
-  "updatedAt": "2026-02-03T14:16:34.087Z"
+  "updatedAt": "2026-02-03T14:17:49.771Z"
 }
