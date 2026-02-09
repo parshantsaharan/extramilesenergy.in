@@ -9,7 +9,7 @@
     <meta name="description" content="ExtraMiles Energy's ESS 11kW Smart BMS Lithium Battery - Advanced solar energy storage for home, commercial & industrial systems. 4000+ cycles, 5-year warranty.">
     <meta name="keywords" content="ESS 11kW lithium battery, solar battery India, LiFePO4 battery Hisar, smart BMS battery, solar hybrid inverter battery, commercial solar backup Haryana">
     <meta name="author" content="ExtraMiles Energy">
-    <link rel="canonical" href="https://extramilesenergy.in/blog/ess-11kw-smart-bms-battery">
+    <link rel="canonical" href="https://extramilesenergy.in/blogs/ess-11kw-smart-bms-lithium-battery.html">
     
     <!-- Performance Optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
     <meta property="og:title" content="ESS 11kW Smart BMS Lithium Battery - Solar Storage Solution">
     <meta property="og:description" content="Advanced 11kW energy storage with smart BMS for solar systems in India. Perfect for homes & businesses.">
     <meta property="og:image" content="https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000138424.png">
-    <meta property="og:url" content="https://extramilesenergy.in/blog/ess-11kw-smart-bms-battery">
+    <meta property="og:url" content="https://extramilesenergy.in/blogs/ess-11kw-smart-bms-lithium-battery.html">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="en_IN">
     
@@ -60,7 +60,7 @@
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://extramilesenergy.in/blog/ess-11kw-smart-bms-battery"
+            "@id": "https://extramilesenergy.in/blogs/ess-11kw-smart-bms-lithium-battery.html"
         }
     }
     </script>
@@ -387,6 +387,7 @@
         .blog-links a:hover {
             color: var(--secondary-color);
             padding-left: 10px;
+            text-decoration: underline;
         }
         
         .blog-links a:last-child {
@@ -744,17 +745,23 @@
             
             <section class="blog-links">
                 <h3>Explore More Solar Resources</h3>
-                <a href="https://extramilesenergy.in/blog/solar-hybrid-inverter-guide">
-                    Complete Guide to Solar Hybrid Inverters: Selection & Installation
+                <a href="https://extramilesenergy.in/blogs/on-grid-off-grid-hybrid-solar-system-guide-2026.html">
+                    On Grid vs Off Grid vs Hybrid Solar System Guide 2026
                 </a>
-                <a href="https://extramilesenergy.in/blog/lithium-vs-lead-acid-battery">
-                    Lithium vs Lead Acid Batteries: Comprehensive Comparison 2026
+                <a href="https://extramilesenergy.in/blogs/best-lithium-battery-for-home-inverter-2026.html">
+                    Best Lithium Battery for Home Inverter 2026
                 </a>
-                <a href="https://extramilesenergy.in/blog/industrial-solar-system-guide">
-                    Industrial Solar System Planning: Complete Implementation Guide
+                <a href="https://extramilesenergy.in/blogs/ev-battery-price-in-hisar-2026.html">
+                    EV Battery Price in Hisar 2026
                 </a>
-                <a href="https://extramilesenergy.in/blog/solar-rooftop-subsidy-haryana">
-                    Solar Rooftop Subsidies in Haryana: Updated 2026 Guide
+                <a href="https://extramilesenergy.in/blogs/lead-acid-vs-lifepo4-electric-scooter.html">
+                    Lead Acid vs LiFePO4 for Electric Scooter - Complete Comparison
+                </a>
+                <a href="https://extramilesenergy.in/blogs/lithium-battery-cycle-life-guide.html">
+                    Lithium Battery Cycle Life Guide - How Long Do They Last?
+                </a>
+                <a href="https://extramilesenergy.in/blogs/ev-scooty-lithium-battery-guide-2026.html">
+                    EV Scooty Lithium Battery Guide 2026 - Price, Range & Benefits
                 </a>
             </section>
             
@@ -797,6 +804,18 @@
                 'value': 1
             });
         });
+        
+        // Track blog link clicks
+        document.querySelectorAll('.blog-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                const blogTitle = this.textContent.trim().substring(0, 50);
+                gtag('event', 'click', {
+                    'event_category': 'internal_link',
+                    'event_label': 'blog_link_' + blogTitle,
+                    'value': 1
+                });
+            });
+        });
     </script>
     
     <!-- Schema.org Breadcrumb -->
@@ -814,14 +833,14 @@
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": "Products",
-                "item": "https://extramilesenergy.in/products"
+                "name": "Blogs",
+                "item": "https://extramilesenergy.in/blogs"
             },
             {
                 "@type": "ListItem",
                 "position": 3,
                 "name": "ESS 11kW Smart BMS Lithium Battery",
-                "item": "https://extramilesenergy.in/blog/ess-11kw-smart-bms-battery"
+                "item": "https://extramilesenergy.in/blogs/ess-11kw-smart-bms-lithium-battery.html"
             }
         ]
     }
