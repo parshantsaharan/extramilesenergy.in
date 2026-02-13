@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# 🔒 Block admin panel
+Disallow: /admin/
+
+# 🧪 Block testing folder
+Disallow: /test/
+
+# 🔐 Extra safety
+Disallow: /admin/index.html
+
+# ✅ Sitemap
+Sitemap: https://extramilesenergy.in/sitemap.xml
