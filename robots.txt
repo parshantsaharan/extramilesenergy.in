@@ -1,19 +1,15 @@
-# ===============================
 # Extra Miles Energy - robots.txt
-# ===============================
 
 User-agent: *
 Allow: /
 
-# 🚫 Block admin panel
+# Block admin panel
 Disallow: /admin/
-Disallow: /admin/index.html
 
-# 🚫 Block testing area
+# Block testing area
 Disallow: /test/
 
-# 🚫 Optional: block config or sensitive files (safe practice)
+# Optional sensitive files
 Disallow: /config.yml
 
-# ✅ Sitemap location
 Sitemap: https://extramilesenergy.in/sitemap.xml
