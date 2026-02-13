@@ -3,25 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST Admin - Extra Miles Energy</title>
+    <title>TEST Admin - Extra Miles Energy (Full Version)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* TEST VERSION BANNER */
+        /* TEST BANNER - Clearly visible */
         .test-banner {
-            background: #ff3366;
+            background: linear-gradient(90deg, #ff3366, #ff0066);
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 12px;
             font-weight: bold;
             position: sticky;
             top: 0;
-            z-index: 10000;
+            z-index: 999999;
             border-bottom: 3px solid yellow;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .test-banner i {
-            margin: 0 10px;
+            margin: 0 15px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
         
+        /* Main Styles - Same as production */
         :root {
             --primary: #0b1220;
             --secondary: #142044;
@@ -40,6 +50,11 @@
             --radius: 12px;
             --radius-sm: 8px;
             --transition: all 0.3s ease;
+            
+            --cat-battery: #45ff90;
+            --cat-inverter: #35d0ff;
+            --cat-accessory: #7c5cff;
+            --cat-cabinet: #ffb145;
         }
         
         * {
@@ -108,18 +123,20 @@
         
         .login-subtitle {
             color: var(--gold-light);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-size: 0.95rem;
         }
         
         .test-label {
             background: #ff3366;
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 30px;
             display: inline-block;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: 2px solid yellow;
         }
         
         .form-group {
@@ -166,11 +183,18 @@
             gap: 8px;
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
             width: 100%;
+            font-size: 1rem;
         }
         
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .btn-danger { background: linear-gradient(135deg, var(--danger), #ff2b5e); }
@@ -187,11 +211,18 @@
         
         .message.error { background: rgba(255, 53, 112, 0.1); border: 1px solid rgba(255, 53, 112, 0.3); color: var(--danger); }
         .message.success { background: rgba(69, 255, 144, 0.1); border: 1px solid rgba(69, 255, 144, 0.3); color: var(--success); }
+        .message.warning { background: rgba(255, 177, 69, 0.1); border: 1px solid rgba(255, 177, 69, 0.3); color: var(--warning); }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
         
         .login-attempts {
             font-size: 0.8rem;
             color: var(--warning);
             margin-top: 5px;
+            min-height: 20px;
         }
         
         .security-note {
@@ -211,6 +242,7 @@
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
         
         .header-content {
@@ -224,10 +256,23 @@
         .test-badge {
             background: #ff3366;
             color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            border: 2px solid yellow;
+            display: inline-block;
+        }
+        
+        .company-badge {
+            display: inline-block;
             padding: 4px 12px;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
             border-radius: 20px;
             font-size: 0.8rem;
-            margin-left: 10px;
+            margin-top: 5px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         .admin-nav {
@@ -237,6 +282,7 @@
             border-bottom: 2px solid rgba(255, 215, 0, 0.2);
             padding-bottom: 15px;
             overflow-x: auto;
+            flex-wrap: nowrap;
         }
         
         .nav-btn {
@@ -249,11 +295,24 @@
             transition: var(--transition);
             white-space: nowrap;
             font-weight: 500;
+            position: relative;
+            font-size: 0.95rem;
         }
         
         .nav-btn:hover, .nav-btn.active {
             background: rgba(255, 215, 0, 0.1);
             color: var(--gold);
+        }
+        
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
         }
         
         .tab-content {
@@ -276,6 +335,7 @@
             border-radius: var(--radius);
             padding: 30px;
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
         }
         
         .form-row {
@@ -285,6 +345,176 @@
             margin-bottom: 20px;
         }
         
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        select.form-input {
+            cursor: pointer;
+        }
+        
+        /* File Upload */
+        .file-upload-area {
+            border: 2px dashed rgba(255, 215, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+            background: rgba(255, 215, 0, 0.05);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .camera-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .camera-btn {
+            padding: 10px 20px;
+            background: rgba(53, 208, 255, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .camera-btn:hover {
+            background: rgba(53, 208, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .image-preview-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px auto;
+        }
+        
+        .image-preview {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: var(--radius-sm);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            display: block;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 53, 112, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .multiple-image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .multiple-image-preview img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .product-actions .btn {
+            flex: 1;
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Company Details */
+        .company-details-form {
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+        }
+        
+        .detail-item label {
+            min-width: 150px;
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+        
+        .detail-item input {
+            flex: 1;
+        }
+        
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -297,12 +527,19 @@
             padding: 25px 20px;
             background: rgba(255, 215, 0, 0.1);
             border-radius: var(--radius);
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         .stat-card .number {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .label {
+            color: var(--gold-light);
+            font-size: 0.9rem;
         }
         
         .quick-actions {
@@ -319,6 +556,7 @@
             border-radius: var(--radius);
             text-align: center;
             cursor: pointer;
+            transition: var(--transition);
             color: var(--text);
             text-decoration: none;
             display: flex;
@@ -327,58 +565,18 @@
             gap: 10px;
         }
         
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+        .quick-action-btn:hover {
+            background: rgba(53, 208, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: var(--gold);
         }
         
-        .product-card {
-            background: var(--card-bg);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: var(--radius);
-            padding: 20px;
+        .quick-action-btn i {
+            font-size: 2rem;
+            color: var(--accent);
         }
         
-        .product-image {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-            border-radius: var(--radius-sm);
-            margin-bottom: 15px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .product-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .product-actions .btn {
-            flex: 1;
-            padding: 8px;
-        }
-        
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-        }
-        
-        .detail-item label {
-            min-width: 150px;
-            color: var(--gold-light);
-        }
-        
-        .detail-item input {
-            flex: 1;
-        }
-        
+        /* Camera Modal */
         .camera-modal {
             display: none;
             position: fixed;
@@ -387,7 +585,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
+            z-index: 999999;
             align-items: center;
             justify-content: center;
         }
@@ -420,24 +618,10 @@
             justify-content: center;
         }
         
-        .multiple-image-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .multiple-image-preview img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid var(--gold);
-        }
-        
         .loading {
             text-align: center;
             padding: 60px 20px;
+            color: var(--text-muted);
         }
         
         .spinner {
@@ -455,26 +639,43 @@
             100% { transform: rotate(360deg); }
         }
         
+        .token-warning {
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(255, 53, 112, 0.1);
+            border: 1px solid rgba(255, 53, 112, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--danger);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .login-box { padding: 30px 20px; }
+            .form-container { padding: 20px; }
             .form-row { grid-template-columns: 1fr; }
             .products-grid { grid-template-columns: 1fr; }
             .detail-item { flex-direction: column; align-items: flex-start; }
             .detail-item label { min-width: auto; }
+            .camera-preview { height: 300px; }
+            .admin-nav { gap: 5px; }
+            .nav-btn { padding: 10px 12px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
-    <!-- TEST BANNER -->
+    <!-- TEST BANNER - Very Visible -->
     <div class="test-banner">
-        <i class="fas fa-flask"></i> TESTING VERSION - Admin Panel <i class="fas fa-flask"></i>
+        <i class="fas fa-flask"></i> TESTING MODE - ADMIN PANEL (FULL VERSION) <i class="fas fa-flask"></i>
     </div>
 
     <!-- Login Page -->
     <div id="loginPage" class="login-container">
         <div class="login-box">
-            <span class="test-label"><i class="fas fa-flask"></i> TEST MODE</span>
+            <span class="test-label"><i class="fas fa-flask"></i> TEST ENVIRONMENT</span>
             <h1 class="login-title">Extra Miles Energy</h1>
-            <p class="login-subtitle">Admin Panel (Test Version)</p>
+            <p class="login-subtitle">Admin Panel - Full Featured Test Version</p>
             
             <div id="loginMessage" class="message"></div>
             
@@ -489,7 +690,7 @@
             </button>
 
             <div class="security-note">
-                <i class="fas fa-shield-alt"></i> Default password: <strong>Sky12345</strong>
+                <i class="fas fa-shield-alt"></i> Default password: <strong>Sky12345</strong> (Change after login)
             </div>
         </div>
     </div>
@@ -500,8 +701,14 @@
             <div class="container">
                 <div class="header-content">
                     <div>
-                        <h2>Extra Miles Energy <span class="test-badge">TEST VERSION</span></h2>
-                        <div>Complete Management System (Testing)</div>
+                        <h2 style="background: linear-gradient(135deg, var(--gold), #FFE55C); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            Extra Miles Energy
+                        </h2>
+                        <div style="color: var(--gold-light);">Complete Management System</div>
+                        <div>
+                            <span class="company-badge">Test Version v3.0</span>
+                            <span class="test-badge"><i class="fas fa-flask"></i> TESTING</span>
+                        </div>
                     </div>
                     <button class="btn btn-danger" onclick="logout()">
                         <i class="fas fa-sign-out-alt"></i> Logout
@@ -519,35 +726,40 @@
                 <button class="nav-btn" onclick="showTab('categories')"><i class="fas fa-tags"></i> Categories</button>
                 <button class="nav-btn" onclick="showTab('company')"><i class="fas fa-building"></i> Company</button>
                 <button class="nav-btn" onclick="showTab('settings')"><i class="fas fa-cog"></i> Settings</button>
+                <button class="nav-btn" onclick="showTab('backup')"><i class="fas fa-database"></i> Backup</button>
             </div>
             
             <!-- Dashboard Tab -->
             <div id="dashboard" class="tab-content active">
                 <div class="form-container">
-                    <h3>Dashboard Overview</h3>
+                    <h3 style="margin-bottom: 20px; color: var(--gold);">Dashboard Overview</h3>
                     
                     <div class="stats-grid">
-                        <div class="stat-card"><div class="number" id="totalProducts">0</div><div>Total Products</div></div>
-                        <div class="stat-card"><div class="number" id="activeProducts">0</div><div>Active</div></div>
-                        <div class="stat-card"><div class="number" id="draftProducts">0</div><div>Draft</div></div>
-                        <div class="stat-card"><div class="number" id="productCategories">0</div><div>Categories</div></div>
+                        <div class="stat-card"><div class="number" id="totalProducts">0</div><div class="label">Total Products</div></div>
+                        <div class="stat-card"><div class="number" id="activeProducts">0</div><div class="label">Active</div></div>
+                        <div class="stat-card"><div class="number" id="draftProducts">0</div><div class="label">Draft</div></div>
+                        <div class="stat-card"><div class="number" id="productCategories">0</div><div class="label">Categories</div></div>
+                        <div class="stat-card"><div class="number" id="lastSync">Never</div><div class="label">Last Sync</div></div>
                     </div>
                     
                     <div class="quick-actions">
                         <a href="#" class="quick-action-btn" onclick="showTab('addProduct')">
                             <i class="fas fa-plus-circle"></i><span>Add Product</span>
                         </a>
-                        <a href="#" class="quick-action-btn" onclick="testGitHubConnection()">
-                            <i class="fas fa-plug"></i><span>Test GitHub</span>
+                        <a href="#" class="quick-action-btn" onclick="syncWithGitHub()">
+                            <i class="fas fa-sync-alt"></i><span>Sync GitHub</span>
                         </a>
                         <a href="../index.html" target="_blank" class="quick-action-btn">
                             <i class="fas fa-external-link-alt"></i><span>View Live Site</span>
                         </a>
+                        <a href="#" class="quick-action-btn" onclick="showTab('categories')">
+                            <i class="fas fa-tags"></i><span>Categories</span>
+                        </a>
                     </div>
                     
                     <div style="margin-top: 40px;">
-                        <h4>Recent Activity</h4>
-                        <div id="recentActivity">No activity yet</div>
+                        <h4 style="color: var(--gold); margin-bottom: 15px;">Recent Activity</h4>
+                        <div id="recentActivity" style="color: var(--text-muted);">Loading...</div>
                     </div>
                 </div>
             </div>
@@ -555,26 +767,34 @@
             <!-- Products Tab -->
             <div id="products" class="tab-content">
                 <div class="form-container">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                        <h3>Manage Products</h3>
-                        <button class="btn" onclick="showTab('addProduct')"><i class="fas fa-plus"></i> Add New</button>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                        <h3 style="color: var(--gold);">Manage Products</h3>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn" onclick="showTab('addProduct')"><i class="fas fa-plus"></i> Add New</button>
+                            <button class="btn btn-success" onclick="syncWithGitHub()"><i class="fas fa-sync-alt"></i> Sync</button>
+                        </div>
                     </div>
                     
-                    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
-                        <input type="text" id="searchProducts" class="form-input" placeholder="Search..." style="flex:1;" onkeyup="searchProducts()">
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="text" id="searchProducts" class="form-input" placeholder="Search products..." style="flex:1;" onkeyup="searchProducts()">
                         <select id="filterCategory" class="form-input" style="width:200px;" onchange="filterProducts()">
                             <option value="">All Categories</option>
                         </select>
+                        <select id="filterStatus" class="form-input" style="width:150px;" onchange="filterProducts()">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="draft">Draft</option>
+                        </select>
                     </div>
                     
-                    <div id="productsList" class="loading"><div class="spinner"></div><div>Loading...</div></div>
+                    <div id="productsList" class="loading"><div class="spinner"></div><div>Loading products...</div></div>
                 </div>
             </div>
             
             <!-- Add Product Tab -->
             <div id="addProduct" class="tab-content">
                 <div class="form-container">
-                    <h3 id="formTitle">Add New Product</h3>
+                    <h3 style="margin-bottom: 20px; color: var(--gold);" id="formTitle">Add New Product</h3>
                     <div id="addProductMessage" class="message"></div>
                     
                     <div class="form-row">
@@ -590,26 +810,102 @@
                         </div>
                     </div>
                     
-                    <!-- Battery Fields -->
+                    <!-- Battery Specific Fields -->
                     <div id="batteryFields" style="display: none;">
                         <div class="form-row">
-                            <div class="form-group"><label>Voltage</label><input type="text" id="productVoltage" class="form-input"></div>
-                            <div class="form-group"><label>Configuration</label><input type="text" id="productConfig" class="form-input"></div>
+                            <div class="form-group">
+                                <label class="form-label">Voltage & Capacity</label>
+                                <input type="text" id="productVoltage" class="form-input" placeholder="e.g., 60V 30Ah">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Configuration</label>
+                                <input type="text" id="productConfig" class="form-input" placeholder="e.g., 19S2P">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Chemistry</label>
+                                <input type="text" id="productChemistry" class="form-input" value="LiFePO₄">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">BMS Type</label>
+                                <input type="text" id="productBMS" class="form-input" placeholder="e.g., JK Smart BMS">
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Inverter Fields -->
+                    <!-- Inverter Specific Fields -->
                     <div id="inverterFields" style="display: none;">
                         <div class="form-row">
-                            <div class="form-group"><label>Power (W)</label><input type="text" id="inverterPower" class="form-input"></div>
-                            <div class="form-group"><label>Input Voltage</label><input type="text" id="inputVoltage" class="form-input"></div>
+                            <div class="form-group">
+                                <label class="form-label">Power Rating (W)</label>
+                                <input type="text" id="inverterPower" class="form-input" placeholder="e.g., 3000W">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Input Voltage</label>
+                                <input type="text" id="inputVoltage" class="form-input" placeholder="e.g., 48V DC">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Output Voltage</label>
+                                <input type="text" id="outputVoltage" class="form-input" placeholder="e.g., 230V AC">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Efficiency (%)</label>
+                                <input type="text" id="efficiency" class="form-input" placeholder="e.g., 95%">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accessory Specific Fields -->
+                    <div id="accessoryFields" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Accessory Type</label>
+                                <select id="accessoryType" class="form-input">
+                                    <option value="bms">BMS</option>
+                                    <option value="connector">Connectors</option>
+                                    <option value="cabinet">Battery Cabinet</option>
+                                    <option value="charger">Charger</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Specifications</label>
+                                <input type="text" id="accessorySpecs" class="form-input" placeholder="e.g., 100A">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Compatibility</label>
+                                <input type="text" id="compatibility" class="form-input" placeholder="e.g., 48V Systems">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Dimensions</label>
+                                <input type="text" id="material" class="form-input" placeholder="e.g., 300x200x150mm">
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Common Fields -->
                     <div class="form-row">
-                        <div class="form-group"><label>Price</label><input type="text" id="productPrice" class="form-input"></div>
-                        <div class="form-group"><label>Status</label>
+                        <div class="form-group">
+                            <label class="form-label">Price Range</label>
+                            <input type="text" id="productPrice" class="form-input" placeholder="e.g., ₹18,000 - ₹22,000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Model Number</label>
+                            <input type="text" id="productModel" class="form-input" placeholder="e.g., EM-LFP6030">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Warranty</label>
+                            <input type="text" id="productWarranty" class="form-input" value="3 Year Warranty">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
                             <select id="productStatus" class="form-input">
                                 <option value="active">Active</option>
                                 <option value="draft">Draft</option>
@@ -618,30 +914,52 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Features (one per line)</label>
-                        <textarea id="productFeatures" class="form-input" rows="4"></textarea>
+                        <label class="form-label">Key Features (one per line) *</label>
+                        <textarea id="productFeatures" class="form-input" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Complete Description</label>
+                        <textarea id="completeDescription" class="form-input" rows="6"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Technical Specifications (JSON)</label>
+                        <textarea id="techSpecs" class="form-input" rows="3" placeholder='{"Cell Type":"LiFePO4","Cycle Life":"4000+"}'></textarea>
                     </div>
                     
                     <!-- Main Image -->
                     <div class="form-group">
-                        <label>Product Image</label>
+                        <label class="form-label">Main Product Image</label>
                         <div class="file-upload-area" onclick="document.getElementById('productImage').click()">
-                            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--gold);"></i>
-                            <div>Click to upload</div>
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--gold); margin-bottom: 10px;"></i>
+                            <div style="color: var(--gold-light);">Click to upload or use camera</div>
                             <div class="camera-options">
-                                <div class="camera-btn" onclick="openCamera()"><i class="fas fa-camera"></i> Camera</div>
+                                <div class="camera-btn" onclick="openCamera()"><i class="fas fa-camera"></i> Open Camera</div>
+                                <div class="camera-btn" onclick="document.getElementById('productImage').click()"><i class="fas fa-folder-open"></i> Choose File</div>
                             </div>
                         </div>
                         <input type="file" id="productImage" accept="image/*" style="display:none;" onchange="previewImage(event)">
-                        <div id="imagePreviewContainer" style="display:none; margin-top:10px;">
-                            <img id="imagePreview" class="image-preview" style="max-width:200px;">
-                            <button onclick="removeImage()">Remove</button>
+                        <div id="imagePreviewContainer" class="image-preview-container" style="display:none;">
+                            <img id="imagePreview" class="image-preview">
+                            <button type="button" class="remove-image" onclick="removeImage()"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
                     
-                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <!-- Additional Images -->
+                    <div class="form-group">
+                        <label class="form-label">Additional Images (Gallery)</label>
+                        <div class="file-upload-area" onclick="document.getElementById('additionalImages').click()">
+                            <i class="fas fa-images" style="font-size: 2rem; color: var(--gold);"></i>
+                            <div style="color: var(--gold-light);">Click to select multiple images</div>
+                        </div>
+                        <input type="file" id="additionalImages" accept="image/*" multiple style="display:none;" onchange="previewMultipleImages(event)">
+                        <div id="multipleImagePreview" class="multiple-image-preview" style="display:none;"></div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
                         <button class="btn btn-success" onclick="saveProduct()" style="flex:1;">Save Product</button>
-                        <button class="btn" onclick="clearForm()" style="flex:1;">Clear</button>
+                        <button class="btn" onclick="clearForm()" style="flex:1;">Clear Form</button>
                         <button class="btn btn-danger" onclick="showTab('products')" style="flex:1;">Back</button>
                     </div>
                 </div>
@@ -650,32 +968,39 @@
             <!-- Categories Tab -->
             <div id="categories" class="tab-content">
                 <div class="form-container">
-                    <h3>Category Management</h3>
+                    <h3 style="margin-bottom: 20px; color: var(--gold);">Category Management</h3>
                     <div id="categoriesMessage" class="message"></div>
                     
                     <div class="company-details-form">
-                        <h4>Add New Category</h4>
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Add New Category</h4>
                         <div class="form-row">
-                            <div class="form-group"><label>Name</label><input type="text" id="newCategoryName" class="form-input"></div>
-                            <div class="form-group"><label>Icon</label><input type="text" id="newCategoryIcon" class="form-input" value="fa-box"></div>
+                            <div class="form-group">
+                                <label class="form-label">Category Name</label>
+                                <input type="text" id="newCategoryName" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Icon Class</label>
+                                <input type="text" id="newCategoryIcon" class="form-input" value="fa-box">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Subcategories (one per line)</label>
+                            <label class="form-label">Subcategories (one per line)</label>
                             <textarea id="newSubcategories" class="form-input" rows="4"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Type</label>
+                            <label class="form-label">Category Type</label>
                             <select id="newCategoryType" class="form-input">
                                 <option value="battery">Battery</option>
                                 <option value="inverter">Inverter</option>
                                 <option value="accessory">Accessory</option>
+                                <option value="cabinet">Cabinet</option>
                             </select>
                         </div>
                         <button class="btn" onclick="addNewCategory()">Add Category</button>
                     </div>
                     
                     <div style="margin-top: 30px;">
-                        <h4>Existing Categories</h4>
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Existing Categories</h4>
                         <div id="categoriesList"></div>
                     </div>
                 </div>
@@ -684,56 +1009,112 @@
             <!-- Company Tab -->
             <div id="company" class="tab-content">
                 <div class="form-container">
-                    <h3>Company Details</h3>
+                    <h3 style="margin-bottom: 20px; color: var(--gold);">Company Details</h3>
                     <div id="companyMessage" class="message"></div>
                     
                     <div class="company-details-form">
-                        <div class="detail-item"><label>Company Name:</label><input type="text" id="companyName" value="Skyline Stores"></div>
-                        <div class="detail-item"><label>Brand Name:</label><input type="text" id="brandName" value="Extra Miles Energy"></div>
-                        <div class="detail-item"><label>GST:</label><input type="text" id="companyGST" value="06AUIPP2101K2ZR"></div>
-                        <div class="detail-item"><label>Email:</label><input type="email" id="companyEmail" value="extramilesenergy@gmail.com"></div>
-                        <div class="detail-item"><label>Phone:</label><input type="text" id="companyPhone1" value="+91 78765 55055"></div>
-                        <div class="detail-item"><label>WhatsApp:</label><input type="text" id="companyWhatsApp" value="+917876555055"></div>
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Basic Information</h4>
+                        <div class="detail-item"><label>Company Name:</label><input type="text" id="companyName" class="form-input" value="Skyline Stores"></div>
+                        <div class="detail-item"><label>Brand Name:</label><input type="text" id="brandName" class="form-input" value="Extra Miles Energy"></div>
+                        <div class="detail-item"><label>GST Number:</label><input type="text" id="companyGST" class="form-input" value="06AUIPP2101K2ZR"></div>
+                        <div class="detail-item"><label>Tagline:</label><input type="text" id="companyTagline" class="form-input" value="Premium LiFePO₄ Battery Solutions"></div>
                     </div>
                     
-                    <button class="btn btn-success" onclick="saveCompanyDetails()">Save Details</button>
+                    <div class="company-details-form">
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Contact Information</h4>
+                        <div class="detail-item"><label>Address:</label><input type="text" id="companyAddress" class="form-input" value="Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001"></div>
+                        <div class="detail-item"><label>Email:</label><input type="email" id="companyEmail" class="form-input" value="extramilesenergy@gmail.com"></div>
+                        <div class="detail-item"><label>Phone 1:</label><input type="tel" id="companyPhone1" class="form-input" value="+91 78765 55055"></div>
+                        <div class="detail-item"><label>WhatsApp:</label><input type="tel" id="companyWhatsApp" class="form-input" value="+917876555055"></div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn btn-success" onclick="saveCompanyDetails()" style="flex:1;">Save Details</button>
+                        <button class="btn" onclick="loadCompanyDetails()" style="flex:1;">Reload</button>
+                    </div>
                 </div>
             </div>
             
             <!-- Settings Tab -->
             <div id="settings" class="tab-content">
                 <div class="form-container">
-                    <h3>GitHub Configuration</h3>
+                    <h3 style="margin-bottom: 20px; color: var(--gold);">GitHub Configuration</h3>
                     <div id="settingsMessage" class="message"></div>
                     
                     <div class="company-details-form">
                         <div class="form-group">
-                            <label>GitHub Token</label>
+                            <label class="form-label">GitHub Token</label>
                             <input type="password" id="githubToken" class="form-input" placeholder="Enter GitHub token">
                         </div>
                         <div class="form-row">
-                            <div class="form-group"><label>Username</label><input type="text" id="githubUsername" value="parshantsaharan"></div>
-                            <div class="form-group"><label>Repository</label><input type="text" id="githubRepo" value="extramilesenergy.in"></div>
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <input type="text" id="githubUsername" class="form-input" value="parshantsaharan">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Repository</label>
+                                <input type="text" id="githubRepo" class="form-input" value="extramilesenergy.in">
+                            </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group"><label>Branch</label><input type="text" id="githubBranch" value="main"></div>
-                            <div class="form-group"><label>Products Path</label><input type="text" id="productsPath" value="content/products"></div>
+                            <div class="form-group">
+                                <label class="form-label">Branch</label>
+                                <input type="text" id="githubBranch" class="form-input" value="main">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Products Path</label>
+                                <input type="text" id="productsPath" class="form-input" value="content/products">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Uploads Path</label>
+                                <input type="text" id="uploadsPath" class="form-input" value="uploads">
+                            </div>
                         </div>
                         
-                        <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
                             <button class="btn" onclick="saveSettings()">Save Settings</button>
                             <button class="btn btn-success" onclick="testGitHubConnection()">Test Connection</button>
+                            <button class="btn btn-warning" onclick="syncWithGitHub()">Sync Now</button>
                         </div>
                     </div>
                     
                     <div style="margin-top: 30px;">
-                        <h4>Change Password</h4>
+                        <h4 style="margin-bottom: 15px; color: var(--gold);">Change Password</h4>
                         <div class="form-row">
-                            <input type="password" id="currentPassword" class="form-input" placeholder="Current">
-                            <input type="password" id="newPassword" class="form-input" placeholder="New">
-                            <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm">
+                            <input type="password" id="currentPassword" class="form-input" placeholder="Current Password">
+                            <input type="password" id="newPassword" class="form-input" placeholder="New Password">
+                            <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm Password">
                         </div>
                         <button class="btn" onclick="changePassword()">Change Password</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Backup Tab -->
+            <div id="backup" class="tab-content">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px; color: var(--gold);">Backup & Restore</h3>
+                    
+                    <div class="company-details-form">
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Create Backup</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                            <button class="btn" onclick="exportProducts()">Export Products</button>
+                            <button class="btn" onclick="exportSettings()">Export Settings</button>
+                            <button class="btn btn-success" onclick="createFullBackup()">Full Backup</button>
+                        </div>
+                    </div>
+                    
+                    <div class="company-details-form">
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Restore Data</h4>
+                        <div class="form-group">
+                            <input type="file" id="backupFile" class="form-input" accept=".json">
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <button class="btn btn-warning" onclick="restoreProducts()">Restore Products</button>
+                            <button class="btn btn-danger" onclick="restoreFullBackup()">Full Restore</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -743,7 +1124,7 @@
     <!-- Camera Modal -->
     <div id="cameraModal" class="camera-modal">
         <div class="camera-container">
-            <h3 style="text-align: center;">Take Photo</h3>
+            <h3 style="margin-bottom: 20px; color: var(--gold); text-align: center;">Take Photo</h3>
             <video id="cameraPreview" class="camera-preview" autoplay playsinline></video>
             <div class="camera-controls">
                 <button class="btn btn-danger" onclick="closeCamera()">Cancel</button>
@@ -758,6 +1139,7 @@
         const DEFAULT_PASSWORD = 'Sky12345';
         const MAX_LOGIN_ATTEMPTS = 5;
         const LOCKOUT_TIME = 15 * 60 * 1000;
+        const STORAGE_PREFIX = 'test_'; // IMPORTANT: Separate storage for test
         
         // Global State
         let products = [];
@@ -770,43 +1152,58 @@
         
         // Categories
         let categories = {
-            batteries: { name: 'LiFePO4 Batteries', icon: 'fa-battery-full', type: 'battery', subcategories: ['EV Battery', 'Solar Battery'] },
-            inverters: { name: 'Solar Inverters', icon: 'fa-solar-panel', type: 'inverter', subcategories: ['Hybrid Inverter'] }
+            batteries: { name: 'LiFePO4 Batteries', icon: 'fa-battery-full', type: 'battery', subcategories: ['EV Battery', 'Solar Battery', 'E-Rickshaw Battery', 'Custom Battery'] },
+            inverters: { name: 'Solar Inverters', icon: 'fa-solar-panel', type: 'inverter', subcategories: ['Hybrid Inverter', 'Off-Grid Inverter', 'On-Grid Inverter'] },
+            accessories: { name: 'Accessories', icon: 'fa-plug', type: 'accessory', subcategories: ['BMS', 'Connectors', 'Battery Cabinet', 'Chargers'] }
         };
         
         // Company Details
         let companyDetails = {
             name: 'Skyline Stores', brand: 'Extra Miles Energy', gst: '06AUIPP2101K2ZR',
+            tagline: 'Premium LiFePO₄ Battery Solutions',
+            address: 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001',
             email: 'extramilesenergy@gmail.com', phone1: '+91 78765 55055', whatsapp: '+917876555055'
         };
         
         // GitHub Config
         let githubConfig = {
             token: '', username: 'parshantsaharan', repo: 'extramilesenergy.in',
-            branch: 'main', productsPath: 'content/products'
+            branch: 'main', productsPath: 'content/products', uploadsPath: 'uploads', companyPath: 'content/company.json'
         };
 
         // ==================== INIT ====================
         document.addEventListener('DOMContentLoaded', function() {
-            loadLocalProducts();
             loadCategories();
             loadCompanyDetails();
             loadSettings();
+            loadLocalProducts();
             
-            const sessionToken = sessionStorage.getItem('admin_session');
+            const sessionToken = sessionStorage.getItem(STORAGE_PREFIX + 'admin_session');
             if (sessionToken) {
                 showAdminDashboard();
                 updateDashboardStats();
                 updateCategorySelect();
+                loadRecentActivity();
+                resetSessionTimeout();
             }
         });
 
+        // Helper for test storage keys
+        function getStorageKey(key) {
+            return STORAGE_PREFIX + key;
+        }
+
+        // ==================== LOCAL STORAGE FUNCTIONS ====================
         function loadLocalProducts() {
-            const saved = localStorage.getItem('local_products_test'); // Different key for test
+            const saved = localStorage.getItem(getStorageKey('local_products'));
             if (saved) {
                 try {
                     products = JSON.parse(saved);
-                } catch(e) { products = []; }
+                } catch(e) {
+                    products = [];
+                }
+            } else {
+                products = [];
             }
             displayProducts();
         }
@@ -814,25 +1211,56 @@
         // ==================== LOGIN ====================
         function login() {
             const password = document.getElementById('password').value;
-            const savedPassword = localStorage.getItem('admin_password_test') || DEFAULT_PASSWORD;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            if (!password) {
+                showMessage('loginMessage', 'Please enter password', 'error');
+                return;
+            }
+            
+            const savedPassword = localStorage.getItem(getStorageKey('admin_password')) || DEFAULT_PASSWORD;
             
             if (password === savedPassword) {
-                sessionStorage.setItem('admin_session', 'test-token');
-                showAdminDashboard();
-                addActivity('Login successful');
+                loginAttempts = 0;
+                lockoutUntil = null;
+                
+                const sessionToken = 'token-' + Math.random().toString(36).substr(2, 16);
+                sessionStorage.setItem(STORAGE_PREFIX + 'admin_session', sessionToken);
+                
+                showMessage('loginMessage', 'Login successful!', 'success');
+                addActivity('Admin login successful');
+                
+                setTimeout(() => {
+                    showAdminDashboard();
+                    loadLocalProducts();
+                    updateCategorySelect();
+                    resetSessionTimeout();
+                }, 1000);
             } else {
-                alert('Incorrect password');
+                loginAttempts++;
+                const remaining = MAX_LOGIN_ATTEMPTS - loginAttempts;
+                
+                if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                    lockoutUntil = Date.now() + LOCKOUT_TIME;
+                    showMessage('loginMessage', 'Too many attempts. Locked for 15 minutes.', 'error');
+                } else {
+                    showMessage('loginMessage', `Incorrect password! ${remaining} attempts left.`, 'error');
+                    document.getElementById('loginAttempts').textContent = `${remaining} attempts left`;
+                }
             }
         }
         
         function logout() {
-            sessionStorage.removeItem('admin_session');
+            addActivity('Admin logged out');
+            sessionStorage.removeItem(STORAGE_PREFIX + 'admin_session');
             showLoginPage();
         }
         
         function showLoginPage() {
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('password').value = '';
+            document.getElementById('loginAttempts').textContent = '';
         }
         
         function showAdminDashboard() {
@@ -840,23 +1268,37 @@
             document.getElementById('adminDashboard').style.display = 'block';
         }
         
+        // Session Timeout
+        let sessionTimeout;
+        function resetSessionTimeout() {
+            clearTimeout(sessionTimeout);
+            sessionTimeout = setTimeout(() => {
+                alert('Session expired due to inactivity');
+                logout();
+            }, 30 * 60 * 1000);
+        }
+        
+        document.addEventListener('click', resetSessionTimeout);
+        document.addEventListener('keypress', resetSessionTimeout);
+
+        // ==================== UI FUNCTIONS ====================
         function showMessage(elementId, text, type) {
-            const el = document.getElementById(elementId);
-            if (el) {
-                el.textContent = text;
-                el.className = `message ${type}`;
-                el.style.display = 'block';
-                setTimeout(() => el.style.display = 'none', 3000);
-            }
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            element.textContent = text;
+            element.className = `message ${type}`;
+            element.style.display = 'block';
+            setTimeout(() => { element.style.display = 'none'; }, 3000);
         }
         
         function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
             document.getElementById(tabId).classList.add('active');
             
-            document.querySelectorAll('.nav-btn').forEach(b => {
-                if (b.getAttribute('onclick')?.includes(tabId)) b.classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('onclick')?.includes(tabId)) btn.classList.add('active');
             });
             
             if (tabId === 'addProduct') {
@@ -869,40 +1311,43 @@
             }
             if (tabId === 'categories') displayCategoriesList();
             if (tabId === 'dashboard') updateDashboardStats();
+            
+            resetSessionTimeout();
         }
         
         function addActivity(action) {
-            const activities = JSON.parse(localStorage.getItem('admin_activities_test') || '[]');
-            activities.unshift({ action, timestamp: new Date().toLocaleString() });
-            if (activities.length > 10) activities.pop();
-            localStorage.setItem('admin_activities_test', JSON.stringify(activities));
+            const activities = JSON.parse(localStorage.getItem(getStorageKey('admin_activities')) || '[]');
+            activities.unshift({ action, timestamp: new Date().toLocaleString('en-IN') });
+            if (activities.length > 20) activities.pop();
+            localStorage.setItem(getStorageKey('admin_activities'), JSON.stringify(activities));
             loadRecentActivity();
         }
         
         function loadRecentActivity() {
             const container = document.getElementById('recentActivity');
             if (!container) return;
-            const activities = JSON.parse(localStorage.getItem('admin_activities_test') || '[]');
+            const activities = JSON.parse(localStorage.getItem(getStorageKey('admin_activities')) || '[]');
             if (activities.length === 0) {
-                container.innerHTML = 'No activity';
+                container.innerHTML = '<div style="color: var(--text-muted);">No recent activity</div>';
                 return;
             }
             let html = '';
-            activities.slice(0, 5).forEach(a => {
-                html += `<div>${a.action} - ${a.timestamp}</div>`;
+            activities.slice(0, 10).forEach(a => {
+                html += `<div style="margin-bottom:5px;">${a.action} - <small>${a.timestamp}</small></div>`;
             });
             container.innerHTML = html;
         }
 
         // ==================== CATEGORY FUNCTIONS ====================
         function loadCategories() {
-            const saved = localStorage.getItem('product_categories_test');
+            const saved = localStorage.getItem(getStorageKey('product_categories'));
             if (saved) try { categories = JSON.parse(saved); } catch(e) {}
         }
         
         function saveCategories() {
-            localStorage.setItem('product_categories_test', JSON.stringify(categories));
+            localStorage.setItem(getStorageKey('product_categories'), JSON.stringify(categories));
             updateCategorySelect();
+            updateCategoryFilter();
             addActivity('Categories updated');
         }
         
@@ -939,7 +1384,7 @@
             const type = document.getElementById('newCategoryType').value;
             
             if (!name || subcats.length === 0) {
-                showMessage('categoriesMessage', 'Fill all fields', 'error');
+                showMessage('categoriesMessage', 'Please fill all fields', 'error');
                 return;
             }
             
@@ -947,9 +1392,13 @@
             categories[key] = { name, icon, type, subcategories: subcats };
             saveCategories();
             displayCategoriesList();
+            
             document.getElementById('newCategoryName').value = '';
+            document.getElementById('newCategoryIcon').value = '';
             document.getElementById('newSubcategories').value = '';
+            
             showMessage('categoriesMessage', 'Category added!', 'success');
+            addActivity(`Added category: ${name}`);
         }
         
         function displayCategoriesList() {
@@ -958,18 +1407,33 @@
             let html = '';
             Object.keys(categories).forEach(key => {
                 const cat = categories[key];
-                html += `<div style="background:rgba(255,215,0,0.05); padding:15px; margin-bottom:10px;">
-                    <div><i class="fas ${cat.icon}"></i> <strong>${cat.name}</strong></div>
-                    <div>${cat.subcategories.join(', ')}</div>
+                html += `<div style="background:rgba(255,215,0,0.05); padding:15px; border-radius:8px; margin-bottom:10px;">
+                    <div style="display:flex; justify-content:space-between;">
+                        <div><i class="fas ${cat.icon}" style="color:var(--gold);"></i> <strong style="color:var(--gold);">${cat.name}</strong></div>
+                        <button class="btn btn-danger" onclick="deleteCategory('${key}')" style="padding:5px 10px;">Delete</button>
+                    </div>
+                    <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:5px;">
+                        ${cat.subcategories.map(sub => `<span style="background:rgba(255,215,0,0.1); padding:3px 10px; border-radius:15px; font-size:0.8rem;">${sub}</span>`).join('')}
+                    </div>
                 </div>`;
             });
             container.innerHTML = html;
+        }
+        
+        function deleteCategory(key) {
+            if (confirm(`Delete ${categories[key].name}?`)) {
+                delete categories[key];
+                saveCategories();
+                displayCategoriesList();
+                addActivity(`Deleted category: ${key}`);
+            }
         }
         
         function updateFieldsBasedOnCategory() {
             const selected = document.getElementById('productCategory').value;
             document.getElementById('batteryFields').style.display = 'none';
             document.getElementById('inverterFields').style.display = 'none';
+            document.getElementById('accessoryFields').style.display = 'none';
             
             let categoryType = 'other';
             Object.keys(categories).forEach(key => {
@@ -980,6 +1444,7 @@
             
             if (categoryType === 'battery') document.getElementById('batteryFields').style.display = 'block';
             else if (categoryType === 'inverter') document.getElementById('inverterFields').style.display = 'block';
+            else if (categoryType === 'accessory') document.getElementById('accessoryFields').style.display = 'block';
         }
 
         // ==================== CAMERA FUNCTIONS ====================
@@ -990,7 +1455,7 @@
         
         async function startCamera() {
             try {
-                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: currentCamera } });
                 document.getElementById('cameraPreview').srcObject = cameraStream;
             } catch (error) {
                 alert('Camera access denied');
@@ -999,7 +1464,9 @@
         }
         
         function switchCamera() {
-            // Simplified for test
+            currentCamera = currentCamera === 'environment' ? 'user' : 'environment';
+            if (cameraStream) cameraStream.getTracks().forEach(t => t.stop());
+            startCamera();
         }
         
         function capturePhoto() {
@@ -1010,9 +1477,13 @@
             canvas.getContext('2d').drawImage(video, 0, 0);
             
             canvas.toBlob(blob => {
-                const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
+                const file = new File([blob], `photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
                 const event = { target: { files: [file] } };
                 previewImage(event);
+                
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                document.getElementById('productImage').files = dt.files;
             }, 'image/jpeg');
             
             closeCamera();
@@ -1026,6 +1497,7 @@
             }
         }
         
+        // ==================== IMAGE FUNCTIONS ====================
         function previewImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1041,6 +1513,31 @@
         function removeImage() {
             document.getElementById('imagePreview').src = '';
             document.getElementById('imagePreviewContainer').style.display = 'none';
+            document.getElementById('productImage').value = '';
+        }
+        
+        function previewMultipleImages(event) {
+            const files = Array.from(event.target.files);
+            const container = document.getElementById('multipleImagePreview');
+            container.innerHTML = '';
+            additionalImages = files;
+            
+            if (files.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            files.forEach((file, i) => {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">`;
+                    container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            container.style.display = 'grid';
         }
 
         // ==================== PRODUCT FUNCTIONS ====================
@@ -1048,17 +1545,18 @@
             const container = document.getElementById('productsList');
             const display = filtered || products;
             
-            if (display.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:40px;">No products. Add your first product!</div>';
+            if (!display || display.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--gold-light);">No products found. Add your first product!</div>';
                 return;
             }
             
             let html = '<div class="products-grid">';
             display.forEach(p => {
                 html += `<div class="product-card">
-                    <img src="${p.image || 'https://via.placeholder.com/300x200/142044/FFD700?text=Product'}" class="product-image">
-                    <h4>${p.name}</h4>
-                    <div>${p.category}</div>
+                    <img src="${p.image || 'https://via.placeholder.com/300x200/142044/FFD700?text=Product'}" class="product-image" onerror="this.src=\'https://via.placeholder.com/300x200/142044/FFD700?text=Product\'">
+                    <h4 style="color:var(--gold-light);">${p.name || 'Unnamed'}</h4>
+                    <div style="color:var(--gold); font-size:0.9rem;">${p.category || 'No category'}</div>
+                    ${p.price ? `<div style="color:var(--gold); font-weight:700; margin:10px 0;">${p.price}</div>` : ''}
                     <div class="product-actions">
                         <button class="btn" onclick="editProduct('${p.id}')">Edit</button>
                         <button class="btn btn-danger" onclick="deleteProduct('${p.id}')">Delete</button>
@@ -1071,17 +1569,23 @@
         
         function searchProducts() {
             const term = document.getElementById('searchProducts').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+            if (!term) {
+                displayProducts(products);
+                return;
+            }
+            const filtered = products.filter(p => 
+                (p.name && p.name.toLowerCase().includes(term)) ||
+                (p.category && p.category.toLowerCase().includes(term))
+            );
             displayProducts(filtered);
         }
         
         function filterProducts() {
             const category = document.getElementById('filterCategory').value;
-            if (!category) {
-                displayProducts(products);
-                return;
-            }
-            const filtered = products.filter(p => p.category === category);
+            const status = document.getElementById('filterStatus').value;
+            let filtered = products;
+            if (category) filtered = filtered.filter(p => p.category === category);
+            if (status) filtered = filtered.filter(p => p.status === status);
             displayProducts(filtered);
         }
         
@@ -1097,15 +1601,33 @@
             document.getElementById('productCategory').value = '';
             document.getElementById('productVoltage').value = '';
             document.getElementById('productConfig').value = '';
+            document.getElementById('productChemistry').value = 'LiFePO₄';
+            document.getElementById('productBMS').value = '';
             document.getElementById('inverterPower').value = '';
             document.getElementById('inputVoltage').value = '';
+            document.getElementById('outputVoltage').value = '';
+            document.getElementById('efficiency').value = '';
+            document.getElementById('accessoryType').value = 'bms';
+            document.getElementById('accessorySpecs').value = '';
+            document.getElementById('compatibility').value = '';
+            document.getElementById('material').value = '';
             document.getElementById('productPrice').value = '';
+            document.getElementById('productModel').value = '';
+            document.getElementById('productWarranty').value = '3 Year Warranty';
             document.getElementById('productStatus').value = 'active';
             document.getElementById('productFeatures').value = '';
+            document.getElementById('completeDescription').value = '';
+            document.getElementById('techSpecs').value = '';
             document.getElementById('productImage').value = '';
+            document.getElementById('additionalImages').value = '';
             document.getElementById('imagePreviewContainer').style.display = 'none';
+            document.getElementById('multipleImagePreview').style.display = 'none';
             editingProductId = null;
             document.getElementById('formTitle').textContent = 'Add New Product';
+            
+            document.getElementById('batteryFields').style.display = 'none';
+            document.getElementById('inverterFields').style.display = 'none';
+            document.getElementById('accessoryFields').style.display = 'none';
         }
         
         function editProduct(id) {
@@ -1113,15 +1635,28 @@
             if (!product) return;
             
             editingProductId = id;
+            
             document.getElementById('productName').value = product.name || '';
             document.getElementById('productCategory').value = product.category || '';
             document.getElementById('productVoltage').value = product.voltage || '';
             document.getElementById('productConfig').value = product.configuration || '';
+            document.getElementById('productChemistry').value = product.chemistry || 'LiFePO₄';
+            document.getElementById('productBMS').value = product.bms || '';
             document.getElementById('inverterPower').value = product.power || '';
             document.getElementById('inputVoltage').value = product.inputVoltage || '';
+            document.getElementById('outputVoltage').value = product.outputVoltage || '';
+            document.getElementById('efficiency').value = product.efficiency || '';
+            document.getElementById('accessoryType').value = product.accessoryType || 'bms';
+            document.getElementById('accessorySpecs').value = product.accessorySpecs || '';
+            document.getElementById('compatibility').value = product.compatibility || '';
+            document.getElementById('material').value = product.material || '';
             document.getElementById('productPrice').value = product.price || '';
+            document.getElementById('productModel').value = product.model || '';
+            document.getElementById('productWarranty').value = product.warranty || '3 Year Warranty';
             document.getElementById('productStatus').value = product.status || 'active';
             document.getElementById('productFeatures').value = (product.features || []).join('\n');
+            document.getElementById('completeDescription').value = product.description || '';
+            document.getElementById('techSpecs').value = product.specifications ? JSON.stringify(product.specifications, null, 2) : '';
             
             if (product.image) {
                 document.getElementById('imagePreview').src = product.image;
@@ -1130,61 +1665,110 @@
             
             updateFieldsBasedOnCategory();
             showTab('addProduct');
+            addActivity(`Editing: ${product.name}`);
         }
         
         function saveProduct() {
             const name = document.getElementById('productName').value.trim();
             const category = document.getElementById('productCategory').value;
+            const featuresText = document.getElementById('productFeatures').value.trim();
             
-            if (!name || !category) {
-                showMessage('addProductMessage', 'Name and category required', 'error');
+            if (!name) {
+                showMessage('addProductMessage', 'Please enter product name', 'error');
                 return;
             }
             
-            const id = editingProductId || 'prod-' + Date.now();
-            const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
+            if (!category) {
+                showMessage('addProductMessage', 'Please select a category', 'error');
+                return;
+            }
+            
+            const id = editingProductId || 'prod-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+            const features = featuresText ? featuresText.split('\n').filter(f => f.trim()) : [];
+            
+            let specifications = {};
+            try {
+                const techSpecs = document.getElementById('techSpecs').value.trim();
+                if (techSpecs) {
+                    specifications = JSON.parse(techSpecs);
+                }
+            } catch (e) {}
             
             const product = {
-                id, name, category, features,
+                id: id,
+                name: name,
+                category: category,
+                features: features,
                 status: document.getElementById('productStatus').value,
+                price: document.getElementById('productPrice').value || null,
+                model: document.getElementById('productModel').value || null,
+                warranty: document.getElementById('productWarranty').value || '3 Year Warranty',
+                description: document.getElementById('completeDescription').value || null,
+                specifications: specifications,
+                
                 voltage: document.getElementById('productVoltage').value || null,
                 configuration: document.getElementById('productConfig').value || null,
+                chemistry: document.getElementById('productChemistry').value || 'LiFePO₄',
+                bms: document.getElementById('productBMS').value || null,
+                
                 power: document.getElementById('inverterPower').value || null,
                 inputVoltage: document.getElementById('inputVoltage').value || null,
-                price: document.getElementById('productPrice').value || null
+                outputVoltage: document.getElementById('outputVoltage').value || null,
+                efficiency: document.getElementById('efficiency').value || null,
+                
+                accessoryType: document.getElementById('accessoryType').value || null,
+                accessorySpecs: document.getElementById('accessorySpecs').value || null,
+                compatibility: document.getElementById('compatibility').value || null,
+                material: document.getElementById('material').value || null,
+                
+                image: editingProductId ? (products.find(p => p.id === id)?.image || null) : null,
+                
+                createdAt: editingProductId ? (products.find(p => p.id === id)?.createdAt || new Date().toISOString()) : new Date().toISOString(),
+                updatedAt: new Date().toISOString()
             };
             
             const index = products.findIndex(p => p.id === id);
             if (index > -1) {
                 products[index] = product;
+                addActivity(`Updated product: ${product.name}`);
             } else {
                 products.push(product);
+                addActivity(`Added new product: ${product.name}`);
             }
             
-            localStorage.setItem('local_products_test', JSON.stringify(products));
-            showMessage('addProductMessage', 'Product saved!', 'success');
-            clearForm();
+            localStorage.setItem(getStorageKey('local_products'), JSON.stringify(products));
+            
+            showMessage('addProductMessage', 'Product saved successfully!', 'success');
             updateDashboardStats();
             displayProducts();
-            showTab('products');
+            
+            setTimeout(() => {
+                clearForm();
+                showTab('products');
+            }, 1500);
         }
         
         function deleteProduct(id) {
-            if (!confirm('Delete product?')) return;
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            
+            const product = products.find(p => p.id === id);
             products = products.filter(p => p.id !== id);
-            localStorage.setItem('local_products_test', JSON.stringify(products));
+            localStorage.setItem(getStorageKey('local_products'), JSON.stringify(products));
             displayProducts();
             updateDashboardStats();
+            addActivity(`Deleted product: ${product?.name || id}`);
         }
 
         // ==================== COMPANY FUNCTIONS ====================
         function loadCompanyDetails() {
-            const saved = localStorage.getItem('company_details_test');
+            const saved = localStorage.getItem(getStorageKey('company_details'));
             if (saved) try { companyDetails = JSON.parse(saved); } catch(e) {}
             
             document.getElementById('companyName').value = companyDetails.name || '';
             document.getElementById('brandName').value = companyDetails.brand || '';
             document.getElementById('companyGST').value = companyDetails.gst || '';
+            document.getElementById('companyTagline').value = companyDetails.tagline || '';
+            document.getElementById('companyAddress').value = companyDetails.address || '';
             document.getElementById('companyEmail').value = companyDetails.email || '';
             document.getElementById('companyPhone1').value = companyDetails.phone1 || '';
             document.getElementById('companyWhatsApp').value = companyDetails.whatsapp || '';
@@ -1195,17 +1779,20 @@
                 name: document.getElementById('companyName').value,
                 brand: document.getElementById('brandName').value,
                 gst: document.getElementById('companyGST').value,
+                tagline: document.getElementById('companyTagline').value,
+                address: document.getElementById('companyAddress').value,
                 email: document.getElementById('companyEmail').value,
                 phone1: document.getElementById('companyPhone1').value,
                 whatsapp: document.getElementById('companyWhatsApp').value
             };
-            localStorage.setItem('company_details_test', JSON.stringify(companyDetails));
+            localStorage.setItem(getStorageKey('company_details'), JSON.stringify(companyDetails));
             showMessage('companyMessage', 'Company details saved!', 'success');
+            addActivity('Company details updated');
         }
 
         // ==================== GITHUB FUNCTIONS ====================
         function loadSettings() {
-            const saved = localStorage.getItem('github_config_test');
+            const saved = localStorage.getItem(getStorageKey('github_config'));
             if (saved) try { githubConfig = JSON.parse(saved); } catch(e) {}
             
             document.getElementById('githubToken').value = githubConfig.token || '';
@@ -1213,6 +1800,7 @@
             document.getElementById('githubRepo').value = githubConfig.repo;
             document.getElementById('githubBranch').value = githubConfig.branch;
             document.getElementById('productsPath').value = githubConfig.productsPath;
+            document.getElementById('uploadsPath').value = githubConfig.uploadsPath || 'uploads';
         }
         
         function saveSettings() {
@@ -1221,14 +1809,39 @@
                 username: document.getElementById('githubUsername').value,
                 repo: document.getElementById('githubRepo').value,
                 branch: document.getElementById('githubBranch').value,
-                productsPath: document.getElementById('productsPath').value
+                productsPath: document.getElementById('productsPath').value,
+                uploadsPath: document.getElementById('uploadsPath').value,
+                companyPath: 'content/company.json'
             };
-            localStorage.setItem('github_config_test', JSON.stringify(githubConfig));
+            localStorage.setItem(getStorageKey('github_config'), JSON.stringify(githubConfig));
             showMessage('settingsMessage', 'Settings saved!', 'success');
+            addActivity('GitHub settings updated');
         }
         
-        function testGitHubConnection() {
-            alert('GitHub test - Implement actual API call as needed');
+        async function testGitHubConnection() {
+            const token = document.getElementById('githubToken').value;
+            if (!token) {
+                alert('Please enter GitHub token');
+                return;
+            }
+            try {
+                const res = await fetch('https://api.github.com/user', {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                if (res.ok) {
+                    const user = await res.json();
+                    alert(`✅ Connected as: ${user.login}`);
+                    addActivity('GitHub connection successful');
+                } else {
+                    alert('❌ Connection failed');
+                }
+            } catch(e) {
+                alert('Error: ' + e.message);
+            }
+        }
+        
+        async function syncWithGitHub() {
+            alert('GitHub sync - Implement actual API calls in production');
         }
 
         // ==================== PASSWORD CHANGE ====================
@@ -1236,25 +1849,133 @@
             const current = document.getElementById('currentPassword').value;
             const newPass = document.getElementById('newPassword').value;
             const confirm = document.getElementById('confirmPassword').value;
+            const saved = localStorage.getItem(getStorageKey('admin_password')) || DEFAULT_PASSWORD;
             
             if (!current || !newPass || !confirm) {
                 alert('Fill all fields');
                 return;
             }
-            
+            if (current !== saved) {
+                alert('Current password incorrect');
+                return;
+            }
             if (newPass !== confirm) {
                 alert('Passwords do not match');
                 return;
             }
+            if (newPass.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
             
-            localStorage.setItem('admin_password_test', newPass);
+            localStorage.setItem(getStorageKey('admin_password'), newPass);
             document.getElementById('currentPassword').value = '';
             document.getElementById('newPassword').value = '';
             document.getElementById('confirmPassword').value = '';
             alert('Password changed!');
+            addActivity('Password changed');
         }
 
-        // ==================== EXPORTS ====================
+        // ==================== BACKUP FUNCTIONS ====================
+        function exportProducts() {
+            const data = JSON.stringify(products, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `products-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            addActivity('Products exported');
+        }
+        
+        function exportSettings() {
+            const data = JSON.stringify({ 
+                companyDetails, 
+                githubConfig: {...githubConfig, token: '***'}, 
+                categories 
+            }, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `settings-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            addActivity('Settings exported');
+        }
+        
+        function createFullBackup() {
+            const data = JSON.stringify({
+                products,
+                companyDetails,
+                githubConfig: {...githubConfig, token: '***'},
+                categories,
+                activities: JSON.parse(localStorage.getItem(getStorageKey('admin_activities')) || '[]')
+            }, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `full-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            addActivity('Full backup created');
+        }
+        
+        function restoreProducts() {
+            const file = document.getElementById('backupFile').files[0];
+            if (!file) { alert('Select a file'); return; }
+            
+            const reader = new FileReader();
+            reader.onload = e => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (Array.isArray(data)) {
+                        products = data;
+                        localStorage.setItem(getStorageKey('local_products'), JSON.stringify(products));
+                        displayProducts();
+                        updateDashboardStats();
+                        alert('Products restored!');
+                        addActivity('Products restored');
+                    } else {
+                        alert('Invalid format');
+                    }
+                } catch(err) {
+                    alert('Error reading file');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function restoreFullBackup() {
+            const file = document.getElementById('backupFile').files[0];
+            if (!file) { alert('Select a file'); return; }
+            
+            const reader = new FileReader();
+            reader.onload = e => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.products) {
+                        products = data.products;
+                        localStorage.setItem(getStorageKey('local_products'), JSON.stringify(products));
+                    }
+                    if (data.companyDetails) {
+                        companyDetails = data.companyDetails;
+                        localStorage.setItem(getStorageKey('company_details'), JSON.stringify(companyDetails));
+                    }
+                    if (data.categories) {
+                        categories = data.categories;
+                        localStorage.setItem(getStorageKey('product_categories'), JSON.stringify(categories));
+                    }
+                    alert('Full restore completed!');
+                    addActivity('Full backup restored');
+                    location.reload();
+                } catch(err) {
+                    alert('Error reading file');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ==================== GLOBAL EXPORTS ====================
         window.login = login;
         window.logout = logout;
         window.showTab = showTab;
@@ -1264,6 +1985,7 @@
         window.closeCamera = closeCamera;
         window.previewImage = previewImage;
         window.removeImage = removeImage;
+        window.previewMultipleImages = previewMultipleImages;
         window.saveProduct = saveProduct;
         window.clearForm = clearForm;
         window.editProduct = editProduct;
@@ -1271,12 +1993,19 @@
         window.searchProducts = searchProducts;
         window.filterProducts = filterProducts;
         window.addNewCategory = addNewCategory;
+        window.deleteCategory = deleteCategory;
         window.updateFieldsBasedOnCategory = updateFieldsBasedOnCategory;
         window.saveCompanyDetails = saveCompanyDetails;
         window.loadCompanyDetails = loadCompanyDetails;
         window.saveSettings = saveSettings;
         window.testGitHubConnection = testGitHubConnection;
+        window.syncWithGitHub = syncWithGitHub;
         window.changePassword = changePassword;
+        window.exportProducts = exportProducts;
+        window.exportSettings = exportSettings;
+        window.createFullBackup = createFullBackup;
+        window.restoreProducts = restoreProducts;
+        window.restoreFullBackup = restoreFullBackup;
     </script>
 </body>
 </html>
