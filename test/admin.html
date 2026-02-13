@@ -1532,6 +1532,10 @@
         const DEFAULT_PASSWORD_HASH = '8c6c9a7b3d5e8f2a1b4d7e9c3f6a2b8d5e1f4c7a9b2d5e8f1a4c7d9b2e5f8a1c'; // Hash of 'Sky12345'
         const MAX_LOGIN_ATTEMPTS = 5;
         const LOCKOUT_TIME = 15 * 60 * 1000; // 15 minutes
+        // 🔧 TEMP RESET (remove after successful login)
+localStorage.removeItem('admin_password_hash');
+localStorage.removeItem('admin_session_valid');
+sessionStorage.removeItem('admin_session');
         
         let products = [];
         let editingProductId = null;
