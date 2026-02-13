@@ -153,5 +153,26 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000138423.png",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1770977858884-mkng9yutn",
+    "name": "Smart Hybrid Solar Inverter ",
+    "voltage": "5KW",
+    "category": "Solar Battery",
+    "price": "Rs. 45000/-",
+    "model": "GOOTU 5KW 24V",
+    "configuration": null,
+    "chemistry": "Transformer Less Inverter ",
+    "warranty": "2 Year Warranty",
+    "capacity": "5000",
+    "bms": null,
+    "features": [
+      "Actual Load capacity 5Kw ",
+      "Solar Input upto 9kW",
+      "Efficiency upto 98%"
+    ],
+    "status": "active",
+    "image": "",
+    "displayOrder": 0
   }
 ]
