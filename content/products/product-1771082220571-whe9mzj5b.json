@@ -1,0 +1,26 @@
+{
+  "id": "product-1771082220571-whe9mzj5b",
+  "name": "60Volt 45 Ah lithium battery pack for electric scooter ",
+  "voltage": "60Volt 45Ah",
+  "category": "EV Battery",
+  "price": "Rs. 34500/-",
+  "model": "EM-LFP6045",
+  "configuration": "19s 3p",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "2736 Wh",
+  "bms": "JK Smart BMS with Active Balancer ",
+  "features": [
+    "Lifepo4 battery ",
+    "3 year warrenty ",
+    "Waterproof ",
+    "Bluetooth Connectivity ",
+    "4500+ Life Cycle ",
+    "15 year life"
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133042.png",
+  "displayOrder": 0,
+  "createdAt": "2026-02-14T15:17:00.571Z",
+  "updatedAt": "2026-02-14T15:17:00.571Z"
+}
