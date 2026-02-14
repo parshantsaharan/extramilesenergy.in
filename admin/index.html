@@ -637,6 +637,51 @@
                 flex-direction: column;
             }
         }
+
+        /* Category Badge */
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .category-solar-inverter {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+        
+        .category-hybrid-inverter {
+            background: rgba(53, 208, 255, 0.2);
+            color: #35d0ff;
+            border: 1px solid #35d0ff;
+        }
+        
+        .category-solar-battery {
+            background: rgba(69, 255, 144, 0.2);
+            color: #45ff90;
+            border: 1px solid #45ff90;
+        }
+        
+        .category-ev-battery {
+            background: rgba(124, 92, 255, 0.2);
+            color: #7c5cff;
+            border: 1px solid #7c5cff;
+        }
+
+        .brand-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            font-size: 0.7rem;
+            color: var(--gold);
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -645,7 +690,7 @@
         <div class="login-box">
             <h1 class="login-title">Extra Miles Energy</h1>
             <p style="color: var(--gold-light); margin-bottom: 10px; font-weight: 500;">Admin Panel</p>
-            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Product Management System</p>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Solar & Hybrid Solutions</p>
             
             <div id="loginMessage" class="message"></div>
             
@@ -679,7 +724,7 @@
                         <h2 style="background: linear-gradient(135deg, var(--gold), #FFE55C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">
                             Extra Miles Energy
                         </h2>
-                        <div style="color: var(--gold-light); font-size: 0.9rem;">LiFePO₄ Battery Management System</div>
+                        <div style="color: var(--gold-light); font-size: 0.9rem;">Solar Inverters | Hybrid Inverters | LiFePO₄ Batteries</div>
                         <div class="company-badge">Admin Panel</div>
                     </div>
                     <button class="btn btn-danger" onclick="logout()">
@@ -723,16 +768,16 @@
                             <div class="label">Total Products</div>
                         </div>
                         <div class="stat-card">
-                            <div class="number" id="activeProducts">0</div>
-                            <div class="label">Active Products</div>
+                            <div class="number" id="solarInverters">0</div>
+                            <div class="label">Solar Inverters</div>
                         </div>
                         <div class="stat-card">
-                            <div class="number" id="draftProducts">0</div>
-                            <div class="label">Draft Products</div>
+                            <div class="number" id="hybridInverters">0</div>
+                            <div class="label">Hybrid Inverters</div>
                         </div>
                         <div class="stat-card">
-                            <div class="number" id="lastSync">--</div>
-                            <div class="label">Last Sync</div>
+                            <div class="number" id="solarBatteries">0</div>
+                            <div class="label">Solar Batteries</div>
                         </div>
                     </div>
                     
@@ -743,25 +788,17 @@
                                 <i class="fas fa-plus-circle"></i>
                                 <span>Add New Product</span>
                             </a>
+                            <a href="#" class="quick-action-btn" onclick="addGootuHybrid()">
+                                <i class="fas fa-bolt"></i>
+                                <span>Add Gootu Hybrid</span>
+                            </a>
+                            <a href="#" class="quick-action-btn" onclick="addTechfineHybrid()">
+                                <i class="fas fa-microchip"></i>
+                                <span>Add Techfine Hybrid</span>
+                            </a>
                             <a href="#" class="quick-action-btn" onclick="syncWithGitHub()">
                                 <i class="fas fa-sync-alt"></i>
                                 <span>Sync to GitHub</span>
-                            </a>
-                            <a href="../" target="_blank" class="quick-action-btn">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>View Website</span>
-                            </a>
-                            <a href="#" class="quick-action-btn" onclick="showTab('company')">
-                                <i class="fas fa-edit"></i>
-                                <span>Edit Company Info</span>
-                            </a>
-                            <a href="https://wa.me/917876555055" target="_blank" class="quick-action-btn">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>WhatsApp Support</span>
-                            </a>
-                            <a href="#" class="quick-action-btn" onclick="exportProducts()">
-                                <i class="fas fa-download"></i>
-                                <span>Export Products</span>
                             </a>
                         </div>
                     </div>
@@ -790,14 +827,22 @@
                         </div>
                     </div>
                     
-                    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="searchProducts" class="form-input" placeholder="Search products..." style="flex: 1;" onkeyup="searchProducts()">
                         <select id="filterCategory" class="form-input" style="width: 200px;" onchange="filterProducts()">
                             <option value="">All Categories</option>
-                            <option value="EV Battery">EV Battery</option>
+                            <option value="Solar Inverter">Solar Inverter</option>
+                            <option value="Hybrid Inverter">Hybrid Inverter</option>
                             <option value="Solar Battery">Solar Battery</option>
+                            <option value="EV Battery">EV Battery</option>
                             <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
                             <option value="Custom Battery">Custom Battery</option>
+                        </select>
+                        <select id="filterBrand" class="form-input" style="width: 150px;" onchange="filterProducts()">
+                            <option value="">All Brands</option>
+                            <option value="Gootu">Gootu</option>
+                            <option value="Techfine">Techfine</option>
+                            <option value="Extra Miles">Extra Miles</option>
                         </select>
                         <select id="filterStatus" class="form-input" style="width: 150px;" onchange="filterProducts()">
                             <option value="">All Status</option>
@@ -823,11 +868,16 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Product Name *</label>
-                            <input type="text" id="productName" class="form-input" placeholder="e.g., 60V 30Ah Lithium Battery" required>
+                            <input type="text" id="productName" class="form-input" placeholder="e.g., 3kW Hybrid Inverter" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Voltage & Capacity *</label>
-                            <input type="text" id="productVoltage" class="form-input" placeholder="e.g., 60V 30Ah" required>
+                            <label class="form-label">Brand</label>
+                            <select id="productBrand" class="form-input">
+                                <option value="Extra Miles">Extra Miles</option>
+                                <option value="Gootu">Gootu</option>
+                                <option value="Techfine">Techfine</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
                     </div>
                     
@@ -835,33 +885,46 @@
                         <div class="form-group">
                             <label class="form-label">Category *</label>
                             <select id="productCategory" class="form-input" required>
-                                <option value="EV Battery">EV Battery</option>
+                                <option value="Solar Inverter">Solar Inverter</option>
+                                <option value="Hybrid Inverter">Hybrid Inverter</option>
                                 <option value="Solar Battery">Solar Battery</option>
+                                <option value="EV Battery">EV Battery</option>
                                 <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
                                 <option value="Custom Battery">Custom Battery</option>
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Power Rating</label>
+                            <input type="text" id="productPower" class="form-input" placeholder="e.g., 3kW, 5kW, 10kW">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Voltage</label>
+                            <input type="text" id="productVoltage" class="form-input" placeholder="e.g., 24V, 48V, 96V">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Price Range</label>
-                            <input type="text" id="productPrice" class="form-input" placeholder="e.g., ₹18,000 - ₹22,000">
+                            <input type="text" id="productPrice" class="form-input" placeholder="e.g., ₹45,000 - ₹55,000">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Model Number</label>
-                            <input type="text" id="productModel" class="form-input" placeholder="e.g., EM-LFP6030">
+                            <input type="text" id="productModel" class="form-input" placeholder="e.g., GT-3048, TF-5048">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Configuration</label>
-                            <input type="text" id="productConfig" class="form-input" placeholder="e.g., 19S2P">
+                            <input type="text" id="productConfig" class="form-input" placeholder="e.g., 16S, 15S">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Chemistry</label>
-                            <input type="text" id="productChemistry" class="form-input" value="LiFePO₄" placeholder="Lithium Iron Phosphate">
+                            <label class="form-label">Chemistry / Type</label>
+                            <input type="text" id="productChemistry" class="form-input" value="LiFePO₄" placeholder="For batteries">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Warranty</label>
@@ -871,18 +934,33 @@
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Capacity (Wh)</label>
-                            <input type="text" id="productCapacity" class="form-input" placeholder="e.g., 1820 Wh">
+                            <label class="form-label">Capacity (Ah/Wh)</label>
+                            <input type="text" id="productCapacity" class="form-input" placeholder="e.g., 100Ah, 200Ah">
                         </div>
                         <div class="form-group">
                             <label class="form-label">BMS Type</label>
-                            <input type="text" id="productBMS" class="form-input" placeholder="e.g., JK Smart BMS 40A">
+                            <input type="text" id="productBMS" class="form-input" placeholder="e.g., JK Smart BMS 200A">
                         </div>
                     </div>
                     
                     <div class="form-group">
+                        <label class="form-label">Compatible With</label>
+                        <select id="productCompatibility" class="form-input" multiple size="3">
+                            <option value="gootu">Gootu Hybrid Inverters</option>
+                            <option value="techfine">Techfine Hybrid Inverters</option>
+                            <option value="generic">Generic Inverters</option>
+                        </select>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Hold Ctrl/Cmd to select multiple</div>
+                    </div>
+                    
+                    <div class="form-group">
                         <label class="form-label">Features (One per line) *</label>
-                        <textarea id="productFeatures" class="form-input" placeholder="LiFePO4 Cells&#10;3 Year Warranty&#10;Smart BMS&#10;Waterproof&#10;Active Cell Balancer&#10;2000+ Cycles" required rows="4"></textarea>
+                        <textarea id="productFeatures" class="form-input" placeholder="LiFePO4 Cells&#10;JK Smart BMS 200A&#10;RS485/CAN Communication&#10;Compatible with Gootu/Techfine&#10;5000+ Cycles&#10;10 Year Design Life" required rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Technical Specifications</label>
+                        <textarea id="productSpecs" class="form-input" placeholder="Max Charging Current: 100A&#10;Max Discharging Current: 100A&#10;Communication: RS485, CAN&#10;IP Rating: IP65" rows="3"></textarea>
                     </div>
                     
                     <div class="form-group">
@@ -966,7 +1044,7 @@
                         
                         <div class="detail-item">
                             <label>Tagline:</label>
-                            <input type="text" id="companyTagline" class="form-input" value="Premium LiFePO₄ Battery Solutions">
+                            <input type="text" id="companyTagline" class="form-input" value="Solar & Hybrid Solutions with LiFePO₄ Technology">
                         </div>
                     </div>
                     
@@ -1004,17 +1082,36 @@
                         
                         <div class="detail-item">
                             <label>Website Title:</label>
-                            <input type="text" id="websiteTitle" class="form-input" value="Extra Miles Energy - Premium Lithium Batteries">
+                            <input type="text" id="websiteTitle" class="form-input" value="Extra Miles Energy - Solar Inverters, Hybrid Inverters & LiFePO₄ Batteries">
                         </div>
                         
                         <div class="detail-item">
                             <label>Meta Description:</label>
-                            <textarea id="websiteDescription" class="form-input" rows="3">High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with LiFePO4 technology for maximum safety and longevity.</textarea>
+                            <textarea id="websiteDescription" class="form-input" rows="3">Premium solar inverters, hybrid inverters from Gootu and Techfine, and LiFePO₄ batteries with JK Smart BMS. Compatible with all major inverter brands.</textarea>
                         </div>
                         
                         <div class="detail-item">
                             <label>Hero Background:</label>
                             <input type="file" id="heroBackground" class="form-input" accept="image/*">
+                        </div>
+                    </div>
+                    
+                    <div class="company-details-form" style="margin-top: 30px;">
+                        <h4 style="margin-bottom: 20px; color: var(--gold-light);">Brand Authorizations</h4>
+                        
+                        <div class="detail-item">
+                            <label>Gootu Authorized Dealer:</label>
+                            <input type="checkbox" id="gootuAuth" checked>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <label>Techfine Authorized Dealer:</label>
+                            <input type="checkbox" id="techfineAuth" checked>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <label>JK BMS Authorized:</label>
+                            <input type="checkbox" id="jkBmsAuth" checked>
                         </div>
                     </div>
                     
@@ -1230,14 +1327,17 @@
             name: 'Skyline Stores',
             brand: 'Extra Miles Energy',
             gst: '07HYXPS2318L1ZY',
-            tagline: 'Premium LiFePO₄ Battery Solutions',
+            tagline: 'Solar & Hybrid Solutions with LiFePO₄ Technology',
             address: 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001',
             email: 'extramilesenergy@gmail.com',
             phone1: '+91 78765 55055',
             phone2: '',
             whatsapp: '+917876555055',
-            websiteTitle: 'Extra Miles Energy - Premium Lithium Batteries',
-            websiteDescription: 'High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with LiFePO4 technology for maximum safety and longevity.'
+            websiteTitle: 'Extra Miles Energy - Solar Inverters, Hybrid Inverters & LiFePO₄ Batteries',
+            websiteDescription: 'Premium solar inverters, hybrid inverters from Gootu and Techfine, and LiFePO₄ batteries with JK Smart BMS. Compatible with all major inverter brands.',
+            gootuAuth: true,
+            techfineAuth: true,
+            jkBmsAuth: true
         };
         
         let githubConfig = {
@@ -1322,6 +1422,43 @@
             if (tabId === 'addProduct') {
                 document.getElementById('formTitle').textContent = editingProductId ? 'Edit Product' : 'Add New Product';
             }
+        }
+        
+        // Quick add templates
+        function addGootuHybrid() {
+            clearForm();
+            document.getElementById('productName').value = 'Gootu 5kW Hybrid Inverter';
+            document.getElementById('productBrand').value = 'Gootu';
+            document.getElementById('productCategory').value = 'Hybrid Inverter';
+            document.getElementById('productPower').value = '5kW';
+            document.getElementById('productVoltage').value = '48V';
+            document.getElementById('productPrice').value = '₹55,000 - ₹62,000';
+            document.getElementById('productModel').value = 'GT-5048';
+            document.getElementById('productChemistry').value = 'Hybrid Inverter';
+            document.getElementById('productWarranty').value = '5 Year Warranty';
+            document.getElementById('productFeatures').value = 'Pure Sine Wave Output\nMPPT Solar Charger 80A\nParallel Operation up to 30kW\nWi-Fi Monitoring Available\nLithium Battery Compatible\nGootu Original Technology\nJK BMS Compatible\nCAN/RS485 Communication';
+            document.getElementById('productSpecs').value = 'Max PV Input: 4500W\nMPPT Range: 120-450V\nMax Charging Current: 80A\nMax AC Charging: 60A\nTransfer Time: <10ms\nIP Rating: IP21';
+            document.getElementById('productStatus').value = 'active';
+            document.getElementById('productOrder').value = '1';
+            addActivity('Opened Gootu hybrid inverter template');
+        }
+        
+        function addTechfineHybrid() {
+            clearForm();
+            document.getElementById('productName').value = 'Techfine 5kW Hybrid Inverter';
+            document.getElementById('productBrand').value = 'Techfine';
+            document.getElementById('productCategory').value = 'Hybrid Inverter';
+            document.getElementById('productPower').value = '5kW';
+            document.getElementById('productVoltage').value = '48V';
+            document.getElementById('productPrice').value = '₹52,000 - ₹58,000';
+            document.getElementById('productModel').value = 'TF-5048';
+            document.getElementById('productChemistry').value = 'Hybrid Inverter';
+            document.getElementById('productWarranty').value = '5 Year Warranty';
+            document.getElementById('productFeatures').value = 'Pure Sine Wave Output\nMPPT Solar Charger 100A\nParallel Operation\nSmart LCD Display\nLithium Battery Compatible\nTechfine Advanced Technology\nJK BMS Compatible\nRS485 Communication';
+            document.getElementById('productSpecs').value = 'Max PV Input: 5500W\nMPPT Range: 120-450V\nMax Charging Current: 100A\nMax AC Charging: 80A\nEfficiency: 93%\nIP Rating: IP20';
+            document.getElementById('productStatus').value = 'active';
+            document.getElementById('productOrder').value = '2';
+            addActivity('Opened Techfine hybrid inverter template');
         }
         
         // Message display
@@ -1538,6 +1675,13 @@
                     imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${imageUrl}`;
                 }
                 
+                // Get category class
+                let categoryClass = '';
+                if (product.category === 'Solar Inverter') categoryClass = 'category-solar-inverter';
+                else if (product.category === 'Hybrid Inverter') categoryClass = 'category-hybrid-inverter';
+                else if (product.category === 'Solar Battery') categoryClass = 'category-solar-battery';
+                else if (product.category === 'EV Battery') categoryClass = 'category-ev-battery';
+                
                 html += `
                     <div class="product-card">
                         <img src="${imageUrl || 'https://via.placeholder.com/300x200/FFD700/0b1220?text=Product'}" 
@@ -1545,9 +1689,13 @@
                              alt="${product.name}"
                              onerror="this.src='https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles'">
                         <h4 style="margin-bottom: 5px; color: var(--gold-light);">${product.name}</h4>
-                        <div style="color: var(--gold); margin-bottom: 10px; font-weight: 600;">${product.voltage || ''}</div>
+                        <div style="margin-bottom: 10px;">
+                            <span class="category-badge ${categoryClass}">${product.category || ''}</span>
+                            ${product.brand ? `<span class="brand-tag">${product.brand}</span>` : ''}
+                        </div>
+                        <div style="color: var(--gold); margin-bottom: 5px; font-weight: 600;">${product.power || ''} ${product.voltage || ''}</div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span style="color: var(--text-muted); font-size: 0.9rem;">${product.category || ''}</span>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">${product.model || ''}</span>
                             <span style="color: ${product.status === 'active' ? 'var(--success)' : 'var(--warning)'}; font-size: 0.8rem; background: ${product.status === 'active' ? 'rgba(69, 255, 144, 0.1)' : 'rgba(255, 177, 69, 0.1)'}; padding: 2px 10px; border-radius: 10px;">
                                 ${product.status || 'draft'}
                             </span>
@@ -1574,21 +1722,27 @@
             const searchTerm = document.getElementById('searchProducts').value.toLowerCase();
             const filtered = products.filter(product => 
                 product.name.toLowerCase().includes(searchTerm) ||
-                (product.voltage && product.voltage.toLowerCase().includes(searchTerm)) ||
+                (product.model && product.model.toLowerCase().includes(searchTerm)) ||
                 (product.category && product.category.toLowerCase().includes(searchTerm)) ||
-                (product.model && product.model.toLowerCase().includes(searchTerm))
+                (product.brand && product.brand.toLowerCase().includes(searchTerm)) ||
+                (product.power && product.power.toLowerCase().includes(searchTerm))
             );
             displayProducts(filtered);
         }
         
         function filterProducts() {
             const category = document.getElementById('filterCategory').value;
+            const brand = document.getElementById('filterBrand').value;
             const status = document.getElementById('filterStatus').value;
             
             let filtered = products;
             
             if (category) {
                 filtered = filtered.filter(p => p.category === category);
+            }
+            
+            if (brand) {
+                filtered = filtered.filter(p => p.brand === brand);
             }
             
             if (status) {
@@ -1601,12 +1755,14 @@
         // Update dashboard stats
         function updateDashboardStats() {
             const total = products.length;
-            const active = products.filter(p => p.status === 'active').length;
-            const draft = products.filter(p => p.status === 'draft').length;
+            const solarInverters = products.filter(p => p.category === 'Solar Inverter').length;
+            const hybridInverters = products.filter(p => p.category === 'Hybrid Inverter').length;
+            const solarBatteries = products.filter(p => p.category === 'Solar Battery').length;
             
             document.getElementById('totalProducts').textContent = total;
-            document.getElementById('activeProducts').textContent = active;
-            document.getElementById('draftProducts').textContent = draft;
+            document.getElementById('solarInverters').textContent = solarInverters;
+            document.getElementById('hybridInverters').textContent = hybridInverters;
+            document.getElementById('solarBatteries').textContent = solarBatteries;
             document.getElementById('productsCount').textContent = total;
             
             const lastSync = localStorage.getItem('last_sync_time');
@@ -1633,7 +1789,7 @@
             document.getElementById('storageInfo').textContent = `${percent}% used`;
         }
         
-        // ✅ FIXED: Upload image with unique filename (NO SHA ERROR)
+        // Upload image to GitHub
         async function uploadImageToGitHub(imageFile) {
             const base64Content = await new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1642,14 +1798,12 @@
                 reader.readAsDataURL(imageFile);
             });
 
-            // 🔥 CRITICAL FIX: ALWAYS unique filename
             const ext = imageFile.name.split('.').pop() || 'jpg';
             const fileName = `product-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
             const filePath = `${githubConfig.uploadsPath}/${fileName}`;
 
             console.log('Uploading image:', fileName);
 
-            // ✅ SHA not needed because filename is ALWAYS new
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -1670,15 +1824,16 @@
             }
 
             const data = await response.json();
-            // Return raw GitHub URL
             return `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${filePath}`;
         }
         
-        // ✅ FIXED: Save product with PROPER image handling
+        // Save product
         async function saveProduct() {
             const name = document.getElementById('productName').value;
-            const voltage = document.getElementById('productVoltage').value;
+            const brand = document.getElementById('productBrand').value;
             const category = document.getElementById('productCategory').value;
+            const power = document.getElementById('productPower').value;
+            const voltage = document.getElementById('productVoltage').value;
             const price = document.getElementById('productPrice').value;
             const model = document.getElementById('productModel').value;
             const config = document.getElementById('productConfig').value;
@@ -1686,12 +1841,14 @@
             const warranty = document.getElementById('productWarranty').value;
             const capacity = document.getElementById('productCapacity').value;
             const bms = document.getElementById('productBMS').value;
+            const compatibility = Array.from(document.getElementById('productCompatibility').selectedOptions).map(opt => opt.value);
             const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
+            const specs = document.getElementById('productSpecs').value.split('\n').filter(s => s.trim());
             const status = document.getElementById('productStatus').value;
             const order = document.getElementById('productOrder').value;
             const imageFile = document.getElementById('productImage').files[0];
             
-            if (!name || !voltage || !features.length) {
+            if (!name || !category || !features.length) {
                 showMessage('addProductMessage', 'Please fill all required fields', 'error');
                 return;
             }
@@ -1708,8 +1865,10 @@
             const product = {
                 id: productId,
                 name,
-                voltage,
+                brand,
                 category,
+                power: power || null,
+                voltage: voltage || null,
                 price: price || null,
                 model: model || null,
                 configuration: config || null,
@@ -1717,7 +1876,9 @@
                 warranty: warranty || '3 Year Warranty',
                 capacity: capacity || null,
                 bms: bms || null,
+                compatibility: compatibility.length ? compatibility : null,
                 features,
+                specifications: specs.length ? specs : null,
                 status,
                 image: imageUrl,
                 displayOrder: parseInt(order) || 0,
@@ -1773,6 +1934,9 @@
         // Clear form
         function clearForm() {
             document.getElementById('productName').value = '';
+            document.getElementById('productBrand').value = 'Extra Miles';
+            document.getElementById('productCategory').value = 'Hybrid Inverter';
+            document.getElementById('productPower').value = '';
             document.getElementById('productVoltage').value = '';
             document.getElementById('productPrice').value = '';
             document.getElementById('productModel').value = '';
@@ -1781,7 +1945,9 @@
             document.getElementById('productWarranty').value = '3 Year Warranty';
             document.getElementById('productCapacity').value = '';
             document.getElementById('productBMS').value = '';
+            Array.from(document.getElementById('productCompatibility').options).forEach(opt => opt.selected = false);
             document.getElementById('productFeatures').value = '';
+            document.getElementById('productSpecs').value = '';
             document.getElementById('productOrder').value = '0';
             document.getElementById('productStatus').value = 'active';
             document.getElementById('productImage').value = '';
@@ -1797,9 +1963,11 @@
             
             editingProductId = productId;
             
-            document.getElementById('productName').value = product.name;
+            document.getElementById('productName').value = product.name || '';
+            document.getElementById('productBrand').value = product.brand || 'Extra Miles';
+            document.getElementById('productCategory').value = product.category || 'Hybrid Inverter';
+            document.getElementById('productPower').value = product.power || '';
             document.getElementById('productVoltage').value = product.voltage || '';
-            document.getElementById('productCategory').value = product.category || 'EV Battery';
             document.getElementById('productPrice').value = product.price || '';
             document.getElementById('productModel').value = product.model || '';
             document.getElementById('productConfig').value = product.configuration || '';
@@ -1807,7 +1975,17 @@
             document.getElementById('productWarranty').value = product.warranty || '3 Year Warranty';
             document.getElementById('productCapacity').value = product.capacity || '';
             document.getElementById('productBMS').value = product.bms || '';
+            
+            // Set compatibility
+            if (product.compatibility && Array.isArray(product.compatibility)) {
+                const options = document.getElementById('productCompatibility').options;
+                for (let opt of options) {
+                    opt.selected = product.compatibility.includes(opt.value);
+                }
+            }
+            
             document.getElementById('productFeatures').value = product.features?.join('\n') || '';
+            document.getElementById('productSpecs').value = product.specifications?.join('\n') || '';
             document.getElementById('productStatus').value = product.status || 'active';
             document.getElementById('productOrder').value = product.displayOrder || 0;
             
@@ -1904,8 +2082,10 @@
             const websiteProducts = products.map(p => ({
                 id: p.id,
                 name: p.name,
-                voltage: p.voltage,
+                brand: p.brand,
                 category: p.category,
+                power: p.power,
+                voltage: p.voltage,
                 price: p.price,
                 model: p.model,
                 configuration: p.configuration,
@@ -1913,7 +2093,9 @@
                 warranty: p.warranty,
                 capacity: p.capacity,
                 bms: p.bms,
+                compatibility: p.compatibility,
                 features: p.features,
+                specifications: p.specifications,
                 status: p.status,
                 image: p.image,
                 displayOrder: p.displayOrder || 0
@@ -2015,6 +2197,11 @@
             document.getElementById('companyWhatsApp').value = companyDetails.whatsapp;
             document.getElementById('websiteTitle').value = companyDetails.websiteTitle;
             document.getElementById('websiteDescription').value = companyDetails.websiteDescription;
+            
+            // Authorizations
+            document.getElementById('gootuAuth').checked = companyDetails.gootuAuth !== false;
+            document.getElementById('techfineAuth').checked = companyDetails.techfineAuth !== false;
+            document.getElementById('jkBmsAuth').checked = companyDetails.jkBmsAuth !== false;
         }
         
         function saveCompanyDetails() {
@@ -2029,7 +2216,10 @@
                 phone2: document.getElementById('companyPhone2').value,
                 whatsapp: document.getElementById('companyWhatsApp').value,
                 websiteTitle: document.getElementById('websiteTitle').value,
-                websiteDescription: document.getElementById('websiteDescription').value
+                websiteDescription: document.getElementById('websiteDescription').value,
+                gootuAuth: document.getElementById('gootuAuth').checked,
+                techfineAuth: document.getElementById('techfineAuth').checked,
+                jkBmsAuth: document.getElementById('jkBmsAuth').checked
             };
             
             localStorage.setItem('company_details', JSON.stringify(companyDetails));
