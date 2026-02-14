@@ -11,7 +11,6 @@
     "warranty": "2 Year Warranty",
     "capacity": "6000 Watt",
     "bms": null,
-    "fullDescription": "The Gootu 6KW 48V Hybrid Inverter (v2.0) is a compact, high-performance hybrid inverter engineered for homes and small commercial setups.\n\nWith a wide MPPT window, high PV/AC charging currents and robust BMS connectivity (CAN/RS485), it delivers reliable pure-sine backup, simultaneous solar + grid operation and flexible battery support for uninterrupted power.\n\nMain Features\n\n⚡ Rated Output: 6.0 kW (6 kVA) pure sine wave output, PF ≈ 1\n\n🔋 Battery Voltage: 48 V system compatibility\n\n☀️ MPPT Range: 60 – 450 V (supports high PV input voltages up to 500 V VOC)\n\n🔌 PV / AC Charging: High charging capability — PV charging current ~120 A and AC charging current ~120 A (max charging 120 A)\n\n🔁 Simultaneous AC & PV Activation: Solar and grid can supply loads together for stable supply and faster battery charging\n\n🔧 Supported Battery Types: Gel, lead-acid, and lithium battery compatibility (configurable)\n\n🌐 Communication & Monitoring: USB + BMS (485) / CAN/RS485 for BMS integration; Wi-Fi optional for remote monitoring\n\n📦 Design: High-frequency, compact & lightweight construction for easier installation\n\n🔄 Dual Output / Parallel Ready: Dual output design for flexible load distribution; model supports parallel operation on applicable SKUs (check model spec)\n\n🛡️ Built for Reliability: Robust thermal & electrical protection suited for demanding environments\n\nQuick Specs (for product card / highlights)\n\nOutput Power: 6.0 kW (6 kVA)\n\nBattery Voltage: 48 V\n\nMPPT Input: 60–450 V (Max PV VOC 500 V)\n\nPV Charging Current: ~120 A\n\nAC Charging Current: ~120 A",
     "features": [
       "Transformer less inverter",
       "Effeciancy 98%",
@@ -19,16 +18,6 @@
       "PV Power 9000Watt"
     ],
     "status": "active",
-    "images": [
-      {
-        "url": "1771077151969-gootu-6kw-hybrid.png",
-        "isPrimary": true
-      },
-      {
-        "url": "1771077154378-gootu-new-product-6kw-solar-inverter-mppt-max-27a-9000w-input-pv-hybrid-inverter-1000x1000.webp",
-        "isPrimary": false
-      }
-    ],
     "displayOrder": 0
   }
 ]
