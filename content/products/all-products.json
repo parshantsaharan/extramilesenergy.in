@@ -2,8 +2,8 @@
   {
     "id": "product-1771080181899-64wo0a229",
     "name": "60 Volt 30Ah Lithium Phosphate battery for Electric Scooter ",
-    "category": "EV Battery",
     "voltage": "60Volt 30Ah",
+    "category": "EV Battery",
     "price": "Rs. 23500/-",
     "model": "EM-LFP6030",
     "configuration": "19s2p",
@@ -26,8 +26,8 @@
   {
     "id": "product-1771080985142-eua9z08wd",
     "name": "72Volt 30Ah lithium phosphate battery pack for electric scooter ",
-    "category": "EV Battery",
     "voltage": "72 Volt 30Ah",
+    "category": "EV Battery",
     "price": "Rs. 27500/-",
     "model": "EM-LFP7230",
     "configuration": "23s2p",
@@ -49,8 +49,8 @@
   {
     "id": "product-1771081346827-c6fq8hxih",
     "name": "76Volt 45Ah Lithium Phosphate battery for electric scooter ",
-    "category": "EV Battery",
     "voltage": "76Volt 45Ah",
+    "category": "EV Battery",
     "price": "Rs. 40000/-",
     "model": "EM-LFP7645",
     "configuration": "24s3p",
@@ -72,8 +72,8 @@
   {
     "id": "product-1771081704432-j736brdls",
     "name": "72Volt 45Ah Lithium Phosphate battery for electric scooter ",
-    "category": "EV Battery",
     "voltage": "72Volt 45Ah",
+    "category": "EV Battery",
     "price": "Rs. 39000/-",
     "model": "EM-LFP7245",
     "configuration": "23s3p",
@@ -96,8 +96,8 @@
   {
     "id": "product-1771082220571-whe9mzj5b",
     "name": "60Volt 45 Ah lithium battery pack for electric scooter ",
-    "category": "EV Battery",
     "voltage": "60Volt 45Ah",
+    "category": "EV Battery",
     "price": "Rs. 34500/-",
     "model": "EM-LFP6045",
     "configuration": "19s 3p",
@@ -120,8 +120,8 @@
   {
     "id": "product-1771082511554-7yaywaqa9",
     "name": "51.2 Volt 105 Ah lithium batteries for E rikshaw ",
-    "category": "EV Battery",
     "voltage": "51.2 Volt 105 Ah",
+    "category": "EV Battery",
     "price": "Rs. 60000/-",
     "model": "EM-LFP51105",
     "configuration": "16s1p",
@@ -143,10 +143,8 @@
   {
     "id": "product-1771083901819-3iq53otp4",
     "name": "6Kw Solar Hybrid inverter ",
-    "brand": "Gootu",
-    "category": "Solar Inverter",
-    "power": "6Kw",
     "voltage": "48V",
+    "category": "Solar Inverter",
     "price": "Rs. 48000/-",
     "model": "GOOTU 6Kw P9000",
     "configuration": null,
@@ -154,22 +152,39 @@
     "warranty": "2 Year Warranty",
     "capacity": null,
     "bms": null,
-    "compatibility": [
-      "generic"
-    ],
     "features": [
       "Smart Hybrid Solar Inverter ",
       "Wifi Connection ",
       "Smartphone Monitor "
     ],
-    "specifications": [
-      "Max Charing Current 120A",
-      "Max PV Input 9000 watt",
-      "Max PV Input VOC 500v",
-      "Battery 48Volt "
-    ],
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771083901988-wb2xxk.webp",
+    "displayOrder": 0
+  },
+  {
+    "id": "product-1771084447408-pmz0wqpi1",
+    "name": "11Kw Smart Ess Battery for Hmne and Industrial Requirements ",
+    "voltage": "51.2Volt 210 Ah",
+    "category": "Solar Battery",
+    "price": "Rs. 125000/-",
+    "model": "EM-LFP51210",
+    "configuration": "16S14P",
+    "chemistry": "LiFePO₄",
+    "warranty": "5 Year Warranty",
+    "capacity": "10752Wh",
+    "bms": "JK ESS Smart BMS 150Amp",
+    "features": [
+      "Lifepo4 Cell",
+      "Bluetooth Connectivity ",
+      "4500+ life Cycle ",
+      "Wall Mounted ",
+      "Maintanence free",
+      "Smart Display ",
+      "Bluetooth Connectivity ",
+      "Parallel Connection "
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771084447459-sngjwl.jpg",
     "displayOrder": 0
   }
 ]
