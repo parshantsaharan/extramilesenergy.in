@@ -116,5 +116,28 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133042.png",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1771082511554-7yaywaqa9",
+    "name": "51.2 Volt 105 Ah lithium batteries for E rikshaw ",
+    "voltage": "51.2 Volt 105 Ah",
+    "category": "EV Battery",
+    "price": "Rs. 60000/-",
+    "model": "EM-LFP51105",
+    "configuration": "16s1p",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "5376 Wh",
+    "bms": "With Smart BMS and bluetooth connectivity ",
+    "features": [
+      "Lifepo4 Cell",
+      "3 year warrenty ",
+      "With GPS inbuilt ",
+      "Waterproof ",
+      "4500+ Lifecycle "
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000144257.png",
+    "displayOrder": 0
   }
 ]
