@@ -1,0 +1,25 @@
+{
+  "id": "product-1771081346827-c6fq8hxih",
+  "name": "76Volt 45Ah Lithium Phosphate battery for electric scooter ",
+  "voltage": "76Volt 45Ah",
+  "category": "EV Battery",
+  "price": "Rs. 40000/-",
+  "model": "EM-LFP7645",
+  "configuration": "24s3p",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "3456 Watt",
+  "bms": "JK Smart BMS with Active Balancer ",
+  "features": [
+    "LiFePo4 Cell ",
+    "3 year warrenty ",
+    "Waterproof ",
+    "Bluetooth Connectivity ",
+    "JK smart Active Balance "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133063.png",
+  "displayOrder": 0,
+  "createdAt": "2026-02-14T15:02:26.827Z",
+  "updatedAt": "2026-02-14T15:02:26.827Z"
+}
