@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cat-ev-battery",
+    "name": "EV Batteries",
+    "icon": "fas fa-car",
+    "description": "Electric Vehicle Batteries for E-Rickshaw, E-Cart, Golf Cart"
+  },
+  {
+    "id": "cat-solar-battery",
+    "name": "Solar Batteries",
+    "icon": "fas fa-sun",
+    "description": "Solar Energy Storage Batteries for Home & Commercial"
+  },
+  {
+    "id": "cat-solar-inverter",
+    "name": "Solar Inverters",
+    "icon": "fas fa-solar-panel",
+    "description": "Hybrid, On-Grid, Off-Grid Solar Inverters"
+  },
+  {
+    "id": "cat-energy-storage",
+    "name": "Energy Storage Systems",
+    "icon": "fas fa-home",
+    "description": "Complete Home & Industrial Energy Storage Solutions"
+  }
+]
