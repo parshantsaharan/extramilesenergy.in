@@ -653,7 +653,7 @@
                 <label class="form-label">Admin Password</label>
                 <input type="password" id="password" class="form-input" placeholder="Enter admin password" autocomplete="current-password">
                 <div style="margin-top: 5px; font-size: 0.85rem; color: var(--gold-light);">
-    <i class="fas fa-key"></i> Default password set. Please change after first login.
+    <i class="fas fa-key"></i> Default: Sky12345
 </div>
             </div>
             
@@ -1527,20 +1527,14 @@
             let html = '<div class="products-grid">';
             
             displayProducts.forEach(product => {
-                // ✅ FIX: Handle image URLs properly
                 let imageUrl = product.image || '';
                 
-                // If image is already a GitHub URL, use it as is
                 if (imageUrl && imageUrl.includes('githubusercontent.com')) {
-                    // Already a GitHub URL, use it
-                } 
-                // If image is a local path, convert to GitHub URL
-                else if (imageUrl && imageUrl.startsWith('../')) {
+                    // Already GitHub URL
+                } else if (imageUrl && imageUrl.startsWith('../')) {
                     const cleanPath = imageUrl.replace('../', '');
                     imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${cleanPath}`;
-                }
-                // If image is just filename
-                else if (imageUrl && !imageUrl.startsWith('http')) {
+                } else if (imageUrl && !imageUrl.startsWith('http')) {
                     imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${imageUrl}`;
                 }
                 
@@ -1639,6 +1633,47 @@
             document.getElementById('storageInfo').textContent = `${percent}% used`;
         }
         
+        // ✅ FIXED: Upload image with unique filename (NO SHA ERROR)
+        async function uploadImageToGitHub(imageFile) {
+            const base64Content = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(imageFile);
+            });
+
+            // 🔥 CRITICAL FIX: ALWAYS unique filename
+            const ext = imageFile.name.split('.').pop() || 'jpg';
+            const fileName = `product-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+            const filePath = `${githubConfig.uploadsPath}/${fileName}`;
+
+            console.log('Uploading image:', fileName);
+
+            // ✅ SHA not needed because filename is ALWAYS new
+            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${githubConfig.token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    message: `Add product image: ${fileName}`,
+                    content: base64Content,
+                    branch: githubConfig.branch
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(`Image upload failed: ${error.message}`);
+            }
+
+            const data = await response.json();
+            // Return raw GitHub URL
+            return `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${filePath}`;
+        }
+        
         // ✅ FIXED: Save product with PROPER image handling
         async function saveProduct() {
             const name = document.getElementById('productName').value;
@@ -1684,7 +1719,7 @@
                 bms: bms || null,
                 features,
                 status,
-                image: imageUrl, // Will be updated if new image is uploaded
+                image: imageUrl,
                 displayOrder: parseInt(order) || 0,
                 createdAt: editingProductId ? products.find(p => p.id === productId)?.createdAt : new Date().toISOString(),
                 updatedAt: new Date().toISOString()
@@ -1696,7 +1731,7 @@
                 // Step 1: Upload image to GitHub if exists
                 if (imageFile && githubConfig.token) {
                     const uploadedImageUrl = await uploadImageToGitHub(imageFile);
-                    product.image = uploadedImageUrl; // Set GitHub URL
+                    product.image = uploadedImageUrl;
                     addActivity(`Uploaded image: ${imageFile.name}`);
                 }
                 
@@ -1811,49 +1846,9 @@
             }
         }
         
-        // ✅ FIXED: Upload image to GitHub
-        async function uploadImageToGitHub(imageFile) {
-            const base64Content = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = reject;
-                reader.readAsDataURL(imageFile);
-            });
-            
-            // Create safe filename
-            const originalName = imageFile.name;
-            const safeName = originalName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9.-]/g, '');
-            const fileName = safeName || `image-${Date.now()}.jpg`;
-            const filePath = `${githubConfig.uploadsPath}/${fileName}`;
-            
-            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${githubConfig.token}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify({
-                    message: `Upload product image: ${fileName}`,
-                    content: base64Content,
-                    branch: githubConfig.branch
-                })
-            });
-            
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(`Failed to upload image: ${error.message}`);
-            }
-            
-            // Return GitHub raw URL
-            return `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${filePath}`;
-        }
-        
-        // ✅ FIXED: Save individual product to GitHub
+        // Save individual product to GitHub
         async function saveToGitHub(product) {
-            // Make sure image URL is properly set
             if (product.image && !product.image.includes('githubusercontent.com')) {
-                // If image is a local filename, convert to GitHub URL
                 if (product.image && !product.image.startsWith('http')) {
                     const fileName = product.image.split('/').pop();
                     product.image = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${fileName}`;
@@ -1864,7 +1859,6 @@
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/${product.id}.json`;
             
-            // Get SHA if file exists
             let sha = null;
             try {
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -1882,7 +1876,6 @@
                 // File doesn't exist
             }
             
-            // Save individual product file
             const saveResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -1906,9 +1899,8 @@
             return true;
         }
         
-        // ✅ FIXED: Update master products list WITHOUT losing image URLs
+        // Update master products list
         async function updateMasterProductsList() {
-            // Create clean product list for website
             const websiteProducts = products.map(p => ({
                 id: p.id,
                 name: p.name,
@@ -1923,7 +1915,7 @@
                 bms: p.bms,
                 features: p.features,
                 status: p.status,
-                image: p.image, // Keep the full GitHub URL
+                image: p.image,
                 displayOrder: p.displayOrder || 0
             }));
             
@@ -1931,7 +1923,6 @@
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/all-products.json`;
             
-            // Get SHA if file exists
             let sha = null;
             try {
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -1949,7 +1940,6 @@
                 // File doesn't exist
             }
             
-            // Update master list
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -1975,7 +1965,6 @@
             const filePath = `${githubConfig.productsPath}/${productId}.json`;
             
             try {
-                // Get SHA first
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                     headers: {
                         'Authorization': `token ${githubConfig.token}`,
@@ -1987,7 +1976,6 @@
                     const fileData = await getResponse.json();
                     const sha = fileData.sha;
                     
-                    // Delete file
                     await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                         method: 'DELETE',
                         headers: {
@@ -2002,7 +1990,6 @@
                         })
                     });
                     
-                    // Update master list after deletion
                     await updateMasterProductsList();
                 }
             } catch (error) {
@@ -2166,15 +2153,12 @@
             }
             
             try {
-                // Save company details first
                 await saveCompanyDetailsToGitHub();
                 
-                // Save all products to GitHub
                 for (const product of products) {
                     await saveToGitHub(product);
                 }
                 
-                // Update master list
                 await updateMasterProductsList();
                 
                 localStorage.setItem('last_sync_time', new Date().toISOString());
