@@ -1,8 +1,8 @@
 {
   "id": "product-1771082220571-whe9mzj5b",
   "name": "60Volt 45 Ah lithium battery pack for electric scooter ",
-  "voltage": "60Volt 45Ah",
   "category": "EV Battery",
+  "voltage": "60Volt 45Ah",
   "price": "Rs. 34500/-",
   "model": "EM-LFP6045",
   "configuration": "19s 3p",
@@ -20,7 +20,5 @@
   ],
   "status": "active",
   "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133042.png",
-  "displayOrder": 0,
-  "createdAt": "2026-02-14T15:17:00.571Z",
-  "updatedAt": "2026-02-14T15:17:00.571Z"
+  "displayOrder": 0
 }
