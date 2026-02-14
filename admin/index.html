@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 🔒 IMPORTANT: block indexing -->
     <meta name="robots" content="noindex, nofollow">
-<meta name="googlebot" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
     <title>Admin Panel - Extra Miles Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -43,12 +42,12 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* Login */
+        /* Login Page Styles */
         .login-container {
             min-height: 100vh;
             display: flex;
@@ -91,7 +90,6 @@
             background: linear-gradient(135deg, var(--gold), #FFE55C);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
         
         .form-group {
@@ -302,11 +300,11 @@
             cursor: pointer;
         }
         
-        /* File Upload with Camera */
-        .file-upload-area {
+        /* Multiple Images Upload */
+        .multi-image-upload-area {
             border: 2px dashed rgba(255, 215, 0, 0.3);
             border-radius: var(--radius);
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
@@ -314,55 +312,36 @@
             background: rgba(255, 215, 0, 0.05);
         }
         
-        .file-upload-area:hover {
+        .multi-image-upload-area:hover {
             border-color: var(--gold);
             background: rgba(255, 215, 0, 0.1);
         }
         
-        .camera-options {
-            display: flex;
+        .image-gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
+            margin: 20px 0;
         }
         
-        .camera-btn {
-            padding: 10px 20px;
-            background: rgba(53, 208, 255, 0.1);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .camera-btn:hover {
-            background: rgba(53, 208, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .image-preview-container {
+        .gallery-item {
             position: relative;
-            display: inline-block;
-            margin: 20px auto;
-        }
-        
-        .image-preview {
-            max-width: 300px;
-            max-height: 300px;
             border-radius: var(--radius-sm);
+            overflow: hidden;
             border: 2px solid rgba(255, 215, 0, 0.3);
-            display: block;
-            background: rgba(0, 0, 0, 0.2);
+            aspect-ratio: 1;
         }
         
-        .remove-image {
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .remove-gallery-image {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 5px;
+            right: 5px;
             background: rgba(255, 53, 112, 0.9);
             color: white;
             border: none;
@@ -376,9 +355,26 @@
             transition: var(--transition);
         }
         
-        .remove-image:hover {
+        .remove-gallery-image:hover {
             background: var(--danger);
             transform: scale(1.1);
+        }
+        
+        .gallery-item.featured {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
         
         /* Products Grid */
@@ -424,6 +420,26 @@
             flex: 1;
             padding: 8px 16px;
             font-size: 0.9rem;
+        }
+        
+        .product-badges {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .badge.has-page {
+            background: var(--success);
+            color: var(--primary);
         }
         
         /* Company Details Section */
@@ -588,6 +604,22 @@
             justify-content: center;
         }
         
+        /* Category Icons */
+        .category-icon {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .category-icon.ev { background: rgba(53, 208, 255, 0.2); color: var(--accent); }
+        .category-icon.solar { background: rgba(255, 215, 0, 0.2); color: var(--gold); }
+        .category-icon.inverter { background: rgba(124, 92, 255, 0.2); color: var(--accent2); }
+        .category-icon.ess { background: rgba(69, 255, 144, 0.2); color: var(--success); }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -624,6 +656,10 @@
             .camera-preview {
                 height: 300px;
             }
+            
+            .image-gallery-preview {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
         }
         
         @media (max-width: 480px) {
@@ -635,10 +671,6 @@
                 padding: 10px 15px;
                 font-size: 0.9rem;
             }
-            
-            .camera-options {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
@@ -648,7 +680,7 @@
         <div class="login-box">
             <h1 class="login-title">Extra Miles Energy</h1>
             <p style="color: var(--gold-light); margin-bottom: 10px; font-weight: 500;">Admin Panel</p>
-            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Product Management System</p>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Advanced Product Management System</p>
             
             <div id="loginMessage" class="message"></div>
             
@@ -656,8 +688,8 @@
                 <label class="form-label">Admin Password</label>
                 <input type="password" id="password" class="form-input" placeholder="Enter admin password" autocomplete="current-password">
                 <div style="margin-top: 5px; font-size: 0.85rem; color: var(--gold-light);">
-    <i class="fas fa-key"></i> Default password set. Please change after first login.
-</div>
+                    <i class="fas fa-key"></i> Default password set. Please change after first login.
+                </div>
             </div>
             
             <button class="btn btn-block" onclick="login()">
@@ -667,7 +699,7 @@
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 215, 0, 0.2);">
                 <p style="color: var(--gold-light); font-size: 0.9rem;">
                     <i class="fas fa-info-circle" style="color: var(--gold);"></i> 
-                    Configure GitHub token for automatic sync
+                    v2.0 - Now with Product Detail Pages & Multiple Images
                 </p>
             </div>
         </div>
@@ -679,11 +711,11 @@
             <div class="container">
                 <div class="header-content">
                     <div>
-                        <h2 style="background: linear-gradient(135deg, var(--gold), #FFE55C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">
+                        <h2 style="background: linear-gradient(135deg, var(--gold), #FFE55C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px;">
                             Extra Miles Energy
                         </h2>
-                        <div style="color: var(--gold-light); font-size: 0.9rem;">LiFePO₄ Battery Management System</div>
-                        <div class="company-badge">Admin Panel</div>
+                        <div style="color: var(--gold-light); font-size: 0.9rem;">LiFePO₄ Battery & Solar Solutions</div>
+                        <div class="company-badge">Admin Panel v2.0</div>
                     </div>
                     <button class="btn btn-danger" onclick="logout()">
                         <i class="fas fa-sign-out-alt"></i> Logout
@@ -703,6 +735,9 @@
                 </button>
                 <button class="nav-btn" onclick="showTab('addProduct')">
                     <i class="fas fa-plus-circle"></i> Add Product
+                </button>
+                <button class="nav-btn" onclick="showTab('categories')">
+                    <i class="fas fa-tags"></i> Categories
                 </button>
                 <button class="nav-btn" onclick="showTab('company')">
                     <i class="fas fa-building"></i> Company Details
@@ -730,12 +765,20 @@
                             <div class="label">Active Products</div>
                         </div>
                         <div class="stat-card">
-                            <div class="number" id="draftProducts">0</div>
-                            <div class="label">Draft Products</div>
+                            <div class="number" id="productsWithPages">0</div>
+                            <div class="label">With Detail Pages</div>
                         </div>
                         <div class="stat-card">
                             <div class="number" id="lastSync">--</div>
                             <div class="label">Last Sync</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Category Stats -->
+                    <div style="margin-top: 30px; margin-bottom: 30px;">
+                        <h4 style="margin-bottom: 15px; color: var(--gold-light);">Category Distribution</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;" id="categoryStats">
+                            <!-- Will be populated by JavaScript -->
                         </div>
                     </div>
                     
@@ -754,9 +797,9 @@
                                 <i class="fas fa-external-link-alt"></i>
                                 <span>View Website</span>
                             </a>
-                            <a href="#" class="quick-action-btn" onclick="showTab('company')">
-                                <i class="fas fa-edit"></i>
-                                <span>Edit Company Info</span>
+                            <a href="#" class="quick-action-btn" onclick="generateAllProductPages()">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Generate All Pages</span>
                             </a>
                             <a href="https://wa.me/917876555055" target="_blank" class="quick-action-btn">
                                 <i class="fab fa-whatsapp"></i>
@@ -793,19 +836,21 @@
                         </div>
                     </div>
                     
-                    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="searchProducts" class="form-input" placeholder="Search products..." style="flex: 1;" onkeyup="searchProducts()">
                         <select id="filterCategory" class="form-input" style="width: 200px;" onchange="filterProducts()">
                             <option value="">All Categories</option>
-                            <option value="EV Battery">EV Battery</option>
-                            <option value="Solar Battery">Solar Battery</option>
-                            <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
-                            <option value="Custom Battery">Custom Battery</option>
+                            <option value="EV Battery">🔋 EV Battery</option>
+                            <option value="Solar Battery">☀️ Solar Battery</option>
+                            <option value="E-Rickshaw Battery">🛺 E-Rickshaw Battery</option>
+                            <option value="Solar Inverter">⚡ Solar Inverter</option>
+                            <option value="Solar ESS Battery">🏭 Solar ESS Battery</option>
+                            <option value="Custom Battery">🔧 Custom Battery</option>
                         </select>
                         <select id="filterStatus" class="form-input" style="width: 150px;" onchange="filterProducts()">
                             <option value="">All Status</option>
-                            <option value="active">Active</option>
-                            <option value="draft">Draft</option>
+                            <option value="active">✅ Active</option>
+                            <option value="draft">📝 Draft</option>
                         </select>
                     </div>
                     
@@ -816,7 +861,7 @@
                 </div>
             </div>
             
-            <!-- Add Product Tab -->
+            <!-- Add Product Tab (Updated with Multiple Images & Description) -->
             <div id="addProduct" class="tab-content">
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);" id="formTitle">Add New Product</h3>
@@ -826,101 +871,123 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Product Name *</label>
-                            <input type="text" id="productName" class="form-input" placeholder="e.g., 60V 30Ah Lithium Battery" required>
+                            <input type="text" id="productName" class="form-input" placeholder="e.g., 5kW Solar Hybrid Inverter" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Voltage & Capacity *</label>
-                            <input type="text" id="productVoltage" class="form-input" placeholder="e.g., 60V 30Ah" required>
+                            <label class="form-label">Model Number</label>
+                            <input type="text" id="productModel" class="form-input" placeholder="e.g., EM-SH5K">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Category *</label>
-                            <select id="productCategory" class="form-input" required>
-                                <option value="EV Battery">EV Battery</option>
-                                <option value="Solar Battery">Solar Battery</option>
-                                <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
-                                <option value="Custom Battery">Custom Battery</option>
+                            <select id="productCategory" class="form-input" required onchange="updateCategoryFields()">
+                                <option value="EV Battery">🔋 EV Battery</option>
+                                <option value="Solar Battery">☀️ Solar Battery</option>
+                                <option value="E-Rickshaw Battery">🛺 E-Rickshaw Battery</option>
+                                <option value="Solar Inverter">⚡ Solar Inverter</option>
+                                <option value="Solar ESS Battery">🏭 Solar ESS Battery</option>
+                                <option value="Custom Battery">🔧 Custom Battery</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Price Range</label>
-                            <input type="text" id="productPrice" class="form-input" placeholder="e.g., ₹18,000 - ₹22,000">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Model Number</label>
-                            <input type="text" id="productModel" class="form-input" placeholder="e.g., EM-LFP6030">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Configuration</label>
-                            <input type="text" id="productConfig" class="form-input" placeholder="e.g., 19S2P">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Chemistry</label>
-                            <input type="text" id="productChemistry" class="form-input" value="LiFePO₄" placeholder="Lithium Iron Phosphate">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Warranty</label>
-                            <input type="text" id="productWarranty" class="form-input" value="3 Year Warranty">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Capacity (Wh)</label>
-                            <input type="text" id="productCapacity" class="form-input" placeholder="e.g., 1820 Wh">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">BMS Type</label>
-                            <input type="text" id="productBMS" class="form-input" placeholder="e.g., JK Smart BMS 40A">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Features (One per line) *</label>
-                        <textarea id="productFeatures" class="form-input" placeholder="LiFePO4 Cells&#10;3 Year Warranty&#10;Smart BMS&#10;Waterproof&#10;Active Cell Balancer&#10;2000+ Cycles" required rows="4"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Product Image</label>
-                        <div class="file-upload-area" onclick="document.getElementById('productImage').click()">
-                            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--gold); margin-bottom: 10px;"></i>
-                            <div style="color: var(--gold-light);">Click to upload image or use camera</div>
-                            <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">JPG or PNG, max 5MB</div>
-                            
-                            <div class="camera-options">
-                                <div class="camera-btn" onclick="openCamera()">
-                                    <i class="fas fa-camera"></i> Open Camera
-                                </div>
-                                <div class="camera-btn" onclick="document.getElementById('productImage').click()">
-                                    <i class="fas fa-folder-open"></i> Choose File
-                                </div>
-                            </div>
-                        </div>
-                        <input type="file" id="productImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
-                        
-                        <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
-                            <img id="imagePreview" class="image-preview">
-                            <button type="button" class="remove-image" onclick="removeImage()">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Status</label>
                             <select id="productStatus" class="form-input">
-                                <option value="active">Active</option>
-                                <option value="draft">Draft</option>
+                                <option value="active">✅ Active</option>
+                                <option value="draft">📝 Draft</option>
                             </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Battery Specific Fields (shown for battery categories) -->
+                    <div id="batteryFields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Voltage & Capacity *</label>
+                                <input type="text" id="productVoltage" class="form-input" placeholder="e.g., 48V 100Ah">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chemistry</label>
+                                <input type="text" id="productChemistry" class="form-input" value="LiFePO₄">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Capacity (Wh)</label>
+                                <input type="text" id="productCapacity" class="form-input" placeholder="e.g., 4800 Wh">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">BMS Type</label>
+                                <input type="text" id="productBMS" class="form-input" placeholder="e.g., JK Smart BMS 100A">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Configuration</label>
+                                <input type="text" id="productConfig" class="form-input" placeholder="e.g., 16S1P">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Warranty</label>
+                                <input type="text" id="productWarranty" class="form-input" value="3 Year Warranty">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Inverter Specific Fields (shown for inverter categories) -->
+                    <div id="inverterFields" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Power Rating *</label>
+                                <input type="text" id="productPower" class="form-input" placeholder="e.g., 5kW">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Input Voltage</label>
+                                <input type="text" id="productInputVoltage" class="form-input" placeholder="e.g., 48V DC">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Output Voltage</label>
+                                <input type="text" id="productOutputVoltage" class="form-input" placeholder="e.g., 230V AC">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">MPPT Range</label>
+                                <input type="text" id="productMPPT" class="form-input" placeholder="e.g., 60-115V DC">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Max PV Input</label>
+                                <input type="text" id="productPVInput" class="form-input" placeholder="e.g., 6500W">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Efficiency</label>
+                                <input type="text" id="productEfficiency" class="form-input" placeholder="e.g., 97%">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Warranty</label>
+                                <input type="text" id="productWarrantyInverter" class="form-input" value="5 Year Warranty">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">IP Rating</label>
+                                <input type="text" id="productIP" class="form-input" placeholder="e.g., IP65">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Common Fields for All -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Price Range</label>
+                            <input type="text" id="productPrice" class="form-input" placeholder="e.g., ₹45,000 - ₹55,000">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Display Order</label>
@@ -928,25 +995,206 @@
                         </div>
                     </div>
                     
+                    <!-- NEW: Detailed Description Field -->
+                    <div class="form-group">
+                        <label class="form-label">Detailed Description *</label>
+                        <textarea id="productDescription" class="form-input" placeholder="Write a detailed description of the product..." rows="6" required></textarea>
+                        <div style="margin-top: 5px; font-size: 0.85rem; color: var(--gold-light);">
+                            <i class="fas fa-info-circle"></i> This will be shown on the product detail page
+                        </div>
+                    </div>
+                    
+                    <!-- NEW: Key Features (for detail page) -->
+                    <div class="form-group">
+                        <label class="form-label">Key Features (One per line) *</label>
+                        <textarea id="productFeatures" class="form-input" placeholder="High efficiency >97%&#10;Pure sine wave output&#10;Parallel operation up to 6 units&#10;LCD display with real-time data&#10;Mobile app monitoring" required rows="4"></textarea>
+                    </div>
+                    
+                    <!-- NEW: Specifications (JSON format or key-value pairs) -->
+                    <div class="form-group">
+                        <label class="form-label">Technical Specifications (Optional - for table display)</label>
+                        <textarea id="productSpecs" class="form-input" placeholder="Max PV Voltage: 500V DC&#10;Nominal Battery Voltage: 48V&#10;AC Output Current: 20.8A&#10;Transfer Time: <10ms&#10;Operating Temperature: -10°C to 50°C" rows="5"></textarea>
+                        <div style="margin-top: 5px; font-size: 0.85rem; color: var(--gold-light);">
+                            <i class="fas fa-info-circle"></i> Enter one specification per line (Name: Value)
+                        </div>
+                    </div>
+                    
+                    <!-- NEW: Multiple Images Upload -->
+                    <div class="form-group">
+                        <label class="form-label">Product Images Gallery *</label>
+                        <div class="multi-image-upload-area" onclick="document.getElementById('productImages').click()">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2.5rem; color: var(--gold); margin-bottom: 10px;"></i>
+                            <div style="color: var(--gold-light); font-size: 1.1rem;">Click to upload multiple images</div>
+                            <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">JPG or PNG, max 5MB each</div>
+                            <div style="color: var(--gold); font-size: 0.85rem; margin-top: 10px;">
+                                <i class="fas fa-star"></i> First image will be the main product image
+                            </div>
+                            
+                            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+                                <div class="camera-btn" onclick="openGalleryCamera(event)">
+                                    <i class="fas fa-camera"></i> Take Photo
+                                </div>
+                                <div class="camera-btn" onclick="event.stopPropagation(); document.getElementById('productImages').click()">
+                                    <i class="fas fa-folder-open"></i> Choose Files
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="file" id="productImages" accept="image/*" multiple style="display: none;" onchange="previewMultipleImages(event)">
+                        
+                        <!-- Image Gallery Preview -->
+                        <div id="imageGalleryPreview" class="image-gallery-preview"></div>
+                    </div>
+                    
+                    <!-- Create Product Page Option -->
+                    <div class="form-group" style="margin: 20px 0; padding: 15px; background: rgba(255, 215, 0, 0.05); border-radius: var(--radius);">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="createProductPage" checked> 
+                            <span style="color: var(--gold-light);">Create dedicated product page (recommended)</span>
+                        </label>
+                        <div style="color: var(--text-muted); font-size: 0.85rem; margin-left: 30px;">
+                            <i class="fas fa-link"></i> Product will be available at: /products/product-name.html
+                        </div>
+                    </div>
+                    
                     <div style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
-                        <button class="btn btn-success" onclick="saveProduct()" style="flex: 1; min-width: 200px;">
+                        <button class="btn btn-success" onclick="saveProduct()" style="flex: 2; min-width: 200px;">
                             <i class="fas fa-save"></i> Save Product
                         </button>
-                        <button class="btn" onclick="clearForm()" style="flex: 1; min-width: 200px;">
-                            <i class="fas fa-times"></i> Clear Form
+                        <button class="btn" onclick="clearForm()" style="flex: 1; min-width: 150px;">
+                            <i class="fas fa-times"></i> Clear
                         </button>
-                        <button class="btn btn-danger" onclick="showTab('products')" style="flex: 1; min-width: 200px;">
-                            <i class="fas fa-arrow-left"></i> Back to Products
+                        <button class="btn btn-danger" onclick="showTab('products')" style="flex: 1; min-width: 150px;">
+                            <i class="fas fa-arrow-left"></i> Back
                         </button>
                     </div>
                 </div>
             </div>
             
-            <!-- Company Details Tab -->
+            <!-- Categories Tab (NEW) -->
+            <div id="categories" class="tab-content">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px; color: var(--gold);">Manage Categories</h3>
+                    
+                    <div id="categoriesMessage" class="message"></div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <!-- EV Battery Category -->
+                        <div class="product-card" style="border-color: var(--accent);">
+                            <div style="font-size: 2rem; margin-bottom: 10px; color: var(--accent);">🔋</div>
+                            <h4 style="color: var(--gold);">EV Battery</h4>
+                            <div class="category-icon ev" style="width: auto; border-radius: 20px; padding: 5px 10px; margin: 10px 0;">
+                                <i class="fas fa-car"></i> Electric Vehicle
+                            </div>
+                            <div style="color: var(--text-muted); margin: 15px 0;">Products: <span id="catEvCount">0</span></div>
+                            <button class="btn" onclick="filterByCategory('EV Battery')" style="width: 100%;">
+                                <i class="fas fa-search"></i> View Products
+                            </button>
+                        </div>
+                        
+                        <!-- Solar Battery Category -->
+                        <div class="product-card" style="border-color: var(--gold);">
+                            <div style="font-size: 2rem; margin-bottom: 10px; color: var(--gold);">☀️</div>
+                            <h4 style="color: var(--gold);">Solar Battery</h4>
+                            <div class="category-icon solar" style="width: auto; border-radius: 20px; padding: 5px 10px; margin: 10px 0;">
+                                <i class="fas fa-solar-panel"></i> Solar Storage
+                            </div>
+                            <div style="color: var(--text-muted); margin: 15px 0;">Products: <span id="catSolarCount">0</span></div>
+                            <button class="btn" onclick="filterByCategory('Solar Battery')" style="width: 100%;">
+                                <i class="fas fa-search"></i> View Products
+                            </button>
+                        </div>
+                        
+                        <!-- E-Rickshaw Battery Category -->
+                        <div class="product-card" style="border-color: var(--success);">
+                            <div style="font-size: 2rem; margin-bottom: 10px; color: var(--success);">🛺</div>
+                            <h4 style="color: var(--gold);">E-Rickshaw Battery</h4>
+                            <div class="category-icon ev" style="width: auto; border-radius: 20px; padding: 5px 10px; margin: 10px 0;">
+                                <i class="fas fa-motorcycle"></i> E-Rickshaw
+                            </div>
+                            <div style="color: var(--text-muted); margin: 15px 0;">Products: <span id="catERickCount">0</span></div>
+                            <button class="btn" onclick="filterByCategory('E-Rickshaw Battery')" style="width: 100%;">
+                                <i class="fas fa-search"></i> View Products
+                            </button>
+                        </div>
+                        
+                        <!-- Solar Inverter Category (NEW) -->
+                        <div class="product-card" style="border-color: var(--accent2);">
+                            <div style="font-size: 2rem; margin-bottom: 10px; color: var(--accent2);">⚡</div>
+                            <h4 style="color: var(--gold);">Solar Inverter</h4>
+                            <div class="category-icon inverter" style="width: auto; border-radius: 20px; padding: 5px 10px; margin: 10px 0;">
+                                <i class="fas fa-bolt"></i> Hybrid Inverter
+                            </div>
+                            <div style="color: var(--text-muted); margin: 15px 0;">Products: <span id="catInverterCount">0</span></div>
+                            <button class="btn" onclick="filterByCategory('Solar Inverter')" style="width: 100%;">
+                                <i class="fas fa-search"></i> View Products
+                            </button>
+                        </div>
+                        
+                        <!-- Solar ESS Battery Category (NEW) -->
+                        <div class="product-card" style="border-color: var(--warning);">
+                            <div style="font-size: 2rem; margin-bottom: 10px; color: var(--warning);">🏭</div>
+                            <h4 style="color: var(--gold);">Solar ESS Battery</h4>
+                            <div class="category-icon ess" style="width: auto; border-radius: 20px; padding: 5px 10px; margin: 10px 0;">
+                                <i class="fas fa-industry"></i> Energy Storage System
+                            </div>
+                            <div style="color: var(--text-muted); margin: 15px 0;">Products: <span id="catESSCount">0</span></div>
+                            <button class="btn" onclick="filterByCategory('Solar ESS Battery')" style="width: 100%;">
+                                <i class="fas fa-search"></i> View Products
+                            </button>
+                        </div>
+                        
+                        <!-- Custom Battery Category -->
+                        <div class="product-card" style="border-color: var(--danger);">
+                            <div style="font-size: 2rem; margin-bottom: 10px; color: var(--danger);">🔧</div>
+                            <h4 style="color: var(--gold);">Custom Battery</h4>
+                            <div class="category-icon ev" style="width: auto; border-radius: 20px; padding: 5px 10px; margin: 10px 0;">
+                                <i class="fas fa-tools"></i> Custom Solutions
+                            </div>
+                            <div style="color: var(--text-muted); margin: 15px 0;">Products: <span id="catCustomCount">0</span></div>
+                            <button class="btn" onclick="filterByCategory('Custom Battery')" style="width: 100%;">
+                                <i class="fas fa-search"></i> View Products
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 40px; padding: 20px; background: rgba(255, 215, 0, 0.05); border-radius: var(--radius);">
+                        <h4 style="margin-bottom: 15px; color: var(--gold);">Category Settings</h4>
+                        <div class="form-group">
+                            <label class="form-label">Enable/Disable Categories on Website</label>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" class="category-toggle" value="EV Battery" checked> 🔋 EV Battery
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" class="category-toggle" value="Solar Battery" checked> ☀️ Solar Battery
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" class="category-toggle" value="E-Rickshaw Battery" checked> 🛺 E-Rickshaw Battery
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" class="category-toggle" value="Solar Inverter" checked> ⚡ Solar Inverter
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" class="category-toggle" value="Solar ESS Battery" checked> 🏭 Solar ESS Battery
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" class="category-toggle" value="Custom Battery" checked> 🔧 Custom Battery
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="saveCategorySettings()" style="margin-top: 20px;">
+                            <i class="fas fa-save"></i> Save Category Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Company Details Tab (unchanged) -->
             <div id="company" class="tab-content">
+                <!-- ... existing company details ... -->
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);">Company Details</h3>
-                    
                     <div id="companyMessage" class="message"></div>
                     
                     <div class="company-details-form">
@@ -969,11 +1217,11 @@
                         
                         <div class="detail-item">
                             <label>Tagline:</label>
-                            <input type="text" id="companyTagline" class="form-input" value="Premium LiFePO₄ Battery Solutions">
+                            <input type="text" id="companyTagline" class="form-input" value="Premium LiFePO₄ Battery & Solar Solutions">
                         </div>
                     </div>
                     
-                    <div class="company-details-form" style="margin-top: 30px;">
+                    <div class="company-details-form">
                         <h4 style="margin-bottom: 20px; color: var(--gold-light);">Contact Information</h4>
                         
                         <div class="detail-item">
@@ -993,7 +1241,7 @@
                         
                         <div class="detail-item">
                             <label>Phone 2:</label>
-                            <input type="tel" id="companyPhone2" class="form-input" placeholder="Optional second number">
+                            <input type="tel" id="companyPhone2" class="form-input">
                         </div>
                         
                         <div class="detail-item">
@@ -1002,17 +1250,17 @@
                         </div>
                     </div>
                     
-                    <div class="company-details-form" style="margin-top: 30px;">
+                    <div class="company-details-form">
                         <h4 style="margin-bottom: 20px; color: var(--gold-light);">Website Settings</h4>
                         
                         <div class="detail-item">
                             <label>Website Title:</label>
-                            <input type="text" id="websiteTitle" class="form-input" value="Extra Miles Energy - Premium Lithium Batteries">
+                            <input type="text" id="websiteTitle" class="form-input" value="Extra Miles Energy - Premium Lithium Batteries & Solar Solutions">
                         </div>
                         
                         <div class="detail-item">
                             <label>Meta Description:</label>
-                            <textarea id="websiteDescription" class="form-input" rows="3">High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with LiFePO4 technology for maximum safety and longevity.</textarea>
+                            <textarea id="websiteDescription" class="form-input" rows="3">High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Premium solar inverters and ESS solutions. Built with LiFePO4 technology for maximum safety and longevity.</textarea>
                         </div>
                         
                         <div class="detail-item">
@@ -1026,14 +1274,15 @@
                             <i class="fas fa-save"></i> Save All Details
                         </button>
                         <button class="btn" onclick="loadCompanyDetails()" style="flex: 1;">
-                            <i class="fas fa-redo"></i> Reload Defaults
+                            <i class="fas fa-redo"></i> Reload
                         </button>
                     </div>
                 </div>
             </div>
             
-            <!-- Settings Tab -->
+            <!-- Settings Tab (unchanged) -->
             <div id="settings" class="tab-content">
+                <!-- ... existing settings ... -->
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);">GitHub Configuration</h3>
                     
@@ -1070,12 +1319,23 @@
                         
                         <div class="form-row">
                             <div class="form-group">
+                                <label class="form-label">Product Pages Path</label>
+                                <input type="text" id="productPagesPath" class="form-input" value="products">
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label">Uploads Path</label>
                                 <input type="text" id="uploadsPath" class="form-input" value="uploads">
                             </div>
+                        </div>
+                        
+                        <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">Company Details Path</label>
                                 <input type="text" id="companyPath" class="form-input" value="content/company.json">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Categories Path</label>
+                                <input type="text" id="categoriesPath" class="form-input" value="content/categories.json">
                             </div>
                         </div>
                         
@@ -1113,7 +1373,7 @@
                         </button>
                     </div>
                     
-                    <div style="margin-top: 30px; padding: 20px; background: rgba(255, 215, 0, 0.05); border-radius: var(--radius); border: 1px solid rgba(255, 215, 0, 0.2);">
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(255, 215, 0, 0.05); border-radius: var(--radius);">
                         <h4 style="margin-bottom: 15px; color: var(--gold);">System Information</h4>
                         <div style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                             <div>Browser: <span id="browserInfo">--</span></div>
@@ -1125,8 +1385,9 @@
                 </div>
             </div>
             
-            <!-- Backup Tab -->
+            <!-- Backup Tab (unchanged) -->
             <div id="backup" class="tab-content">
+                <!-- ... existing backup ... -->
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);">Data Backup & Restore</h3>
                     
@@ -1215,9 +1476,20 @@
                     <i class="fas fa-camera"></i> Capture
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Page Preview Modal (NEW) -->
+    <div id="productPreviewModal" class="camera-modal">
+        <div class="camera-container" style="max-width: 1000px; max-height: 90vh; overflow-y: auto;">
+            <h3 style="margin-bottom: 20px; color: var(--gold); text-align: center;">Product Page Preview</h3>
             
-            <div style="margin-top: 20px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-                <i class="fas fa-lightbulb"></i> Tip: Ensure good lighting for better product photos
+            <div id="productPreviewContent" style="color: var(--text);"></div>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                <button class="btn btn-success" onclick="closeProductPreview()">
+                    <i class="fas fa-check"></i> Close Preview
+                </button>
             </div>
         </div>
     </div>
@@ -1229,18 +1501,21 @@
         let editingProductId = null;
         let cameraStream = null;
         let currentCamera = 'environment';
+        let productImages = []; // Array to store multiple images
+        let currentGalleryMode = 'single'; // 'single' or 'multiple'
+        
         let companyDetails = {
             name: 'Skyline Stores',
             brand: 'Extra Miles Energy',
             gst: '07HYXPS2318L1ZY',
-            tagline: 'Premium LiFePO₄ Battery Solutions',
+            tagline: 'Premium LiFePO₄ Battery & Solar Solutions',
             address: 'Shop No. 8, Opp. Aryan School, Kamri Road, Hisar - 125001',
             email: 'extramilesenergy@gmail.com',
             phone1: '+91 78765 55055',
             phone2: '',
             whatsapp: '+917876555055',
-            websiteTitle: 'Extra Miles Energy - Premium Lithium Batteries',
-            websiteDescription: 'High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Built with LiFePO4 technology for maximum safety and longevity.'
+            websiteTitle: 'Extra Miles Energy - Premium Lithium Batteries & Solar Solutions',
+            websiteDescription: 'High-performance lithium batteries for electric vehicles, solar systems, and custom applications. Premium solar inverters and ESS solutions. Built with LiFePO4 technology for maximum safety and longevity.'
         };
         
         let githubConfig = {
@@ -1249,8 +1524,19 @@
             repo: 'extramilesenergy.in',
             branch: 'main',
             productsPath: 'content/products',
+            productPagesPath: 'products',
             uploadsPath: 'uploads',
-            companyPath: 'content/company.json'
+            companyPath: 'content/company.json',
+            categoriesPath: 'content/categories.json'
+        };
+        
+        let categorySettings = {
+            'EV Battery': true,
+            'Solar Battery': true,
+            'E-Rickshaw Battery': true,
+            'Solar Inverter': true,
+            'Solar ESS Battery': true,
+            'Custom Battery': true
         };
         
         // Initialize
@@ -1263,12 +1549,20 @@
                 loadProducts();
                 loadSettings();
                 loadCompanyDetails();
+                loadCategorySettings();
                 updateSystemInfo();
                 loadRecentActivity();
             }
+            
+            // Set up category toggle listeners
+            document.querySelectorAll('.category-toggle').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    categorySettings[this.value] = this.checked;
+                });
+            });
         });
         
-        // Authentication
+        // Authentication Functions
         function login() {
             const password = document.getElementById('password').value;
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
@@ -1279,10 +1573,10 @@
                 loadProducts();
                 loadSettings();
                 loadCompanyDetails();
+                loadCategorySettings();
                 updateSystemInfo();
                 loadRecentActivity();
                 showMessage('loginMessage', 'Login successful! Redirecting...', 'success');
-                
                 addActivity('Admin login successful');
             } else {
                 showMessage('loginMessage', 'Incorrect password!', 'error');
@@ -1312,6 +1606,8 @@
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             
             document.getElementById(tabId).classList.add('active');
+            
+            // Find and activate corresponding nav button
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 if (btn.onclick && btn.onclick.toString().includes(tabId)) {
                     btn.classList.add('active');
@@ -1320,16 +1616,109 @@
             
             if (tabId === 'dashboard') {
                 updateDashboardStats();
+                updateCategoryStats();
+            }
+            
+            if (tabId === 'products') {
+                displayProducts();
             }
             
             if (tabId === 'addProduct') {
                 document.getElementById('formTitle').textContent = editingProductId ? 'Edit Product' : 'Add New Product';
+                updateCategoryFields();
             }
+            
+            if (tabId === 'categories') {
+                updateCategoryStats();
+                loadCategorySettings();
+            }
+        }
+        
+        // Category Functions
+        function updateCategoryFields() {
+            const category = document.getElementById('productCategory').value;
+            const batteryFields = document.getElementById('batteryFields');
+            const inverterFields = document.getElementById('inverterFields');
+            
+            if (category === 'Solar Inverter') {
+                batteryFields.style.display = 'none';
+                inverterFields.style.display = 'block';
+            } else {
+                batteryFields.style.display = 'block';
+                inverterFields.style.display = 'none';
+            }
+        }
+        
+        function filterByCategory(category) {
+            document.getElementById('filterCategory').value = category;
+            showTab('products');
+            filterProducts();
+        }
+        
+        function updateCategoryStats() {
+            const counts = {
+                'EV Battery': 0,
+                'Solar Battery': 0,
+                'E-Rickshaw Battery': 0,
+                'Solar Inverter': 0,
+                'Solar ESS Battery': 0,
+                'Custom Battery': 0
+            };
+            
+            products.forEach(p => {
+                if (counts.hasOwnProperty(p.category)) {
+                    counts[p.category]++;
+                }
+            });
+            
+            document.getElementById('catEvCount').textContent = counts['EV Battery'];
+            document.getElementById('catSolarCount').textContent = counts['Solar Battery'];
+            document.getElementById('catERickCount').textContent = counts['E-Rickshaw Battery'];
+            document.getElementById('catInverterCount').textContent = counts['Solar Inverter'];
+            document.getElementById('catESSCount').textContent = counts['Solar ESS Battery'];
+            document.getElementById('catCustomCount').textContent = counts['Custom Battery'];
+            
+            // Update dashboard category stats
+            let categoryStatsHtml = '';
+            for (const [category, count] of Object.entries(counts)) {
+                let icon = '🔋';
+                if (category === 'Solar Battery') icon = '☀️';
+                else if (category === 'E-Rickshaw Battery') icon = '🛺';
+                else if (category === 'Solar Inverter') icon = '⚡';
+                else if (category === 'Solar ESS Battery') icon = '🏭';
+                else if (category === 'Custom Battery') icon = '🔧';
+                
+                categoryStatsHtml += `
+                    <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: var(--radius);">
+                        <div style="font-size: 1.5rem; margin-bottom: 5px;">${icon}</div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--gold);">${count}</div>
+                        <div style="color: var(--text-muted); font-size: 0.8rem;">${category}</div>
+                    </div>
+                `;
+            }
+            document.getElementById('categoryStats').innerHTML = categoryStatsHtml;
+        }
+        
+        function loadCategorySettings() {
+            const saved = localStorage.getItem('category_settings');
+            if (saved) {
+                categorySettings = JSON.parse(saved);
+                document.querySelectorAll('.category-toggle').forEach(checkbox => {
+                    checkbox.checked = categorySettings[checkbox.value] || false;
+                });
+            }
+        }
+        
+        function saveCategorySettings() {
+            localStorage.setItem('category_settings', JSON.stringify(categorySettings));
+            showMessage('categoriesMessage', 'Category settings saved!', 'success');
+            addActivity('Updated category settings');
         }
         
         // Message display
         function showMessage(elementId, text, type) {
             const element = document.getElementById(elementId);
+            if (!element) return;
             element.textContent = text;
             element.className = `message ${type}`;
             element.style.display = 'block';
@@ -1379,9 +1768,17 @@
         
         // Camera Functions
         function openCamera() {
+            currentGalleryMode = 'single';
             const modal = document.getElementById('cameraModal');
             modal.classList.add('active');
-            
+            startCamera();
+        }
+        
+        function openGalleryCamera(event) {
+            event.stopPropagation();
+            currentGalleryMode = 'multiple';
+            const modal = document.getElementById('cameraModal');
+            modal.classList.add('active');
             startCamera();
         }
         
@@ -1398,8 +1795,6 @@
                 cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
                 const video = document.getElementById('cameraPreview');
                 video.srcObject = cameraStream;
-                
-                addActivity('Opened camera for product photo');
             } catch (error) {
                 console.error('Camera error:', error);
                 alert('Camera access denied or not available. Please allow camera access.');
@@ -1429,17 +1824,31 @@
             canvas.toBlob(function(blob) {
                 const file = new File([blob], `product-${Date.now()}.jpg`, { type: 'image/jpeg' });
                 
-                const event = {
-                    target: {
-                        files: [file]
+                if (currentGalleryMode === 'single') {
+                    // For single image upload (legacy)
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    document.getElementById('productImage').files = dataTransfer.files;
+                    
+                    const event = { target: { files: [file] } };
+                    previewImage(event);
+                } else {
+                    // For multiple images gallery
+                    const dataTransfer = new DataTransfer();
+                    
+                    // Get existing files
+                    const existingFiles = document.getElementById('productImages').files;
+                    for (let i = 0; i < existingFiles.length; i++) {
+                        dataTransfer.items.add(existingFiles[i]);
                     }
-                };
-                
-                previewImage(event);
-                
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
-                document.getElementById('productImage').files = dataTransfer.files;
+                    
+                    // Add new file
+                    dataTransfer.items.add(file);
+                    document.getElementById('productImages').files = dataTransfer.files;
+                    
+                    const event = { target: { files: dataTransfer.files } };
+                    previewMultipleImages(event);
+                }
                 
                 addActivity('Captured product photo with camera');
             }, 'image/jpeg', 0.9);
@@ -1457,7 +1866,7 @@
             }
         }
         
-        // Image preview
+        // Legacy single image preview
         function previewImage(event) {
             const file = event.target.files[0];
             const preview = document.getElementById('imagePreview');
@@ -1468,11 +1877,69 @@
                 reader.onload = function(e) {
                     preview.src = e.target.result;
                     container.style.display = 'block';
-                    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 };
                 reader.readAsDataURL(file);
+            }
+        }
+        
+        // NEW: Multiple images preview
+        function previewMultipleImages(event) {
+            const files = Array.from(event.target.files);
+            const galleryPreview = document.getElementById('imageGalleryPreview');
+            
+            if (files.length === 0) {
+                galleryPreview.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                const imageId = `preview-${index}-${Date.now()}`;
                 
-                addActivity(`Uploaded product image: ${file.name}`);
+                reader.onload = function(e) {
+                    const imgHtml = `
+                        <div class="gallery-item ${index === 0 ? 'featured' : ''}" id="${imageId}">
+                            <img src="${e.target.result}" alt="Product image ${index + 1}">
+                            <button type="button" class="remove-gallery-image" onclick="removeGalleryImage(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            ${index === 0 ? '<div class="featured-badge">Main Image</div>' : ''}
+                        </div>
+                    `;
+                    
+                    // Append to gallery
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = imgHtml;
+                    const existingItem = document.getElementById(imageId);
+                    if (existingItem) {
+                        existingItem.outerHTML = imgHtml;
+                    } else {
+                        galleryPreview.insertAdjacentHTML('beforeend', imgHtml);
+                    }
+                };
+                
+                reader.readAsDataURL(file);
+            });
+            
+            // Store files array in a global variable for later use
+            window.currentProductImageFiles = files;
+        }
+        
+        function removeGalleryImage(index) {
+            const fileInput = document.getElementById('productImages');
+            const files = Array.from(fileInput.files);
+            
+            if (index >= 0 && index < files.length) {
+                files.splice(index, 1);
+                
+                const dataTransfer = new DataTransfer();
+                files.forEach(file => dataTransfer.items.add(file));
+                fileInput.files = dataTransfer.files;
+                
+                // Refresh preview
+                const event = { target: { files: dataTransfer.files } };
+                previewMultipleImages(event);
             }
         }
         
@@ -1480,25 +1947,37 @@
             document.getElementById('imagePreview').src = '';
             document.getElementById('imagePreviewContainer').style.display = 'none';
             document.getElementById('productImage').value = '';
-            editingProductId = null;
         }
         
         // Load products
         async function loadProducts() {
-            const container = document.getElementById('productsList');
-            
             try {
-                const response = await fetch(`https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.productsPath}/all-products.json`);
-                
-                if (response.ok) {
-                    products = await response.json();
-                    addActivity('Products loaded from GitHub');
+                // Try to load from GitHub first
+                if (githubConfig.token) {
+                    const response = await fetch(`https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.productsPath}/all-products.json`);
+                    
+                    if (response.ok) {
+                        products = await response.json();
+                        addActivity('Products loaded from GitHub');
+                    } else {
+                        products = JSON.parse(localStorage.getItem('local_products') || '[]');
+                        addActivity('Products loaded from local storage');
+                    }
                 } else {
                     products = JSON.parse(localStorage.getItem('local_products') || '[]');
-                    addActivity('Products loaded from local storage');
                 }
                 
+                // Ensure each product has required fields
+                products = products.map(p => ({
+                    ...p,
+                    images: p.images || (p.image ? [p.image] : []),
+                    description: p.description || '',
+                    specs: p.specs || {},
+                    hasDetailPage: p.hasDetailPage || false
+                }));
+                
                 updateDashboardStats();
+                updateCategoryStats();
                 displayProducts();
                 
             } catch (error) {
@@ -1529,34 +2008,40 @@
             
             let html = '<div class="products-grid">';
             
-            displayProducts.forEach(product => {
-                // ✅ FIX: Handle image URLs properly
-                let imageUrl = product.image || '';
+            displayProducts.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)).forEach(product => {
+                // Get main image
+                let imageUrl = product.images && product.images.length > 0 ? product.images[0] : (product.image || '');
                 
-                // If image is already a GitHub URL, use it as is
-                if (imageUrl && imageUrl.includes('githubusercontent.com')) {
-                    // Already a GitHub URL, use it
-                } 
-                // If image is a local path, convert to GitHub URL
-                else if (imageUrl && imageUrl.startsWith('../')) {
-                    const cleanPath = imageUrl.replace('../', '');
-                    imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${cleanPath}`;
-                }
-                // If image is just filename
-                else if (imageUrl && !imageUrl.startsWith('http')) {
+                // Convert to GitHub URL if needed
+                if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
                     imageUrl = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${imageUrl}`;
                 }
                 
+                // Get category icon
+                let categoryIcon = '🔋';
+                if (product.category === 'Solar Battery') categoryIcon = '☀️';
+                else if (product.category === 'E-Rickshaw Battery') categoryIcon = '🛺';
+                else if (product.category === 'Solar Inverter') categoryIcon = '⚡';
+                else if (product.category === 'Solar ESS Battery') categoryIcon = '🏭';
+                else if (product.category === 'Custom Battery') categoryIcon = '🔧';
+                
                 html += `
                     <div class="product-card">
-                        <img src="${imageUrl || 'https://via.placeholder.com/300x200/FFD700/0b1220?text=Product'}" 
+                        <div class="product-badges">
+                            ${product.hasDetailPage ? '<span class="badge has-page"><i class="fas fa-link"></i> Page</span>' : ''}
+                        </div>
+                        <img src="${imageUrl || 'https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles'}" 
                              class="product-image" 
                              alt="${product.name}"
                              onerror="this.src='https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles'">
                         <h4 style="margin-bottom: 5px; color: var(--gold-light);">${product.name}</h4>
-                        <div style="color: var(--gold); margin-bottom: 10px; font-weight: 600;">${product.voltage || ''}</div>
+                        <div style="color: var(--gold); margin-bottom: 10px; font-weight: 600;">
+                            ${product.category === 'Solar Inverter' ? product.power || '' : product.voltage || ''}
+                        </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span style="color: var(--text-muted); font-size: 0.9rem;">${product.category || ''}</span>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">
+                                ${categoryIcon} ${product.category || ''}
+                            </span>
                             <span style="color: ${product.status === 'active' ? 'var(--success)' : 'var(--warning)'}; font-size: 0.8rem; background: ${product.status === 'active' ? 'rgba(69, 255, 144, 0.1)' : 'rgba(255, 177, 69, 0.1)'}; padding: 2px 10px; border-radius: 10px;">
                                 ${product.status || 'draft'}
                             </span>
@@ -1566,6 +2051,11 @@
                             <button class="btn" onclick="editProduct('${product.id}')">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
+                            ${product.hasDetailPage ? `
+                                <button class="btn btn-info" onclick="previewProductPage('${product.id}')">
+                                    <i class="fas fa-eye"></i> Preview
+                                </button>
+                            ` : ''}
                             <button class="btn btn-danger" onclick="deleteProduct('${product.id}')">
                                 <i class="fas fa-trash"></i> Delete
                             </button>
@@ -1585,7 +2075,8 @@
                 product.name.toLowerCase().includes(searchTerm) ||
                 (product.voltage && product.voltage.toLowerCase().includes(searchTerm)) ||
                 (product.category && product.category.toLowerCase().includes(searchTerm)) ||
-                (product.model && product.model.toLowerCase().includes(searchTerm))
+                (product.model && product.model.toLowerCase().includes(searchTerm)) ||
+                (product.description && product.description.toLowerCase().includes(searchTerm))
             );
             displayProducts(filtered);
         }
@@ -1611,11 +2102,11 @@
         function updateDashboardStats() {
             const total = products.length;
             const active = products.filter(p => p.status === 'active').length;
-            const draft = products.filter(p => p.status === 'draft').length;
+            const withPages = products.filter(p => p.hasDetailPage).length;
             
             document.getElementById('totalProducts').textContent = total;
             document.getElementById('activeProducts').textContent = active;
-            document.getElementById('draftProducts').textContent = draft;
+            document.getElementById('productsWithPages').textContent = withPages;
             document.getElementById('productsCount').textContent = total;
             
             const lastSync = localStorage.getItem('last_sync_time');
@@ -1642,68 +2133,103 @@
             document.getElementById('storageInfo').textContent = `${percent}% used`;
         }
         
-        // ✅ FIXED: Save product with PROPER image handling
+        // Save product with all new features
         async function saveProduct() {
             const name = document.getElementById('productName').value;
-            const voltage = document.getElementById('productVoltage').value;
-            const category = document.getElementById('productCategory').value;
-            const price = document.getElementById('productPrice').value;
             const model = document.getElementById('productModel').value;
-            const config = document.getElementById('productConfig').value;
-            const chemistry = document.getElementById('productChemistry').value;
-            const warranty = document.getElementById('productWarranty').value;
-            const capacity = document.getElementById('productCapacity').value;
-            const bms = document.getElementById('productBMS').value;
-            const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
+            const category = document.getElementById('productCategory').value;
             const status = document.getElementById('productStatus').value;
+            const price = document.getElementById('productPrice').value;
             const order = document.getElementById('productOrder').value;
-            const imageFile = document.getElementById('productImage').files[0];
             
-            if (!name || !voltage || !features.length) {
+            // NEW fields
+            const description = document.getElementById('productDescription').value;
+            const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
+            const specsText = document.getElementById('productSpecs').value;
+            
+            // Parse specs
+            const specs = {};
+            specsText.split('\n').forEach(line => {
+                const [key, value] = line.split(':').map(s => s.trim());
+                if (key && value) {
+                    specs[key] = value;
+                }
+            });
+            
+            const createPage = document.getElementById('createProductPage').checked;
+            
+            // Get image files
+            const imageFiles = document.getElementById('productImages').files;
+            
+            if (!name || !category || !description || features.length === 0) {
                 showMessage('addProductMessage', 'Please fill all required fields', 'error');
                 return;
             }
             
             const productId = editingProductId || `product-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
             
-            // Start with existing image if editing
-            let imageUrl = '';
-            if (editingProductId) {
-                const existingProduct = products.find(p => p.id === productId);
-                imageUrl = existingProduct?.image || '';
-            }
-            
-            const product = {
+            // Build product object
+            let product = {
                 id: productId,
                 name,
-                voltage,
-                category,
-                price: price || null,
                 model: model || null,
-                configuration: config || null,
-                chemistry: chemistry || 'LiFePO₄',
-                warranty: warranty || '3 Year Warranty',
-                capacity: capacity || null,
-                bms: bms || null,
-                features,
+                category,
                 status,
-                image: imageUrl, // Will be updated if new image is uploaded
+                price: price || null,
                 displayOrder: parseInt(order) || 0,
+                description,
+                features,
+                specs,
+                hasDetailPage: createPage,
                 createdAt: editingProductId ? products.find(p => p.id === productId)?.createdAt : new Date().toISOString(),
                 updatedAt: new Date().toISOString()
             };
             
+            // Add category-specific fields
+            if (category === 'Solar Inverter') {
+                product.power = document.getElementById('productPower').value;
+                product.inputVoltage = document.getElementById('productInputVoltage').value;
+                product.outputVoltage = document.getElementById('productOutputVoltage').value;
+                product.mppt = document.getElementById('productMPPT').value;
+                product.pvInput = document.getElementById('productPVInput').value;
+                product.efficiency = document.getElementById('productEfficiency').value;
+                product.warranty = document.getElementById('productWarrantyInverter').value;
+                product.ipRating = document.getElementById('productIP').value;
+            } else {
+                product.voltage = document.getElementById('productVoltage').value;
+                product.chemistry = document.getElementById('productChemistry').value;
+                product.capacity = document.getElementById('productCapacity').value;
+                product.bms = document.getElementById('productBMS').value;
+                product.configuration = document.getElementById('productConfig').value;
+                product.warranty = document.getElementById('productWarranty').value;
+            }
+            
             try {
                 showMessage('addProductMessage', 'Saving product...', 'success');
                 
-                // Step 1: Upload image to GitHub if exists
-                if (imageFile && githubConfig.token) {
-                    const uploadedImageUrl = await uploadImageToGitHub(imageFile);
-                    product.image = uploadedImageUrl; // Set GitHub URL
-                    addActivity(`Uploaded image: ${imageFile.name}`);
+                // Upload images to GitHub if token exists
+                if (githubConfig.token && imageFiles.length > 0) {
+                    const imageUrls = [];
+                    
+                    for (let i = 0; i < imageFiles.length; i++) {
+                        const file = imageFiles[i];
+                        const uploadedUrl = await uploadImageToGitHub(file);
+                        imageUrls.push(uploadedUrl);
+                    }
+                    
+                    product.images = imageUrls;
+                    product.image = imageUrls[0]; // First image as main
+                } else if (editingProductId) {
+                    // Keep existing images
+                    const existingProduct = products.find(p => p.id === productId);
+                    product.images = existingProduct?.images || [];
+                    product.image = existingProduct?.image || (product.images[0] || '');
+                } else {
+                    product.images = [];
+                    product.image = '';
                 }
                 
-                // Step 2: Update local array
+                // Update local array
                 const index = products.findIndex(p => p.id === productId);
                 if (index > -1) {
                     products[index] = product;
@@ -1713,14 +2239,17 @@
                     addActivity(`Added new product: ${product.name}`);
                 }
                 
-                // Step 3: Save to localStorage
+                // Save to localStorage
                 localStorage.setItem('local_products', JSON.stringify(products));
                 
-                // Step 4: Save to GitHub if configured
+                // Save to GitHub if configured
                 if (githubConfig.token) {
-                    // First save individual product
                     await saveToGitHub(product);
-                    // Then update master list
+                    
+                    if (createPage) {
+                        await generateProductPage(product);
+                    }
+                    
                     await updateMasterProductsList();
                     localStorage.setItem('last_sync_time', new Date().toISOString());
                 }
@@ -1728,8 +2257,18 @@
                 showMessage('addProductMessage', 'Product saved successfully!', 'success');
                 clearForm();
                 updateDashboardStats();
+                updateCategoryStats();
                 displayProducts();
-                showTab('products');
+                
+                if (createPage) {
+                    setTimeout(() => {
+                        if (confirm('Product page created! Would you like to preview it?')) {
+                            previewProductPage(product.id);
+                        }
+                    }, 1000);
+                } else {
+                    showTab('products');
+                }
                 
             } catch (error) {
                 console.error('Error saving product:', error);
@@ -1738,83 +2277,431 @@
             }
         }
         
-        // Clear form
-        function clearForm() {
-            document.getElementById('productName').value = '';
-            document.getElementById('productVoltage').value = '';
-            document.getElementById('productPrice').value = '';
-            document.getElementById('productModel').value = '';
-            document.getElementById('productConfig').value = '';
-            document.getElementById('productChemistry').value = 'LiFePO₄';
-            document.getElementById('productWarranty').value = '3 Year Warranty';
-            document.getElementById('productCapacity').value = '';
-            document.getElementById('productBMS').value = '';
-            document.getElementById('productFeatures').value = '';
-            document.getElementById('productOrder').value = '0';
-            document.getElementById('productStatus').value = 'active';
-            document.getElementById('productImage').value = '';
-            document.getElementById('imagePreviewContainer').style.display = 'none';
-            editingProductId = null;
-            document.getElementById('formTitle').textContent = 'Add New Product';
-        }
-        
-        // Edit product
-        function editProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
+        // Generate HTML for product detail page
+        async function generateProductPage(product) {
+            const pageContent = generateProductPageHTML(product);
+            const fileName = `${product.id}.html`;
+            const filePath = `${githubConfig.productPagesPath}/${fileName}`;
             
-            editingProductId = productId;
+            const base64Content = btoa(unescape(encodeURIComponent(pageContent)));
             
-            document.getElementById('productName').value = product.name;
-            document.getElementById('productVoltage').value = product.voltage || '';
-            document.getElementById('productCategory').value = product.category || 'EV Battery';
-            document.getElementById('productPrice').value = product.price || '';
-            document.getElementById('productModel').value = product.model || '';
-            document.getElementById('productConfig').value = product.configuration || '';
-            document.getElementById('productChemistry').value = product.chemistry || 'LiFePO₄';
-            document.getElementById('productWarranty').value = product.warranty || '3 Year Warranty';
-            document.getElementById('productCapacity').value = product.capacity || '';
-            document.getElementById('productBMS').value = product.bms || '';
-            document.getElementById('productFeatures').value = product.features?.join('\n') || '';
-            document.getElementById('productStatus').value = product.status || 'active';
-            document.getElementById('productOrder').value = product.displayOrder || 0;
-            
-            if (product.image) {
-                document.getElementById('imagePreview').src = product.image;
-                document.getElementById('imagePreviewContainer').style.display = 'block';
-            }
-            
-            showTab('addProduct');
-            addActivity(`Editing product: ${product.name}`);
-        }
-        
-        // Delete product
-        async function deleteProduct(productId) {
-            if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) return;
-            
+            // Get SHA if file exists
+            let sha = null;
             try {
-                const product = products.find(p => p.id === productId);
-                products = products.filter(p => p.id !== productId);
-                localStorage.setItem('local_products', JSON.stringify(products));
+                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
                 
-                if (githubConfig.token) {
-                    await deleteFromGitHub(productId);
+                if (getResponse.ok) {
+                    const fileData = await getResponse.json();
+                    sha = fileData.sha;
                 }
-                
-                updateDashboardStats();
-                displayProducts();
-                
-                addActivity(`Deleted product: ${product?.name || productId}`);
-                showMessage('addProductMessage', 'Product deleted successfully!', 'success');
-                
-            } catch (error) {
-                console.error('Error deleting product:', error);
-                alert('Error deleting product: ' + error.message);
-                addActivity(`Error deleting product: ${error.message}`);
+            } catch (e) {
+                // File doesn't exist
             }
+            
+            // Save product page
+            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${githubConfig.token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    message: `Create product page: ${product.name}`,
+                    content: base64Content,
+                    branch: githubConfig.branch,
+                    ...(sha && { sha })
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to create product page');
+            }
+            
+            return true;
         }
         
-        // ✅ FIXED: Upload image to GitHub
+        // Generate product page HTML template
+        function generateProductPageHTML(product) {
+            const categoryIcon = {
+                'EV Battery': '🔋',
+                'Solar Battery': '☀️',
+                'E-Rickshaw Battery': '🛺',
+                'Solar Inverter': '⚡',
+                'Solar ESS Battery': '🏭',
+                'Custom Battery': '🔧'
+            }[product.category] || '📦';
+            
+            // Build images gallery HTML
+            const imagesHtml = (product.images || []).map((img, index) => `
+                <div class="gallery-item ${index === 0 ? 'active' : ''}" onclick="changeImage('${img}', ${index})">
+                    <img src="${img}" alt="${product.name} - Image ${index + 1}">
+                </div>
+            `).join('');
+            
+            // Build features HTML
+            const featuresHtml = (product.features || []).map(f => `
+                <li><i class="fas fa-check-circle" style="color: var(--gold);"></i> ${f}</li>
+            `).join('');
+            
+            // Build specs HTML
+            const specsHtml = Object.entries(product.specs || {}).map(([key, value]) => `
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid rgba(255,215,0,0.2); color: var(--gold-light);">${key}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid rgba(255,215,0,0.2); color: var(--text);">${value}</td>
+                </tr>
+            `).join('');
+            
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${product.name} - Extra Miles Energy</title>
+    <meta name="description" content="${product.description.substring(0, 160)}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0b1220;
+            --secondary: #142044;
+            --gold: #FFD700;
+            --gold-light: #FFF9C4;
+            --accent: #35d0ff;
+            --text: #ffffff;
+            --text-muted: #a0b3d9;
+            --card-bg: rgba(20, 32, 68, 0.95);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--gold), #FFE55C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--gold), #FFC107);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        /* Product Gallery */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .gallery-thumbnails .gallery-item {
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-thumbnails .gallery-item:hover,
+        .gallery-thumbnails .gallery-item.active {
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+        
+        .gallery-thumbnails .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        /* Product Info */
+        .product-info {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .product-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 20px;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .product-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* Features */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .features-list li {
+            list-style: none;
+            padding: 10px;
+            background: rgba(255,215,0,0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+        
+        /* Specifications */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        
+        .specs-table tr:hover {
+            background: rgba(255,215,0,0.05);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .product-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-thumbnails {
+                flex-direction: row;
+                order: 2;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../" class="logo">Extra Miles Energy</a>
+                <a href="../#contact" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div style="margin-bottom: 20px; color: var(--text-muted);">
+            <a href="../" style="color: var(--gold); text-decoration: none;">Home</a> 
+            <i class="fas fa-chevron-right" style="font-size: 0.8rem; margin: 0 10px;"></i>
+            <a href="../#products" style="color: var(--gold); text-decoration: none;">Products</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.8rem; margin: 0 10px;"></i>
+            <span style="color: var(--gold-light);">${product.name}</span>
+        </div>
+        
+        <!-- Image Gallery -->
+        <div class="product-gallery">
+            <div class="gallery-thumbnails" id="thumbnails">
+                ${imagesHtml}
+            </div>
+            <div class="main-image" id="mainImage">
+                <img src="${product.images?.[0] || ''}" alt="${product.name}">
+            </div>
+        </div>
+        
+        <!-- Product Info -->
+        <div class="product-info">
+            <h1 class="product-title">${product.name}</h1>
+            <div class="product-category">
+                ${categoryIcon} ${product.category}
+            </div>
+            
+            ${product.price ? `<div class="product-price">${product.price}</div>` : ''}
+            
+            <div class="product-description">
+                <p>${product.description.replace(/\n/g, '<br>')}</p>
+            </div>
+            
+            <!-- Key Features -->
+            <h2 style="color: var(--gold); margin: 30px 0 20px;">Key Features</h2>
+            <ul class="features-list">
+                ${featuresHtml}
+            </ul>
+            
+            <!-- Technical Specifications -->
+            ${Object.keys(product.specs || {}).length > 0 ? `
+                <h2 style="color: var(--gold); margin: 30px 0 20px;">Technical Specifications</h2>
+                <table class="specs-table">
+                    ${specsHtml}
+                </table>
+            ` : ''}
+            
+            <!-- Additional Details -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
+                ${product.warranty ? `
+                    <div style="text-align: center; padding: 15px; background: rgba(255,215,0,0.05); border-radius: 8px;">
+                        <i class="fas fa-shield-alt" style="color: var(--gold); font-size: 1.5rem;"></i>
+                        <div style="margin-top: 10px;">${product.warranty}</div>
+                    </div>
+                ` : ''}
+                
+                ${product.chemistry ? `
+                    <div style="text-align: center; padding: 15px; background: rgba(255,215,0,0.05); border-radius: 8px;">
+                        <i class="fas fa-battery-full" style="color: var(--gold); font-size: 1.5rem;"></i>
+                        <div style="margin-top: 10px;">${product.chemistry}</div>
+                    </div>
+                ` : ''}
+                
+                ${product.bms ? `
+                    <div style="text-align: center; padding: 15px; background: rgba(255,215,0,0.05); border-radius: 8px;">
+                        <i class="fas fa-microchip" style="color: var(--gold); font-size: 1.5rem;"></i>
+                        <div style="margin-top: 10px;">${product.bms}</div>
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2 style="color: var(--gold); margin-bottom: 20px;">Interested in this product?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Get in touch with us for best prices and expert advice</p>
+            
+            <div class="contact-buttons">
+                <a href="https://wa.me/917876555055?text=I'm%20interested%20in%20${encodeURIComponent(product.name)}" class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Now
+                </a>
+                <a href="tel:+917876555055" class="btn">
+                    <i class="fas fa-phone"></i> Call Us
+                </a>
+                <a href="../#contact" class="btn">
+                    <i class="fas fa-envelope"></i> Send Enquiry
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function changeImage(src, index) {
+            document.querySelector('#mainImage img').src = src;
+            document.querySelectorAll('.gallery-item').forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>`;
+        }
+        
+        // Upload image to GitHub
         async function uploadImageToGitHub(imageFile) {
             const base64Content = await new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1825,8 +2712,9 @@
             
             // Create safe filename
             const originalName = imageFile.name;
-            const safeName = originalName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9.-]/g, '');
-            const fileName = safeName || `image-${Date.now()}.jpg`;
+            const timestamp = Date.now();
+            const safeName = `${timestamp}-${originalName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9.-]/g, '')}`;
+            const fileName = safeName || `image-${timestamp}.jpg`;
             const filePath = `${githubConfig.uploadsPath}/${fileName}`;
             
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -1852,17 +2740,8 @@
             return `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${filePath}`;
         }
         
-        // ✅ FIXED: Save individual product to GitHub
+        // Save product to GitHub
         async function saveToGitHub(product) {
-            // Make sure image URL is properly set
-            if (product.image && !product.image.includes('githubusercontent.com')) {
-                // If image is a local filename, convert to GitHub URL
-                if (product.image && !product.image.startsWith('http')) {
-                    const fileName = product.image.split('/').pop();
-                    product.image = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${githubConfig.uploadsPath}/${fileName}`;
-                }
-            }
-            
             const content = JSON.stringify(product, null, 2);
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/${product.id}.json`;
@@ -1885,8 +2764,7 @@
                 // File doesn't exist
             }
             
-            // Save individual product file
-            const saveResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `token ${githubConfig.token}`,
@@ -1901,32 +2779,24 @@
                 })
             });
             
-            if (!saveResponse.ok) {
-                const error = await saveResponse.json();
+            if (!response.ok) {
+                const error = await response.json();
                 throw new Error(`Failed to save product: ${error.message}`);
             }
             
             return true;
         }
         
-        // ✅ FIXED: Update master products list WITHOUT losing image URLs
+        // Update master products list
         async function updateMasterProductsList() {
-            // Create clean product list for website
             const websiteProducts = products.map(p => ({
                 id: p.id,
                 name: p.name,
-                voltage: p.voltage,
                 category: p.category,
                 price: p.price,
-                model: p.model,
-                configuration: p.configuration,
-                chemistry: p.chemistry,
-                warranty: p.warranty,
-                capacity: p.capacity,
-                bms: p.bms,
-                features: p.features,
+                image: p.images?.[0] || p.image || '',
+                hasDetailPage: p.hasDetailPage || false,
                 status: p.status,
-                image: p.image, // Keep the full GitHub URL
                 displayOrder: p.displayOrder || 0
             }));
             
@@ -1934,7 +2804,6 @@
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/all-products.json`;
             
-            // Get SHA if file exists
             let sha = null;
             try {
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -1948,11 +2817,8 @@
                     const fileData = await getResponse.json();
                     sha = fileData.sha;
                 }
-            } catch (e) {
-                // File doesn't exist
-            }
+            } catch (e) {}
             
-            // Update master list
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -1973,44 +2839,252 @@
             }
         }
         
-        // Delete from GitHub
-        async function deleteFromGitHub(productId) {
-            const filePath = `${githubConfig.productsPath}/${productId}.json`;
+        // Clear form
+        function clearForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productModel').value = '';
+            document.getElementById('productCategory').value = 'EV Battery';
+            document.getElementById('productStatus').value = 'active';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productOrder').value = '0';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productFeatures').value = '';
+            document.getElementById('productSpecs').value = '';
+            document.getElementById('createProductPage').checked = true;
             
-            try {
-                // Get SHA first
-                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
+            // Battery fields
+            document.getElementById('productVoltage').value = '';
+            document.getElementById('productChemistry').value = 'LiFePO₄';
+            document.getElementById('productCapacity').value = '';
+            document.getElementById('productBMS').value = '';
+            document.getElementById('productConfig').value = '';
+            document.getElementById('productWarranty').value = '3 Year Warranty';
+            
+            // Inverter fields
+            document.getElementById('productPower').value = '';
+            document.getElementById('productInputVoltage').value = '';
+            document.getElementById('productOutputVoltage').value = '';
+            document.getElementById('productMPPT').value = '';
+            document.getElementById('productPVInput').value = '';
+            document.getElementById('productEfficiency').value = '';
+            document.getElementById('productWarrantyInverter').value = '5 Year Warranty';
+            document.getElementById('productIP').value = '';
+            
+            // Images
+            document.getElementById('productImages').value = '';
+            document.getElementById('imageGalleryPreview').innerHTML = '';
+            
+            editingProductId = null;
+            document.getElementById('formTitle').textContent = 'Add New Product';
+            updateCategoryFields();
+        }
+        
+        // Edit product
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            editingProductId = productId;
+            
+            document.getElementById('productName').value = product.name || '';
+            document.getElementById('productModel').value = product.model || '';
+            document.getElementById('productCategory').value = product.category || 'EV Battery';
+            document.getElementById('productStatus').value = product.status || 'active';
+            document.getElementById('productPrice').value = product.price || '';
+            document.getElementById('productOrder').value = product.displayOrder || 0;
+            document.getElementById('productDescription').value = product.description || '';
+            document.getElementById('productFeatures').value = (product.features || []).join('\n');
+            
+            // Format specs for display
+            const specsText = Object.entries(product.specs || {})
+                .map(([k, v]) => `${k}: ${v}`)
+                .join('\n');
+            document.getElementById('productSpecs').value = specsText;
+            
+            document.getElementById('createProductPage').checked = product.hasDetailPage || false;
+            
+            // Battery fields
+            document.getElementById('productVoltage').value = product.voltage || '';
+            document.getElementById('productChemistry').value = product.chemistry || 'LiFePO₄';
+            document.getElementById('productCapacity').value = product.capacity || '';
+            document.getElementById('productBMS').value = product.bms || '';
+            document.getElementById('productConfig').value = product.configuration || '';
+            document.getElementById('productWarranty').value = product.warranty || '3 Year Warranty';
+            
+            // Inverter fields
+            document.getElementById('productPower').value = product.power || '';
+            document.getElementById('productInputVoltage').value = product.inputVoltage || '';
+            document.getElementById('productOutputVoltage').value = product.outputVoltage || '';
+            document.getElementById('productMPPT').value = product.mppt || '';
+            document.getElementById('productPVInput').value = product.pvInput || '';
+            document.getElementById('productEfficiency').value = product.efficiency || '';
+            document.getElementById('productWarrantyInverter').value = product.warranty || '5 Year Warranty';
+            document.getElementById('productIP').value = product.ipRating || '';
+            
+            // We can't set file inputs programmatically for security reasons
+            // So we'll just show a message that images are preserved
+            if (product.images && product.images.length > 0) {
+                const galleryPreview = document.getElementById('imageGalleryPreview');
+                let html = '<div style="color: var(--gold-light); margin: 10px 0;">Existing images will be preserved. Upload new images to add more.</div>';
+                
+                product.images.forEach((img, index) => {
+                    html += `
+                        <div class="gallery-item ${index === 0 ? 'featured' : ''}">
+                            <img src="${img}" alt="Existing image ${index + 1}">
+                            <div style="position: absolute; top: 5px; left: 5px; background: var(--gold); color: var(--primary); padding: 2px 5px; border-radius: 3px; font-size: 0.7rem;">
+                                Existing
+                            </div>
+                        </div>
+                    `;
                 });
                 
-                if (getResponse.ok) {
-                    const fileData = await getResponse.json();
-                    const sha = fileData.sha;
+                galleryPreview.innerHTML = html;
+            }
+            
+            showTab('addProduct');
+            addActivity(`Editing product: ${product.name}`);
+        }
+        
+        // Delete product
+        async function deleteProduct(productId) {
+            if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) return;
+            
+            try {
+                const product = products.find(p => p.id === productId);
+                products = products.filter(p => p.id !== productId);
+                localStorage.setItem('local_products', JSON.stringify(products));
+                
+                if (githubConfig.token) {
+                    // Delete product file
+                    const filePath = `${githubConfig.productsPath}/${productId}.json`;
                     
-                    // Delete file
-                    await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': `token ${githubConfig.token}`,
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/vnd.github.v3+json'
-                        },
-                        body: JSON.stringify({
-                            message: `Delete product: ${productId}`,
-                            sha: sha,
-                            branch: githubConfig.branch
-                        })
-                    });
+                    try {
+                        const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                            headers: {
+                                'Authorization': `token ${githubConfig.token}`,
+                                'Accept': 'application/vnd.github.v3+json'
+                            }
+                        });
+                        
+                        if (getResponse.ok) {
+                            const fileData = await getResponse.json();
+                            await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Authorization': `token ${githubConfig.token}`,
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/vnd.github.v3+json'
+                                },
+                                body: JSON.stringify({
+                                    message: `Delete product: ${product?.name || productId}`,
+                                    sha: fileData.sha,
+                                    branch: githubConfig.branch
+                                })
+                            });
+                        }
+                    } catch (e) {
+                        console.log('Product file not found in GitHub');
+                    }
                     
-                    // Update master list after deletion
+                    // Delete product page if exists
+                    if (product?.hasDetailPage) {
+                        const pagePath = `${githubConfig.productPagesPath}/${productId}.html`;
+                        try {
+                            const pageResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${pagePath}`, {
+                                headers: {
+                                    'Authorization': `token ${githubConfig.token}`,
+                                    'Accept': 'application/vnd.github.v3+json'
+                                }
+                            });
+                            
+                            if (pageResponse.ok) {
+                                const pageData = await pageResponse.json();
+                                await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${pagePath}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Authorization': `token ${githubConfig.token}`,
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/vnd.github.v3+json'
+                                    },
+                                    body: JSON.stringify({
+                                        message: `Delete product page: ${product?.name || productId}`,
+                                        sha: pageData.sha,
+                                        branch: githubConfig.branch
+                                    })
+                                });
+                            }
+                        } catch (e) {
+                            console.log('Product page not found in GitHub');
+                        }
+                    }
+                    
                     await updateMasterProductsList();
                 }
+                
+                updateDashboardStats();
+                updateCategoryStats();
+                displayProducts();
+                
+                addActivity(`Deleted product: ${product?.name || productId}`);
+                alert('Product deleted successfully!');
+                
             } catch (error) {
-                console.error('Error deleting from GitHub:', error);
+                console.error('Error deleting product:', error);
+                alert('Error deleting product: ' + error.message);
+                addActivity(`Error deleting product: ${error.message}`);
             }
+        }
+        
+        // Preview product page
+        function previewProductPage(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const previewContent = document.getElementById('productPreviewContent');
+            const html = generateProductPageHTML(product);
+            
+            // Extract just the main content part for preview
+            const bodyMatch = html.match(/<body>([\s\S]*)<\/body>/);
+            if (bodyMatch) {
+                previewContent.innerHTML = bodyMatch[1];
+            } else {
+                previewContent.innerHTML = '<div style="color: var(--danger);">Error generating preview</div>';
+            }
+            
+            document.getElementById('productPreviewModal').classList.add('active');
+        }
+        
+        function closeProductPreview() {
+            document.getElementById('productPreviewModal').classList.remove('active');
+        }
+        
+        // Generate all product pages
+        async function generateAllProductPages() {
+            if (!githubConfig.token) {
+                alert('Please configure GitHub token first');
+                showTab('settings');
+                return;
+            }
+            
+            if (!confirm('This will generate/update pages for all active products. Continue?')) return;
+            
+            let success = 0;
+            let failed = 0;
+            
+            for (const product of products) {
+                if (product.status === 'active') {
+                    try {
+                        await generateProductPage(product);
+                        success++;
+                    } catch (error) {
+                        console.error(`Failed to generate page for ${product.name}:`, error);
+                        failed++;
+                    }
+                }
+            }
+            
+            alert(`Pages generated: ${success} successful, ${failed} failed`);
+            addActivity(`Generated ${success} product pages`);
         }
         
         // Company Details Functions
@@ -2076,9 +3150,7 @@
                     const fileData = await getResponse.json();
                     sha = fileData.sha;
                 }
-            } catch (e) {
-                // File doesn't exist
-            }
+            } catch (e) {}
             
             await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
@@ -2096,7 +3168,7 @@
             });
         }
         
-        // GitHub Functions
+        // Settings Functions
         function loadSettings() {
             const savedConfig = localStorage.getItem('github_config');
             if (savedConfig) {
@@ -2106,8 +3178,10 @@
                 document.getElementById('githubRepo').value = githubConfig.repo;
                 document.getElementById('githubBranch').value = githubConfig.branch;
                 document.getElementById('productsPath').value = githubConfig.productsPath;
+                document.getElementById('productPagesPath').value = githubConfig.productPagesPath || 'products';
                 document.getElementById('uploadsPath').value = githubConfig.uploadsPath;
                 document.getElementById('companyPath').value = githubConfig.companyPath;
+                document.getElementById('categoriesPath').value = githubConfig.categoriesPath || 'content/categories.json';
             }
             
             const backupFreq = localStorage.getItem('backup_frequency') || 'weekly';
@@ -2124,8 +3198,10 @@
                 repo: document.getElementById('githubRepo').value,
                 branch: document.getElementById('githubBranch').value,
                 productsPath: document.getElementById('productsPath').value,
+                productPagesPath: document.getElementById('productPagesPath').value,
                 uploadsPath: document.getElementById('uploadsPath').value,
-                companyPath: document.getElementById('companyPath').value
+                companyPath: document.getElementById('companyPath').value,
+                categoriesPath: document.getElementById('categoriesPath').value
             };
             
             localStorage.setItem('github_config', JSON.stringify(githubConfig));
@@ -2149,10 +3225,10 @@
                 
                 if (response.ok) {
                     const user = await response.json();
-                    alert(`Connected successfully!\nGitHub user: ${user.login}`);
+                    alert(`✅ Connected successfully!\nGitHub user: ${user.login}`);
                     addActivity('GitHub connection test successful');
                 } else {
-                    alert('Connection failed. Please check your token.');
+                    alert('❌ Connection failed. Please check your token.');
                     addActivity('GitHub connection test failed');
                 }
             } catch (error) {
@@ -2169,12 +3245,19 @@
             }
             
             try {
-                // Save company details first
+                showMessage('addProductMessage', 'Syncing with GitHub...', 'success');
+                
+                // Save company details
                 await saveCompanyDetailsToGitHub();
                 
-                // Save all products to GitHub
+                // Save all products
                 for (const product of products) {
                     await saveToGitHub(product);
+                    
+                    // Generate product pages for active products
+                    if (product.status === 'active' && product.hasDetailPage) {
+                        await generateProductPage(product);
+                    }
                 }
                 
                 // Update master list
@@ -2183,12 +3266,12 @@
                 localStorage.setItem('last_sync_time', new Date().toISOString());
                 updateDashboardStats();
                 
-                alert('Successfully synced with GitHub!');
+                alert('✅ Successfully synced with GitHub!');
                 addActivity('Manual sync completed with GitHub');
                 
             } catch (error) {
                 console.error('Sync error:', error);
-                alert('Sync failed: ' + error.message);
+                alert('❌ Sync failed: ' + error.message);
                 addActivity(`Sync failed: ${error.message}`);
             }
         }
@@ -2249,6 +3332,7 @@
             const data = {
                 githubConfig: githubConfig,
                 companyDetails: companyDetails,
+                categorySettings: categorySettings,
                 exportDate: new Date().toISOString()
             };
             
@@ -2270,6 +3354,7 @@
                 products: products,
                 companyDetails: companyDetails,
                 githubConfig: githubConfig,
+                categorySettings: categorySettings,
                 activities: JSON.parse(localStorage.getItem('admin_activities') || '[]'),
                 backupDate: new Date().toISOString()
             };
@@ -2310,6 +3395,7 @@
                         products = restoredProducts;
                         localStorage.setItem('local_products', JSON.stringify(products));
                         updateDashboardStats();
+                        updateCategoryStats();
                         displayProducts();
                         
                         alert('Products restored successfully!');
@@ -2357,11 +3443,17 @@
                         loadSettings();
                     }
                     
+                    if (backup.categorySettings) {
+                        categorySettings = backup.categorySettings;
+                        localStorage.setItem('category_settings', JSON.stringify(categorySettings));
+                    }
+                    
                     if (backup.activities && Array.isArray(backup.activities)) {
                         localStorage.setItem('admin_activities', JSON.stringify(backup.activities));
                     }
                     
                     updateDashboardStats();
+                    updateCategoryStats();
                     displayProducts();
                     updateSystemInfo();
                     loadRecentActivity();
@@ -2408,7 +3500,7 @@
             }
         }
         
-        // Check for auto backup every hour
+        // Set interval for auto backup
         setInterval(checkAutoBackup, 60 * 60 * 1000);
         setTimeout(checkAutoBackup, 5000);
     </script>
