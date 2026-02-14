@@ -68,5 +68,29 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133063.png",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1771081704432-j736brdls",
+    "name": "72Volt 45Ah Lithium Phosphate battery for electric scooter ",
+    "voltage": "72Volt 45Ah",
+    "category": "EV Battery",
+    "price": "Rs. 39000/-",
+    "model": "EM-LFP7245",
+    "configuration": "23s3p",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "3312 Wh",
+    "bms": "JK Smart BMS with Active Balancer ",
+    "features": [
+      "Lifepo4 battery ",
+      "Waterproof ",
+      "3 Year Warranty ",
+      "Smart Active Balancer ",
+      "4500+ Life Cycle ",
+      "15 years Life"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133029.png",
+    "displayOrder": 0
   }
 ]
