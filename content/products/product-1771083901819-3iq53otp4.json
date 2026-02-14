@@ -1,0 +1,34 @@
+{
+  "id": "product-1771083901819-3iq53otp4",
+  "name": "6Kw Solar Hybrid inverter ",
+  "brand": "Gootu",
+  "category": "Solar Inverter",
+  "power": "6Kw",
+  "voltage": "48V",
+  "price": "Rs. 48000/-",
+  "model": "GOOTU 6Kw P9000",
+  "configuration": null,
+  "chemistry": "Solar Inverter ",
+  "warranty": "2 Year Warranty",
+  "capacity": null,
+  "bms": null,
+  "compatibility": [
+    "generic"
+  ],
+  "features": [
+    "Smart Hybrid Solar Inverter ",
+    "Wifi Connection ",
+    "Smartphone Monitor "
+  ],
+  "specifications": [
+    "Max Charing Current 120A",
+    "Max PV Input 9000 watt",
+    "Max PV Input VOC 500v",
+    "Battery 48Volt "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771083901988-wb2xxk.webp",
+  "displayOrder": 0,
+  "createdAt": "2026-02-14T15:45:01.819Z",
+  "updatedAt": "2026-02-14T15:45:01.819Z"
+}
