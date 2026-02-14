@@ -1,0 +1,28 @@
+{
+  "id": "product-1771084447408-pmz0wqpi1",
+  "name": "11Kw Smart Ess Battery for Hmne and Industrial Requirements ",
+  "voltage": "51.2Volt 210 Ah",
+  "category": "Solar Battery",
+  "price": "Rs. 125000/-",
+  "model": "EM-LFP51210",
+  "configuration": "16S14P",
+  "chemistry": "LiFePO₄",
+  "warranty": "5 Year Warranty",
+  "capacity": "10752Wh",
+  "bms": "JK ESS Smart BMS 150Amp",
+  "features": [
+    "Lifepo4 Cell",
+    "Bluetooth Connectivity ",
+    "4500+ life Cycle ",
+    "Wall Mounted ",
+    "Maintanence free",
+    "Smart Display ",
+    "Bluetooth Connectivity ",
+    "Parallel Connection "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771084447459-sngjwl.jpg",
+  "displayOrder": 0,
+  "createdAt": "2026-02-14T15:54:07.408Z",
+  "updatedAt": "2026-02-14T15:54:07.408Z"
+}
