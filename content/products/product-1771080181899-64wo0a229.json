@@ -1,0 +1,26 @@
+{
+  "id": "product-1771080181899-64wo0a229",
+  "name": "60 Volt 30Ah Lithium Phosphate battery for Electric Scooter ",
+  "voltage": "60Volt 30Ah",
+  "category": "EV Battery",
+  "price": "Rs. 23500/-",
+  "model": "EM-LFP6030",
+  "configuration": "19s2p",
+  "chemistry": "LiFePO₄",
+  "warranty": "3 Year Warranty",
+  "capacity": "1820Wh",
+  "bms": "JK SMART BMS WITH ACTIVE BALANCER ",
+  "features": [
+    "LiFePo4 Battery Cell",
+    "15 Years Life ",
+    "4500+ Life cycles ",
+    "Bluetooth Connectivity ",
+    "Smart Balance function ",
+    "Fast charging support "
+  ],
+  "status": "active",
+  "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000144247.png",
+  "displayOrder": 0,
+  "createdAt": "2026-02-14T14:43:01.899Z",
+  "updatedAt": "2026-02-14T14:43:01.899Z"
+}
