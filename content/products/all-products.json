@@ -160,5 +160,30 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771083901988-wb2xxk.webp",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1771084629372-ayg20k5u8",
+    "name": "10.7 Kw Smart Energy Storage Battery Pack ",
+    "voltage": "51.2V 210Ah",
+    "category": "EV Battery",
+    "price": "Rs. 125000/-",
+    "model": "EM-LFP51210",
+    "configuration": "16S14P",
+    "chemistry": "LiFePO₄",
+    "warranty": "5 Year Warranty",
+    "capacity": "10752Wh",
+    "bms": "JK ESS Smart BMS 150Amp",
+    "features": [
+      "Lifepo4 Cell",
+      "Bluetooth Connectivity ",
+      "Smart Display Bluetooth Connectivity ",
+      "Maintanence free Battery Pack ",
+      "Wall mounted ",
+      "4500+ life Cycle ",
+      "20 years+ Life"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771084629430-h39tzr.jpg",
+    "displayOrder": 0
   }
 ]
