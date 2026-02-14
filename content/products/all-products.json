@@ -2,8 +2,8 @@
   {
     "id": "product-1771080181899-64wo0a229",
     "name": "60 Volt 30Ah Lithium Phosphate battery for Electric Scooter ",
-    "voltage": "60Volt 30Ah",
     "category": "EV Battery",
+    "voltage": "60Volt 30Ah",
     "price": "Rs. 23500/-",
     "model": "EM-LFP6030",
     "configuration": "19s2p",
@@ -26,8 +26,8 @@
   {
     "id": "product-1771080985142-eua9z08wd",
     "name": "72Volt 30Ah lithium phosphate battery pack for electric scooter ",
-    "voltage": "72 Volt 30Ah",
     "category": "EV Battery",
+    "voltage": "72 Volt 30Ah",
     "price": "Rs. 27500/-",
     "model": "EM-LFP7230",
     "configuration": "23s2p",
@@ -49,8 +49,8 @@
   {
     "id": "product-1771081346827-c6fq8hxih",
     "name": "76Volt 45Ah Lithium Phosphate battery for electric scooter ",
-    "voltage": "76Volt 45Ah",
     "category": "EV Battery",
+    "voltage": "76Volt 45Ah",
     "price": "Rs. 40000/-",
     "model": "EM-LFP7645",
     "configuration": "24s3p",
@@ -72,8 +72,8 @@
   {
     "id": "product-1771081704432-j736brdls",
     "name": "72Volt 45Ah Lithium Phosphate battery for electric scooter ",
-    "voltage": "72Volt 45Ah",
     "category": "EV Battery",
+    "voltage": "72Volt 45Ah",
     "price": "Rs. 39000/-",
     "model": "EM-LFP7245",
     "configuration": "23s3p",
@@ -96,8 +96,8 @@
   {
     "id": "product-1771082220571-whe9mzj5b",
     "name": "60Volt 45 Ah lithium battery pack for electric scooter ",
-    "voltage": "60Volt 45Ah",
     "category": "EV Battery",
+    "voltage": "60Volt 45Ah",
     "price": "Rs. 34500/-",
     "model": "EM-LFP6045",
     "configuration": "19s 3p",
@@ -120,8 +120,8 @@
   {
     "id": "product-1771082511554-7yaywaqa9",
     "name": "51.2 Volt 105 Ah lithium batteries for E rikshaw ",
-    "voltage": "51.2 Volt 105 Ah",
     "category": "EV Battery",
+    "voltage": "51.2 Volt 105 Ah",
     "price": "Rs. 60000/-",
     "model": "EM-LFP51105",
     "configuration": "16s1p",
@@ -138,6 +138,38 @@
     ],
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000144257.png",
+    "displayOrder": 0
+  },
+  {
+    "id": "product-1771083901819-3iq53otp4",
+    "name": "6Kw Solar Hybrid inverter ",
+    "brand": "Gootu",
+    "category": "Solar Inverter",
+    "power": "6Kw",
+    "voltage": "48V",
+    "price": "Rs. 48000/-",
+    "model": "GOOTU 6Kw P9000",
+    "configuration": null,
+    "chemistry": "Solar Inverter ",
+    "warranty": "2 Year Warranty",
+    "capacity": null,
+    "bms": null,
+    "compatibility": [
+      "generic"
+    ],
+    "features": [
+      "Smart Hybrid Solar Inverter ",
+      "Wifi Connection ",
+      "Smartphone Monitor "
+    ],
+    "specifications": [
+      "Max Charing Current 120A",
+      "Max PV Input 9000 watt",
+      "Max PV Input VOC 500v",
+      "Battery 48Volt "
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771083901988-wb2xxk.webp",
     "displayOrder": 0
   }
 ]
