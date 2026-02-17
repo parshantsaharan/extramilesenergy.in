@@ -1733,6 +1733,36 @@
             companyPath: 'content/company.json'
         };
         
+        // ============================================
+        // ✅ FIXED: Product Page Filename Generator - NO extra dash
+        // ============================================
+        function generateProductFileName(productName) {
+            if (!productName) return 'product.html';
+            
+            // Step 1: Convert to lowercase
+            let fileName = productName.toLowerCase();
+            
+            // Step 2: Replace spaces with hyphens
+            fileName = fileName.replace(/\s+/g, '-');
+            
+            // Step 3: Remove all special characters EXCEPT hyphens and alphanumeric
+            fileName = fileName.replace(/[^a-z0-9-]+/g, '');
+            
+            // Step 4: Remove leading and trailing hyphens
+            fileName = fileName.replace(/^-+|-+$/g, '');
+            
+            // Step 5: Replace multiple consecutive hyphens with single hyphen
+            fileName = fileName.replace(/-+/g, '-');
+            
+            // Step 6: Handle empty string case
+            if (!fileName || fileName === '') {
+                fileName = 'product-' + Date.now();
+            }
+            
+            // Step 7: Add .html extension
+            return fileName + '.html';
+        }
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
@@ -3096,9 +3126,9 @@
                 // STEP 3: Save individual product JSON to GitHub
                 await saveProductJsonToGitHub(product);
                 
-                // STEP 4: Generate and save HTML page to GitHub
+                // STEP 4: Generate and save HTML page to GitHub using FIXED filename generator
                 const productHTML = generateProductHTML(product);
-                const pageFileName = product.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.html';
+                const pageFileName = generateProductFileName(product.name);
                 await saveProductHtmlToGitHub(productHTML, pageFileName, product.name);
                 
                 // STEP 5: Update local products array
@@ -3260,8 +3290,10 @@
                 return;
             }
             
+            // Generate correct filename using FIXED function
+            const pageFileName = generateProductFileName(product.name);
+            
             // Show detailed confirmation
-            const pageFileName = product.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.html';
             const confirmMessage = `⚠️ DELETE CONFIRMATION ⚠️\n\n` +
                 `Product: ${product.name}\n` +
                 `\nThis will permanently delete:\n` +
@@ -3585,6 +3617,13 @@
             showSyncStatus('Checking GitHub status...', 'syncing');
             
             for (const page of productPages) {
+                // ✅ FIX: Ensure filename is correct
+                const correctFileName = generateProductFileName(page.productName);
+                if (page.fileName !== correctFileName) {
+                    console.log(`Fixing filename: ${page.fileName} -> ${correctFileName}`);
+                    page.fileName = correctFileName;
+                }
+                
                 try {
                     const url = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/products/${page.fileName}`;
                     const response = await fetch(url, {
