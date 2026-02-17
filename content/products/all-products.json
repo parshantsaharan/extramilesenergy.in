@@ -185,5 +185,25 @@
     "status": "active",
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/product-1771084852628-1cnhi5.jpg",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1771361359178-gxsf6ki3d",
+    "name": "test 2",
+    "voltage": "test 2",
+    "category": "EV Battery",
+    "price": "test 2",
+    "model": "test 2",
+    "configuration": "test 2",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "test 2",
+    "bms": null,
+    "features": [
+      "test 2"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/2026-02-18-3-1771361359878.png",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
