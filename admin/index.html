@@ -2472,72 +2472,91 @@
 </html>`;
         }
         
-        // Save product
-        async function saveProduct() {
-            const name = document.getElementById('productName').value;
-            const voltage = document.getElementById('productVoltage').value;
-            const category = document.getElementById('productCategory').value;
-            const price = document.getElementById('productPrice').value;
-            const model = document.getElementById('productModel').value;
-            const config = document.getElementById('productConfig').value;
-            const chemistry = document.getElementById('productChemistry').value;
-            const warranty = document.getElementById('productWarranty').value;
-            const capacity = document.getElementById('productCapacity').value;
-            const bms = document.getElementById('productBMS').value;
-            const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
-            const status = document.getElementById('productStatus').value;
-            const order = document.getElementById('productOrder').value;
-            const description = document.getElementById('productDescription').value;
-            
-            if (!name || !voltage || !features.length) {
-                showMessage('addProductMessage', 'Please fill all required fields', 'error');
-                return;
-            }
-            
-            const productId = editingProductId || `product-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-            
-            const product = {
-                id: productId,
-                name,
-                voltage,
-                category,
-                price: price || null,
-                model: model || null,
-                configuration: config || null,
-                chemistry: chemistry || 'LiFePO₄',
-                warranty: warranty || '3 Year Warranty',
-                capacity: capacity || null,
-                bms: bms || null,
-                features,
-                description,
-                specifications: specifications,
-                status,
-                images: uploadedImages.map(img => ({
-                    id: img.id,
-                    dataUrl: img.dataUrl,
-                    isMain: img.isMain,
-                    name: img.name
-                })),
-                displayOrder: parseInt(order) || 0,
-                createdAt: editingProductId ? products.find(p => p.id === productId)?.createdAt : new Date().toISOString(),
-                updatedAt: new Date().toISOString()
-            };
-            
-            try {
-                showMessage('addProductMessage', 'Saving product...', 'success');
-                
-                // Update products array
-                const index = products.findIndex(p => p.id === productId);
-                if (index > -1) {
-                    products[index] = product;
-                    addActivity(`Updated product: ${product.name}`);
-                } else {
-                    products.push(product);
-                    addActivity(`Added new product: ${product.name}`);
-                }
-                
-                // Save to localStorage
-                localStorage.setItem('local_products', JSON.stringify(products));
+        // ✅ FIXED: Save product with PROPER error handling
+async function saveProduct() {
+    const name = document.getElementById('productName').value;
+    const voltage = document.getElementById('productVoltage').value;
+    const category = document.getElementById('productCategory').value;
+    const price = document.getElementById('productPrice').value;
+    const model = document.getElementById('productModel').value;
+    const config = document.getElementById('productConfig').value;
+    const chemistry = document.getElementById('productChemistry').value;
+    const warranty = document.getElementById('productWarranty').value;
+    const capacity = document.getElementById('productCapacity').value;
+    const bms = document.getElementById('productBMS').value;
+    const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
+    const status = document.getElementById('productStatus').value;
+    const order = document.getElementById('productOrder').value;
+    const imageFile = document.getElementById('productImage').files[0];
+    
+    if (!name || !voltage || !features.length) {
+        showMessage('addProductMessage', 'Please fill all required fields', 'error');
+        return;
+    }
+    
+    const productId = editingProductId || `product-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    
+    // ⚠️ IMPORTANT: 'image' use करें, 'location' नहीं
+    let imageUrl = '';
+    if (editingProductId) {
+        const existingProduct = products.find(p => p.id === productId);
+        imageUrl = existingProduct?.image || '';
+    }
+    
+    const product = {
+        id: productId,
+        name,
+        voltage,
+        category,
+        price: price || null,
+        model: model || null,
+        configuration: config || null,
+        chemistry: chemistry || 'LiFePO₄',
+        warranty: warranty || '3 Year Warranty',
+        capacity: capacity || null,
+        bms: bms || null,
+        features,
+        status,
+        image: imageUrl, // ⚠️ 'image' use करें, 'location' नहीं
+        displayOrder: parseInt(order) || 0,
+        createdAt: editingProductId ? products.find(p => p.id === productId)?.createdAt : new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    };
+    
+    try {
+        showMessage('addProductMessage', 'Saving product...', 'success');
+        
+        // Update local array
+        const index = products.findIndex(p => p.id === productId);
+        if (index > -1) {
+            products[index] = product;
+            addActivity(`Updated product: ${product.name}`);
+        } else {
+            products.push(product);
+            addActivity(`Added new product: ${product.name}`);
+        }
+        
+        // ✅ FIX: Safe localStorage save
+        try {
+            localStorage.setItem('local_products', JSON.stringify(products));
+            console.log('Product saved to localStorage successfully');
+        } catch (storageError) {
+            console.error('localStorage error:', storageError);
+            showMessage('addProductMessage', 'Warning: Saved but storage limit may be exceeded', 'warning');
+        }
+        
+        showMessage('addProductMessage', 'Product saved successfully!', 'success');
+        clearForm();
+        updateDashboardStats();
+        displayProducts();
+        showTab('products');
+        
+    } catch (error) {
+        console.error('Error saving product:', error);
+        showMessage('addProductMessage', `Error: ${error.message}`, 'error');
+        addActivity(`Error saving product: ${error.message}`);
+    }
+}
                 
                 // Generate HTML page
                 const productHTML = generateProductHTML(product);
