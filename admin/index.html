@@ -2472,7 +2472,7 @@
 </html>`;
         }
         
-        // ✅ FIXED: Save product with PROPER error handling
+        // ✅ COMPLETE FIXED: Save product with ALL required functions
 async function saveProduct() {
     const name = document.getElementById('productName').value;
     const voltage = document.getElementById('productVoltage').value;
@@ -2496,7 +2496,6 @@ async function saveProduct() {
     
     const productId = editingProductId || `product-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     
-    // ⚠️ IMPORTANT: 'image' use करें, 'location' नहीं
     let imageUrl = '';
     if (editingProductId) {
         const existingProduct = products.find(p => p.id === productId);
@@ -2517,7 +2516,7 @@ async function saveProduct() {
         bms: bms || null,
         features,
         status,
-        image: imageUrl, // ⚠️ 'image' use करें, 'location' नहीं
+        image: imageUrl,
         displayOrder: parseInt(order) || 0,
         createdAt: editingProductId ? products.find(p => p.id === productId)?.createdAt : new Date().toISOString(),
         updatedAt: new Date().toISOString()
@@ -2526,7 +2525,19 @@ async function saveProduct() {
     try {
         showMessage('addProductMessage', 'Saving product...', 'success');
         
-        // Update local array
+        // Upload image if exists
+        if (imageFile && githubConfig.token) {
+            try {
+                const uploadedImageUrl = await uploadImageToGitHub(imageFile);
+                product.image = uploadedImageUrl;
+                addActivity(`Uploaded image: ${imageFile.name}`);
+            } catch (uploadError) {
+                console.warn('Image upload failed, saving without image:', uploadError);
+                // Continue without image
+            }
+        }
+        
+        // Update products array
         const index = products.findIndex(p => p.id === productId);
         if (index > -1) {
             products[index] = product;
@@ -2536,13 +2547,24 @@ async function saveProduct() {
             addActivity(`Added new product: ${product.name}`);
         }
         
-        // ✅ FIX: Safe localStorage save
+        // Save to localStorage
         try {
             localStorage.setItem('local_products', JSON.stringify(products));
-            console.log('Product saved to localStorage successfully');
         } catch (storageError) {
             console.error('localStorage error:', storageError);
-            showMessage('addProductMessage', 'Warning: Saved but storage limit may be exceeded', 'warning');
+            showMessage('addProductMessage', 'Warning: Storage limit may be exceeded', 'warning');
+        }
+        
+        // Sync to GitHub if configured
+        if (githubConfig.token) {
+            try {
+                await saveToGitHub(product);
+                await updateMasterProductsList();
+                localStorage.setItem('last_sync_time', new Date().toISOString());
+            } catch (githubError) {
+                console.warn('GitHub sync failed, saved locally only:', githubError);
+                showMessage('addProductMessage', 'Saved locally but GitHub sync failed', 'warning');
+            }
         }
         
         showMessage('addProductMessage', 'Product saved successfully!', 'success');
@@ -2556,6 +2578,101 @@ async function saveProduct() {
         showMessage('addProductMessage', `Error: ${error.message}`, 'error');
         addActivity(`Error saving product: ${error.message}`);
     }
+}
+        // Upload image to GitHub
+async function uploadImageToGitHub(imageFile) {
+    const base64Content = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(imageFile);
+    });
+    
+    const fileName = imageFile.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9.-]/g, '') || `image-${Date.now()}.jpg`;
+    const filePath = `${githubConfig.uploadsPath}/${fileName}`;
+    
+    const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${githubConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({
+            message: `Upload product image: ${fileName}`,
+            content: base64Content,
+            branch: githubConfig.branch
+        })
+    });
+    
+    if (!response.ok) throw new Error('Failed to upload image');
+    return `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/${filePath}`;
+}
+
+// Save to GitHub
+async function saveToGitHub(product) {
+    const content = JSON.stringify(product, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(content)));
+    const filePath = `${githubConfig.productsPath}/${product.id}.json`;
+    
+    const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${githubConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({
+            message: `Save product: ${product.name}`,
+            content: base64Content,
+            branch: githubConfig.branch
+        })
+    });
+    
+    if (!response.ok) throw new Error('Failed to save to GitHub');
+    return true;
+}
+
+// Update master products list
+async function updateMasterProductsList() {
+    const websiteProducts = products.map(p => ({
+        id: p.id,
+        name: p.name,
+        voltage: p.voltage,
+        category: p.category,
+        price: p.price,
+        model: p.model,
+        configuration: p.configuration,
+        chemistry: p.chemistry,
+        warranty: p.warranty,
+        capacity: p.capacity,
+        bms: p.bms,
+        features: p.features,
+        status: p.status,
+        image: p.image,
+        displayOrder: p.displayOrder || 0
+    }));
+    
+    const content = JSON.stringify(websiteProducts, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(content)));
+    const filePath = `${githubConfig.productsPath}/all-products.json`;
+    
+    const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${githubConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({
+            message: 'Update master products list',
+            content: base64Content,
+            branch: githubConfig.branch
+        })
+    });
+    
+    if (!response.ok) throw new Error('Failed to update master list');
+    return true;
 }
                 
                 // Generate HTML page
