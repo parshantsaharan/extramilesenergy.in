@@ -29,6 +29,8 @@
     "id": "product-1771080985142-eua9z08wd",
     "name": "72Volt 30Ah lithium phosphate battery pack for electric scooter ",
     "voltage": "72 Volt 30Ah",
+    "mainCategory": "EV Battery",
+    "subCategory": "Electric Scooter Battery",
     "price": "Rs. 27500/-",
     "model": "EM-LFP7230",
     "configuration": "23s2p",
@@ -44,7 +46,8 @@
       "3 year Warranty "
     ],
     "status": "active",
-    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/1000133044.png",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/7230-1771370325870.png",
+    "datasheet": "",
     "displayOrder": 0
   },
   {
