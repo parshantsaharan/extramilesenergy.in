@@ -160,5 +160,31 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/gootu-new-product-6kw-solar-inverter-mppt-max-27a-9000w-input-pv-hybrid-inverter-1000x1000.webp",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1771370692559-nix8fk8fn",
+    "name": "11kw ESS Battery Pack For Home and Business",
+    "voltage": "51.2 Volt 210Ah",
+    "mainCategory": "ESS Battery",
+    "subCategory": "Home Energy Storage (5kW-10kW)",
+    "price": "Rs. 120000/-",
+    "model": "EM-LFP51210",
+    "configuration": "16s14p",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "10700 Wh",
+    "bms": "JK Smart Ess BMS With Active Balancer And Parallel Function",
+    "features": [
+      "LiFePo4 Cell",
+      "20+ years Life",
+      "Zero Maintanance",
+      "Wall Mount",
+      "Can Port",
+      "Parallel Function"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/ess-11.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
