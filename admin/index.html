@@ -1789,13 +1789,17 @@
         // Message display
         function showMessage(elementId, text, type) {
             const element = document.getElementById(elementId);
-            element.textContent = text;
-            element.className = `message ${type}`;
-            element.style.display = 'block';
-            
-            setTimeout(() => {
-                element.style.display = 'none';
-            }, 5000);
+            if (element) {
+                element.textContent = text;
+                element.className = `message ${type}`;
+                element.style.display = 'block';
+                
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 5000);
+            } else {
+                console.warn(`Element ${elementId} not found`);
+            }
         }
         
         // Activity Log
@@ -1816,6 +1820,8 @@
         
         function loadRecentActivity() {
             const container = document.getElementById('recentActivity');
+            if (!container) return;
+            
             const activities = JSON.parse(localStorage.getItem('admin_activities') || '[]');
             
             if (activities.length === 0) {
@@ -2106,6 +2112,7 @@
         // ============================================
         async function loadProducts() {
             const container = document.getElementById('productsList');
+            if (!container) return;
             
             try {
                 // First try to load from GitHub
@@ -2153,6 +2160,8 @@
         // Display products
         function displayProducts(filteredProducts = null) {
             const container = document.getElementById('productsList');
+            if (!container) return;
+            
             const displayProducts = filteredProducts || products;
             
             if (displayProducts.length === 0) {
@@ -2240,17 +2249,25 @@
             const active = products.filter(p => p.status === 'active').length;
             const draft = products.filter(p => p.status === 'draft').length;
             
-            document.getElementById('totalProducts').textContent = total;
-            document.getElementById('activeProducts').textContent = active;
-            document.getElementById('draftProducts').textContent = draft;
-            document.getElementById('productsCount').textContent = total;
-            document.getElementById('totalPages').textContent = productPages.length;
+            const totalProductsEl = document.getElementById('totalProducts');
+            const activeProductsEl = document.getElementById('activeProducts');
+            const draftProductsEl = document.getElementById('draftProducts');
+            const productsCountEl = document.getElementById('productsCount');
+            const totalPagesEl = document.getElementById('totalPages');
+            
+            if (totalProductsEl) totalProductsEl.textContent = total;
+            if (activeProductsEl) activeProductsEl.textContent = active;
+            if (draftProductsEl) draftProductsEl.textContent = draft;
+            if (productsCountEl) productsCountEl.textContent = total;
+            if (totalPagesEl) totalPagesEl.textContent = productPages.length;
             
             const lastSync = localStorage.getItem('last_sync_time');
-            document.getElementById('lastSync').textContent = lastSync ? new Date(lastSync).toLocaleString('en-IN') : 'Never';
+            const lastSyncEl = document.getElementById('lastSync');
+            if (lastSyncEl) lastSyncEl.textContent = lastSync ? new Date(lastSync).toLocaleString('en-IN') : 'Never';
             
             const lastBackup = localStorage.getItem('last_backup_time');
-            document.getElementById('lastBackup').textContent = lastBackup ? new Date(lastBackup).toLocaleString('en-IN') : 'Never';
+            const lastBackupEl = document.getElementById('lastBackup');
+            if (lastBackupEl) lastBackupEl.textContent = lastBackup ? new Date(lastBackup).toLocaleString('en-IN') : 'Never';
         }
         
         // Update system info
@@ -2262,12 +2279,15 @@
             else if (ua.includes('Safari')) browser = 'Safari';
             else if (ua.includes('Edge')) browser = 'Edge';
             
-            document.getElementById('browserInfo').textContent = browser;
+            const browserInfoEl = document.getElementById('browserInfo');
+            if (browserInfoEl) browserInfoEl.textContent = browser;
             
             const used = JSON.stringify(localStorage).length;
             const limit = 5 * 1024 * 1024;
             const percent = Math.round((used / limit) * 100);
-            document.getElementById('storageInfo').textContent = `${percent}% used`;
+            
+            const storageInfoEl = document.getElementById('storageInfo');
+            if (storageInfoEl) storageInfoEl.textContent = `${percent}% used`;
         }
         
         // Improved Image Upload with Duplicate Handling
@@ -2773,7 +2793,13 @@
             const features = document.getElementById('productFeatures').value.split('\n').filter(f => f.trim());
             const status = document.getElementById('productStatus').value;
             const order = document.getElementById('productOrder').value;
-            const description = document.getElementById('productDescription').value;
+            
+            // Safely get description (element might not exist)
+            let description = '';
+            const descElement = document.getElementById('productDescription');
+            if (descElement) {
+                description = descElement.value;
+            }
             
             if (!name || !voltage || !features.length) {
                 showMessage('addProductMessage', 'Please fill all required fields', 'error');
@@ -2947,7 +2973,10 @@
             document.getElementById('productCapacity').value = '';
             document.getElementById('productBMS').value = '';
             document.getElementById('productFeatures').value = '';
-            document.getElementById('productDescription').value = '';
+            
+            const descElement = document.getElementById('productDescription');
+            if (descElement) descElement.value = '';
+            
             document.getElementById('productOrder').value = '0';
             document.getElementById('productStatus').value = 'active';
             
@@ -2987,7 +3016,10 @@
             document.getElementById('productCapacity').value = product.capacity || '';
             document.getElementById('productBMS').value = product.bms || '';
             document.getElementById('productFeatures').value = product.features?.join('\n') || '';
-            document.getElementById('productDescription').value = product.description || '';
+            
+            const descElement = document.getElementById('productDescription');
+            if (descElement) descElement.value = product.description || '';
+            
             document.getElementById('productStatus').value = product.status || 'active';
             document.getElementById('productOrder').value = product.displayOrder || 0;
             
@@ -3043,6 +3075,7 @@
         // Product Pages Functions
         function loadProductPages() {
             const container = document.getElementById('productPagesContainer');
+            if (!container) return;
             
             if (productPages.length === 0) {
                 container.innerHTML = `
@@ -3409,35 +3442,51 @@
         function loadCompanyDetails() {
             const saved = localStorage.getItem('company_details');
             if (saved) {
-                companyDetails = JSON.parse(saved);
+                try {
+                    companyDetails = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error loading company details:', e);
+                }
             }
             
-            document.getElementById('companyName').value = companyDetails.name || '';
-            document.getElementById('brandName').value = companyDetails.brand || '';
-            document.getElementById('companyGST').value = companyDetails.gst || '';
-            document.getElementById('companyTagline').value = companyDetails.tagline || '';
-            document.getElementById('companyAddress').value = companyDetails.address || '';
-            document.getElementById('companyEmail').value = companyDetails.email || '';
-            document.getElementById('companyPhone1').value = companyDetails.phone1 || '';
-            document.getElementById('companyPhone2').value = companyDetails.phone2 || '';
-            document.getElementById('companyWhatsApp').value = companyDetails.whatsapp || '';
-            document.getElementById('websiteTitle').value = companyDetails.websiteTitle || '';
-            document.getElementById('websiteDescription').value = companyDetails.websiteDescription || '';
+            const companyNameEl = document.getElementById('companyName');
+            const brandNameEl = document.getElementById('brandName');
+            const companyGSTEl = document.getElementById('companyGST');
+            const companyTaglineEl = document.getElementById('companyTagline');
+            const companyAddressEl = document.getElementById('companyAddress');
+            const companyEmailEl = document.getElementById('companyEmail');
+            const companyPhone1El = document.getElementById('companyPhone1');
+            const companyPhone2El = document.getElementById('companyPhone2');
+            const companyWhatsAppEl = document.getElementById('companyWhatsApp');
+            const websiteTitleEl = document.getElementById('websiteTitle');
+            const websiteDescriptionEl = document.getElementById('websiteDescription');
+            
+            if (companyNameEl) companyNameEl.value = companyDetails.name || '';
+            if (brandNameEl) brandNameEl.value = companyDetails.brand || '';
+            if (companyGSTEl) companyGSTEl.value = companyDetails.gst || '';
+            if (companyTaglineEl) companyTaglineEl.value = companyDetails.tagline || '';
+            if (companyAddressEl) companyAddressEl.value = companyDetails.address || '';
+            if (companyEmailEl) companyEmailEl.value = companyDetails.email || '';
+            if (companyPhone1El) companyPhone1El.value = companyDetails.phone1 || '';
+            if (companyPhone2El) companyPhone2El.value = companyDetails.phone2 || '';
+            if (companyWhatsAppEl) companyWhatsAppEl.value = companyDetails.whatsapp || '';
+            if (websiteTitleEl) websiteTitleEl.value = companyDetails.websiteTitle || '';
+            if (websiteDescriptionEl) websiteDescriptionEl.value = companyDetails.websiteDescription || '';
         }
         
         function saveCompanyDetails() {
             companyDetails = {
-                name: document.getElementById('companyName').value,
-                brand: document.getElementById('brandName').value,
-                gst: document.getElementById('companyGST').value,
-                tagline: document.getElementById('companyTagline').value,
-                address: document.getElementById('companyAddress').value,
-                email: document.getElementById('companyEmail').value,
-                phone1: document.getElementById('companyPhone1').value,
-                phone2: document.getElementById('companyPhone2').value,
-                whatsapp: document.getElementById('companyWhatsApp').value,
-                websiteTitle: document.getElementById('websiteTitle').value,
-                websiteDescription: document.getElementById('websiteDescription').value
+                name: document.getElementById('companyName')?.value || '',
+                brand: document.getElementById('brandName')?.value || '',
+                gst: document.getElementById('companyGST')?.value || '',
+                tagline: document.getElementById('companyTagline')?.value || '',
+                address: document.getElementById('companyAddress')?.value || '',
+                email: document.getElementById('companyEmail')?.value || '',
+                phone1: document.getElementById('companyPhone1')?.value || '',
+                phone2: document.getElementById('companyPhone2')?.value || '',
+                whatsapp: document.getElementById('companyWhatsApp')?.value || '',
+                websiteTitle: document.getElementById('websiteTitle')?.value || '',
+                websiteDescription: document.getElementById('websiteDescription')?.value || ''
             };
             
             localStorage.setItem('company_details', JSON.stringify(companyDetails));
@@ -3451,35 +3500,57 @@
             if (savedConfig) {
                 try {
                     githubConfig = JSON.parse(savedConfig);
-                    document.getElementById('githubToken').value = githubConfig.token || '';
-                    document.getElementById('githubUsername').value = githubConfig.username || 'parshantsaharan';
-                    document.getElementById('githubRepo').value = githubConfig.repo || 'extramilesenergy.in';
-                    document.getElementById('githubBranch').value = githubConfig.branch || 'main';
-                    document.getElementById('productsPath').value = githubConfig.productsPath || 'content/products';
-                    document.getElementById('uploadsPath').value = githubConfig.uploadsPath || 'uploads';
-                    document.getElementById('companyPath').value = githubConfig.companyPath || 'content/company.json';
+                    const tokenEl = document.getElementById('githubToken');
+                    const usernameEl = document.getElementById('githubUsername');
+                    const repoEl = document.getElementById('githubRepo');
+                    const branchEl = document.getElementById('githubBranch');
+                    const productsPathEl = document.getElementById('productsPath');
+                    const uploadsPathEl = document.getElementById('uploadsPath');
+                    const companyPathEl = document.getElementById('companyPath');
+                    
+                    if (tokenEl) tokenEl.value = githubConfig.token || '';
+                    if (usernameEl) usernameEl.value = githubConfig.username || 'parshantsaharan';
+                    if (repoEl) repoEl.value = githubConfig.repo || 'extramilesenergy.in';
+                    if (branchEl) branchEl.value = githubConfig.branch || 'main';
+                    if (productsPathEl) productsPathEl.value = githubConfig.productsPath || 'content/products';
+                    if (uploadsPathEl) uploadsPathEl.value = githubConfig.uploadsPath || 'uploads';
+                    if (companyPathEl) companyPathEl.value = githubConfig.companyPath || 'content/company.json';
                 } catch (e) {
                     console.error('Error loading settings:', e);
                 }
             }
             
-            const backupFreq = localStorage.getItem('backup_frequency') || 'weekly';
-            document.getElementById('backupFrequency').value = backupFreq;
+            const backupFreqEl = document.getElementById('backupFrequency');
+            if (backupFreqEl) {
+                const backupFreq = localStorage.getItem('backup_frequency') || 'weekly';
+                backupFreqEl.value = backupFreq;
+            }
             
-            const lastAutoBackup = localStorage.getItem('last_auto_backup');
-            document.getElementById('lastAutoBackup').value = lastAutoBackup ? new Date(lastAutoBackup).toLocaleString('en-IN') : 'Never';
+            const lastAutoBackupEl = document.getElementById('lastAutoBackup');
+            if (lastAutoBackupEl) {
+                const lastAutoBackup = localStorage.getItem('last_auto_backup');
+                lastAutoBackupEl.value = lastAutoBackup ? new Date(lastAutoBackup).toLocaleString('en-IN') : 'Never';
+            }
         }
         
         function saveSettings() {
             try {
+                const tokenEl = document.getElementById('githubToken');
+                const usernameEl = document.getElementById('githubUsername');
+                const repoEl = document.getElementById('githubRepo');
+                const branchEl = document.getElementById('githubBranch');
+                const productsPathEl = document.getElementById('productsPath');
+                const uploadsPathEl = document.getElementById('uploadsPath');
+                const companyPathEl = document.getElementById('companyPath');
+                
                 githubConfig = {
-                    token: document.getElementById('githubToken').value,
-                    username: document.getElementById('githubUsername').value,
-                    repo: document.getElementById('githubRepo').value,
-                    branch: document.getElementById('githubBranch').value,
-                    productsPath: document.getElementById('productsPath').value,
-                    uploadsPath: document.getElementById('uploadsPath').value,
-                    companyPath: document.getElementById('companyPath').value
+                    token: tokenEl ? tokenEl.value : '',
+                    username: usernameEl ? usernameEl.value : 'parshantsaharan',
+                    repo: repoEl ? repoEl.value : 'extramilesenergy.in',
+                    branch: branchEl ? branchEl.value : 'main',
+                    productsPath: productsPathEl ? productsPathEl.value : 'content/products',
+                    uploadsPath: uploadsPathEl ? uploadsPathEl.value : 'uploads',
+                    companyPath: companyPathEl ? companyPathEl.value : 'content/company.json'
                 };
                 
                 localStorage.setItem('github_config', JSON.stringify(githubConfig));
@@ -3522,9 +3593,9 @@
         }
         
         function changePassword() {
-            const current = document.getElementById('currentPassword').value;
-            const newPass = document.getElementById('newPassword').value;
-            const confirmPass = document.getElementById('confirmPassword').value;
+            const current = document.getElementById('currentPassword')?.value;
+            const newPass = document.getElementById('newPassword')?.value;
+            const confirmPass = document.getElementById('confirmPassword')?.value;
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
             
             if (!current || !newPass || !confirmPass) {
@@ -3550,9 +3621,13 @@
             localStorage.setItem('admin_password', newPass);
             localStorage.setItem('admin_token', newPass);
             
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
+            const currentEl = document.getElementById('currentPassword');
+            const newEl = document.getElementById('newPassword');
+            const confirmEl = document.getElementById('confirmPassword');
+            
+            if (currentEl) currentEl.value = '';
+            if (newEl) newEl.value = '';
+            if (confirmEl) confirmEl.value = '';
             
             alert('Password changed successfully!');
             addActivity('Admin password changed');
@@ -3621,7 +3696,7 @@
         
         function restoreProducts() {
             const fileInput = document.getElementById('backupFile');
-            const file = fileInput.files[0];
+            const file = fileInput?.files[0];
             
             if (!file) {
                 alert('Please select a backup file first');
@@ -3655,7 +3730,7 @@
         
         function restoreFullBackup() {
             const fileInput = document.getElementById('backupFile');
-            const file = fileInput.files[0];
+            const file = fileInput?.files[0];
             
             if (!file) {
                 alert('Please select a backup file first');
@@ -3711,11 +3786,12 @@
         }
         
         function saveBackupSettings() {
-            const frequency = document.getElementById('backupFrequency').value;
-            localStorage.setItem('backup_frequency', frequency);
-            
-            alert('Backup settings saved!');
-            addActivity(`Updated backup frequency to: ${frequency}`);
+            const frequency = document.getElementById('backupFrequency')?.value;
+            if (frequency) {
+                localStorage.setItem('backup_frequency', frequency);
+                alert('Backup settings saved!');
+                addActivity(`Updated backup frequency to: ${frequency}`);
+            }
         }
         
         // Auto backup check
