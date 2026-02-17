@@ -1077,15 +1077,23 @@
                         </div>
                     </div>
                     
+                    <!-- Updated Filter Section with Main and Sub Categories -->
                     <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="searchProducts" class="form-input" placeholder="Search products..." style="flex: 1;" onkeyup="searchProducts()">
-                        <select id="filterCategory" class="form-input" style="width: 200px;" onchange="filterProducts()">
-                            <option value="">All Categories</option>
+                        
+                        <select id="filterMainCategory" class="form-input" style="width: 200px;" onchange="updateSubFilter()">
+                            <option value="">All Main Categories</option>
                             <option value="EV Battery">EV Battery</option>
                             <option value="Solar Battery">Solar Battery</option>
-                            <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
-                            <option value="Custom Battery">Custom Battery</option>
+                            <option value="ESS Battery">ESS Battery</option>
+                            <option value="Solar Inverter">Solar Inverter</option>
+                            <option value="EV Charger">EV Charger</option>
                         </select>
+                        
+                        <select id="filterSubCategory" class="form-input" style="width: 200px;" onchange="filterProducts()" disabled>
+                            <option value="">All Sub Categories</option>
+                        </select>
+                        
                         <select id="filterStatus" class="form-input" style="width: 150px;" onchange="filterProducts()">
                             <option value="">All Status</option>
                             <option value="active">Active</option>
@@ -1100,7 +1108,7 @@
                 </div>
             </div>
             
-            <!-- Add Product Tab -->
+            <!-- Add Product Tab - Updated with Category Fields -->
             <div id="addProduct" class="tab-content">
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);" id="formTitle">Add New Product</h3>
@@ -1118,49 +1126,62 @@
                         </div>
                     </div>
                     
+                    <!-- ✅ NEW: Category Fields -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Category *</label>
-                            <select id="productCategory" class="form-input" required>
+                            <label class="form-label">Main Category *</label>
+                            <select id="productMainCategory" class="form-input" onchange="updateSubCategories()" required>
+                                <option value="">Select Main Category</option>
                                 <option value="EV Battery">EV Battery</option>
                                 <option value="Solar Battery">Solar Battery</option>
-                                <option value="E-Rickshaw Battery">E-Rickshaw Battery</option>
-                                <option value="Custom Battery">Custom Battery</option>
+                                <option value="ESS Battery">ESS Battery (Energy Storage)</option>
+                                <option value="Solar Inverter">Solar Inverter</option>
+                                <option value="EV Charger">EV Battery Charger</option>
                             </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Sub Category</label>
+                            <select id="productSubCategory" class="form-input">
+                                <option value="">Select Sub Category</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Price Range</label>
                             <input type="text" id="productPrice" class="form-input" placeholder="e.g., ₹18,000 - ₹22,000">
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Model Number</label>
                             <input type="text" id="productModel" class="form-input" placeholder="e.g., EM-LFP6030">
                         </div>
+                    </div>
+                    
+                    <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Configuration</label>
                             <input type="text" id="productConfig" class="form-input" placeholder="e.g., 19S2P">
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Chemistry</label>
                             <input type="text" id="productChemistry" class="form-input" value="LiFePO₄" placeholder="Lithium Iron Phosphate">
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Warranty</label>
-                            <input type="text" id="productWarranty" class="form-input" value="3 Year Warranty">
-                        </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
+                            <label class="form-label">Warranty</label>
+                            <input type="text" id="productWarranty" class="form-input" value="3 Year Warranty">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Capacity (Wh)</label>
                             <input type="text" id="productCapacity" class="form-input" placeholder="e.g., 1820 Wh">
                         </div>
+                    </div>
+                    
+                    <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">BMS Type</label>
                             <input type="text" id="productBMS" class="form-input" placeholder="e.g., JK Smart BMS 40A">
@@ -1294,7 +1315,7 @@
                 </div>
             </div>
             
-            <!-- GitHub Workflow Tab (UPDATED with Cleanup Features) -->
+            <!-- GitHub Workflow Tab -->
             <div id="githubWorkflow" class="tab-content">
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);">GitHub Workflow Management</h3>
@@ -1319,7 +1340,7 @@
                         </div>
                     </div>
                     
-                    <!-- GitHub Workflow Cleanup Section - NEW -->
+                    <!-- GitHub Workflow Cleanup Section -->
                     <div style="margin-bottom: 30px; padding: 20px; background: rgba(255, 53, 112, 0.1); border-radius: var(--radius); border: 1px solid var(--danger);">
                         <h4 style="color: var(--danger); margin-bottom: 20px;">
                             <i class="fas fa-exclamation-triangle"></i> GitHub Workflow Cleanup
@@ -1748,6 +1769,42 @@
         let productPdfFile = null;
         let productPdfName = '';
         
+        // ============================================
+        // ✅ NEW: Category Data
+        // ============================================
+        const categoryData = {
+            "EV Battery": [
+                "Electric Scooter Battery",
+                "E-Rickshaw Battery",
+                "Electric Car Battery",
+                "Custom EV Battery"
+            ],
+            "Solar Battery": [
+                "Home Solar Battery (12V/24V)",
+                "Industrial Solar Battery (48V)",
+                "Solar Tubular Battery",
+                "Custom Solar Battery"
+            ],
+            "ESS Battery": [
+                "Home Energy Storage (5kW-10kW)",
+                "Industrial ESS (15kW-50kW)",
+                "Backup Power System",
+                "Custom ESS"
+            ],
+            "Solar Inverter": [
+                "On Grid Inverter",
+                "Off Grid Inverter",
+                "Hybrid Inverter",
+                "Solar Pump Inverter"
+            ],
+            "EV Charger": [
+                "Portable EV Charger",
+                "Wall Mount Charger",
+                "Fast DC Charger",
+                "Battery Charger (Lead Acid/LiFePO4)"
+            ]
+        };
+        
         let companyDetails = {
             name: 'Skyline Stores',
             brand: 'Extra Miles Energy',
@@ -1778,28 +1835,61 @@
         function generateProductFileName(productName) {
             if (!productName) return 'product.html';
             
-            // Step 1: Convert to lowercase
             let fileName = productName.toLowerCase();
-            
-            // Step 2: Replace spaces with hyphens
             fileName = fileName.replace(/\s+/g, '-');
-            
-            // Step 3: Remove all special characters EXCEPT hyphens and alphanumeric
             fileName = fileName.replace(/[^a-z0-9-]+/g, '');
-            
-            // Step 4: Remove leading and trailing hyphens
             fileName = fileName.replace(/^-+|-+$/g, '');
-            
-            // Step 5: Replace multiple consecutive hyphens with single hyphen
             fileName = fileName.replace(/-+/g, '-');
             
-            // Step 6: Handle empty string case
             if (!fileName || fileName === '') {
                 fileName = 'product-' + Date.now();
             }
             
-            // Step 7: Add .html extension
             return fileName + '.html';
+        }
+        
+        // ============================================
+        // ✅ NEW: Category Functions
+        // ============================================
+        function updateSubCategories() {
+            const mainCat = document.getElementById('productMainCategory').value;
+            const subCatSelect = document.getElementById('productSubCategory');
+            
+            // Clear existing options
+            subCatSelect.innerHTML = '<option value="">Select Sub Category</option>';
+            
+            if (mainCat && categoryData[mainCat]) {
+                categoryData[mainCat].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subCatSelect.appendChild(option);
+                });
+                subCatSelect.disabled = false;
+            } else {
+                subCatSelect.disabled = true;
+            }
+        }
+        
+        function updateSubFilter() {
+            const mainCat = document.getElementById('filterMainCategory').value;
+            const subFilter = document.getElementById('filterSubCategory');
+            
+            subFilter.innerHTML = '<option value="">All Sub Categories</option>';
+            
+            if (mainCat && categoryData[mainCat]) {
+                categoryData[mainCat].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subFilter.appendChild(option);
+                });
+                subFilter.disabled = false;
+            } else {
+                subFilter.disabled = true;
+            }
+            
+            filterProducts();
         }
         
         // Initialize
@@ -1863,7 +1953,6 @@
             
             document.getElementById(tabId).classList.add('active');
             
-            // Find and activate nav button
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
                     btn.classList.add('active');
@@ -2018,7 +2107,7 @@
             }
         }
         
-        // Multiple Images Functions - Photo ek baar mein select hogi
+        // Multiple Images Functions
         function handleMultipleImages(event) {
             const files = Array.from(event.target.files);
             console.log('Selected files:', files.length);
@@ -2041,8 +2130,6 @@
             });
             
             addActivity(`Uploaded ${files.length} product images`);
-            
-            // Clear the input so same file can be selected again
             event.target.value = '';
         }
         
@@ -2131,7 +2218,6 @@
             productPdfFile = file;
             productPdfName = file.name;
             
-            // Show PDF preview
             const pdfInfo = document.getElementById('pdfInfo');
             if (pdfInfo) {
                 pdfInfo.innerHTML = `
@@ -2255,7 +2341,7 @@
             }
         }
         
-        // Display products
+        // Display products - Updated with categories
         function displayProducts(filteredProducts = null) {
             const container = document.getElementById('productsList');
             if (!container) return;
@@ -2288,6 +2374,16 @@
                              onerror="this.src='https://via.placeholder.com/300x200/142044/FFD700?text=Extra+Miles'">
                         <h4 style="margin-bottom: 5px; color: var(--gold-light);">${product.name}</h4>
                         <div style="color: var(--gold); margin-bottom: 10px; font-weight: 600;">${product.voltage || ''}</div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">
+                                <i class="fas fa-tag"></i> ${product.mainCategory || 'Uncategorized'}
+                            </span>
+                        </div>
+                        ${product.subCategory ? `
+                            <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">
+                                <i class="fas fa-angle-right"></i> ${product.subCategory}
+                            </div>
+                        ` : ''}
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span style="color: var(--text-muted); font-size: 0.9rem;">${product.category || ''}</span>
                             <span style="color: ${product.status === 'active' ? 'var(--success)' : 'var(--warning)'}; font-size: 0.8rem; background: ${product.status === 'active' ? 'rgba(69, 255, 144, 0.1)' : 'rgba(255, 177, 69, 0.1)'}; padding: 2px 10px; border-radius: 10px;">
@@ -2312,26 +2408,32 @@
             container.innerHTML = html;
         }
         
-        // Search and filter products
+        // Search and filter products - Updated with categories
         function searchProducts() {
             const searchTerm = document.getElementById('searchProducts').value.toLowerCase();
             const filtered = products.filter(product => 
                 product.name.toLowerCase().includes(searchTerm) ||
                 (product.voltage && product.voltage.toLowerCase().includes(searchTerm)) ||
-                (product.category && product.category.toLowerCase().includes(searchTerm)) ||
+                (product.mainCategory && product.mainCategory.toLowerCase().includes(searchTerm)) ||
+                (product.subCategory && product.subCategory.toLowerCase().includes(searchTerm)) ||
                 (product.model && product.model.toLowerCase().includes(searchTerm))
             );
             displayProducts(filtered);
         }
         
         function filterProducts() {
-            const category = document.getElementById('filterCategory').value;
+            const mainCategory = document.getElementById('filterMainCategory').value;
+            const subCategory = document.getElementById('filterSubCategory').value;
             const status = document.getElementById('filterStatus').value;
             
             let filtered = products;
             
-            if (category) {
-                filtered = filtered.filter(p => p.category === category);
+            if (mainCategory) {
+                filtered = filtered.filter(p => p.mainCategory === mainCategory);
+            }
+            
+            if (subCategory) {
+                filtered = filtered.filter(p => p.subCategory === subCategory);
             }
             
             if (status) {
@@ -2388,7 +2490,7 @@
             if (storageInfoEl) storageInfoEl.textContent = `${percent}% used`;
         }
         
-        // Improved Image Upload with Duplicate Handling
+        // Upload image to GitHub
         async function uploadImageToGitHub(imageFile, retryCount = 0) {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -2396,19 +2498,16 @@
                     reader.onload = async function() {
                         const base64Content = reader.result.split(',')[1];
                         
-                        // Create safe filename
                         let originalName = imageFile.name;
                         let fileName = originalName.toLowerCase()
                             .replace(/\s+/g, '-')
                             .replace(/[^a-z0-9.-]/g, '');
                         
-                        // अगर नाम में पहले से extension है तो उसे रखें
                         if (!fileName.includes('.') || fileName.endsWith('.')) {
                             const ext = imageFile.type.split('/')[1] || 'jpg';
                             fileName = fileName.replace(/\.+$/, '') + '.' + ext;
                         }
                         
-                        // Check if file already exists on GitHub
                         const checkUrl = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${githubConfig.uploadsPath}/${fileName}`;
                         
                         try {
@@ -2419,22 +2518,18 @@
                                 }
                             });
                             
-                            // अगर file पहले से मौजूद है तो नया नाम बनाएं
                             if (checkResponse.ok) {
-                                // File exists, create new name with timestamp
                                 const nameParts = fileName.split('.');
                                 const ext = nameParts.pop();
                                 const baseName = nameParts.join('.');
                                 fileName = `${baseName}-${Date.now()}.${ext}`;
                             }
                         } catch (e) {
-                            // File doesn't exist, continue with original name
                             console.log('File not found, using original name');
                         }
                         
                         const filePath = `${githubConfig.uploadsPath}/${fileName}`;
                         
-                        // Upload file
                         const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                             method: 'PUT',
                             headers: {
@@ -2452,9 +2547,7 @@
                         if (!response.ok) {
                             const error = await response.json();
                             
-                            // Retry logic for network errors
                             if (retryCount < 3) {
-                                console.log(`Retrying upload... Attempt ${retryCount + 1}`);
                                 setTimeout(() => {
                                     uploadImageToGitHub(imageFile, retryCount + 1)
                                         .then(resolve)
@@ -2462,8 +2555,7 @@
                                 }, 1000 * (retryCount + 1));
                                 return;
                             }
-                            
-                            reject(new Error(`Failed to upload image: ${error.message}`));
+                                            reject(new Error(`Failed to upload image: ${error.message}`));
                             return;
                         }
                         
@@ -2480,7 +2572,7 @@
             });
         }
         
-        // PDF Upload to GitHub with Duplicate Handling
+        // PDF Upload to GitHub
         async function uploadPdfToGitHub(pdfFile, retryCount = 0) {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -2488,18 +2580,15 @@
                     reader.onload = async function() {
                         const base64Content = reader.result.split(',')[1];
                         
-                        // Create safe filename
                         let originalName = pdfFile.name;
                         let fileName = originalName.toLowerCase()
                             .replace(/\s+/g, '-')
                             .replace(/[^a-z0-9.-]/g, '');
                         
-                        // Ensure .pdf extension
                         if (!fileName.endsWith('.pdf')) {
                             fileName = fileName.replace(/\.+$/, '') + '.pdf';
                         }
                         
-                        // Check if file already exists on GitHub
                         const checkUrl = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${githubConfig.uploadsPath}/${fileName}`;
                         
                         try {
@@ -2510,9 +2599,7 @@
                                 }
                             });
                             
-                            // अगर file पहले से मौजूद है तो नया नाम बनाएं
                             if (checkResponse.ok) {
-                                // File exists, create new name with timestamp
                                 fileName = fileName.replace('.pdf', `-${Date.now()}.pdf`);
                             }
                         } catch (e) {
@@ -2521,7 +2608,6 @@
                         
                         const filePath = `${githubConfig.uploadsPath}/${fileName}`;
                         
-                        // Upload file
                         const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                             method: 'PUT',
                             headers: {
@@ -2539,7 +2625,6 @@
                         if (!response.ok) {
                             const error = await response.json();
                             
-                            // Retry logic
                             if (retryCount < 3) {
                                 setTimeout(() => {
                                     uploadPdfToGitHub(pdfFile, retryCount + 1)
@@ -2572,7 +2657,6 @@
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/${product.id}.json`;
             
-            // Get SHA if file exists
             let sha = null;
             try {
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -2590,7 +2674,6 @@
                 // File doesn't exist
             }
             
-            // Save to GitHub
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -2619,7 +2702,6 @@
             const base64Content = btoa(unescape(encodeURIComponent(html)));
             const filePath = `products/${fileName}`;
             
-            // Get SHA if file exists
             let sha = null;
             try {
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -2637,7 +2719,6 @@
                 // File doesn't exist
             }
             
-            // Save to GitHub
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -2663,14 +2744,14 @@
         
         // Update master products list on GitHub
         async function updateMasterProductsList() {
-            // Create clean product list for website (only active products)
             const websiteProducts = products
-                .filter(p => p.status === 'active') // Only show active products on website
+                .filter(p => p.status === 'active')
                 .map(p => ({
                     id: p.id,
                     name: p.name,
                     voltage: p.voltage,
-                    category: p.category,
+                    mainCategory: p.mainCategory,
+                    subCategory: p.subCategory,
                     price: p.price,
                     model: p.model,
                     configuration: p.configuration,
@@ -2689,7 +2770,6 @@
             const base64Content = btoa(unescape(encodeURIComponent(content)));
             const filePath = `${githubConfig.productsPath}/all-products.json`;
             
-            // Get SHA if file exists
             let sha = null;
             try {
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -2707,7 +2787,6 @@
                 // File doesn't exist
             }
             
-            // Update master list
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
@@ -2730,12 +2809,11 @@
             return true;
         }
         
-        // Generate Product HTML Page
+        // Generate Product HTML Page - Updated with categories
         function generateProductHTML(product) {
             const mainImage = uploadedImages.find(img => img.isMain) || uploadedImages[0];
             const mainImageUrl = mainImage ? mainImage.dataUrl : 'https://via.placeholder.com/500x400/142044/FFD700?text=Product';
             
-            // Gallery HTML
             let galleryHTML = '';
             if (uploadedImages.length > 0) {
                 galleryHTML = `
@@ -2752,7 +2830,6 @@
                 `;
             }
             
-            // Specifications HTML
             const specsHTML = (product.specifications || specifications).map(spec => `
                 <tr>
                     <td><strong>${spec.key}</strong></td>
@@ -2760,7 +2837,6 @@
                 </tr>
             `).join('');
             
-            // Features HTML
             const featuresHTML = (product.features || []).map(f => `
                 <li><i class="fas fa-check-circle" style="color: var(--gold);"></i> ${f}</li>
             `).join('');
@@ -2768,7 +2844,6 @@
             const whatsappNumber = companyDetails.whatsapp || '917876555055';
             const phoneNumber = companyDetails.phone1 || '+917876555055';
             
-            // Datasheet HTML
             const datasheetHTML = product.datasheet ? `
                 <div style="margin: 20px 0; text-align: center;">
                     <a href="${product.datasheet}" target="_blank" style="background: var(--danger); color: white; padding: 12px 25px; border-radius: var(--radius-sm); text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
@@ -2883,6 +2958,22 @@
             color: var(--accent);
             font-size: 1.2rem;
             margin-bottom: 20px;
+        }
+        
+        .category-info {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .category-badge {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         .price {
@@ -3005,7 +3096,12 @@
             ${galleryHTML}
             
             <h1 class="product-title">${product.name}</h1>
-            <div class="product-specs">${product.voltage || ''} | ${product.category || ''}</div>
+            <div class="product-specs">${product.voltage || ''}</div>
+            
+            <div class="category-info">
+                <span class="category-badge"><i class="fas fa-tag"></i> ${product.mainCategory || 'Product'}</span>
+                ${product.subCategory ? `<span class="category-badge"><i class="fas fa-angle-right"></i> ${product.subCategory}</span>` : ''}
+            </div>
             
             ${product.price ? `<div class="price">${product.price}</div>` : ''}
             
@@ -3044,7 +3140,8 @@
         async function saveProduct() {
             const name = document.getElementById('productName').value;
             const voltage = document.getElementById('productVoltage').value;
-            const category = document.getElementById('productCategory').value;
+            const mainCategory = document.getElementById('productMainCategory').value;
+            const subCategory = document.getElementById('productSubCategory').value;
             const price = document.getElementById('productPrice').value;
             const model = document.getElementById('productModel').value;
             const config = document.getElementById('productConfig').value;
@@ -3056,19 +3153,17 @@
             const status = document.getElementById('productStatus').value;
             const order = document.getElementById('productOrder').value;
             
-            // Safely get description
             let description = '';
             const descElement = document.getElementById('productDescription');
             if (descElement) {
                 description = descElement.value;
             }
             
-            if (!name || !voltage || !features.length) {
-                showMessage('addProductMessage', 'Please fill all required fields', 'error');
+            if (!name || !voltage || !features.length || !mainCategory) {
+                showMessage('addProductMessage', 'Please fill all required fields (Name, Voltage, Features, Main Category)', 'error');
                 return;
             }
             
-            // Check if GitHub token exists
             if (!githubConfig.token) {
                 showMessage('addProductMessage', 'Please configure GitHub token in Settings first', 'error');
                 showTab('settings');
@@ -3090,7 +3185,8 @@
                 id: productId,
                 name,
                 voltage,
-                category,
+                mainCategory,
+                subCategory: subCategory || null,
                 price: price || null,
                 model: model || null,
                 configuration: config || null,
@@ -3118,7 +3214,6 @@
             try {
                 showMessage('addProductMessage', 'Saving product and publishing to website...', 'success');
                 
-                // STEP 1: Upload images to GitHub
                 if (uploadedImages.length > 0) {
                     try {
                         const uploadedImageUrls = [];
@@ -3149,7 +3244,6 @@
                     }
                 }
                 
-                // STEP 2: Upload PDF if exists
                 if (productPdfFile) {
                     try {
                         const pdfUrl = await uploadPdfToGitHub(productPdfFile);
@@ -3162,15 +3256,12 @@
                     }
                 }
                 
-                // STEP 3: Save individual product JSON to GitHub
                 await saveProductJsonToGitHub(product);
                 
-                // STEP 4: Generate and save HTML page to GitHub using FIXED filename generator
                 const productHTML = generateProductHTML(product);
                 const pageFileName = generateProductFileName(product.name);
                 await saveProductHtmlToGitHub(productHTML, pageFileName, product.name);
                 
-                // STEP 5: Update local products array
                 const index = products.findIndex(p => p.id === productId);
                 if (index > -1) {
                     products[index] = product;
@@ -3180,13 +3271,10 @@
                     addActivity(`Added new product: ${product.name}`);
                 }
                 
-                // STEP 6: Update master products list on GitHub
                 await updateMasterProductsList();
                 
-                // STEP 7: Save to localStorage as backup
                 localStorage.setItem('local_products', JSON.stringify(products));
                 
-                // STEP 8: Create product page record
                 const productPage = {
                     id: 'page_' + Date.now(),
                     productId: product.id,
@@ -3207,7 +3295,6 @@
                 productPages.push(productPage);
                 localStorage.setItem('product_pages', JSON.stringify(productPages));
                 
-                // STEP 9: Update last sync time
                 localStorage.setItem('last_sync_time', new Date().toISOString());
                 
                 showMessage('addProductMessage', '✅ Product saved and published to website successfully!', 'success');
@@ -3215,7 +3302,6 @@
                 updateDashboardStats();
                 displayProducts();
                 
-                // Ask if user wants to view on website
                 setTimeout(() => {
                     if (confirm('Product published successfully! Open website to view?')) {
                         window.open(`https://${githubConfig.username}.github.io/${githubConfig.repo}/products/${pageFileName}`, '_blank');
@@ -3235,6 +3321,9 @@
         function clearForm() {
             document.getElementById('productName').value = '';
             document.getElementById('productVoltage').value = '';
+            document.getElementById('productMainCategory').value = '';
+            document.getElementById('productSubCategory').innerHTML = '<option value="">Select Sub Category</option>';
+            document.getElementById('productSubCategory').disabled = true;
             document.getElementById('productPrice').value = '';
             document.getElementById('productModel').value = '';
             document.getElementById('productConfig').value = '';
@@ -3253,7 +3342,6 @@
             uploadedImages = [];
             renderImageGrid();
             
-            // Clear PDF
             removePdf();
             
             specifications = [
@@ -3268,7 +3356,7 @@
             document.getElementById('formTitle').textContent = 'Add New Product';
         }
         
-        // Edit product
+        // Edit product - Updated with categories
         function editProduct(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -3277,7 +3365,15 @@
             
             document.getElementById('productName').value = product.name;
             document.getElementById('productVoltage').value = product.voltage || '';
-            document.getElementById('productCategory').value = product.category || 'EV Battery';
+            document.getElementById('productMainCategory').value = product.mainCategory || '';
+            updateSubCategories();
+            
+            setTimeout(() => {
+                if (product.subCategory) {
+                    document.getElementById('productSubCategory').value = product.subCategory;
+                }
+            }, 100);
+            
             document.getElementById('productPrice').value = product.price || '';
             document.getElementById('productModel').value = product.model || '';
             document.getElementById('productConfig').value = product.configuration || '';
@@ -3303,7 +3399,6 @@
             }
             renderSpecificationsTable();
             
-            // Load PDF if exists
             if (product.datasheet) {
                 const pdfInfo = document.getElementById('pdfInfo');
                 if (pdfInfo) {
@@ -3320,22 +3415,20 @@
             addActivity(`Editing product: ${product.name}`);
         }
         
-        // Complete Delete product with GitHub cleanup
+        // Delete product with GitHub cleanup
         async function deleteProduct(productId) {
-            // Find the product first
             const product = products.find(p => p.id === productId);
             if (!product) {
                 alert('Product not found!');
                 return;
             }
             
-            // Generate correct filename using FIXED function
             const pageFileName = generateProductFileName(product.name);
             
-            // Show detailed confirmation
             const confirmMessage = `⚠️ DELETE CONFIRMATION ⚠️\n\n` +
                 `Product: ${product.name}\n` +
-                `\nThis will permanently delete:\n` +
+                `Category: ${product.mainCategory || 'N/A'} ${product.subCategory ? '- ' + product.subCategory : ''}\n\n` +
+                `This will permanently delete:\n` +
                 `• Product from website homepage\n` +
                 `• Product detail page (products/${pageFileName})\n` +
                 `• All product images from GitHub\n` +
@@ -3348,7 +3441,6 @@
                 return;
             }
             
-            // Double confirm with password
             const password = prompt('Please enter admin password to confirm deletion:');
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
             
@@ -3360,10 +3452,9 @@
             try {
                 showMessage('addProductMessage', 'Deleting product from website and GitHub...', 'warning');
                 
-                // STEP 1: Delete product HTML page from GitHub
+                // Delete HTML page
                 try {
                     const pagePath = `products/${pageFileName}`;
-                    
                     const getPageResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${pagePath}`, {
                         headers: {
                             'Authorization': `token ${githubConfig.token}`,
@@ -3373,7 +3464,6 @@
                     
                     if (getPageResponse.ok) {
                         const pageData = await getPageResponse.json();
-                        
                         await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${pagePath}`, {
                             method: 'DELETE',
                             headers: {
@@ -3387,17 +3477,15 @@
                                 branch: githubConfig.branch
                             })
                         });
-                        
                         addActivity(`Deleted product page: ${pageFileName}`);
                     }
                 } catch (error) {
                     console.warn('Error deleting HTML page:', error);
                 }
                 
-                // STEP 2: Delete product JSON file from GitHub
+                // Delete JSON file
                 try {
                     const jsonPath = `${githubConfig.productsPath}/${product.id}.json`;
-                    
                     const getJsonResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${jsonPath}`, {
                         headers: {
                             'Authorization': `token ${githubConfig.token}`,
@@ -3407,7 +3495,6 @@
                     
                     if (getJsonResponse.ok) {
                         const jsonData = await getJsonResponse.json();
-                        
                         await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${jsonPath}`, {
                             method: 'DELETE',
                             headers: {
@@ -3421,14 +3508,13 @@
                                 branch: githubConfig.branch
                             })
                         });
-                        
                         addActivity(`Deleted product JSON: ${product.id}.json`);
                     }
                 } catch (error) {
                     console.warn('Error deleting JSON file:', error);
                 }
                 
-                // STEP 3: Delete all product images from GitHub
+                // Delete images
                 if (product.images && product.images.length > 0) {
                     for (const img of product.images) {
                         if (img.githubUrl) {
@@ -3446,7 +3532,6 @@
                                 
                                 if (getImageResponse.ok) {
                                     const imageData = await getImageResponse.json();
-                                    
                                     await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${imagePath}`, {
                                         method: 'DELETE',
                                         headers: {
@@ -3460,7 +3545,6 @@
                                             branch: githubConfig.branch
                                         })
                                     });
-                                    
                                     addActivity(`Deleted image: ${fileName}`);
                                 }
                             } catch (error) {
@@ -3470,7 +3554,7 @@
                     }
                 }
                 
-                // STEP 4: Delete product PDF from GitHub if exists
+                // Delete PDF
                 if (product.datasheet) {
                     try {
                         const urlParts = product.datasheet.split('/');
@@ -3486,7 +3570,6 @@
                         
                         if (getPdfResponse.ok) {
                             const pdfData = await getPdfResponse.json();
-                            
                             await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${pdfPath}`, {
                                 method: 'DELETE',
                                 headers: {
@@ -3500,7 +3583,6 @@
                                     branch: githubConfig.branch
                                 })
                             });
-                            
                             addActivity(`Deleted PDF: ${fileName}`);
                         }
                     } catch (error) {
@@ -3508,19 +3590,15 @@
                     }
                 }
                 
-                // STEP 5: Remove product from local array
                 products = products.filter(p => p.id !== productId);
                 localStorage.setItem('local_products', JSON.stringify(products));
                 
-                // STEP 6: Remove associated page from productPages
                 productPages = productPages.filter(p => p.productId !== productId);
                 localStorage.setItem('product_pages', JSON.stringify(productPages));
                 
-                // STEP 7: Remove from pending pushes
                 pendingPushes = pendingPushes.filter(p => p.productId !== productId);
                 localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
                 
-                // STEP 8: Update master products list on GitHub
                 if (githubConfig.token) {
                     try {
                         await updateMasterProductsList();
@@ -3530,7 +3608,6 @@
                     }
                 }
                 
-                // STEP 9: Update all displays
                 updateDashboardStats();
                 displayProducts();
                 if (typeof loadProductPages === 'function') {
@@ -3540,11 +3617,9 @@
                     loadPendingQueue();
                 }
                 
-                // STEP 10: Show success message
                 showMessage('addProductMessage', `✅ Product "${product.name}" permanently deleted from website and GitHub!`, 'success');
                 addActivity(`Permanently deleted product: ${product.name} from website`);
                 
-                // Optional: Ask if user wants to verify on website
                 setTimeout(() => {
                     if (confirm('Product deleted successfully! Open website to verify?')) {
                         window.open(`https://${githubConfig.username}.github.io/${githubConfig.repo}`, '_blank');
@@ -3558,7 +3633,7 @@
             }
         }
         
-        // Product Pages Functions with GitHub Status
+        // Product Pages Functions
         async function loadProductPages() {
             const container = document.getElementById('productPagesContainer');
             if (!container) return;
@@ -3577,7 +3652,6 @@
                 return;
             }
             
-            // First, check which pages exist on GitHub
             if (githubConfig.token) {
                 await checkPagesGitHubStatus();
             }
@@ -3593,7 +3667,6 @@
                                   page.status === 'ready' ? 'Ready' :
                                   page.status === 'failed' ? 'Failed' : 'Draft';
                 
-                // GitHub Status
                 const githubStatus = page.onGitHub ? 
                     '<span style="color: var(--success);"><i class="fas fa-check-circle"></i> On GitHub</span>' : 
                     '<span style="color: var(--warning);"><i class="fas fa-exclamation-triangle"></i> Not on GitHub</span>';
@@ -3649,14 +3722,12 @@
             updatePageStats();
         }
         
-        // Check GitHub Status for All Pages
         async function checkPagesGitHubStatus() {
             if (!githubConfig.token) return;
             
             showSyncStatus('Checking GitHub status...', 'syncing');
             
             for (const page of productPages) {
-                // Fix: Ensure filename is correct
                 const correctFileName = generateProductFileName(page.productName);
                 if (page.fileName !== correctFileName) {
                     console.log(`Fixing filename: ${page.fileName} -> ${correctFileName}`);
@@ -3688,7 +3759,6 @@
             showSyncStatus('GitHub status updated', 'success');
         }
         
-        // Push Single Page to GitHub
         async function pushSinglePageToGitHub(pageId) {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token in Settings first');
@@ -3705,7 +3775,6 @@
                 const base64Content = btoa(unescape(encodeURIComponent(page.html)));
                 const filePath = `products/${page.fileName}`;
                 
-                // Get SHA if file exists
                 let sha = null;
                 try {
                     const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -3719,11 +3788,8 @@
                         const fileData = await getResponse.json();
                         sha = fileData.sha;
                     }
-                } catch (e) {
-                    // File doesn't exist
-                }
+                } catch (e) {}
                 
-                // Push to GitHub
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                     method: 'PUT',
                     headers: {
@@ -3749,7 +3815,6 @@
                     
                     localStorage.setItem('product_pages', JSON.stringify(productPages));
                     
-                    // Remove from pending pushes
                     pendingPushes = pendingPushes.filter(p => p.pageId !== pageId);
                     localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
                     
@@ -3757,7 +3822,6 @@
                     loadProductPages();
                     addActivity(`Pushed product page: ${page.productName}`);
                     
-                    // Ask if user wants to view on website
                     setTimeout(() => {
                         if (confirm('Page pushed successfully! Open on website to view?')) {
                             window.open(`https://${githubConfig.username}.github.io/${githubConfig.repo}/products/${page.fileName}`, '_blank');
@@ -3778,7 +3842,6 @@
             }
         }
         
-        // View on GitHub
         function viewOnGitHub(pageId) {
             const page = productPages.find(p => p.id === pageId);
             if (page && page.githubUrl) {
@@ -3786,7 +3849,6 @@
             }
         }
         
-        // Update Page Statistics
         function updatePageStats() {
             const totalLocal = productPages.length;
             const onGitHub = productPages.filter(p => p.onGitHub).length;
@@ -3810,7 +3872,6 @@
             if (githubPendingEl) githubPendingEl.textContent = pending;
         }
         
-        // Check All GitHub Status
         async function checkAllGitHubStatus() {
             await checkPagesGitHubStatus();
             loadProductPages();
@@ -3947,7 +4008,6 @@
             addActivity('Updated company details locally');
         }
         
-        // Push Company Details to GitHub Manually
         async function pushCompanyDetailsToGitHub() {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token in Settings first');
@@ -3962,7 +4022,6 @@
                 const base64Content = btoa(unescape(encodeURIComponent(content)));
                 const filePath = githubConfig.companyPath;
                 
-                // Get SHA if file exists
                 let sha = null;
                 try {
                     const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
@@ -3976,11 +4035,8 @@
                         const fileData = await getResponse.json();
                         sha = fileData.sha;
                     }
-                } catch (e) {
-                    // File doesn't exist
-                }
+                } catch (e) {}
                 
-                // Push to GitHub
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                     method: 'PUT',
                     headers: {
@@ -4000,10 +4056,8 @@
                     showMessage('companyMessage', 'Company details pushed to GitHub successfully!', 'success');
                     addActivity('Pushed company details to GitHub');
                     
-                    // Update last sync time
                     localStorage.setItem('last_sync_time', new Date().toISOString());
                     
-                    // Ask if user wants to view on website
                     setTimeout(() => {
                         if (confirm('Company details pushed successfully! Open website to view?')) {
                             window.open(`https://${githubConfig.username}.github.io/${githubConfig.repo}`, '_blank');
@@ -4021,7 +4075,6 @@
             }
         }
         
-        // Pull Company Details from GitHub
         async function pullCompanyDetailsFromGitHub() {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token in Settings first');
@@ -4038,13 +4091,8 @@
                 if (response.ok) {
                     const githubData = await response.json();
                     
-                    // Update companyDetails object
                     companyDetails = githubData;
-                    
-                    // Save to localStorage
                     localStorage.setItem('company_details', JSON.stringify(companyDetails));
-                    
-                    // Update form fields
                     loadCompanyDetails();
                     
                     showMessage('companyMessage', 'Company details pulled from GitHub successfully!', 'success');
@@ -4145,8 +4193,6 @@
                     const user = await response.json();
                     alert(`Connected successfully!\nGitHub user: ${user.login}`);
                     addActivity('GitHub connection test successful');
-                    
-                    // Update connection status
                     document.getElementById('githubConnectionStatus').textContent = '✅ Connected';
                 } else {
                     const error = await response.json();
@@ -4202,7 +4248,6 @@
             addActivity('Admin password changed');
         }
         
-        // Sync status display
         function showSyncStatus(message, type = 'syncing') {
             const statusEl = document.getElementById('githubLastSync');
             if (statusEl) {
@@ -4215,19 +4260,16 @@
         // GitHub Workflow Functions
         let stopDeletionFlag = false;
 
-        // Stop deletion process
         function stopWorkflowDeletion() {
             stopDeletionFlag = true;
             showSyncStatus('Stopping deletion...', 'warning');
             
-            // Hide progress bar after 2 seconds
             setTimeout(() => {
                 document.getElementById('workflowProgressContainer').style.display = 'none';
                 stopDeletionFlag = false;
             }, 2000);
         }
 
-        // Get all workflow runs with pagination
         async function getAllWorkflowRuns(page = 1) {
             try {
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs?per_page=100&page=${page}`, {
@@ -4249,7 +4291,6 @@
             }
         }
 
-        // Delete a single workflow run
         async function deleteWorkflowRun(runId) {
             try {
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs/${runId}`, {
@@ -4267,7 +4308,6 @@
             }
         }
 
-        // Get total count of workflow runs
         async function getTotalWorkflowCount() {
             try {
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs?per_page=1`, {
@@ -4279,7 +4319,6 @@
                 
                 if (!response.ok) return 0;
                 
-                // Get total count from Link header
                 const linkHeader = response.headers.get('Link');
                 if (linkHeader) {
                     const lastPageMatch = linkHeader.match(/page=(\d+)>; rel="last"/);
@@ -4295,17 +4334,14 @@
             }
         }
 
-        // Delete all workflow runs
         async function deleteAllWorkflowRuns() {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token first');
                 return;
             }
             
-            // Get total count first
             const totalCount = await getTotalWorkflowCount();
             
-            // Double confirmation
             const confirmMessage = `⚠️ WARNING ⚠️\n\n` +
                 `This will delete approximately ${totalCount} workflow runs from GitHub.\n\n` +
                 `This action CANNOT be undone!\n\n` +
@@ -4313,7 +4349,6 @@
             
             if (!confirm(confirmMessage)) return;
             
-            // Password confirmation
             const password = prompt('Please enter admin password to confirm:');
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
             
@@ -4322,7 +4357,6 @@
                 return;
             }
             
-            // Show progress bar
             const progressContainer = document.getElementById('workflowProgressContainer');
             const progressBar = document.getElementById('workflowProgressBar');
             const progressText = document.getElementById('workflowProgressText');
@@ -4351,7 +4385,6 @@
                     
                     progressText.textContent = `Deleting page ${page}...`;
                     
-                    // Delete each run in this page
                     for (const run of runs) {
                         if (stopDeletionFlag) {
                             progressText.textContent = 'Deletion stopped by user';
@@ -4366,12 +4399,10 @@
                             failedCount++;
                         }
                         
-                        // Update progress
                         const percent = Math.round((deletedCount / totalCount) * 100);
                         progressBar.style.width = percent + '%';
                         progressCount.textContent = `${deletedCount}/${totalCount}`;
                         
-                        // Small delay to avoid rate limiting
                         await new Promise(resolve => setTimeout(resolve, 200));
                     }
                     
@@ -4381,7 +4412,7 @@
                     
                 } catch (error) {
                     console.error('Error in batch:', error);
-                    failedCount += 100; // Assume all in this batch failed
+                    failedCount += 100;
                     hasMore = false;
                 }
             }
@@ -4397,13 +4428,11 @@
             
             addActivity(`Deleted ${deletedCount} workflow runs from GitHub`);
             
-            // Hide progress bar after 5 seconds
             setTimeout(() => {
                 progressContainer.style.display = 'none';
             }, 5000);
         }
 
-        // Delete old workflow runs (older than specified days)
         async function deleteOldWorkflowRuns() {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token first');
@@ -4426,7 +4455,6 @@
             
             if (!confirm(confirmMessage)) return;
             
-            // Show progress bar
             const progressContainer = document.getElementById('workflowProgressContainer');
             const progressBar = document.getElementById('workflowProgressBar');
             const progressText = document.getElementById('workflowProgressText');
@@ -4477,12 +4505,11 @@
                             
                             progressCount.textContent = `${deletedCount} deleted`;
                             
-                            // Small delay
                             await new Promise(resolve => setTimeout(resolve, 200));
                         }
                     }
                     
-                    if (!hasOldRuns && page > 3) { // Stop if 3 pages in a row have no old runs
+                    if (!hasOldRuns && page > 3) {
                         hasMore = false;
                     }
                     
@@ -4502,13 +4529,11 @@
             
             addActivity(`Deleted ${deletedCount} old workflow runs from GitHub`);
             
-            // Hide progress bar after 5 seconds
             setTimeout(() => {
                 progressContainer.style.display = 'none';
             }, 5000);
         }
 
-        // Get workflow statistics
         async function getWorkflowStats() {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token first');
@@ -4518,7 +4543,6 @@
             showSyncStatus('Fetching workflow stats...', 'syncing');
             
             try {
-                // Get first page to see recent runs
                 const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs?per_page=10`, {
                     headers: {
                         'Authorization': `token ${githubConfig.token}`,
@@ -4531,16 +4555,11 @@
                 const data = await response.json();
                 const recentRuns = data.workflow_runs || [];
                 
-                // Try to get total count
                 let totalCount = 'Unknown';
                 try {
                     totalCount = await getTotalWorkflowCount();
-                } catch (e) {
-                    // Ignore error
-                }
+                } catch (e) {}
                 
-                // Calculate stats
-                const now = new Date();
                 const runsByDate = {};
                 const runsByStatus = {};
                 
@@ -4552,7 +4571,6 @@
                     runsByStatus[status] = (runsByStatus[status] || 0) + 1;
                 }
                 
-                // Create stats HTML
                 let statsHtml = `
                     <div style="padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius);">
                         <h5 style="color: var(--gold); margin-bottom: 15px;">📊 Workflow Statistics</h5>
@@ -4633,7 +4651,6 @@
             }
         }
 
-        // Update the existing loadPendingQueue function to include cleanup button
         function loadPendingQueue() {
             const container = document.getElementById('pendingQueueContainer');
             if (!container) return;
@@ -4681,7 +4698,6 @@
             document.getElementById('githubLastSync').textContent = workflowStatus.lastSync ? 
                 new Date(workflowStatus.lastSync).toLocaleTimeString() : 'Never';
             
-            // Update connection status
             document.getElementById('githubConnectionStatus').textContent = githubConfig.token ? '✅ Connected' : '❌ Not Connected';
         }
         
@@ -4973,7 +4989,6 @@
             }
         }
         
-        // Auto backup check
         function checkAutoBackup() {
             const frequency = localStorage.getItem('backup_frequency') || 'weekly';
             const lastBackup = localStorage.getItem('last_auto_backup');
@@ -4997,7 +5012,6 @@
             }
         }
         
-        // Check for auto backup every hour
         setInterval(checkAutoBackup, 60 * 60 * 1000);
         setTimeout(checkAutoBackup, 5000);
     </script>
