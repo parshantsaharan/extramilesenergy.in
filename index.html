@@ -7,8 +7,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        
-        // ENHANCED CONFIGURATION
         gtag('config', 'G-YJFK0Q3EKW', { 
             'anonymize_ip': true,
             'allow_google_signals': true,
@@ -1323,7 +1321,7 @@
             margin-bottom: 20px;
         }
         
-        /* ===== RESPONSIVE BREAKPOINTS - ONLY MOBILE REDESIGN ===== */
+        /* ===== RESPONSIVE BREAKPOINTS - CRITICAL FIX FOR MOBILE BUTTONS ===== */
         @media (max-width: 992px) {
             .products-compact {
                 grid-template-columns: repeat(2, 1fr);
@@ -1359,7 +1357,7 @@
                 display: none;
             }
             
-            /* ===== MOBILE GRID - SINGLE COLUMN ===== */
+            /* Products grid - single column */
             .products-compact {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -1414,35 +1412,45 @@
                 padding: 40px 0 30px;
             }
             
-            /* ===== MOBILE CART FIX ===== */
+            /* Mobile Cart Fix */
             .cart-sidebar {
                 width: 100%;
                 transform: translateX(100%);
                 box-shadow: none;
             }
             
-            /* ===== MOBILE BUTTONS - STACKED VERTICALLY (CRITICAL FIX) ===== */
+            /* ===== CRITICAL FIX: Mobile Buttons SHOULD BE VISIBLE ===== */
+            /* Product actions should remain flex row on mobile too */
             .product-actions-compact {
-                flex-direction: column;
+                display: flex;
+                flex-direction: row;  /* Keep buttons in a row like desktop */
+                flex-wrap: wrap;      /* Allow wrapping if needed */
                 gap: 8px;
+                margin-top: 15px;
             }
             
+            /* Make buttons slightly smaller on mobile but still visible */
             .btn-add-to-cart, 
             .btn-whatsapp-compact, 
-            .btn-details-compact, 
-            .btn-call-compact {
-                width: 100%;
-                flex: none;
-                min-width: 100%;
-                justify-content: center;
-                padding: 12px 10px;
-                font-size: 0.9rem;
-                margin: 0;
+            .btn-details-compact {
+                flex: 1 1 calc(33.333% - 6px);  /* Three buttons in a row */
+                min-width: 80px;
+                padding: 10px 8px;
+                font-size: 0.8rem;
+                white-space: nowrap;
             }
             
             .btn-call-compact {
-                width: 100%;
-                height: 44px;
+                width: 100%;           /* Call button full width on new line */
+                margin-top: 5px;
+                height: 42px;
+            }
+            
+            /* Ensure buttons are visible and not hidden */
+            .product-actions-compact {
+                opacity: 1;
+                visibility: visible;
+                display: flex !important;  /* Force display */
             }
             
             .sync-badge {
@@ -1454,16 +1462,17 @@
         }
         
         @media (max-width: 480px) {
-            .product-actions-compact {
-                gap: 6px;
-            }
-            
+            /* Even smaller screens */
             .btn-add-to-cart, 
             .btn-whatsapp-compact, 
-            .btn-details-compact, 
+            .btn-details-compact {
+                flex: 1 1 calc(50% - 4px);  /* Two buttons per row on very small screens */
+                font-size: 0.75rem;
+                padding: 8px 4px;
+            }
+            
             .btn-call-compact {
-                padding: 10px 8px;
-                font-size: 0.85rem;
+                width: 100%;
             }
             
             .quick-stat {
