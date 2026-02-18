@@ -1042,9 +1042,9 @@
                                 <i class="fab fa-github"></i>
                                 <span>GitHub Workflow</span>
                             </a>
-                            <a href="https://wa.me/917876555055" target="_blank" class="quick-action-btn">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>WhatsApp Support</span>
+                            <a href="#" class="quick-action-btn" onclick="fixExistingProductImages()">
+                                <i class="fas fa-image"></i>
+                                <span>Fix Product Images</span>
                             </a>
                             <a href="#" class="quick-action-btn" onclick="exportProducts()">
                                 <i class="fas fa-download"></i>
@@ -1077,7 +1077,6 @@
                         </div>
                     </div>
                     
-                    <!-- Updated Filter Section with Main and Sub Categories -->
                     <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="searchProducts" class="form-input" placeholder="Search products..." style="flex: 1;" onkeyup="searchProducts()">
                         
@@ -1108,7 +1107,7 @@
                 </div>
             </div>
             
-            <!-- Add Product Tab - Updated with Category Fields -->
+            <!-- Add Product Tab -->
             <div id="addProduct" class="tab-content">
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);" id="formTitle">Add New Product</h3>
@@ -1126,7 +1125,7 @@
                         </div>
                     </div>
                     
-                    <!-- ✅ NEW: Category Fields -->
+                    <!-- Category Fields -->
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Main Category *</label>
@@ -1211,7 +1210,7 @@
                         <div class="file-upload-area" onclick="document.getElementById('productImages').click()">
                             <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--gold); margin-bottom: 10px;"></i>
                             <div style="color: var(--gold-light);">Click to upload multiple images or use camera</div>
-                            <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Select multiple files (JPG, PNG)</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Images will be uploaded to GitHub (NOT stored in HTML)</div>
                             
                             <div class="camera-options">
                                 <div class="camera-btn" onclick="openCamera()">
@@ -1337,6 +1336,28 @@
                         <div class="stat-card">
                             <div class="number" id="githubLastSync">--:--</div>
                             <div class="label">Last Sync</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Image Fix Utility -->
+                    <div style="margin-bottom: 30px; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: var(--radius); border: 1px solid var(--gold);">
+                        <h4 style="color: var(--gold); margin-bottom: 20px;">
+                            <i class="fas fa-image"></i> Image Optimization Utility
+                        </h4>
+                        
+                        <p style="color: var(--gold-light); margin-bottom: 15px;">
+                            Convert old Base64 images to GitHub URLs for faster loading pages.
+                        </p>
+                        
+                        <button class="btn btn-warning" onclick="fixExistingProductImages()">
+                            <i class="fas fa-sync-alt"></i> Fix All Product Images
+                        </button>
+                        
+                        <div id="imageFixProgress" style="margin-top: 15px; display: none;">
+                            <div style="height: 4px; background: rgba(255,215,0,0.2); border-radius: 2px;">
+                                <div id="imageFixProgressBar" style="width: 0%; height: 100%; background: var(--gold); border-radius: 2px;"></div>
+                            </div>
+                            <div id="imageFixStatus" style="margin-top: 10px; color: var(--gold-light); font-size: 0.9rem;"></div>
                         </div>
                     </div>
                     
@@ -1540,7 +1561,6 @@
                         </div>
                     </div>
                     
-                    <!-- Updated Buttons with Pull and Push Options -->
                     <div style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
                         <button class="btn btn-success" onclick="saveCompanyDetails()" style="flex: 1;">
                             <i class="fas fa-save"></i> Save Locally
@@ -1748,6 +1768,8 @@
     <script>
         // Configuration
         const DEFAULT_PASSWORD = 'Sky12345';
+        const GA_TRACKING_ID = 'G-YJFK0Q3EKW';
+        
         let products = [];
         let editingProductId = null;
         let cameraStream = null;
@@ -1769,9 +1791,7 @@
         let productPdfFile = null;
         let productPdfName = '';
         
-        // ============================================
-        // ✅ NEW: Category Data
-        // ============================================
+        // Category Data
         const categoryData = {
             "EV Battery": [
                 "Electric Scooter Battery",
@@ -1830,7 +1850,7 @@
         };
         
         // ============================================
-        // Product Page Filename Generator - NO extra dash
+        // Product Page Filename Generator
         // ============================================
         function generateProductFileName(productName) {
             if (!productName) return 'product.html';
@@ -1849,13 +1869,12 @@
         }
         
         // ============================================
-        // ✅ NEW: Category Functions
+        // Category Functions
         // ============================================
         function updateSubCategories() {
             const mainCat = document.getElementById('productMainCategory').value;
             const subCatSelect = document.getElementById('productSubCategory');
             
-            // Clear existing options
             subCatSelect.innerHTML = '<option value="">Select Sub Category</option>';
             
             if (mainCat && categoryData[mainCat]) {
@@ -2118,8 +2137,8 @@
                     reader.onload = function(e) {
                         uploadedImages.push({
                             id: 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-                            dataUrl: e.target.result,
-                            file: file,
+                            dataUrl: e.target.result,  // Temporary preview
+                            file: file,                 // Will be uploaded to GitHub
                             isMain: uploadedImages.length === 0,
                             name: file.name
                         });
@@ -2341,7 +2360,7 @@
             }
         }
         
-        // Display products - Updated with categories
+        // Display products
         function displayProducts(filteredProducts = null) {
             const container = document.getElementById('productsList');
             if (!container) return;
@@ -2408,7 +2427,7 @@
             container.innerHTML = html;
         }
         
-        // Search and filter products - Updated with categories
+        // Search and filter products
         function searchProducts() {
             const searchTerm = document.getElementById('searchProducts').value.toLowerCase();
             const filtered = products.filter(product => 
@@ -2508,6 +2527,7 @@
                             fileName = fileName.replace(/\.+$/, '') + '.' + ext;
                         }
                         
+                        // Check if file exists
                         const checkUrl = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${githubConfig.uploadsPath}/${fileName}`;
                         
                         try {
@@ -2555,7 +2575,8 @@
                                 }, 1000 * (retryCount + 1));
                                 return;
                             }
-                                            reject(new Error(`Failed to upload image: ${error.message}`));
+                            
+                            reject(new Error(`Failed to upload image: ${error.message}`));
                             return;
                         }
                         
@@ -2602,9 +2623,7 @@
                             if (checkResponse.ok) {
                                 fileName = fileName.replace('.pdf', `-${Date.now()}.pdf`);
                             }
-                        } catch (e) {
-                            // File doesn't exist, continue
-                        }
+                        } catch (e) {}
                         
                         const filePath = `${githubConfig.uploadsPath}/${fileName}`;
                         
@@ -2670,9 +2689,7 @@
                     const fileData = await getResponse.json();
                     sha = fileData.sha;
                 }
-            } catch (e) {
-                // File doesn't exist
-            }
+            } catch (e) {}
             
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
@@ -2697,7 +2714,7 @@
             return true;
         }
         
-        // Save product HTML page to GitHub
+        // Save product HTML page to GitHub with Google Analytics
         async function saveProductHtmlToGitHub(html, fileName, productName) {
             const base64Content = btoa(unescape(encodeURIComponent(html)));
             const filePath = `products/${fileName}`;
@@ -2715,9 +2732,7 @@
                     const fileData = await getResponse.json();
                     sha = fileData.sha;
                 }
-            } catch (e) {
-                // File doesn't exist
-            }
+            } catch (e) {}
             
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
@@ -2783,9 +2798,7 @@
                     const fileData = await getResponse.json();
                     sha = fileData.sha;
                 }
-            } catch (e) {
-                // File doesn't exist
-            }
+            } catch (e) {}
             
             const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
                 method: 'PUT',
@@ -2809,21 +2822,25 @@
             return true;
         }
         
-        // Generate Product HTML Page - Updated with categories
+        // ============================================
+        // Generate Product HTML with Google Analytics
+        // ============================================
         function generateProductHTML(product) {
-            const mainImage = uploadedImages.find(img => img.isMain) || uploadedImages[0];
-            const mainImageUrl = mainImage ? mainImage.dataUrl : 'https://via.placeholder.com/500x400/142044/FFD700?text=Product';
+            const mainImage = product.images?.find(img => img.isMain) || product.images?.[0];
+            const mainImageUrl = mainImage?.githubUrl || product.image || 'https://via.placeholder.com/500x400/142044/FFD700?text=Product';
             
             let galleryHTML = '';
-            if (uploadedImages.length > 0) {
+            if (product.images && product.images.length > 0) {
                 galleryHTML = `
                     <div class="product-gallery">
                         <div class="main-image">
-                            <img src="${mainImageUrl}" alt="${product.name}" id="mainProductImage">
+                            <img src="${mainImageUrl}" alt="${product.name}" id="mainProductImage" loading="lazy">
                         </div>
                         <div class="thumbnail-grid">
-                            ${uploadedImages.map(img => `
-                                <img src="${img.dataUrl}" alt="Thumbnail" class="thumbnail" onclick="document.getElementById('mainProductImage').src='${img.dataUrl}'">
+                            ${product.images.map(img => `
+                                <img src="${img.githubUrl || img.dataUrl}" alt="Thumbnail" class="thumbnail" 
+                                     onclick="document.getElementById('mainProductImage').src='${img.githubUrl || img.dataUrl}'"
+                                     loading="lazy">
                             `).join('')}
                         </div>
                     </div>
@@ -2844,9 +2861,11 @@
             const whatsappNumber = companyDetails.whatsapp || '917876555055';
             const phoneNumber = companyDetails.phone1 || '+917876555055';
             
+            const productPrice = product.price ? product.price.replace(/[^0-9]/g, '') : '0';
+            
             const datasheetHTML = product.datasheet ? `
                 <div style="margin: 20px 0; text-align: center;">
-                    <a href="${product.datasheet}" target="_blank" style="background: var(--danger); color: white; padding: 12px 25px; border-radius: var(--radius-sm); text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
+                    <a href="${product.datasheet}" target="_blank" class="btn-datasheet" onclick="gtag('event', 'download', {'event_category': 'PDF', 'event_label': '${product.name}'});">
                         <i class="fas fa-file-pdf"></i> Download Datasheet
                     </a>
                 </div>
@@ -2857,235 +2876,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${GA_TRACKING_ID}', {
+            'page_title': '${product.name}',
+            'page_location': window.location.href,
+            'page_path': '/products/${generateProductFileName(product.name)}'
+        });
+        
+        // Track product view
+        gtag('event', 'view_item', {
+            'currency': 'INR',
+            'value': ${productPrice || 0},
+            'items': [{
+                'item_id': '${product.id}',
+                'item_name': '${product.name}',
+                'item_category': '${product.mainCategory || 'Product'}',
+                'item_category2': '${product.subCategory || ''}',
+                'price': ${productPrice || 0},
+                'quantity': 1
+            }]
+        });
+    </script>
+    
     <title>${product.name} | Extra Miles Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/product.css">
     <style>
-        :root {
-            --primary: #0b1220;
-            --secondary: #142044;
-            --gold: #FFD700;
-            --gold-light: #FFF9C4;
-            --accent: #35d0ff;
-            --text: #ffffff;
-            --text-muted: #a0b3d9;
-            --card-bg: rgba(20, 32, 68, 0.95);
-            --radius: 16px;
-            --radius-sm: 10px;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--primary);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background: var(--card-bg);
-            border-bottom: 2px solid var(--gold);
-            padding: 15px 0;
-            margin-bottom: 30px;
-        }
-        
-        .product-detail {
-            background: var(--card-bg);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: var(--radius);
-            padding: 30px;
-        }
-        
-        .product-gallery {
-            margin-bottom: 30px;
-        }
-        
-        .main-image {
-            width: 100%;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .main-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        .thumbnail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 10px;
-        }
-        
-        .thumbnail {
-            width: 100%;
-            height: 80px;
-            object-fit: contain;
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .thumbnail:hover {
-            border-color: var(--gold);
-            transform: scale(1.05);
-        }
-        
-        .product-title {
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        
-        .product-specs {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        
-        .category-info {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .category-badge {
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--gold);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        .price {
-            font-size: 2rem;
-            color: var(--gold);
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-        
-        .specs-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-        }
-        
-        .specs-table td {
-            padding: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .specs-table td:first-child {
-            background: rgba(255, 215, 0, 0.05);
-            color: var(--gold-light);
-            font-weight: 600;
-            width: 200px;
-        }
-        
-        .features-list {
-            list-style: none;
-            margin: 30px 0;
-        }
-        
-        .features-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .btn-whatsapp {
-            background: #25D366;
-            color: white;
-        }
-        
-        .btn-whatsapp:hover {
-            background: #128C7E;
-            transform: translateY(-2px);
-        }
-        
-        .btn-call {
-            background: var(--accent);
-            color: var(--primary);
-        }
-        
-        .btn-call:hover {
-            background: var(--gold);
-            transform: translateY(-2px);
-        }
-        
-        .btn-datasheet {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .btn-datasheet:hover {
-            background: #ff2b5e;
-            transform: translateY(-2px);
-        }
-        
-        .description {
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-            line-height: 1.8;
-        }
-        
-        @media (max-width: 768px) {
-            .main-image { height: 300px; }
-            .product-title { font-size: 1.5rem; }
-            .action-buttons { flex-direction: column; }
-        }
+        .product-gallery .main-image { height: 400px; }
+        @media (max-width: 768px) { .product-gallery .main-image { height: 300px; } }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="container">
-            <a href="../" style="color: var(--gold); text-decoration: none;">
+            <a href="../" class="back-btn" onclick="gtag('event', 'click', {'event_category': 'Navigation', 'event_label': 'Back to Home'});">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
@@ -3106,10 +2936,15 @@
             ${product.price ? `<div class="price">${product.price}</div>` : ''}
             
             <div class="action-buttons">
-                <a href="https://wa.me/${whatsappNumber}?text=Hello%2C%20I%27m%20interested%20in%3A%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.voltage || '')})" class="btn btn-whatsapp" target="_blank">
+                <a href="https://wa.me/${whatsappNumber}?text=Hello%2C%20I%27m%20interested%20in%3A%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.voltage || '')})" 
+                   class="btn btn-whatsapp" 
+                   target="_blank"
+                   onclick="gtag('event', 'conversion', {'event_category': 'WhatsApp', 'event_label': '${product.name}'});">
                     <i class="fab fa-whatsapp"></i> Inquiry on WhatsApp
                 </a>
-                <a href="tel:${phoneNumber}" class="btn btn-call">
+                <a href="tel:${phoneNumber}" 
+                   class="btn btn-call"
+                   onclick="gtag('event', 'conversion', {'event_category': 'Call', 'event_label': '${product.name}'});">
                     <i class="fas fa-phone-alt"></i> Call Now
                 </a>
             </div>
@@ -3130,13 +2965,74 @@
                 <h3 style="color: var(--gold); margin: 30px 0 20px;">Description</h3>
                 <div class="description">${product.description.replace(/\n/g, '<br>')}</div>
             ` : ''}
+            
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 40px;">
+                <a href="#" onclick="shareOnWhatsApp(); gtag('event', 'share', {'event_category': 'Social', 'event_label': 'WhatsApp'}); return false;" style="color: #25D366;">
+                    <i class="fab fa-whatsapp fa-2x"></i>
+                </a>
+                <a href="#" onclick="shareOnFacebook(); gtag('event', 'share', {'event_category': 'Social', 'event_label': 'Facebook'}); return false;" style="color: #1877F2;">
+                    <i class="fab fa-facebook fa-2x"></i>
+                </a>
+                <a href="#" onclick="shareOnTwitter(); gtag('event', 'share', {'event_category': 'Social', 'event_label': 'Twitter'}); return false;" style="color: #1DA1F2;">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
+            </div>
         </div>
     </div>
+    
+    <script>
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent('Check out this product: ${product.name} - ${product.voltage}');
+            const url = encodeURIComponent(window.location.href);
+            window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
+        }
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+        }
+        function shareOnTwitter() {
+            const text = encodeURIComponent('${product.name} - ${product.voltage}');
+            const url = encodeURIComponent(window.location.href);
+            window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+        }
+        
+        let startTime = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const timeSpent = Math.round((Date.now() - startTime) / 1000);
+            gtag('event', 'time_on_page', {
+                'event_category': 'Engagement',
+                'event_label': '${product.name}',
+                'value': timeSpent
+            });
+        });
+        
+        window.addEventListener('scroll', function() {
+            const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            if (scrollPercent > 25 && !window.sent25) {
+                gtag('event', 'scroll_depth', {'event_category': 'Engagement', 'event_label': '25%', 'value': 25});
+                window.sent25 = true;
+            }
+            if (scrollPercent > 50 && !window.sent50) {
+                gtag('event', 'scroll_depth', {'event_category': 'Engagement', 'event_label': '50%', 'value': 50});
+                window.sent50 = true;
+            }
+            if (scrollPercent > 75 && !window.sent75) {
+                gtag('event', 'scroll_depth', {'event_category': 'Engagement', 'event_label': '75%', 'value': 75});
+                window.sent75 = true;
+            }
+            if (scrollPercent > 90 && !window.sent90) {
+                gtag('event', 'scroll_depth', {'event_category': 'Engagement', 'event_label': '90%', 'value': 90});
+                window.sent90 = true;
+            }
+        });
+    </script>
 </body>
 </html>`;
         }
         
-        // Save product with direct GitHub push
+        // ============================================
+        // Save product with GitHub URLs
+        // ============================================
         async function saveProduct() {
             const name = document.getElementById('productName').value;
             const voltage = document.getElementById('productVoltage').value;
@@ -3155,12 +3051,10 @@
             
             let description = '';
             const descElement = document.getElementById('productDescription');
-            if (descElement) {
-                description = descElement.value;
-            }
+            if (descElement) description = descElement.value;
             
             if (!name || !voltage || !features.length || !mainCategory) {
-                showMessage('addProductMessage', 'Please fill all required fields (Name, Voltage, Features, Main Category)', 'error');
+                showMessage('addProductMessage', 'Please fill all required fields', 'error');
                 return;
             }
             
@@ -3198,12 +3092,7 @@
                 description,
                 specifications: specifications,
                 status,
-                images: uploadedImages.map(img => ({
-                    id: img.id,
-                    dataUrl: img.dataUrl,
-                    isMain: img.isMain,
-                    name: img.name
-                })),
+                images: [], // Will be filled after upload
                 image: productImageUrl,
                 datasheet: productPdfUrl,
                 displayOrder: parseInt(order) || 0,
@@ -3214,6 +3103,7 @@
             try {
                 showMessage('addProductMessage', 'Saving product and publishing to website...', 'success');
                 
+                // Upload images to GitHub and get URLs
                 if (uploadedImages.length > 0) {
                     try {
                         const uploadedImageUrls = [];
@@ -3221,10 +3111,12 @@
                             if (img.file) {
                                 const url = await uploadImageToGitHub(img.file);
                                 uploadedImageUrls.push({
-                                    ...img,
-                                    githubUrl: url
+                                    id: img.id,
+                                    githubUrl: url,
+                                    isMain: img.isMain,
+                                    name: img.name
                                 });
-                            } else {
+                            } else if (img.githubUrl) {
                                 uploadedImageUrls.push(img);
                             }
                         }
@@ -3232,7 +3124,7 @@
                         product.images = uploadedImageUrls;
                         
                         const mainImage = uploadedImageUrls.find(img => img.isMain) || uploadedImageUrls[0];
-                        if (mainImage && mainImage.githubUrl) {
+                        if (mainImage) {
                             product.image = mainImage.githubUrl;
                         }
                         
@@ -3244,6 +3136,7 @@
                     }
                 }
                 
+                // Upload PDF if exists
                 if (productPdfFile) {
                     try {
                         const pdfUrl = await uploadPdfToGitHub(productPdfFile);
@@ -3256,12 +3149,15 @@
                     }
                 }
                 
+                // Save product JSON
                 await saveProductJsonToGitHub(product);
                 
+                // Generate and save HTML page
                 const productHTML = generateProductHTML(product);
                 const pageFileName = generateProductFileName(product.name);
                 await saveProductHtmlToGitHub(productHTML, pageFileName, product.name);
                 
+                // Update local array
                 const index = products.findIndex(p => p.id === productId);
                 if (index > -1) {
                     products[index] = product;
@@ -3271,10 +3167,13 @@
                     addActivity(`Added new product: ${product.name}`);
                 }
                 
+                // Update master list
                 await updateMasterProductsList();
                 
+                // Save to localStorage
                 localStorage.setItem('local_products', JSON.stringify(products));
                 
+                // Create product page record
                 const productPage = {
                     id: 'page_' + Date.now(),
                     productId: product.id,
@@ -3284,8 +3183,8 @@
                     status: 'published',
                     onGitHub: true,
                     githubUrl: `https://github.com/${githubConfig.username}/${githubConfig.repo}/blob/${githubConfig.branch}/products/${pageFileName}`,
-                    images: uploadedImages.map(img => img.dataUrl),
-                    mainImage: uploadedImages.find(img => img.isMain)?.dataUrl || (uploadedImages[0]?.dataUrl || ''),
+                    images: product.images?.map(img => img.githubUrl) || [],
+                    mainImage: product.image,
                     datasheet: product.datasheet,
                     createdAt: new Date().toISOString(),
                     updatedAt: new Date().toISOString(),
@@ -3315,6 +3214,106 @@
                 showMessage('addProductMessage', `Error: ${error.message}`, 'error');
                 addActivity(`Error saving product: ${error.message}`);
             }
+        }
+        
+        // ============================================
+        // Fix Existing Product Images
+        // ============================================
+        async function fixExistingProductImages() {
+            if (!githubConfig.token) {
+                alert('Please configure GitHub token first');
+                showTab('settings');
+                return;
+            }
+            
+            const productsToFix = products.filter(p => {
+                return p.images?.some(img => img.dataUrl && !img.githubUrl);
+            });
+            
+            if (productsToFix.length === 0) {
+                alert('No products with Base64 images found!');
+                return;
+            }
+            
+            if (!confirm(`Found ${productsToFix.length} products with Base64 images. Convert them to GitHub URLs? This may take some time.`)) return;
+            
+            const password = prompt('Please enter admin password to confirm:');
+            const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
+            
+            if (password !== savedPassword) {
+                alert('Incorrect password!');
+                return;
+            }
+            
+            showSyncStatus('Fixing product images...', 'syncing');
+            
+            const progressDiv = document.getElementById('imageFixProgress');
+            const progressBar = document.getElementById('imageFixProgressBar');
+            const progressStatus = document.getElementById('imageFixStatus');
+            
+            progressDiv.style.display = 'block';
+            progressBar.style.width = '0%';
+            
+            let fixed = 0;
+            let errors = 0;
+            
+            for (let i = 0; i < productsToFix.length; i++) {
+                const product = productsToFix[i];
+                progressStatus.textContent = `Processing ${i+1}/${productsToFix.length}: ${product.name}`;
+                
+                try {
+                    const newImages = [];
+                    
+                    for (const img of product.images || []) {
+                        if (img.dataUrl && !img.githubUrl) {
+                            // Convert Base64 to File
+                            const response = await fetch(img.dataUrl);
+                            const blob = await response.blob();
+                            const file = new File([blob], img.name || 'image.jpg', { type: blob.type });
+                            
+                            // Upload to GitHub
+                            const url = await uploadImageToGitHub(file);
+                            newImages.push({
+                                id: img.id,
+                                githubUrl: url,
+                                isMain: img.isMain,
+                                name: img.name
+                            });
+                        } else {
+                            newImages.push(img);
+                        }
+                    }
+                    
+                    product.images = newImages;
+                    
+                    const mainImage = newImages.find(img => img.isMain) || newImages[0];
+                    if (mainImage) product.image = mainImage.githubUrl;
+                    
+                    await saveProductJsonToGitHub(product);
+                    
+                    const productHTML = generateProductHTML(product);
+                    const pageFileName = generateProductFileName(product.name);
+                    await saveProductHtmlToGitHub(productHTML, pageFileName, product.name);
+                    
+                    fixed++;
+                } catch (error) {
+                    console.error(`Error fixing ${product.name}:`, error);
+                    errors++;
+                }
+                
+                progressBar.style.width = `${((i+1)/productsToFix.length) * 100}%`;
+            }
+            
+            await updateMasterProductsList();
+            localStorage.setItem('local_products', JSON.stringify(products));
+            
+            progressStatus.textContent = `Completed! Fixed: ${fixed}, Errors: ${errors}`;
+            showSyncStatus(`Fixed ${fixed} products (${errors} errors)`, 'success');
+            addActivity(`Fixed ${fixed} product images`);
+            
+            setTimeout(() => {
+                progressDiv.style.display = 'none';
+            }, 5000);
         }
         
         // Clear form
@@ -3356,7 +3355,7 @@
             document.getElementById('formTitle').textContent = 'Add New Product';
         }
         
-        // Edit product - Updated with categories
+        // Edit product
         function editProduct(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -3390,7 +3389,10 @@
             document.getElementById('productOrder').value = product.displayOrder || 0;
             
             if (product.images && product.images.length > 0) {
-                uploadedImages = product.images;
+                uploadedImages = product.images.map(img => ({
+                    ...img,
+                    dataUrl: img.githubUrl // For preview
+                }));
             }
             renderImageGrid();
             
@@ -3415,31 +3417,19 @@
             addActivity(`Editing product: ${product.name}`);
         }
         
-        // Delete product with GitHub cleanup
+        // Delete product
         async function deleteProduct(productId) {
             const product = products.find(p => p.id === productId);
-            if (!product) {
-                alert('Product not found!');
-                return;
-            }
+            if (!product) return;
             
             const pageFileName = generateProductFileName(product.name);
             
             const confirmMessage = `⚠️ DELETE CONFIRMATION ⚠️\n\n` +
-                `Product: ${product.name}\n` +
-                `Category: ${product.mainCategory || 'N/A'} ${product.subCategory ? '- ' + product.subCategory : ''}\n\n` +
-                `This will permanently delete:\n` +
-                `• Product from website homepage\n` +
-                `• Product detail page (products/${pageFileName})\n` +
-                `• All product images from GitHub\n` +
-                `• Product PDF if exists\n` +
-                `• Product data JSON file\n\n` +
-                `This action CANNOT be undone!\n\n` +
+                `Product: ${product.name}\n\n` +
+                `This will permanently delete from website and GitHub!\n\n` +
                 `Are you absolutely sure?`;
             
-            if (!confirm(confirmMessage)) {
-                return;
-            }
+            if (!confirm(confirmMessage)) return;
             
             const password = prompt('Please enter admin password to confirm deletion:');
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
@@ -3610,15 +3600,11 @@
                 
                 updateDashboardStats();
                 displayProducts();
-                if (typeof loadProductPages === 'function') {
-                    loadProductPages();
-                }
-                if (typeof loadPendingQueue === 'function') {
-                    loadPendingQueue();
-                }
+                if (typeof loadProductPages === 'function') loadProductPages();
+                if (typeof loadPendingQueue === 'function') loadPendingQueue();
                 
-                showMessage('addProductMessage', `✅ Product "${product.name}" permanently deleted from website and GitHub!`, 'success');
-                addActivity(`Permanently deleted product: ${product.name} from website`);
+                showMessage('addProductMessage', `✅ Product "${product.name}" permanently deleted!`, 'success');
+                addActivity(`Deleted product: ${product.name}`);
                 
                 setTimeout(() => {
                     if (confirm('Product deleted successfully! Open website to verify?')) {
@@ -3730,7 +3716,6 @@
             for (const page of productPages) {
                 const correctFileName = generateProductFileName(page.productName);
                 if (page.fileName !== correctFileName) {
-                    console.log(`Fixing filename: ${page.fileName} -> ${correctFileName}`);
                     page.fileName = correctFileName;
                 }
                 
@@ -5014,6 +4999,9 @@
         
         setInterval(checkAutoBackup, 60 * 60 * 1000);
         setTimeout(checkAutoBackup, 5000);
+        
+        // Expose fix function globally
+        window.fixExistingProductImages = fixExistingProductImages;
     </script>
 </body>
 </html>
