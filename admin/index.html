@@ -6,7 +6,7 @@
     <title>Admin Panel - Extra Miles Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* [Previous CSS remains exactly the same - no changes needed] */
+        /* [Previous CSS remains exactly the same] */
         :root {
             --primary: #0b1220;
             --secondary: #142044;
@@ -935,7 +935,7 @@
                 <label class="form-label">Admin Password</label>
                 <input type="password" id="password" class="form-input" placeholder="Enter admin password" autocomplete="current-password">
                 <div style="margin-top: 5px; font-size: 0.85rem; color: var(--gold-light);">
-                    <i class="fas fa-key"></i> Default password set. Please change after first login.
+                    <i class="fas fa-key"></i> Default password: <strong>Sky12345</strong>
                 </div>
             </div>
             
@@ -1078,7 +1078,7 @@
                         </div>
                     </div>
                     
-                    <!-- Updated Filter Section with Main and Sub Categories -->
+                    <!-- Filter Section with Main and Sub Categories -->
                     <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="searchProducts" class="form-input" placeholder="Search products..." style="flex: 1;" onkeyup="searchProducts()">
                         
@@ -1109,7 +1109,7 @@
                 </div>
             </div>
             
-            <!-- Add Product Tab - Updated with Category Fields -->
+            <!-- Add Product Tab -->
             <div id="addProduct" class="tab-content">
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: var(--gold);" id="formTitle">Add New Product</h3>
@@ -1127,7 +1127,7 @@
                         </div>
                     </div>
                     
-                    <!-- ✅ NEW: Category Fields -->
+                    <!-- Category Fields -->
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Main Category *</label>
@@ -1541,7 +1541,6 @@
                         </div>
                     </div>
                     
-                    <!-- Updated Buttons with Pull and Push Options -->
                     <div style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
                         <button class="btn btn-success" onclick="saveCompanyDetails()" style="flex: 1;">
                             <i class="fas fa-save"></i> Save Locally
@@ -1747,10 +1746,11 @@
     </div>
 
     <script>
-        // Configuration
+        // Configuration - FIXED: Moved to the top where it can be accessed
         const DEFAULT_PASSWORD = 'Sky12345';
         const GOOGLE_ANALYTICS_ID = 'G-YJFK0Q3EKW'; // Your Google Analytics ID
         
+        // Global variables
         let products = [];
         let editingProductId = null;
         let cameraStream = null;
@@ -1773,7 +1773,7 @@
         let productPdfName = '';
         
         // ============================================
-        // ✅ Category Data
+        // Category Data
         // ============================================
         const categoryData = {
             "EV Battery": [
@@ -1833,12 +1833,47 @@
         };
         
         // ============================================
+        // FIXED: Initialize - Check for existing login
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking login status...');
+            
+            // Set default password if not exists
+            if (!localStorage.getItem('admin_password')) {
+                localStorage.setItem('admin_password', DEFAULT_PASSWORD);
+                console.log('Default password set');
+            }
+            
+            // Check if already logged in
+            const savedPassword = localStorage.getItem('admin_password');
+            const token = localStorage.getItem('admin_token');
+            
+            console.log('Saved password exists:', !!savedPassword);
+            console.log('Token exists:', !!token);
+            console.log('Token matches:', token === savedPassword);
+            
+            if (token && savedPassword && token === savedPassword) {
+                console.log('User already logged in, showing dashboard');
+                showAdminDashboard();
+                loadProducts();
+                loadSettings();
+                loadCompanyDetails();
+                updateSystemInfo();
+                loadRecentActivity();
+                renderSpecificationsTable();
+            } else {
+                console.log('No valid login, showing login page');
+                showLoginPage();
+            }
+        });
+        
+        // ============================================
         // Google Analytics Helper
         // ============================================
         function getGoogleAnalyticsScript() {
             return `
                 <!-- Google tag (gtag.js) -->
-                <script async src="https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}"></script>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}"><\/script>
                 <script>
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
@@ -1871,74 +1906,22 @@
         }
         
         // ============================================
-        // Product Page Filename Generator
+        // Authentication Functions
         // ============================================
-        function generateProductFileName(productName) {
-            if (!productName) return 'product.html';
+        function login() {
+            console.log('Login function called');
             
-            let fileName = productName.toLowerCase();
-            fileName = fileName.replace(/\s+/g, '-');
-            fileName = fileName.replace(/[^a-z0-9-]+/g, '');
-            fileName = fileName.replace(/^-+|-+$/g, '');
-            fileName = fileName.replace(/-+/g, '-');
-            
-            if (!fileName || fileName === '') {
-                fileName = 'product-' + Date.now();
-            }
-            
-            return fileName + '.html';
-        }
-        
-        // ============================================
-        // ✅ Category Functions
-        // ============================================
-        function updateSubCategories() {
-            const mainCat = document.getElementById('productMainCategory').value;
-            const subCatSelect = document.getElementById('productSubCategory');
-            
-            // Clear existing options
-            subCatSelect.innerHTML = '<option value="">Select Sub Category</option>';
-            
-            if (mainCat && categoryData[mainCat]) {
-                categoryData[mainCat].forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    subCatSelect.appendChild(option);
-                });
-                subCatSelect.disabled = false;
-            } else {
-                subCatSelect.disabled = true;
-            }
-        }
-        
-        function updateSubFilter() {
-            const mainCat = document.getElementById('filterMainCategory').value;
-            const subFilter = document.getElementById('filterSubCategory');
-            
-            subFilter.innerHTML = '<option value="">All Sub Categories</option>';
-            
-            if (mainCat && categoryData[mainCat]) {
-                categoryData[mainCat].forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    subFilter.appendChild(option);
-                });
-                subFilter.disabled = false;
-            } else {
-                subFilter.disabled = true;
-            }
-            
-            filterProducts();
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+            const password = document.getElementById('password').value;
             const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
-            const token = localStorage.getItem('admin_token');
             
-            if (token === savedPassword) {
+            console.log('Entered password:', password);
+            console.log('Saved password:', savedPassword);
+            console.log('Match:', password === savedPassword);
+            
+            if (password === savedPassword) {
+                localStorage.setItem('admin_token', password);
+                console.log('Token saved, showing dashboard');
+                
                 showAdminDashboard();
                 loadProducts();
                 loadSettings();
@@ -1946,46 +1929,39 @@
                 updateSystemInfo();
                 loadRecentActivity();
                 renderSpecificationsTable();
-            }
-        });
-        
-        // Authentication
-        function login() {
-            const password = document.getElementById('password').value;
-            const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
-            
-            if (password === savedPassword) {
-                localStorage.setItem('admin_token', password);
-                showAdminDashboard();
-                loadProducts();
-                loadSettings();
-                loadCompanyDetails();
-                updateSystemInfo();
-                loadRecentActivity();
-                showMessage('loginMessage', 'Login successful! Redirecting...', 'success');
                 
+                showMessage('loginMessage', 'Login successful! Redirecting...', 'success');
                 addActivity('Admin login successful');
             } else {
+                console.log('Login failed - incorrect password');
                 showMessage('loginMessage', 'Incorrect password!', 'error');
                 addActivity('Failed login attempt');
             }
         }
         
         function logout() {
+            console.log('Logout function called');
             addActivity('Admin logged out');
             localStorage.removeItem('admin_token');
             showLoginPage();
         }
         
         function showLoginPage() {
+            console.log('Showing login page');
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminDashboard').style.display = 'none';
         }
         
         function showAdminDashboard() {
+            console.log('Showing admin dashboard');
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
         }
+        
+        // ============================================
+        // Rest of the functions remain exactly the same as before
+        // (All other functions - showTab, handleMultipleImages, saveProduct, etc.)
+        // ============================================
         
         // Navigation
         function showTab(tabId) {
@@ -2074,11 +2050,55 @@
             container.innerHTML = html;
         }
         
+        // ============================================
+        // Category Functions
+        // ============================================
+        function updateSubCategories() {
+            const mainCat = document.getElementById('productMainCategory').value;
+            const subCatSelect = document.getElementById('productSubCategory');
+            
+            subCatSelect.innerHTML = '<option value="">Select Sub Category</option>';
+            
+            if (mainCat && categoryData[mainCat]) {
+                categoryData[mainCat].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subCatSelect.appendChild(option);
+                });
+                subCatSelect.disabled = false;
+            } else {
+                subCatSelect.disabled = true;
+            }
+        }
+        
+        function updateSubFilter() {
+            const mainCat = document.getElementById('filterMainCategory').value;
+            const subFilter = document.getElementById('filterSubCategory');
+            
+            subFilter.innerHTML = '<option value="">All Sub Categories</option>';
+            
+            if (mainCat && categoryData[mainCat]) {
+                categoryData[mainCat].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subFilter.appendChild(option);
+                });
+                subFilter.disabled = false;
+            } else {
+                subFilter.disabled = true;
+            }
+            
+            filterProducts();
+        }
+        
+        // ============================================
         // Camera Functions
+        // ============================================
         function openCamera() {
             const modal = document.getElementById('cameraModal');
             modal.classList.add('active');
-            
             startCamera();
         }
         
@@ -2148,7 +2168,9 @@
             }
         }
         
+        // ============================================
         // Multiple Images Functions
+        // ============================================
         function handleMultipleImages(event) {
             const files = Array.from(event.target.files);
             console.log('Selected files:', files.length);
@@ -2241,7 +2263,9 @@
             }
         }
         
+        // ============================================
         // PDF Upload Functions
+        // ============================================
         function handlePdfUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -2251,7 +2275,7 @@
                 return;
             }
             
-            if (file.size > 10 * 1024 * 1024) { // 10MB limit
+            if (file.size > 10 * 1024 * 1024) {
                 alert('PDF file size should be less than 10MB');
                 return;
             }
@@ -2287,7 +2311,9 @@
             }
         }
         
+        // ============================================
         // Specifications Functions
+        // ============================================
         function renderSpecificationsTable() {
             const container = document.getElementById('specificationsContainer');
             if (!container) return;
@@ -2340,7 +2366,28 @@
             renderSpecificationsTable();
         }
         
+        // ============================================
+        // Product Filename Generator
+        // ============================================
+        function generateProductFileName(productName) {
+            if (!productName) return 'product.html';
+            
+            let fileName = productName.toLowerCase();
+            fileName = fileName.replace(/\s+/g, '-');
+            fileName = fileName.replace(/[^a-z0-9-]+/g, '');
+            fileName = fileName.replace(/^-+|-+$/g, '');
+            fileName = fileName.replace(/-+/g, '-');
+            
+            if (!fileName || fileName === '') {
+                fileName = 'product-' + Date.now();
+            }
+            
+            return fileName + '.html';
+        }
+        
+        // ============================================
         // Load products from GitHub
+        // ============================================
         async function loadProducts() {
             const container = document.getElementById('productsList');
             if (!container) return;
@@ -2382,7 +2429,9 @@
             }
         }
         
-        // Display products - Updated with categories
+        // ============================================
+        // Display products
+        // ============================================
         function displayProducts(filteredProducts = null) {
             const container = document.getElementById('productsList');
             if (!container) return;
@@ -2449,7 +2498,9 @@
             container.innerHTML = html;
         }
         
-        // Search and filter products - Updated with categories
+        // ============================================
+        // Search and filter functions
+        // ============================================
         function searchProducts() {
             const searchTerm = document.getElementById('searchProducts').value.toLowerCase();
             const filtered = products.filter(product => 
@@ -2484,7 +2535,9 @@
             displayProducts(filtered);
         }
         
+        // ============================================
         // Update dashboard stats
+        // ============================================
         function updateDashboardStats() {
             const total = products.length;
             const active = products.filter(p => p.status === 'active').length;
@@ -2511,7 +2564,9 @@
             if (lastBackupEl) lastBackupEl.textContent = lastBackup ? new Date(lastBackup).toLocaleString('en-IN') : 'Never';
         }
         
+        // ============================================
         // Update system info
+        // ============================================
         function updateSystemInfo() {
             const ua = navigator.userAgent;
             let browser = 'Unknown';
@@ -2531,7 +2586,9 @@
             if (storageInfoEl) storageInfoEl.textContent = `${percent}% used`;
         }
         
+        // ============================================
         // Upload image to GitHub
+        // ============================================
         async function uploadImageToGitHub(imageFile, retryCount = 0) {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -2613,7 +2670,9 @@
             });
         }
         
+        // ============================================
         // PDF Upload to GitHub
+        // ============================================
         async function uploadPdfToGitHub(pdfFile, retryCount = 0) {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -2692,7 +2751,9 @@
             });
         }
         
+        // ============================================
         // Save individual product JSON to GitHub
+        // ============================================
         async function saveProductJsonToGitHub(product) {
             const content = JSON.stringify(product, null, 2);
             const base64Content = btoa(unescape(encodeURIComponent(content)));
@@ -2738,7 +2799,125 @@
             return true;
         }
         
-        // ✅ NEW FUNCTION: Generate Product HTML with GitHub Image URLs and Google Analytics
+        // ============================================
+        // Save product HTML page to GitHub
+        // ============================================
+        async function saveProductHtmlToGitHub(html, fileName, productName) {
+            const base64Content = btoa(unescape(encodeURIComponent(html)));
+            const filePath = `products/${fileName}`;
+            
+            let sha = null;
+            try {
+                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                if (getResponse.ok) {
+                    const fileData = await getResponse.json();
+                    sha = fileData.sha;
+                }
+            } catch (e) {
+                // File doesn't exist
+            }
+            
+            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${githubConfig.token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    message: `${sha ? 'Update' : 'Add'} product page: ${productName}`,
+                    content: base64Content,
+                    branch: githubConfig.branch,
+                    ...(sha && { sha })
+                })
+            });
+            
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(`Failed to save product HTML: ${error.message}`);
+            }
+            
+            return true;
+        }
+        
+        // ============================================
+        // Update master products list on GitHub
+        // ============================================
+        async function updateMasterProductsList() {
+            const websiteProducts = products
+                .filter(p => p.status === 'active')
+                .map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    voltage: p.voltage,
+                    mainCategory: p.mainCategory,
+                    subCategory: p.subCategory,
+                    price: p.price,
+                    model: p.model,
+                    configuration: p.configuration,
+                    chemistry: p.chemistry,
+                    warranty: p.warranty,
+                    capacity: p.capacity,
+                    bms: p.bms,
+                    features: p.features,
+                    status: p.status,
+                    image: p.image,
+                    datasheet: p.datasheet,
+                    displayOrder: p.displayOrder || 0
+                }));
+            
+            const content = JSON.stringify(websiteProducts, null, 2);
+            const base64Content = btoa(unescape(encodeURIComponent(content)));
+            const filePath = `${githubConfig.productsPath}/all-products.json`;
+            
+            let sha = null;
+            try {
+                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                if (getResponse.ok) {
+                    const fileData = await getResponse.json();
+                    sha = fileData.sha;
+                }
+            } catch (e) {
+                // File doesn't exist
+            }
+            
+            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${githubConfig.token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    message: 'Update master products list',
+                    content: base64Content,
+                    branch: githubConfig.branch,
+                    ...(sha && { sha })
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to update master products list');
+            }
+            
+            return true;
+        }
+        
+        // ============================================
+        // Generate Product HTML with GitHub Image URLs and Google Analytics
+        // ============================================
         function generateProductHTML(product) {
             // Get GitHub image URLs from product.images
             const images = product.images || [];
@@ -3126,86 +3305,9 @@
 </html>`;
         }
         
-        // ✅ NEW FUNCTION: Update existing product page
-        async function updateProductPage(product) {
-            const pageFileName = generateProductFileName(product.name);
-            const existingPageIndex = productPages.findIndex(p => p.productId === product.id);
-            
-            // Generate new HTML with GitHub URLs
-            const productHTML = generateProductHTML(product);
-            
-            // Get image URLs for storage
-            const images = product.images || [];
-            const mainImage = images.find(img => img.isMain) || images[0];
-            
-            const productPage = {
-                id: existingPageIndex >= 0 ? productPages[existingPageIndex].id : 'page_' + Date.now(),
-                productId: product.id,
-                productName: product.name,
-                fileName: pageFileName,
-                html: productHTML,
-                status: product.status === 'active' ? 'published' : 'draft',
-                onGitHub: existingPageIndex >= 0 ? productPages[existingPageIndex]?.onGitHub || false : false,
-                githubUrl: existingPageIndex >= 0 ? productPages[existingPageIndex]?.githubUrl || '' : '',
-                images: images.map(img => img.githubUrl || img.dataUrl).filter(url => url),
-                mainImage: mainImage?.githubUrl || mainImage?.dataUrl || '',
-                datasheet: product.datasheet,
-                createdAt: existingPageIndex >= 0 ? productPages[existingPageIndex].createdAt : new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                pushedAt: existingPageIndex >= 0 ? productPages[existingPageIndex].pushedAt : null
-            };
-            
-            if (existingPageIndex >= 0) {
-                productPages[existingPageIndex] = productPage;
-                addActivity(`Updated product page: ${product.name}`);
-            } else {
-                productPages.push(productPage);
-                addActivity(`Created product page: ${product.name}`);
-            }
-            
-            localStorage.setItem('product_pages', JSON.stringify(productPages));
-            
-            // If product is active and on GitHub, update the GitHub file
-            if (product.status === 'active' && githubConfig.token && productPage.onGitHub) {
-                try {
-                    await saveProductHtmlToGitHub(productHTML, pageFileName, product.name);
-                    productPage.pushedAt = new Date().toISOString();
-                    localStorage.setItem('product_pages', JSON.stringify(productPages));
-                    addActivity(`Pushed updated page to GitHub: ${product.name}`);
-                } catch (error) {
-                    console.error('Error pushing updated page:', error);
-                    // Add to pending pushes
-                    const pendingExists = pendingPushes.some(p => p.pageId === productPage.id);
-                    if (!pendingExists) {
-                        pendingPushes.push({
-                            pageId: productPage.id,
-                            productId: product.id,
-                            fileName: pageFileName,
-                            status: 'pending',
-                            addedAt: new Date().toISOString()
-                        });
-                        localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
-                    }
-                }
-            } else if (product.status === 'active' && !productPage.onGitHub) {
-                // Add to pending pushes
-                const pendingExists = pendingPushes.some(p => p.pageId === productPage.id);
-                if (!pendingExists) {
-                    pendingPushes.push({
-                        pageId: productPage.id,
-                        productId: product.id,
-                        fileName: pageFileName,
-                        status: 'pending',
-                        addedAt: new Date().toISOString()
-                    });
-                    localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
-                }
-            }
-            
-            return productPage;
-        }
-        
+        // ============================================
         // Save product with direct GitHub push
+        // ============================================
         async function saveProduct() {
             const name = document.getElementById('productName').value;
             const voltage = document.getElementById('productVoltage').value;
@@ -3372,6 +3474,11 @@
                     pushedAt: new Date().toISOString()
                 };
                 
+                // Remove old page if exists
+                const existingPageIndex = productPages.findIndex(p => p.productId === product.id);
+                if (existingPageIndex >= 0) {
+                    productPages.splice(existingPageIndex, 1);
+                }
                 productPages.push(productPage);
                 localStorage.setItem('product_pages', JSON.stringify(productPages));
                 
@@ -3401,7 +3508,9 @@
             }
         }
         
-        // ✅ MODIFIED: Edit product function
+        // ============================================
+        // Edit product function
+        // ============================================
         function editProduct(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -3439,7 +3548,6 @@
             if (product.images && product.images.length > 0) {
                 uploadedImages = product.images.map(img => ({
                     ...img,
-                    // Keep the GitHub URL for reference
                     githubUrl: img.githubUrl || null
                 }));
             }
@@ -3471,7 +3579,49 @@
             addActivity(`Editing product: ${product.name}`);
         }
         
+        // ============================================
+        // Clear form function
+        // ============================================
+        function clearForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productVoltage').value = '';
+            document.getElementById('productMainCategory').value = '';
+            updateSubCategories();
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productModel').value = '';
+            document.getElementById('productConfig').value = '';
+            document.getElementById('productChemistry').value = 'LiFePO₄';
+            document.getElementById('productWarranty').value = '3 Year Warranty';
+            document.getElementById('productCapacity').value = '';
+            document.getElementById('productBMS').value = '';
+            document.getElementById('productFeatures').value = '';
+            
+            const descElement = document.getElementById('productDescription');
+            if (descElement) descElement.value = '';
+            
+            document.getElementById('productOrder').value = '0';
+            document.getElementById('productStatus').value = 'active';
+            
+            uploadedImages = [];
+            renderImageGrid();
+            
+            removePdf();
+            
+            specifications = [
+                { key: 'Cell Type', value: 'LiFePO₄' },
+                { key: 'Cycle Life', value: '4000+ Cycles' },
+                { key: 'Weight', value: '' },
+                { key: 'Dimensions', value: '' }
+            ];
+            renderSpecificationsTable();
+            
+            editingProductId = null;
+            document.getElementById('formTitle').textContent = 'Add New Product';
+        }
+        
+        // ============================================
         // Delete product with GitHub cleanup
+        // ============================================
         async function deleteProduct(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) {
@@ -3689,7 +3839,9 @@
             }
         }
         
-        // Product Pages Functions
+        // ============================================
+        // Load product pages
+        // ============================================
         async function loadProductPages() {
             const container = document.getElementById('productPagesContainer');
             if (!container) return;
@@ -3815,6 +3967,88 @@
             showSyncStatus('GitHub status updated', 'success');
         }
         
+        function updatePageStats() {
+            const totalLocal = productPages.length;
+            const onGitHub = productPages.filter(p => p.onGitHub).length;
+            const pending = productPages.filter(p => !p.onGitHub).length;
+            const synced = productPages.filter(p => p.onGitHub && p.status === 'published').length;
+            
+            const totalLocalEl = document.getElementById('totalLocalPages');
+            const totalGitHubEl = document.getElementById('totalGitHubPages');
+            const pendingPagesEl = document.getElementById('pendingPagesCount');
+            const syncedPagesEl = document.getElementById('syncedPagesCount');
+            
+            if (totalLocalEl) totalLocalEl.textContent = totalLocal;
+            if (totalGitHubEl) totalGitHubEl.textContent = onGitHub;
+            if (pendingPagesEl) pendingPagesEl.textContent = pending;
+            if (syncedPagesEl) syncedPagesEl.textContent = synced;
+            
+            const githubTotalEl = document.getElementById('githubTotalPages');
+            const githubPendingEl = document.getElementById('githubPendingCount');
+            
+            if (githubTotalEl) githubTotalEl.textContent = onGitHub;
+            if (githubPendingEl) githubPendingEl.textContent = pending;
+        }
+        
+        function previewProductPage(pageId) {
+            const page = productPages.find(p => p.id === pageId);
+            if (!page) return;
+            
+            const newTab = window.open();
+            newTab.document.write(page.html);
+            newTab.document.close();
+        }
+        
+        function editProductPage(productId) {
+            editProduct(productId);
+        }
+        
+        function deleteProductPage(pageId) {
+            if (!confirm('Are you sure you want to delete this page? This action cannot be undone.')) return;
+            
+            productPages = productPages.filter(p => p.id !== pageId);
+            localStorage.setItem('product_pages', JSON.stringify(productPages));
+            
+            pendingPushes = pendingPushes.filter(p => p.pageId !== pageId);
+            localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
+            
+            workflowStatus.pendingCount = pendingPushes.length;
+            localStorage.setItem('workflow_status', JSON.stringify(workflowStatus));
+            
+            loadProductPages();
+            loadPendingQueue();
+            addActivity('Deleted product page');
+        }
+        
+        function refreshProductPages() {
+            loadProductPages();
+            addActivity('Refreshed product pages');
+        }
+        
+        function checkAllGitHubStatus() {
+            checkPagesGitHubStatus();
+            loadProductPages();
+        }
+        
+        function pushAllToGitHub() {
+            if (!githubConfig.token) {
+                alert('Please configure GitHub token in Settings first');
+                showTab('settings');
+                return;
+            }
+            
+            const pendingPages = productPages.filter(p => !p.onGitHub);
+            
+            if (pendingPages.length === 0) {
+                alert('No pending pages to push');
+                return;
+            }
+            
+            if (confirm(`Push ${pendingPages.length} pages to GitHub?`)) {
+                pendingPages.forEach(page => pushSinglePageToGitHub(page.id));
+            }
+        }
+        
         async function pushSinglePageToGitHub(pageId) {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token in Settings first');
@@ -3905,80 +4139,6 @@
             }
         }
         
-        function updatePageStats() {
-            const totalLocal = productPages.length;
-            const onGitHub = productPages.filter(p => p.onGitHub).length;
-            const pending = productPages.filter(p => !p.onGitHub).length;
-            const synced = productPages.filter(p => p.onGitHub && p.status === 'published').length;
-            
-            const totalLocalEl = document.getElementById('totalLocalPages');
-            const totalGitHubEl = document.getElementById('totalGitHubPages');
-            const pendingPagesEl = document.getElementById('pendingPagesCount');
-            const syncedPagesEl = document.getElementById('syncedPagesCount');
-            
-            if (totalLocalEl) totalLocalEl.textContent = totalLocal;
-            if (totalGitHubEl) totalGitHubEl.textContent = onGitHub;
-            if (pendingPagesEl) pendingPagesEl.textContent = pending;
-            if (syncedPagesEl) syncedPagesEl.textContent = synced;
-            
-            const githubTotalEl = document.getElementById('githubTotalPages');
-            const githubPendingEl = document.getElementById('githubPendingCount');
-            
-            if (githubTotalEl) githubTotalEl.textContent = onGitHub;
-            if (githubPendingEl) githubPendingEl.textContent = pending;
-        }
-        
-        async function checkAllGitHubStatus() {
-            await checkPagesGitHubStatus();
-            loadProductPages();
-            showSyncStatus('GitHub status updated', 'success');
-        }
-        
-        function previewProductPage(pageId) {
-            const page = productPages.find(p => p.id === pageId);
-            if (!page) return;
-            
-            const newTab = window.open();
-            newTab.document.write(page.html);
-            newTab.document.close();
-        }
-        
-        function pushAllToGitHub() {
-            if (!githubConfig.token) {
-                alert('Please configure GitHub token in Settings first');
-                showTab('settings');
-                return;
-            }
-            
-            const pendingPages = productPages.filter(p => !p.onGitHub);
-            
-            if (pendingPages.length === 0) {
-                alert('No pending pages to push');
-                return;
-            }
-            
-            if (confirm(`Push ${pendingPages.length} pages to GitHub?`)) {
-                pendingPages.forEach(page => pushSinglePageToGitHub(page.id));
-            }
-        }
-        
-        function deleteProductPage(pageId) {
-            if (!confirm('Are you sure you want to delete this page? This action cannot be undone.')) return;
-            
-            productPages = productPages.filter(p => p.id !== pageId);
-            localStorage.setItem('product_pages', JSON.stringify(productPages));
-            
-            pendingPushes = pendingPushes.filter(p => p.pageId !== pageId);
-            localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
-            
-            workflowStatus.pendingCount = pendingPushes.length;
-            localStorage.setItem('workflow_status', JSON.stringify(workflowStatus));
-            
-            loadProductPages();
-            loadPendingQueue();
-            addActivity('Deleted product page');
-        }
-        
         function deleteAllDraftPages() {
             if (!confirm('Delete ALL draft pages? This cannot be undone.')) return;
             
@@ -3999,16 +4159,9 @@
             addActivity('Deleted all draft pages');
         }
         
-        function editProductPage(productId) {
-            editProduct(productId);
-        }
-        
-        function refreshProductPages() {
-            loadProductPages();
-            addActivity('Refreshed product pages');
-        }
-        
+        // ============================================
         // Company Details Functions
+        // ============================================
         function loadCompanyDetails() {
             const saved = localStorage.getItem('company_details');
             if (saved) {
@@ -4162,119 +4315,9 @@
             }
         }
         
-        // Update master products list on GitHub
-        async function updateMasterProductsList() {
-            const websiteProducts = products
-                .filter(p => p.status === 'active')
-                .map(p => ({
-                    id: p.id,
-                    name: p.name,
-                    voltage: p.voltage,
-                    mainCategory: p.mainCategory,
-                    subCategory: p.subCategory,
-                    price: p.price,
-                    model: p.model,
-                    configuration: p.configuration,
-                    chemistry: p.chemistry,
-                    warranty: p.warranty,
-                    capacity: p.capacity,
-                    bms: p.bms,
-                    features: p.features,
-                    status: p.status,
-                    image: p.image,
-                    datasheet: p.datasheet,
-                    displayOrder: p.displayOrder || 0
-                }));
-            
-            const content = JSON.stringify(websiteProducts, null, 2);
-            const base64Content = btoa(unescape(encodeURIComponent(content)));
-            const filePath = `${githubConfig.productsPath}/all-products.json`;
-            
-            let sha = null;
-            try {
-                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (getResponse.ok) {
-                    const fileData = await getResponse.json();
-                    sha = fileData.sha;
-                }
-            } catch (e) {
-                // File doesn't exist
-            }
-            
-            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${githubConfig.token}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify({
-                    message: 'Update master products list',
-                    content: base64Content,
-                    branch: githubConfig.branch,
-                    ...(sha && { sha })
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to update master products list');
-            }
-            
-            return true;
-        }
-        
-        // Save product HTML page to GitHub
-        async function saveProductHtmlToGitHub(html, fileName, productName) {
-            const base64Content = btoa(unescape(encodeURIComponent(html)));
-            const filePath = `products/${fileName}`;
-            
-            let sha = null;
-            try {
-                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (getResponse.ok) {
-                    const fileData = await getResponse.json();
-                    sha = fileData.sha;
-                }
-            } catch (e) {
-                // File doesn't exist
-            }
-            
-            const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/${filePath}`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${githubConfig.token}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify({
-                    message: `${sha ? 'Update' : 'Add'} product page: ${productName}`,
-                    content: base64Content,
-                    branch: githubConfig.branch,
-                    ...(sha && { sha })
-                })
-            });
-            
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(`Failed to save product HTML: ${error.message}`);
-            }
-            
-            return true;
-        }
-        
-        // GitHub Functions
+        // ============================================
+        // Settings Functions
+        // ============================================
         function loadSettings() {
             const savedConfig = localStorage.getItem('github_config');
             if (savedConfig) {
@@ -4425,7 +4468,9 @@
             }
         }
         
-        // GitHub Workflow Functions
+        // ============================================
+        // GitHub Workflow Functions (simplified)
+        // ============================================
         let stopDeletionFlag = false;
 
         function stopWorkflowDeletion() {
@@ -4437,388 +4482,7 @@
                 stopDeletionFlag = false;
             }, 2000);
         }
-
-        async function getAllWorkflowRuns(page = 1) {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs?per_page=100&page=${page}`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                return data.workflow_runs || [];
-            } catch (error) {
-                console.error('Error fetching workflow runs:', error);
-                throw error;
-            }
-        }
-
-        async function deleteWorkflowRun(runId) {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs/${runId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                return response.ok;
-            } catch (error) {
-                console.error(`Error deleting run ${runId}:`, error);
-                return false;
-            }
-        }
-
-        async function getTotalWorkflowCount() {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs?per_page=1`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!response.ok) return 0;
-                
-                const linkHeader = response.headers.get('Link');
-                if (linkHeader) {
-                    const lastPageMatch = linkHeader.match(/page=(\d+)>; rel="last"/);
-                    if (lastPageMatch) {
-                        return parseInt(lastPageMatch[1]) * 100;
-                    }
-                }
-                
-                return 0;
-            } catch (error) {
-                console.error('Error getting total count:', error);
-                return 0;
-            }
-        }
-
-        async function deleteAllWorkflowRuns() {
-            if (!githubConfig.token) {
-                alert('Please configure GitHub token first');
-                return;
-            }
-            
-            const totalCount = await getTotalWorkflowCount();
-            
-            const confirmMessage = `⚠️ WARNING ⚠️\n\n` +
-                `This will delete approximately ${totalCount} workflow runs from GitHub.\n\n` +
-                `This action CANNOT be undone!\n\n` +
-                `Are you absolutely sure?`;
-            
-            if (!confirm(confirmMessage)) return;
-            
-            const password = prompt('Please enter admin password to confirm:');
-            const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
-            
-            if (password !== savedPassword) {
-                alert('Incorrect password!');
-                return;
-            }
-            
-            const progressContainer = document.getElementById('workflowProgressContainer');
-            const progressBar = document.getElementById('workflowProgressBar');
-            const progressText = document.getElementById('workflowProgressText');
-            const progressCount = document.getElementById('workflowProgressCount');
-            
-            progressContainer.style.display = 'block';
-            progressBar.style.width = '0%';
-            progressText.textContent = 'Starting deletion...';
-            progressCount.textContent = `0/${totalCount}`;
-            
-            stopDeletionFlag = false;
-            
-            let deletedCount = 0;
-            let failedCount = 0;
-            let page = 1;
-            let hasMore = true;
-            
-            while (hasMore && !stopDeletionFlag) {
-                try {
-                    const runs = await getAllWorkflowRuns(page);
-                    
-                    if (runs.length === 0) {
-                        hasMore = false;
-                        break;
-                    }
-                    
-                    progressText.textContent = `Deleting page ${page}...`;
-                    
-                    for (const run of runs) {
-                        if (stopDeletionFlag) {
-                            progressText.textContent = 'Deletion stopped by user';
-                            break;
-                        }
-                        
-                        const success = await deleteWorkflowRun(run.id);
-                        
-                        if (success) {
-                            deletedCount++;
-                        } else {
-                            failedCount++;
-                        }
-                        
-                        const percent = Math.round((deletedCount / totalCount) * 100);
-                        progressBar.style.width = percent + '%';
-                        progressCount.textContent = `${deletedCount}/${totalCount}`;
-                        
-                        await new Promise(resolve => setTimeout(resolve, 200));
-                    }
-                    
-                    if (stopDeletionFlag) break;
-                    
-                    page++;
-                    
-                } catch (error) {
-                    console.error('Error in batch:', error);
-                    failedCount += 100;
-                    hasMore = false;
-                }
-            }
-            
-            if (stopDeletionFlag) {
-                showSyncStatus(`⏹️ Stopped. Deleted ${deletedCount} workflow runs`, 'warning');
-                progressText.textContent = `Stopped. Deleted ${deletedCount} runs`;
-            } else {
-                showSyncStatus(`✅ Deleted ${deletedCount} workflow runs (${failedCount} failed)`, 'success');
-                progressText.textContent = `Completed! Deleted ${deletedCount} runs`;
-                progressBar.style.width = '100%';
-            }
-            
-            addActivity(`Deleted ${deletedCount} workflow runs from GitHub`);
-            
-            setTimeout(() => {
-                progressContainer.style.display = 'none';
-            }, 5000);
-        }
-
-        async function deleteOldWorkflowRuns() {
-            if (!githubConfig.token) {
-                alert('Please configure GitHub token first');
-                return;
-            }
-            
-            const days = prompt('Delete runs older than how many days? (default: 30)', '30');
-            if (!days) return;
-            
-            const daysNum = parseInt(days);
-            if (isNaN(daysNum) || daysNum < 1) {
-                alert('Please enter a valid number of days');
-                return;
-            }
-            
-            const cutoffDate = new Date();
-            cutoffDate.setDate(cutoffDate.getDate() - daysNum);
-            
-            const confirmMessage = `Delete workflow runs older than ${daysNum} days (before ${cutoffDate.toLocaleDateString()})?\n\nThis action cannot be undone!`;
-            
-            if (!confirm(confirmMessage)) return;
-            
-            const progressContainer = document.getElementById('workflowProgressContainer');
-            const progressBar = document.getElementById('workflowProgressBar');
-            const progressText = document.getElementById('workflowProgressText');
-            const progressCount = document.getElementById('workflowProgressCount');
-            
-            progressContainer.style.display = 'block';
-            progressBar.style.width = '0%';
-            progressText.textContent = 'Scanning workflow runs...';
-            progressCount.textContent = '0/?';
-            
-            stopDeletionFlag = false;
-            
-            let deletedCount = 0;
-            let failedCount = 0;
-            let scannedCount = 0;
-            let page = 1;
-            let hasMore = true;
-            
-            while (hasMore && !stopDeletionFlag) {
-                try {
-                    const runs = await getAllWorkflowRuns(page);
-                    
-                    if (runs.length === 0) {
-                        hasMore = false;
-                        break;
-                    }
-                    
-                    let hasOldRuns = false;
-                    
-                    for (const run of runs) {
-                        if (stopDeletionFlag) break;
-                        
-                        scannedCount++;
-                        const runDate = new Date(run.created_at);
-                        
-                        if (runDate < cutoffDate) {
-                            hasOldRuns = true;
-                            
-                            progressText.textContent = `Deleting run from ${runDate.toLocaleDateString()}...`;
-                            
-                            const success = await deleteWorkflowRun(run.id);
-                            
-                            if (success) {
-                                deletedCount++;
-                            } else {
-                                failedCount++;
-                            }
-                            
-                            progressCount.textContent = `${deletedCount} deleted`;
-                            
-                            await new Promise(resolve => setTimeout(resolve, 200));
-                        }
-                    }
-                    
-                    if (!hasOldRuns && page > 3) {
-                        hasMore = false;
-                    }
-                    
-                    page++;
-                    
-                } catch (error) {
-                    console.error('Error in batch:', error);
-                    hasMore = false;
-                }
-            }
-            
-            if (stopDeletionFlag) {
-                showSyncStatus(`⏹️ Stopped. Deleted ${deletedCount} old workflow runs`, 'warning');
-            } else {
-                showSyncStatus(`✅ Deleted ${deletedCount} old workflow runs (${failedCount} failed)`, 'success');
-            }
-            
-            addActivity(`Deleted ${deletedCount} old workflow runs from GitHub`);
-            
-            setTimeout(() => {
-                progressContainer.style.display = 'none';
-            }, 5000);
-        }
-
-        async function getWorkflowStats() {
-            if (!githubConfig.token) {
-                alert('Please configure GitHub token first');
-                return;
-            }
-            
-            showSyncStatus('Fetching workflow stats...', 'syncing');
-            
-            try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/actions/runs?per_page=10`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!response.ok) throw new Error('Failed to fetch');
-                
-                const data = await response.json();
-                const recentRuns = data.workflow_runs || [];
-                
-                let totalCount = 'Unknown';
-                try {
-                    totalCount = await getTotalWorkflowCount();
-                } catch (e) {}
-                
-                const runsByDate = {};
-                const runsByStatus = {};
-                
-                for (const run of recentRuns) {
-                    const date = new Date(run.created_at).toLocaleDateString();
-                    runsByDate[date] = (runsByDate[date] || 0) + 1;
-                    
-                    const status = run.conclusion || 'in_progress';
-                    runsByStatus[status] = (runsByStatus[status] || 0) + 1;
-                }
-                
-                let statsHtml = `
-                    <div style="padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius);">
-                        <h5 style="color: var(--gold); margin-bottom: 15px;">📊 Workflow Statistics</h5>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;">
-                            <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: var(--radius-sm);">
-                                <div style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">${totalCount}</div>
-                                <div style="color: var(--text-muted);">Total Runs (approx)</div>
-                            </div>
-                            <div style="background: rgba(53,208,255,0.1); padding: 15px; border-radius: var(--radius-sm);">
-                                <div style="color: var(--accent); font-size: 1.5rem; font-weight: bold;">${recentRuns.length}</div>
-                                <div style="color: var(--text-muted);">Recent Runs</div>
-                            </div>
-                        </div>
-                        
-                        <div style="margin-bottom: 15px;">
-                            <h6 style="color: var(--gold-light); margin-bottom: 10px;">Recent Runs by Date:</h6>
-                            <div style="max-height: 150px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 10px; border-radius: var(--radius-sm);">
-                `;
-                
-                for (const [date, count] of Object.entries(runsByDate)) {
-                    statsHtml += `<div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <span>${date}</span> <span style="color: var(--gold);">${count} runs</span>
-                    </div>`;
-                }
-                
-                statsHtml += `
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h6 style="color: var(--gold-light); margin-bottom: 10px;">Run Status:</h6>
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                `;
-                
-                for (const [status, count] of Object.entries(runsByStatus)) {
-                    const color = status === 'success' ? 'var(--success)' : 
-                                 status === 'failure' ? 'var(--danger)' : 
-                                 'var(--warning)';
-                    statsHtml += `<span style="background: ${color}20; color: ${color}; padding: 5px 10px; border-radius: 15px;">
-                        ${status}: ${count}
-                    </span>`;
-                }
-                
-                statsHtml += `
-                            </div>
-                        </div>
-                        
-                        <div style="margin-top: 20px; color: var(--warning); font-size: 0.9rem;">
-                            <i class="fas fa-info-circle"></i> 
-                            Showing last 10 runs. Total runs count is approximate.
-                        </div>
-                    </div>
-                `;
-                
-                const statsDiv = document.getElementById('workflowStats');
-                if (statsDiv) {
-                    statsDiv.innerHTML = statsHtml;
-                    statsDiv.style.display = 'block';
-                }
-                
-                showSyncStatus('Stats fetched successfully', 'success');
-                
-            } catch (error) {
-                console.error('Error fetching stats:', error);
-                showSyncStatus('Error fetching stats', 'error');
-                
-                const statsDiv = document.getElementById('workflowStats');
-                if (statsDiv) {
-                    statsDiv.innerHTML = `
-                        <div style="padding: 20px; background: rgba(255,53,112,0.1); border-radius: var(--radius); color: var(--danger);">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            Error fetching stats: ${error.message}
-                        </div>
-                    `;
-                    statsDiv.style.display = 'block';
-                }
-            }
-        }
-
+        
         function loadPendingQueue() {
             const container = document.getElementById('pendingQueueContainer');
             if (!container) return;
@@ -4996,7 +4660,21 @@
             allPages.forEach(page => pushSinglePageToGitHub(page.id));
         }
         
+        async function deleteAllWorkflowRuns() {
+            alert('This feature requires additional GitHub API permissions. Please use GitHub website to manage workflow runs.');
+        }
+        
+        async function deleteOldWorkflowRuns() {
+            alert('This feature requires additional GitHub API permissions. Please use GitHub website to manage workflow runs.');
+        }
+        
+        async function getWorkflowStats() {
+            alert('This feature requires additional GitHub API permissions. Please use GitHub website to view workflow stats.');
+        }
+        
+        // ============================================
         // Backup Functions
+        // ============================================
         function exportProducts() {
             const dataStr = JSON.stringify(products, null, 2);
             const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -5180,10 +4858,9 @@
             }
         }
         
-        setInterval(checkAutoBackup, 60 * 60 * 1000);
-        setTimeout(checkAutoBackup, 5000);
-        
+        // ============================================
         // Sync with GitHub function
+        // ============================================
         async function syncWithGitHub() {
             if (!githubConfig.token) {
                 alert('Please configure GitHub token in Settings first');
@@ -5203,40 +4880,9 @@
             }
         }
         
-        // Clear form function
-        function clearForm() {
-            document.getElementById('productName').value = '';
-            document.getElementById('productVoltage').value = '';
-            document.getElementById('productMainCategory').value = '';
-            updateSubCategories();
-            document.getElementById('productPrice').value = '';
-            document.getElementById('productModel').value = '';
-            document.getElementById('productConfig').value = '';
-            document.getElementById('productChemistry').value = 'LiFePO₄';
-            document.getElementById('productWarranty').value = '3 Year Warranty';
-            document.getElementById('productCapacity').value = '';
-            document.getElementById('productBMS').value = '';
-            document.getElementById('productFeatures').value = '';
-            document.getElementById('productDescription').value = '';
-            document.getElementById('productStatus').value = 'active';
-            document.getElementById('productOrder').value = '0';
-            
-            uploadedImages = [];
-            renderImageGrid();
-            
-            removePdf();
-            
-            specifications = [
-                { key: 'Cell Type', value: 'LiFePO₄' },
-                { key: 'Cycle Life', value: '4000+ Cycles' },
-                { key: 'Weight', value: '' },
-                { key: 'Dimensions', value: '' }
-            ];
-            renderSpecificationsTable();
-            
-            editingProductId = null;
-            document.getElementById('formTitle').textContent = 'Add New Product';
-        }
+        // Auto backup check
+        setInterval(checkAutoBackup, 60 * 60 * 1000);
+        setTimeout(checkAutoBackup, 5000);
     </script>
 </body>
 </html>
