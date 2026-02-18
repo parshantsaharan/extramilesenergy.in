@@ -1333,9 +1333,36 @@
         }
         
         @media (max-width: 768px) {
-            .nav-compact {
-                display: none;
-            }
+    .nav-compact {
+        display: flex !important;  /* ✅ Keep flex container */
+        gap: 12px;
+        align-items: center;
+    }
+    
+    /* Hide only navigation links, keep cart and quote */
+    .nav-compact a.nav-tab {
+        display: none;  /* ✅ Hide Home, Products, Blogs, About */
+    }
+    
+    /* ✅ Keep cart icon visible */
+    .cart-icon {
+        display: block !important;
+        margin-right: 5px;
+    }
+    
+    /* Optional: Hide quote button to save space */
+    .cta-small {
+        display: none;
+    }
+    
+    /* Rest of your mobile CSS remains same */
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
             
             .mobile-menu-btn {
                 display: block;
