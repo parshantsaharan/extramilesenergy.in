@@ -759,7 +759,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow: hidden; /* Prevents any overflow */
+            overflow: hidden;
         }
         
         .product-card-compact:hover {
@@ -1323,7 +1323,7 @@
             margin-bottom: 20px;
         }
         
-        /* Responsive Breakpoints */
+        /* ===== RESPONSIVE BREAKPOINTS - ONLY MOBILE REDESIGN ===== */
         @media (max-width: 992px) {
             .products-compact {
                 grid-template-columns: repeat(2, 1fr);
@@ -1359,6 +1359,7 @@
                 display: none;
             }
             
+            /* ===== MOBILE GRID - SINGLE COLUMN ===== */
             .products-compact {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -1413,17 +1414,17 @@
                 padding: 40px 0 30px;
             }
             
-            /* Mobile Cart Fix */
+            /* ===== MOBILE CART FIX ===== */
             .cart-sidebar {
                 width: 100%;
                 transform: translateX(100%);
                 box-shadow: none;
             }
             
-            /* MOBILE BUTTON FIX - CRITICAL */
+            /* ===== MOBILE BUTTONS - STACKED VERTICALLY (CRITICAL FIX) ===== */
             .product-actions-compact {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
             }
             
             .btn-add-to-cart, 
@@ -1436,9 +1437,11 @@
                 justify-content: center;
                 padding: 12px 10px;
                 font-size: 0.9rem;
+                margin: 0;
             }
             
             .btn-call-compact {
+                width: 100%;
                 height: 44px;
             }
             
@@ -1451,24 +1454,24 @@
         }
         
         @media (max-width: 480px) {
-            .quick-stat {
-                min-width: 100%;
-            }
-            
-            .hero-compact h1 {
-                font-size: 1.5rem;
-            }
-            
             .product-actions-compact {
-                gap: 8px;
+                gap: 6px;
             }
             
             .btn-add-to-cart, 
             .btn-whatsapp-compact, 
             .btn-details-compact, 
             .btn-call-compact {
-                padding: 12px 8px;
+                padding: 10px 8px;
                 font-size: 0.85rem;
+            }
+            
+            .quick-stat {
+                min-width: 100%;
+            }
+            
+            .hero-compact h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -2393,7 +2396,7 @@
             filterProducts();
         }
 
-        // Display Products
+        // Display Products - WITH LAZY LOADING
         function displayProducts(productsToShow) {
             const container = document.getElementById('productsContainer');
             const whatsappNumber = companyData.whatsapp || CONFIG.defaults.whatsapp;
@@ -2629,7 +2632,7 @@
         // Shopping Cart Functions
         // ============================================
 
-        // Toggle Cart Sidebar - IMPROVED VERSION
+        // Toggle Cart Sidebar
         function toggleCart() {
             const cart = document.getElementById('cartSidebar');
             const overlay = document.getElementById('cartOverlay');
@@ -2637,13 +2640,9 @@
             cart.classList.toggle('active');
             if (overlay) overlay.classList.toggle('active');
             
-            // Toggle body scroll prevention
             document.body.classList.toggle('cart-open');
-            
-            // Close mobile menu if open
             document.getElementById('mobileMenu').classList.remove('active');
             
-            // Track cart view in GA
             if (typeof gtag === 'function' && cart.classList.contains('active')) {
                 gtag('event', 'view_cart', {
                     'event_category': 'ecommerce',
