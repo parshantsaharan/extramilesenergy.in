@@ -1321,7 +1321,7 @@
             margin-bottom: 20px;
         }
         
-        /* ===== RESPONSIVE BREAKPOINTS - CRITICAL FIX FOR MOBILE BUTTONS ===== */
+        /* ===== RESPONSIVE BREAKPOINTS ===== */
         @media (max-width: 992px) {
             .products-compact {
                 grid-template-columns: repeat(2, 1fr);
@@ -1419,38 +1419,28 @@
                 box-shadow: none;
             }
             
-            /* ===== CRITICAL FIX: Mobile Buttons SHOULD BE VISIBLE ===== */
-            /* Product actions should remain flex row on mobile too */
+            /* Mobile Buttons - 3 in a row */
             .product-actions-compact {
                 display: flex;
-                flex-direction: row;  /* Keep buttons in a row like desktop */
-                flex-wrap: wrap;      /* Allow wrapping if needed */
+                flex-direction: row;
+                flex-wrap: wrap;
                 gap: 8px;
-                margin-top: 15px;
             }
             
-            /* Make buttons slightly smaller on mobile but still visible */
             .btn-add-to-cart, 
             .btn-whatsapp-compact, 
             .btn-details-compact {
-                flex: 1 1 calc(33.333% - 6px);  /* Three buttons in a row */
+                flex: 1 1 calc(33.333% - 6px);
                 min-width: 80px;
-                padding: 10px 8px;
+                padding: 10px 5px;
                 font-size: 0.8rem;
                 white-space: nowrap;
             }
             
             .btn-call-compact {
-                width: 100%;           /* Call button full width on new line */
+                width: 100%;
                 margin-top: 5px;
                 height: 42px;
-            }
-            
-            /* Ensure buttons are visible and not hidden */
-            .product-actions-compact {
-                opacity: 1;
-                visibility: visible;
-                display: flex !important;  /* Force display */
             }
             
             .sync-badge {
@@ -1462,11 +1452,10 @@
         }
         
         @media (max-width: 480px) {
-            /* Even smaller screens */
             .btn-add-to-cart, 
             .btn-whatsapp-compact, 
             .btn-details-compact {
-                flex: 1 1 calc(50% - 4px);  /* Two buttons per row on very small screens */
+                flex: 1 1 calc(50% - 4px);
                 font-size: 0.75rem;
                 padding: 8px 4px;
             }
@@ -1527,19 +1516,24 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu - WITH CART ICON ADDED -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="#home" class="mobile-nav-tab" data-tab="home">Home</a>
         <a href="#content" class="mobile-nav-tab" data-tab="products">Products</a>
         <a href="#content" class="mobile-nav-tab" data-tab="blogs">Blogs</a>
         <a href="#content" class="mobile-nav-tab" data-tab="about">About</a>
         <a href="#content" class="mobile-nav-tab" data-tab="contact">Contact</a>
+        <!-- ✅ CART ICON ADDED FOR MOBILE -->
+        <a href="javascript:void(0)" onclick="toggleCart()" style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-shopping-cart" style="color: var(--gold); font-size: 1.2rem;"></i>
+            Cart (<span id="mobileCartCount">0</span>)
+        </a>
     </div>
 
     <!-- Cart Overlay -->
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 
-    <!-- Cart Sidebar - FIXED -->
+    <!-- Cart Sidebar -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
@@ -2718,14 +2712,16 @@
             }
         }
 
-        // Update Cart Display
+        // Update Cart Display - WITH MOBILE CART COUNT
         function updateCartDisplay() {
             const cartCount = document.getElementById('cartCount');
+            const mobileCartCount = document.getElementById('mobileCartCount');  // ✅ Added for mobile
             const cartContainer = document.getElementById('cartItemsContainer');
             
             const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
             
             if (cartCount) cartCount.textContent = totalItems;
+            if (mobileCartCount) mobileCartCount.textContent = totalItems;  // ✅ Update mobile cart count
             
             if (cart.length === 0) {
                 cartContainer.innerHTML = `
