@@ -2635,24 +2635,28 @@
         // Shopping Cart Functions
         // ============================================
 
-        // Toggle Cart Sidebar
-        function toggleCart() {
-            const cart = document.getElementById('cartSidebar');
-            const overlay = document.getElementById('cartOverlay');
-            
-            cart.classList.toggle('active');
-            if (overlay) overlay.classList.toggle('active');
-            
-            document.body.classList.toggle('cart-open');
-            document.getElementById('mobileMenu').classList.remove('active');
-            
-            if (typeof gtag === 'function' && cart.classList.contains('active')) {
-                gtag('event', 'view_cart', {
-                    'event_category': 'ecommerce',
-                    'event_label': 'Cart Opened'
-                });
-            }
-        }
+        // Toggle Cart Sidebar - UPDATED (Mobile Fix)
+function toggleCart() {
+    const cart = document.getElementById('cartSidebar');
+    const overlay = document.getElementById('cartOverlay');
+    
+    if (!cart) return; // Safety check - mobile pe kaam karega
+
+    cart.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+
+    document.body.classList.toggle('cart-open');
+    
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) mobileMenu.classList.remove('active');
+
+    if (typeof gtag === 'function' && cart.classList.contains('active')) {
+        gtag('event', 'view_cart', { 
+            'event_category': 'ecommerce',
+            'event_label': 'Cart Opened'
+        });
+    }
+}
 
         // Add to Cart
         function addToCart(productId) {
