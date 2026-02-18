@@ -399,7 +399,7 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
         
-        /* Cart Overlay - NEW */
+        /* Cart Overlay */
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -419,7 +419,7 @@
             visibility: visible;
         }
         
-        /* Cart Sidebar - FIXED VERSION (NO PEEK) */
+        /* Cart Sidebar - FIXED */
         .cart-sidebar {
             position: fixed;
             top: 0;
@@ -759,6 +759,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: hidden; /* Prevents any overflow */
         }
         
         .product-card-compact:hover {
@@ -1412,11 +1413,33 @@
                 padding: 40px 0 30px;
             }
             
-            /* Mobile Cart Fix - CRITICAL */
+            /* Mobile Cart Fix */
             .cart-sidebar {
                 width: 100%;
                 transform: translateX(100%);
                 box-shadow: none;
+            }
+            
+            /* MOBILE BUTTON FIX - CRITICAL */
+            .product-actions-compact {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-add-to-cart, 
+            .btn-whatsapp-compact, 
+            .btn-details-compact, 
+            .btn-call-compact {
+                width: 100%;
+                flex: none;
+                min-width: 100%;
+                justify-content: center;
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .btn-call-compact {
+                height: 44px;
             }
             
             .sync-badge {
@@ -1425,40 +1448,27 @@
                 padding: 8px 15px;
                 font-size: 0.7rem;
             }
-            
-            .product-actions-compact {
-                flex-wrap: wrap;
-            }
-            
-            .btn-add-to-cart, 
-            .btn-whatsapp-compact, 
-            .btn-details-compact {
-                flex: 1 1 calc(50% - 5px);
-            }
-            
-            .btn-call-compact {
-                width: 100%;
-            }
         }
         
         @media (max-width: 480px) {
-            .product-actions-compact {
-                flex-direction: column;
-            }
-            
-            .btn-add-to-cart, 
-            .btn-whatsapp-compact, 
-            .btn-details-compact,
-            .btn-call-compact {
-                width: 100%;
-            }
-            
             .quick-stat {
                 min-width: 100%;
             }
             
             .hero-compact h1 {
                 font-size: 1.5rem;
+            }
+            
+            .product-actions-compact {
+                gap: 8px;
+            }
+            
+            .btn-add-to-cart, 
+            .btn-whatsapp-compact, 
+            .btn-details-compact, 
+            .btn-call-compact {
+                padding: 12px 8px;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -1514,7 +1524,7 @@
         <a href="#content" class="mobile-nav-tab" data-tab="contact">Contact</a>
     </div>
 
-    <!-- Cart Overlay - NEW -->
+    <!-- Cart Overlay -->
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 
     <!-- Cart Sidebar - FIXED -->
