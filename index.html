@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
+    <!-- Google Analytics - ENHANCED -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJFK0Q3EKW"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-YJFK0Q3EKW');
+        
+        // ENHANCED CONFIGURATION
+        gtag('config', 'G-YJFK0Q3EKW', { 
+            'anonymize_ip': true,
+            'allow_google_signals': true,
+            'send_page_view': true
+        });
     </script>
     
     <meta charset="UTF-8">
@@ -23,12 +29,12 @@
     
     <!-- SEO Meta Tags - OPTIMIZED -->
     <title>LiFePO4 Battery Manufacturer in Hisar | Extra Miles Energy</title>
-    <meta name="description" content="Buy premium LiFePO4 lithium batteries for inverter, solar & EV in Hisar Haryana. Extra Miles Energy offers long life batteries at best price. Call now.">
+    <meta name="description" content="Buy premium LiFePO4 lithium batteries for inverter, solar & EV in Hisar Haryana. Extra Miles Energy offers 5 years warranty on long life batteries. Call now.">
     <meta name="keywords" content="LiFePO4 battery, lithium battery manufacturer Hisar, EV battery Haryana, solar battery dealer, best inverter battery">
     <meta name="author" content="Extra Miles Energy">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph Tags - FIXED URL -->
+    <!-- Open Graph Tags -->
     <meta property="og:title" content="LiFePO4 Battery Manufacturer Hisar | Extra Miles Energy">
     <meta property="og:description" content="Premium LiFePO4 batteries for EV, Solar & Custom Applications">
     <meta property="og:image" content="https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/logo.png">
@@ -42,7 +48,7 @@
     <meta name="twitter:description" content="Premium lithium batteries for EV & Solar">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/logo.png">
     
-    <!-- WebSite Schema - NEW (BIG SEO BOOST) -->
+    <!-- WebSite Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -57,7 +63,7 @@
     }
     </script>
     
-    <!-- LocalBusiness Schema - ENHANCED -->
+    <!-- LocalBusiness Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -124,7 +130,7 @@
     }
     </script>
     
-    <!-- FAQ Schema - RICH RESULTS -->
+    <!-- FAQ Schema - WITH 5 YEARS WARRANTY -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -143,7 +149,7 @@
           "name": "What is the life of LiFePO4 battery?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "LiFePO4 batteries typically last 10-15 years with 4000-6000 charge cycles. Extra Miles Energy batteries come with 3+ years warranty and Grade A cells for maximum lifespan."
+            "text": "LiFePO4 batteries typically last 10-15 years with 4000-6000 charge cycles. Extra Miles Energy batteries come with 5 years warranty and Grade A cells for maximum lifespan."
           }
         },
         {
@@ -195,6 +201,12 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+        
+        body.cart-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
         
         .container {
@@ -387,25 +399,47 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
         
-        /* Cart Sidebar */
+        /* Cart Overlay - NEW */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(3px);
+        }
+        
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Cart Sidebar - FIXED VERSION (NO PEEK) */
         .cart-sidebar {
             position: fixed;
             top: 0;
-            right: -400px;
+            right: 0;
+            transform: translateX(100%);
             width: 380px;
             max-width: 100%;
             height: 100vh;
             background: var(--card-bg);
             border-left: 2px solid var(--gold);
             z-index: 2000;
-            transition: right 0.3s ease;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 20px;
             overflow-y: auto;
             backdrop-filter: blur(10px);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
         }
         
         .cart-sidebar.active {
-            right: 0;
+            transform: translateX(0);
         }
         
         .cart-header {
@@ -546,7 +580,7 @@
             padding: 0 15px;
         }
         
-        /* Dynamic Blog Link - SEO Optimized */
+        /* Dynamic Blog Link */
         .dynamic-blog-link {
             display: inline-block;
             margin: 15px 0;
@@ -707,7 +741,7 @@
             min-width: 150px;
         }
         
-        /* Products Grid - FULLY RESPONSIVE */
+        /* Products Grid */
         .products-compact {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -918,7 +952,7 @@
             width: 45px;
         }
         
-        /* Blogs Grid - RESPONSIVE */
+        /* Blogs Grid */
         .blogs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1378,8 +1412,11 @@
                 padding: 40px 0 30px;
             }
             
+            /* Mobile Cart Fix - CRITICAL */
             .cart-sidebar {
                 width: 100%;
+                transform: translateX(100%);
+                box-shadow: none;
             }
             
             .sync-badge {
@@ -1477,7 +1514,10 @@
         <a href="#content" class="mobile-nav-tab" data-tab="contact">Contact</a>
     </div>
 
-    <!-- Cart Sidebar -->
+    <!-- Cart Overlay - NEW -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- Cart Sidebar - FIXED -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
@@ -1505,14 +1545,14 @@
     <!-- Hero Section -->
     <section class="hero-compact" id="home">
         <div class="container">
-            <!-- Hidden SEO Headers - Inside Hero Section (Better Semantics) -->
+            <!-- Hidden SEO Headers -->
             <h2 class="seo-hidden">LiFePO4 Battery Manufacturer in Hisar Haryana</h2>
             <h2 class="seo-hidden">Premium Lithium Battery Solutions for EV and Solar</h2>
             
             <h1 id="heroTitle">Premium LiFePO₄ Batteries</h1>
             <p id="heroDescription">Manufacturer of high-quality lithium batteries for EV, Solar & Custom Applications</p>
             
-            <!-- DYNAMIC BLOG LINK - AUTO UPDATES FROM SITEMAP (FIXES ISSUE #1) -->
+            <!-- Dynamic Blog Link -->
             <a href="#" id="dynamicBlogLink" class="dynamic-blog-link">
                 <i class="fas fa-arrow-right"></i> Read: Latest Battery Guide →
             </a>
@@ -1540,7 +1580,7 @@
                     <div class="label">Charge Cycles</div>
                 </div>
                 <div class="quick-stat">
-                    <div class="number">3+ Years</div>
+                    <div class="number">5 Years</div>
                     <div class="label">Warranty</div>
                 </div>
             </div>
@@ -1782,7 +1822,7 @@
                 <div class="footer-section">
                     <h4 id="footerBrand">Extra Miles Energy</h4>
                     <p style="color: var(--gold-light); font-size: 0.9rem;">
-                        Manufacturer of premium LiFePO₄ batteries in Hisar, Haryana.
+                        Manufacturer of premium LiFePO₄ batteries in Hisar, Haryana with 5 years warranty.
                     </p>
                 </div>
                 
@@ -1861,7 +1901,7 @@
         // Cart State
         let cart = JSON.parse(localStorage.getItem('cart') || '[]');
         
-        // Category Data (matching admin panel)
+        // Category Data
         const categoryData = {
             "EV Battery": [
                 "Electric Scooter Battery",
@@ -1911,7 +1951,7 @@
             handleUrlHash();
         });
 
-        // Generate Product Filename (same as admin panel)
+        // Generate Product Filename
         function generateProductFileName(productName) {
             if (!productName) return 'product.html';
             
@@ -1944,7 +1984,6 @@
                         document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
                     }
                     
-                    // Close mobile menu if open
                     document.getElementById('mobileMenu').classList.remove('active');
                 });
             });
@@ -2007,6 +2046,16 @@
                 
                 if (mobileMenu && mobileBtn && !mobileMenu.contains(e.target) && !mobileBtn.contains(e.target) && mobileMenu.classList.contains('active')) {
                     mobileMenu.classList.remove('active');
+                }
+            });
+            
+            // Close cart with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const cart = document.getElementById('cartSidebar');
+                    if (cart.classList.contains('active')) {
+                        toggleCart();
+                    }
                 }
             });
         }
@@ -2113,12 +2162,12 @@
                 
             } catch (error) {
                 console.error('Error loading products:', error);
-                showErrorLoading(container, 'products'); // FIXED: Now calls correct function name
+                showErrorLoading(container, 'products');
                 return false;
             }
         }
 
-        // Load Blogs - IMPROVED WITH PROPER URL HANDLING
+        // Load Blogs
         async function loadBlogs() {
             const container = document.getElementById('blogsContainer');
             
@@ -2157,7 +2206,7 @@
                 
                 if (blogs.length > 0) {
                     displayBlogs(blogs.slice(0, 6));
-                    updateHeroBlogLink(); // AUTO-UPDATE HERO LINK WITH LATEST BLOG
+                    updateHeroBlogLink();
                 } else {
                     showNoBlogs();
                 }
@@ -2184,24 +2233,19 @@
             }));
         }
 
-        // NEW FUNCTION: Update hero blog link with latest blog (FIXES ISSUE #1 & #4)
+        // Update hero blog link with latest blog
         function updateHeroBlogLink() {
             if (!blogs || blogs.length === 0) return;
             
-            // Get latest blog (already sorted newest first)
             const latestBlog = blogs[0];
-            
-            // Update hero link
             const heroLink = document.getElementById('dynamicBlogLink');
             if (heroLink) {
-                // Fix URL to use custom domain (ISSUE #4 FIX)
                 const fullUrl = latestBlog.url.startsWith('http') ? 
                     latestBlog.url : 
                     `https://extramilesenergy.in${latestBlog.url.startsWith('/') ? latestBlog.url : '/' + latestBlog.url}`;
                 
                 heroLink.href = fullUrl;
                 
-                // Beautify title for display
                 const niceTitle = latestBlog.title.length > 40 ? 
                     latestBlog.title.substring(0, 40) + '...' : 
                     latestBlog.title;
@@ -2209,7 +2253,6 @@
                 heroLink.innerHTML = `<i class="fas fa-arrow-right"></i> Read: ${niceTitle} →`;
             }
             
-            // Update footer blog link
             const footerLink = document.getElementById('footerBlogLink');
             if (footerLink) {
                 footerLink.href = latestBlog.url.startsWith('http') ? 
@@ -2265,7 +2308,7 @@
             }
         }
 
-        // Switch Tab
+        // Switch Tab - WITH SPA PAGE VIEW TRACKING
         function switchTab(tabId) {
             currentTab = tabId;
             
@@ -2284,6 +2327,15 @@
             });
             
             window.history.pushState({}, '', `#${tabId}`);
+            
+            // Track virtual pageview for SPA
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: document.title + ' - ' + tabId.charAt(0).toUpperCase() + tabId.slice(1),
+                    page_location: window.location.href,
+                    page_path: '/' + tabId
+                });
+            }
             
             if (tabId === 'blogs' && blogs.length === 0) {
                 loadBlogs();
@@ -2316,7 +2368,7 @@
             filterProducts();
         }
 
-        // Filter by Main Category (from navigation buttons)
+        // Filter by Main Category
         function filterByMainCategory(category) {
             document.getElementById('mainCategoryFilter').value = category || '';
             
@@ -2331,7 +2383,7 @@
             filterProducts();
         }
 
-        // Display Products - WITH LAZY LOADING
+        // Display Products
         function displayProducts(productsToShow) {
             const container = document.getElementById('productsContainer');
             const whatsappNumber = companyData.whatsapp || CONFIG.defaults.whatsapp;
@@ -2402,7 +2454,7 @@
             container.innerHTML = html;
         }
 
-        // Display Blogs - WITH FIXED URL HANDLING (ISSUE #4 FIX)
+        // Display Blogs
         function displayBlogs(blogsToShow) {
             const container = document.getElementById('blogsContainer');
             
@@ -2414,7 +2466,6 @@
             let html = '<div class="blogs-grid">';
             
             blogsToShow.forEach(blog => {
-                // FIX: Use custom domain for URLs (ISSUE #4)
                 const fullUrl = blog.url.startsWith('http') ? 
                     blog.url : 
                     `https://extramilesenergy.in${blog.url.startsWith('/') ? blog.url : '/' + blog.url}`;
@@ -2568,15 +2619,26 @@
         // Shopping Cart Functions
         // ============================================
 
-        // Toggle Cart Sidebar
+        // Toggle Cart Sidebar - IMPROVED VERSION
         function toggleCart() {
             const cart = document.getElementById('cartSidebar');
-            cart.classList.toggle('active');
+            const overlay = document.getElementById('cartOverlay');
             
-            if (cart.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
+            cart.classList.toggle('active');
+            if (overlay) overlay.classList.toggle('active');
+            
+            // Toggle body scroll prevention
+            document.body.classList.toggle('cart-open');
+            
+            // Close mobile menu if open
+            document.getElementById('mobileMenu').classList.remove('active');
+            
+            // Track cart view in GA
+            if (typeof gtag === 'function' && cart.classList.contains('active')) {
+                gtag('event', 'view_cart', {
+                    'event_category': 'ecommerce',
+                    'event_label': 'Cart Opened'
+                });
             }
         }
 
@@ -2603,7 +2665,6 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartDisplay();
             
-            // Show animation
             gtag('event', 'add_to_cart', {
                 'items': [{
                     'item_id': product.id,
@@ -2759,9 +2820,8 @@
             `;
         }
 
-        // FIXED: Error Loading function with proper function name (ISSUE #3 FIX)
+        // Error Loading function with proper function name
         function showErrorLoading(container, type) {
-            // Map type to correct function name (case-sensitive fix)
             const fn = type === 'products' ? 'loadProducts' : 
                       (type === 'Blogs' || type === 'blogs') ? 'loadBlogs' : 'loadProducts';
             
