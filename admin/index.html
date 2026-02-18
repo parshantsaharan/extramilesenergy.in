@@ -1268,26 +1268,33 @@
                 </div>
             </div>
             
-            <!-- Product Pages Tab -->
-            <div id="productPages" class="tab-content">
-                <div class="form-container">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-                        <h3 style="color: var(--gold);">Product Pages</h3>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <button class="btn btn-info" onclick="checkAllGitHubStatus()">
-                                <i class="fas fa-sync-alt"></i> Check GitHub Status
-                            </button>
-                            <button class="btn btn-success" onclick="pushAllToGitHub()">
-                                <i class="fas fa-cloud-upload-alt"></i> Push All Pending
-                            </button>
-                            <button class="btn btn-warning" onclick="deleteAllDraftPages()">
-                                <i class="fas fa-trash"></i> Delete All Drafts
-                            </button>
-                            <button class="btn" onclick="refreshProductPages()">
-                                <i class="fas fa-sync-alt"></i> Refresh
-                            </button>
-                        </div>
-                    </div>
+            <!-- Product Pages Tab - Header Section में ये add करें -->
+<div id="productPages" class="tab-content">
+    <div class="form-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+            <h3 style="color: var(--gold);">Product Pages</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-info" onclick="checkAllGitHubStatus()">
+                    <i class="fas fa-sync-alt"></i> Check GitHub Status
+                </button>
+                <!-- ✅ NEW BUTTON: Pull from GitHub -->
+                <button class="btn btn-primary" onclick="pullProductPagesFromGitHub()" style="background: linear-gradient(135deg, #6f42c1, #6610f2);">
+                    <i class="fas fa-cloud-download-alt"></i> Pull Pages from GitHub
+                </button>
+                <button class="btn btn-success" onclick="pushAllToGitHub()">
+                    <i class="fas fa-cloud-upload-alt"></i> Push All Pending
+                </button>
+                <button class="btn btn-warning" onclick="deleteAllDraftPages()">
+                    <i class="fas fa-trash"></i> Delete All Drafts
+                </button>
+                <button class="btn" onclick="refreshProductPages()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+        </div>
+        <!-- Rest of the code... -->
+    </div>
+</div>
                     
                     <!-- Status Summary -->
                     <div class="stats-grid" style="margin-bottom: 20px;">
@@ -3929,7 +3936,156 @@
             
             updatePageStats();
         }
+        // ============================================
+// Pull Product Pages from GitHub
+// ============================================
+async function pullProductPagesFromGitHub() {
+    if (!githubConfig.token) {
+        alert('Please configure GitHub token in Settings first');
+        showTab('settings');
+        return;
+    }
+    
+    const container = document.getElementById('productPagesContainer');
+    const originalContent = container.innerHTML;
+    
+    try {
+        // Show loading state
+        container.innerHTML = `
+            <div class="loading">
+                <div class="spinner"></div>
+                <div>Pulling product pages from GitHub...</div>
+            </div>
+        `;
         
+        showSyncStatus('Pulling pages from GitHub...', 'syncing');
+        addActivity('Started pulling product pages from GitHub');
+        
+        // Fetch all HTML files from products folder on GitHub
+        const url = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/products`;
+        
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `token ${githubConfig.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch products: ${response.status}`);
+        }
+        
+        const files = await response.json();
+        
+        // Filter only HTML files
+        const htmlFiles = files.filter(file => 
+            file.name.endsWith('.html') && file.type === 'file'
+        );
+        
+        if (htmlFiles.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                    <i class="fas fa-file-alt" style="font-size: 2.5rem; margin-bottom: 15px; color: var(--gold);"></i>
+                    <div style="margin-bottom: 10px; color: var(--gold-light);">No product pages found on GitHub</div>
+                </div>
+            `;
+            showSyncStatus('No pages found', 'warning');
+            return;
+        }
+        
+        // Fetch content of each HTML file
+        const fetchedPages = [];
+        let successCount = 0;
+        let failCount = 0;
+        
+        for (const file of htmlFiles) {
+            try {
+                // Get the raw content of the HTML file
+                const contentResponse = await fetch(file.download_url, {
+                    cache: 'no-store',
+                    headers: {
+                        'Accept': 'text/html'
+                    }
+                });
+                
+                if (!contentResponse.ok) continue;
+                
+                const htmlContent = await contentResponse.text();
+                
+                // Extract product name from HTML title
+                const titleMatch = htmlContent.match(/<title>(.*?)<\/title>/);
+                const productName = titleMatch ? titleMatch[1].replace(' | Extra Miles Energy', '') : file.name.replace('.html', '');
+                
+                // Extract main image URL from HTML
+                const imgMatch = htmlContent.match(/<img[^>]+src="([^">]+)"/);
+                const mainImage = imgMatch ? imgMatch[1] : '';
+                
+                // Create page object
+                const pageId = 'page_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+                
+                fetchedPages.push({
+                    id: pageId,
+                    productId: file.name.replace('.html', ''),
+                    productName: productName,
+                    fileName: file.name,
+                    html: htmlContent,
+                    status: 'published',
+                    onGitHub: true,
+                    githubUrl: file.html_url,
+                    mainImage: mainImage,
+                    createdAt: new Date(file.created_at).toISOString(),
+                    updatedAt: new Date(file.updated_at).toISOString(),
+                    pulledAt: new Date().toISOString()
+                });
+                
+                successCount++;
+                
+            } catch (fileError) {
+                console.warn(`Error processing ${file.name}:`, fileError);
+                failCount++;
+            }
+        }
+        
+        // Update productPages array
+        if (fetchedPages.length > 0) {
+            // Merge with existing pages (avoid duplicates)
+            const existingFileNames = productPages.map(p => p.fileName);
+            const newPages = fetchedPages.filter(p => !existingFileNames.includes(p.fileName));
+            
+            productPages = [...productPages, ...newPages];
+            localStorage.setItem('product_pages', JSON.stringify(productPages));
+            
+            // Update pending pushes if needed
+            // (pages already on GitHub don't need to be in pending)
+            pendingPushes = pendingPushes.filter(push => {
+                const page = productPages.find(p => p.id === push.pageId);
+                return page && !page.onGitHub;
+            });
+            localStorage.setItem('pending_pushes', JSON.stringify(pendingPushes));
+            
+            showMessage('productPagesMessage', 
+                `✅ Pulled ${successCount} pages from GitHub (${failCount} failed, ${newPages.length} new)`, 
+                'success');
+            
+            addActivity(`Pulled ${successCount} product pages from GitHub`);
+        }
+        
+        // Reload the display
+        loadProductPages();
+        showSyncStatus('Pull completed', 'success');
+        
+    } catch (error) {
+        console.error('Error pulling from GitHub:', error);
+        container.innerHTML = originalContent;
+        
+        showMessage('productPagesMessage', 
+            `❌ Error pulling pages: ${error.message}`, 
+            'error');
+        
+        showSyncStatus('Pull failed', 'error');
+        addActivity(`Error pulling product pages: ${error.message}`);
+    }
+}
         async function checkPagesGitHubStatus() {
             if (!githubConfig.token) return;
             
