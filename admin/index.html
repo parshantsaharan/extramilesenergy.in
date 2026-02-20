@@ -1947,12 +1947,11 @@ if (session === 'logged_in') {
         console.error('Auth error:', err);
         showMessage('loginMessage', 'Auth server error!', 'error');
     }
-        }
         
         function logout() {
             console.log('Logout function called');
             addActivity('Admin logged out');
-            localStorage.removeItem('admin_token');
+            localStorage.removeItem('admin_session');
             showLoginPage();
         }
         
