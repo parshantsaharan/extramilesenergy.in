@@ -1844,32 +1844,23 @@
             console.log('DOM loaded, checking login status...');
             
             // Set default password if not exists
-            if (!localStorage.getItem('admin_password')) {
-                localStorage.setItem('admin_password', DEFAULT_PASSWORD);
-                console.log('Default password set');
-            }
-            
+                        
             // Check if already logged in
-            const savedPassword = localStorage.getItem('admin_password');
-            const token = localStorage.getItem('admin_token');
-            
-            console.log('Saved password exists:', !!savedPassword);
-            console.log('Token exists:', !!token);
-            console.log('Token matches:', token === savedPassword);
-            
-            if (token && savedPassword && token === savedPassword) {
-                console.log('User already logged in, showing dashboard');
-                showAdminDashboard();
-                loadProducts();
-                loadSettings();
-                loadCompanyDetails();
-                updateSystemInfo();
-                loadRecentActivity();
-                renderSpecificationsTable();
-            } else {
-                console.log('No valid login, showing login page');
-                showLoginPage();
-            }
+            const session = localStorage.getItem('admin_session');
+
+if (session === 'logged_in') {
+    console.log('User already logged in, showing dashboard');
+    showAdminDashboard();
+    loadProducts();
+    loadSettings();
+    loadCompanyDetails();
+    updateSystemInfo();
+    loadRecentActivity();
+    renderSpecificationsTable();
+} else {
+    console.log('No valid login, showing login page');
+    showLoginPage();
+}
         });
         
         // ============================================
@@ -1913,35 +1904,50 @@
         // ============================================
         // Authentication Functions
         // ============================================
-        function login() {
-            console.log('Login function called');
-            
-            const password = document.getElementById('password').value;
-            const savedPassword = localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
-            
-            console.log('Entered password:', password);
-            console.log('Saved password:', savedPassword);
-            console.log('Match:', password === savedPassword);
-            
-            if (password === savedPassword) {
-                localStorage.setItem('admin_token', password);
-                console.log('Token saved, showing dashboard');
-                
-                showAdminDashboard();
-                loadProducts();
-                loadSettings();
-                loadCompanyDetails();
-                updateSystemInfo();
-                loadRecentActivity();
-                renderSpecificationsTable();
-                
-                showMessage('loginMessage', 'Login successful! Redirecting...', 'success');
-                addActivity('Admin login successful');
-            } else {
-                console.log('Login failed - incorrect password');
-                showMessage('loginMessage', 'Incorrect password!', 'error');
-                addActivity('Failed login attempt');
-            }
+        async function login() {
+    console.log('Login function called');
+
+    const password = document.getElementById('password').value;
+
+    try {
+        // 🔥 GitHub auth file
+        const url = `https://raw.githubusercontent.com/${githubConfig.username}/${githubConfig.repo}/${githubConfig.branch}/content/admin-auth.json`;
+
+        const res = await fetch(url, { cache: 'no-store' });
+
+        if (!res.ok) throw new Error('Auth file not found');
+
+        const data = await res.json();
+
+        if (password === data.password) {
+
+            // ✅ session only (NO password storage)
+            localStorage.setItem('admin_session', 'logged_in');
+
+            console.log('Login successful, showing dashboard');
+
+            showAdminDashboard();
+            loadProducts();
+            loadSettings();
+            loadCompanyDetails();
+            updateSystemInfo();
+            loadRecentActivity();
+            renderSpecificationsTable();
+
+            showMessage('loginMessage', 'Login successful! Redirecting...', 'success');
+            addActivity('Admin login successful');
+
+        } else {
+            console.log('Login failed - incorrect password');
+            showMessage('loginMessage', 'Incorrect password!', 'error');
+            addActivity('Failed login attempt');
+        }
+
+    } catch (err) {
+        console.error('Auth error:', err);
+        showMessage('loginMessage', 'Auth server error!', 'error');
+    }
+}
         }
         
         function logout() {
