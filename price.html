@@ -79,14 +79,6 @@
       color: #2c5282;
       display: inline-block;
     }
-    @media (max-width: 700px) {
-      h1 { font-size: 1.9rem; }
-      h1::after {
-        display: block;
-        margin-top: 0.3rem;
-        font-size: 1.4rem;
-      }
-    }
     
     h2 {
       font-size: 2rem;
@@ -115,27 +107,38 @@
       border: 1px solid #ffd88f;
     }
     
-    table {
+    /* ✅ FIX: Table wrapper for mobile horizontal scroll */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+      margin: 1.5rem 0;
+      border-radius: 24px;
+      box-shadow: 0 6px 18px rgba(0, 30, 60, 0.08);
+    }
+    
+    .table-wrap table {
+      min-width: 650px; /* Forces scroll on mobile, but desktop unaffected */
       width: 100%;
       border-collapse: collapse;
       background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 30, 60, 0.08);
-      margin: 1.5rem 0 2rem 0;
+      font-size: 1rem;
     }
     
+    /* Table styling */
     th {
       background-color: #0a2f44;
       color: white;
       font-weight: 600;
       padding: 16px 12px;
       text-align: left;
+      white-space: nowrap; /* Prevent header text wrap */
     }
     
     td {
       padding: 14px 12px;
       border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap; /* Keep prices in one line */
     }
     
     tr:last-child td {
@@ -156,6 +159,7 @@
       font-size: 0.9rem;
       display: inline-block;
       border: 1px solid #e09f16;
+      white-space: nowrap;
     }
     
     .view-link i {
@@ -250,6 +254,7 @@
       margin: 1rem 0.5rem;
       text-decoration: none;
       border: 2px solid white;
+      white-space: nowrap;
     }
     
     .cta-phone {
@@ -298,9 +303,50 @@
       background: #e5a41f;
     }
     
+    /* ✅ Mobile optimizations */
     @media (max-width: 700px) {
-      .container { padding: 1.5rem 1rem; }
-      .cta-phone, .cta-wa { font-size: 1.3rem; display: block; }
+      .container { 
+        padding: 1.5rem 1rem; 
+      }
+      
+      h1 { 
+        font-size: 1.9rem; 
+      }
+      
+      h1::after {
+        display: block;
+        margin-top: 0.3rem;
+        font-size: 1.4rem;
+      }
+      
+      h2 {
+        font-size: 1.7rem;
+      }
+      
+      .cta-phone, .cta-wa { 
+        font-size: 1.3rem; 
+        display: block;
+        margin: 0.8rem 0;
+      }
+      
+      /* Smaller text on mobile */
+      .table-wrap table {
+        font-size: 0.9rem;
+      }
+      
+      th, td {
+        padding: 10px 8px;
+      }
+      
+      .view-link {
+        padding: 4px 12px;
+        font-size: 0.8rem;
+      }
+      
+      .intro-card {
+        font-size: 1rem;
+        padding: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -317,33 +363,46 @@
 
   <!-- Electric Scooter Table -->
   <h2>💰 Electric Scooter Lithium Battery Price List</h2>
-  <table>
-    <thead>
-      <tr><th>Model</th><th>Voltage</th><th>Capacity</th><th>Approx Price</th><th>Details</th></tr>
-    </thead>
-    <tbody id="scooter-price-body">
-      <tr><td colspan="5" class="loading-message"><i class="fas fa-spinner fa-pulse"></i> Latest prices load ho rahe hain...</td></tr>
-    </tbody>
-  </table>
+  
+  <!-- ✅ WRAPPED: Table 1 -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Model</th><th>Voltage</th><th>Capacity</th><th>Approx Price</th><th>Details</th></tr>
+      </thead>
+      <tbody id="scooter-price-body">
+        <tr><td colspan="5" class="loading-message"><i class="fas fa-spinner fa-pulse"></i> Latest prices load ho rahe hain...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
   <div class="price-note"><i class="fas fa-info-circle"></i> Note: Final price BMS type, casing aur quantity par depend karta hai.</div>
 
   <!-- E-Rickshaw Table -->
   <h2>🚛 E-Rickshaw Lithium Battery Price</h2>
-  <table>
-    <thead><tr><th>Model</th><th>Voltage</th><th>Capacity</th><th>Approx Price</th><th>Details</th></tr></thead>
-    <tbody id="rickshaw-price-body">
-      <tr><td colspan="5" class="loading-message"><i class="fas fa-spinner fa-pulse"></i> Loading...</td></tr>
-    </tbody>
-  </table>
+  
+  <!-- ✅ WRAPPED: Table 2 -->
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Model</th><th>Voltage</th><th>Capacity</th><th>Approx Price</th><th>Details</th></tr></thead>
+      <tbody id="rickshaw-price-body">
+        <tr><td colspan="5" class="loading-message"><i class="fas fa-spinner fa-pulse"></i> Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- ESS Table -->
   <h2>🏠 Home Energy Storage (ESS) Battery Price</h2>
-  <table>
-    <thead><tr><th>Model</th><th>Voltage</th><th>Capacity</th><th>Approx Price</th><th>Details</th></tr></thead>
-    <tbody id="ess-price-body">
-      <tr><td colspan="5" class="loading-message"><i class="fas fa-spinner fa-pulse"></i> Loading...</td></tr>
-    </tbody>
-  </table>
+  
+  <!-- ✅ WRAPPED: Table 3 -->
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Model</th><th>Voltage</th><th>Capacity</th><th>Approx Price</th><th>Details</th></tr></thead>
+      <tbody id="ess-price-body">
+        <tr><td colspan="5" class="loading-message"><i class="fas fa-spinner fa-pulse"></i> Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Why Choose Us -->
   <h2>⭐ Why Choose Extra Miles Energy?</h2>
@@ -366,6 +425,7 @@
     <h2>❓ FAQ</h2>
     <div class="faq-item"><div class="faq-question">Haryana me lithium battery price?</div><div class="faq-answer">₹23,000 se start</div></div>
     <div class="faq-item"><div class="faq-question">Kitne saal chalti hai?</div><div class="faq-answer">4000+ cycles, 8-10 saal</div></div>
+    <div class="faq-item"><div class="faq-question">Kya delivery free hai?</div><div class="faq-answer">Haan, poore Haryana me free</div></div>
   </div>
 
   <!-- CTA -->
@@ -381,17 +441,16 @@
   </div>
 </div>
 
-<!-- ✅ FINAL FIXED SCRIPT - normalize() hata diya -->
+<!-- ✅ SCRIPT - Clean version with working slug -->
 <script>
-// ✅ SAFE slug function - no normalize(), no special chars issues
 function makeSlug(name) {
   return name
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')     // Remove special chars except spaces and hyphens
-    .trim()                            // Remove leading/trailing spaces
-    .replace(/\s+/g, '-')              // Spaces to hyphens
-    .replace(/-+/g, '-')               // Remove multiple hyphens
-    .replace(/^-|-$/g, '') + '.html';  // Remove leading/trailing hyphens
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '') + '.html';
 }
 
 async function loadPriceTables() {
@@ -401,19 +460,15 @@ async function loadPriceTables() {
     ess: document.getElementById("ess-price-body")
   };
   
-  // Multiple URL sources
   const urls = [
     "https://cdn.jsdelivr.net/gh/parshantsaharan/extramilesenergy.in@main/content/products/all-products.json",
     "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/content/products/all-products.json"
   ];
 
   let products = null;
-  let lastError = null;
 
-  // Try each URL
   for (const url of urls) {
     try {
-      console.log(`Trying: ${url}`);
       const res = await fetch(url, { 
         cache: "no-cache",
         headers: { "Accept": "application/json" }
@@ -421,22 +476,17 @@ async function loadPriceTables() {
       
       if (res.ok) {
         products = await res.json();
-        console.log(`✅ Success from: ${url}`);
         break;
       }
     } catch (err) {
-      lastError = err;
-      console.warn(`❌ Failed: ${url}`, err.message);
+      console.warn(`Failed: ${url}`);
     }
   }
 
-  // If all failed
   if (!products) {
-    console.error("All fetch attempts failed:", lastError);
     const errorHtml = `<tr><td colspan="5" class="loading-message">
-      <i class="fas fa-exclamation-triangle" style="color:#f6b024;"></i> 
-      Prices temporarily unavailable.<br>
-      <button onclick="location.reload()" class="retry-btn">⟳ Retry</button>
+      <i class="fas fa-exclamation-triangle"></i> 
+      Prices unavailable. <button onclick="location.reload()" class="retry-btn">Retry</button>
     </td></tr>`;
     
     Object.values(tables).forEach(t => {
@@ -445,22 +495,18 @@ async function loadPriceTables() {
     return;
   }
 
-  // Clear tables
   Object.values(tables).forEach(t => {
     if (t) t.innerHTML = "";
   });
 
   let counts = { scooter: 0, rickshaw: 0, ess: 0 };
 
-  // Process products
   products.forEach(product => {
     if (product.status !== "active") return;
 
-    // ✅ USING SAFE SLUG FUNCTION - normalize() removed
     const slug = makeSlug(product.name);
     const productUrl = `https://extramilesenergy.in/products/${slug}`;
 
-    // Parse voltage and capacity
     let voltage = product.voltage || "-";
     if (voltage.includes("|")) voltage = voltage.split("|")[0].trim();
     
@@ -480,7 +526,6 @@ async function loadPriceTables() {
       </tr>
     `;
 
-    // Category routing
     if (product.subCategory === "Electric Scooter Battery" && tables.scooter) {
       tables.scooter.insertAdjacentHTML("beforeend", row);
       counts.scooter++;
@@ -493,7 +538,6 @@ async function loadPriceTables() {
     }
   });
 
-  // Show "no products" messages
   if (tables.scooter && counts.scooter === 0) 
     tables.scooter.innerHTML = `<tr><td colspan="5" class="loading-message">No scooter batteries</td></tr>`;
   if (tables.rickshaw && counts.rickshaw === 0) 
@@ -501,10 +545,9 @@ async function loadPriceTables() {
   if (tables.ess && counts.ess === 0) 
     tables.ess.innerHTML = `<tr><td colspan="5" class="loading-message">No ESS batteries</td></tr>`;
 
-  console.log("✅ Load complete:", counts);
+  console.log("✅ Loaded:", counts);
 }
 
-// Load on page ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', loadPriceTables);
 } else {
