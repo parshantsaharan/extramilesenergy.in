@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://extramilesenergy.in/</loc>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -218,6 +218,11 @@
   <url>
     <loc>https://extramilesenergy.in/products/72volt-30ah-lithium-phosphate-battery-pack-for-electric-scooter.html</loc>
     <lastmod>2026-02-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://extramilesenergy.in/products/lithium-battery-charger-al-672v-6a.html</loc>
+    <lastmod>2026-03-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
