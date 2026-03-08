@@ -475,22 +475,22 @@
   },
   {
     "id": "product-1772949628179-7undon9va",
-    "name": "LITHIUM BATTERY CHARGER AL 67.2V 6A",
-    "voltage": "67.2 V 6A",
+    "name": "LITHIUM BATTERY CHARGER AL 69.4V 6A",
+    "voltage": "69.4 V 6A",
     "mainCategory": "EV Charger",
     "subCategory": "Battery Charger (Lead Acid/LiFePO4)",
-    "price": "Rs. 1500",
-    "model": "LEAF 67.2V6A",
+    "price": "Rs. 1750",
+    "model": "LEAF 69.4V6A",
     "configuration": "Battery Type: Lithium-ion (60V systems)",
     "chemistry": "LiFePO₄",
     "warranty": "1 Year Warranty",
-    "capacity": "400 Watt",
+    "capacity": "420 Watt",
     "bms": null,
     "features": [
       "Protection Features: Overvoltage, overcurrent, short circuit, overheating"
     ],
     "status": "active",
-    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/ev-charger-al-67.2v6a.jpg",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/ev-charger-69.4v-6a-2-1772951792349.jpeg",
     "datasheet": "",
     "displayOrder": 0
   },
