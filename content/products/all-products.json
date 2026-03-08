@@ -520,5 +520,32 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/ev-charger-al-67.2v6a-1772951510757.jpg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1772952019422-xnc2zxd6e",
+    "name": "LITHIUM BATTERY CHARGER AL 84V 6A",
+    "voltage": "84V 6A",
+    "mainCategory": "EV Charger",
+    "subCategory": "Battery Charger (Lead Acid/LiFePO4)",
+    "price": "Rs. 2450",
+    "model": "LEAF 84V6A",
+    "configuration": "Battery Type: Lithium-ion (72V systems) lifepo4",
+    "chemistry": "LiFePO₄",
+    "warranty": "1 Year Warranty",
+    "capacity": "504Watt",
+    "bms": null,
+    "features": [
+      "Input Voltage: 100-240V AC",
+      "Output Voltage: 84V DC",
+      "Charging Current: 6A",
+      "Battery Type: Lithium-ion (72V systems)",
+      "Protection Features: Overvoltage, overcurrent, short circuit, overheating",
+      "Design: Compact, lightweight, portable",
+      "Application: Electric vehicles, e-bikes, 72V battery systems"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/ev-charger-84v-6a-2.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
