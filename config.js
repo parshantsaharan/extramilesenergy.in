@@ -56,7 +56,7 @@ const GITHUB_CONFIG = {
     WEBSITE_TITLE: 'Extra Miles Energy',
     WEBSITE_DESCRIPTION: 'Premium Lithium Battery Manufacturer in Hisar, Haryana',
     WHATSAPP_NUMBER: '917876555055',
-    PHONE_NUMBER: '919991144903',
+    PHONE_NUMBER: '917876555055',
     EMAIL: 'extramilesenergy@gmail.com',
     
     // ===== ADMIN CONFIG =====
