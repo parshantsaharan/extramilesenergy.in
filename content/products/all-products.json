@@ -739,5 +739,39 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/jk-semi-smart-bms-24s-60amp.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791337659612-8y6uskmef",
+    "name": "JBD 4S 100A LiFePO4 Hardware BMS",
+    "voltage": "12.8V 100A",
+    "mainCategory": "Solar Battery",
+    "subCategory": "Home Solar Battery (12V/24V)",
+    "price": "Rs. 1500",
+    "model": "JBD 4S 100A Hardware",
+    "configuration": "4S",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "1280 Watt",
+    "bms": "Reliable JBD 4S 100A Hardware BMS designed for 4S LiFePO4 battery packs. With a 100A continuous discharge rating, common-port design, cell balancing and essential battery protection functions, it is suitable for high-current 12.8V LFP battery applications including EVs, inverters, solar storage and custom battery packs. ",
+    "features": [
+      "🔋 4S LiFePO4 Compatible – Designed for 4 cells connected in series.",
+      "⚡ 100A High Current – Suitable for high-load battery applications.",
+      "🔌 12.8V Nominal Battery System – 4 × 3.2V LFP cells.",
+      "🛡️ Overcharge Protection – Helps protect cells from excessive charging voltage.",
+      "🔋 Over-Discharge Protection – Helps prevent excessive battery discharge.",
+      "⚡ Over-Current Protection – Protects the battery pack during excessive current conditions.",
+      "🔥 Short-Circuit Protection – Provides protection against short-circuit events.",
+      "🌡️ Temperature Protection – NTC temperature sensing helps monitor battery temperature.",
+      "⚖️ Cell Balancing – Helps maintain voltage consistency between series-connected cells.",
+      "🔗 Common Port Design – Charge and discharge use the same P-/negative port on compatible versions. ",
+      "Y",
+      "Yati Infotech",
+      "+1",
+      "🏗️ Hardware BMS – Simple, reliable protection solution without requiring a smart display/app for basic operation."
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/jbd-4s-100a-hardware-bms.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
