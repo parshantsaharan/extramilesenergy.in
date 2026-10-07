@@ -660,5 +660,34 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/32140-cell-lfp-15-ah.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791336916320-vmp3ynb2f",
+    "name": "JSK 32140 15Ah LiFePO4 Battery Cell",
+    "voltage": "3.2V 15AH",
+    "mainCategory": "EV Battery",
+    "subCategory": "Electric Scooter Battery",
+    "price": "Rs. 320/-",
+    "model": "JSK LFP 32140",
+    "configuration": null,
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "45Watt",
+    "bms": null,
+    "features": [
+      "🔋 JSK 15Ah LFP Battery Cell",
+      "⚡ 3.2V Nominal Voltage",
+      "🔋 15Ah Capacity / 15,000mAh",
+      "🚗 EV Grade – Suitable for electric vehicle and mobility applications",
+      "🔥 LiFePO4 Chemistry – Excellent thermal stability and safety characteristics",
+      "📏 32140 Cylindrical Format",
+      "💪 Suitable for high-power battery pack applications",
+      "🔄 Rechargeable and designed for multi-cell battery-pack assembly",
+      "🎯 Suitable for professional battery pack manufacturing"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/32140-1791336918361.jpg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
