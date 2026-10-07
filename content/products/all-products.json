@@ -803,5 +803,35 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-10-07-at-7.29.44-am.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791339411902-43xe5ypuk",
+    "name": "71.4V 6A Lithium Battery Charger",
+    "voltage": "71.4V 6A",
+    "mainCategory": "EV Charger",
+    "subCategory": "Portable EV Charger",
+    "price": "Rs 1950/-",
+    "model": "LEAF 71.4",
+    "configuration": "20S",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Months Warranty",
+    "capacity": "428Watt",
+    "bms": null,
+    "features": [
+      "71.4V DC Output",
+      "6A Charging Current",
+      "Approx. 428W Charging Power",
+      "Stable and controlled DC output",
+      "Designed for compatible lithium battery systems",
+      "Suitable for EV and custom battery applications",
+      "Compact and practical design",
+      "Easy to use",
+      "Suitable for regular battery charging",
+      "Use with a properly configured BMS"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/71.4v-6a-charger.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
