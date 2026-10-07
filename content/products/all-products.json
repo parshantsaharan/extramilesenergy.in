@@ -601,5 +601,34 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/87.6-volt-10-amp-charger-in-box.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791336246390-6lpbpcmg6",
+    "name": "72V 8A LiFePO4 Charger | 87.6V 24S LFP Battery Charger",
+    "voltage": "84V 8Amp",
+    "mainCategory": "EV Charger",
+    "subCategory": "Portable EV Charger",
+    "price": "Rs. 2400",
+    "model": "LEAF 84V 10A",
+    "configuration": "23S LFP",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Months Warranty",
+    "capacity": "580 Watt",
+    "bms": null,
+    "features": [
+      "🔋 72V LFP Battery Charger – Designed for compatible 72V LiFePO4 battery packs.",
+      "⚡ 8A Charging Output – Provides efficient and consistent charging performance.",
+      "🔌 84V DC Output – Suitable for fully charging a 23S LiFePO4 battery pack.",
+      "🔋 23S LFP Compatible – Designed around 23 series-connected LFP cells.",
+      "🌐 Wide Input Voltage – Supports AC 160V–280V, 50/60Hz.",
+      "🛡️ Heavy-Duty Metal Body – Rugged enclosure for regular use.",
+      "🌡️ Finned Cooling Design – Helps dissipate heat during charging.",
+      "🔗 Ready-to-Use Design – Includes AC power cable and charging connector.",
+      "🛵 Wide Application – Suitable for compatible 72V electric scooters, e-rickshaws, EVs and other LFP battery systems."
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/84-v-8amp-charger.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
