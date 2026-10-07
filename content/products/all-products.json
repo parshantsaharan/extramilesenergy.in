@@ -547,5 +547,30 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/ev-charger-84v-6a-2.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791335331562-p88u9r8oc",
+    "name": "60V 10A Lithium Battery Charger – 69.35V DC Output | High Power Charger",
+    "voltage": "69.35 volt 10A",
+    "mainCategory": "EV Charger",
+    "subCategory": "Portable EV Charger",
+    "price": "2150",
+    "model": "Tansai 60V 10A",
+    "configuration": "19S",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Months Warranty",
+    "capacity": "640 Watt",
+    "bms": null,
+    "features": [
+      "Fast Charging",
+      "Auto Cut Off ",
+      "short circuit protection",
+      "aluminium Body",
+      "best quality"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/69.3-volt-10-amp-lithium-charger.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
