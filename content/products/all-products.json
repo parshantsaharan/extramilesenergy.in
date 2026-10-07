@@ -773,5 +773,35 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/jbd-4s-100a-hardware-bms.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791338963886-6bx12o06a",
+    "name": "51.2V 150Ah LiFePO₄ Battery – BYD Blade Cell",
+    "voltage": "51.2 Volt 150AH",
+    "mainCategory": "Solar Battery",
+    "subCategory": "Industrial Solar Battery (48V)",
+    "price": "Rs. 85000/-",
+    "model": "EME 51.2V 150AH",
+    "configuration": "16S 1P",
+    "chemistry": "LiFePO₄",
+    "warranty": "5 Year Warranty",
+    "capacity": "7.68 KW",
+    "bms": "JK Smart ESS BMS  with LCD Display, Bluetooth / CAN / RS485 communication",
+    "features": [
+      "Premium BYD Blade LiFePO₄ Cells",
+      "51.2V 150Ah Capacity",
+      "7.68 kWh Energy Storage",
+      "6000+ Cycle Life",
+      "5 Year Warranty",
+      "Smart BMS with Display",
+      "CAN / RS485 Communication",
+      "High Safety LiFePO₄ Chemistry",
+      "Maintenance-Free Operation",
+      "Designed for Solar & Home Energy Storage"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/whatsapp-image-2026-10-07-at-7.29.44-am.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
