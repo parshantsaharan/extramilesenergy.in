@@ -572,5 +572,34 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/69.3-volt-10-amp-lithium-charger.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791335845949-my6nq9xqy",
+    "name": "72V 10A LiFePO4 Charger | 87.6V 24S LFP Battery Charger",
+    "voltage": "87.6V 10A",
+    "mainCategory": "EV Charger",
+    "subCategory": "Portable EV Charger",
+    "price": "Rs. 2500/-",
+    "model": "Tansai 72v 10A",
+    "configuration": "High-performance 72V 10A LiFePO4 (LFP) Battery Charger designed for 24S LFP battery packs. It provides 87.6V DC output at 10A, making it suitable for charging compatible 72V 24S lithium iron phosphate battery systems.",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Months Warranty",
+    "capacity": "870 Watt",
+    "bms": null,
+    "features": [
+      "🔋 Designed for 72V LFP Batteries – Suitable for compatible 72V LiFePO4 battery packs.",
+      "⚡ 24S LFP Compatible – Designed for 24-series-cell (24S) LiFePO4 battery configurations.",
+      "🔌 87.6V Charging Output – Provides 87.6V DC, the full-charge voltage for a 24S LFP pack.",
+      "🚀 10A High-Current Charging – 10A output provides efficient charging performance.",
+      "🌐 Wide AC Input Range – Supports AC 160V–280V, 50/60Hz.",
+      "🛡️ Heavy-Duty Metal Housing – Rugged construction for regular charging applications.",
+      "🌡️ Finned Cooling Design – Metal cooling fins help dissipate heat during operation.",
+      "🔗 Ready-to-Use Charger – Supplied with power cable and charging connector.",
+      "🛵 Multiple Applications – Suitable for compatible electric scooters, e-rickshaws, EVs and other 72V LFP battery systems."
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/87.6-volt-10-amp-charger-in-box.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
