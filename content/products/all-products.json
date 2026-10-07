@@ -630,5 +630,35 @@
     "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/84-v-8amp-charger.jpeg",
     "datasheet": "",
     "displayOrder": 0
+  },
+  {
+    "id": "product-1791336664181-wdr2y4nta",
+    "name": "EVE 32140 15Ah 3C LiFePO4 Battery Cell",
+    "voltage": "3.2v 15AH",
+    "mainCategory": "EV Battery",
+    "subCategory": "Custom EV Battery",
+    "price": "Rs 350/-",
+    "model": "EVE 32140 Cylindrical",
+    "configuration": "1S",
+    "chemistry": "LiFePO₄",
+    "warranty": "3 Year Warranty",
+    "capacity": "48 Watt",
+    "bms": null,
+    "features": [
+      "🔋 EVE 32140 LFP Cell",
+      "⚡ 15Ah High Capacity",
+      "🔌 3.2V Nominal Voltage",
+      "🚀 3C High Discharge Rating",
+      "💪 Up to 45A Continuous Discharge (15Ah × 3C)",
+      "🚗 EV Grade Cell – Suitable for electric vehicle and high-power battery applications",
+      "🔥 LiFePO4 Chemistry – Known for good thermal stability and safety characteristics",
+      "📏 32140 Cylindrical Format – Approx. 32mm diameter × 140mm height",
+      "🔄 Rechargeable Cell – Suitable for assembling multi-cell battery packs",
+      "🎯 High Consistency – Suitable for battery-pack assembly where matched cells are required"
+    ],
+    "status": "active",
+    "image": "https://raw.githubusercontent.com/parshantsaharan/extramilesenergy.in/main/uploads/32140-cell-lfp-15-ah.jpeg",
+    "datasheet": "",
+    "displayOrder": 0
   }
 ]
